@@ -1,0 +1,3 @@
+import sqlite
+
+conn = sqlite3.connect('/tmp/example')

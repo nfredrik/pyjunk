@@ -2,6 +2,11 @@ import time
 import tarfile
 import sys
 
+def invalid_file(tarinfo):
+    return tarinfo.islnk() or tarinfo.ischr() or tarinfo.isblk() or tarinfo.isfifo() or tarinfo.isdev() 
+
+
+
 args = sys.argv[1:]
 
 #sys.exit(42)
@@ -35,6 +40,8 @@ for tarinfo in newtar:
     else:
         print 'new file:', tarinfo.name
 
+    if invalid_file(tarinfo):
+        print 'we have an invalid file ...:', tarinfo.name
 newtar.close()
 
 

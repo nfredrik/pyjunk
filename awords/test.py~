@@ -1,0 +1,5 @@
+
+
+
+for i in a.open('a.html', 'r')
+    print i

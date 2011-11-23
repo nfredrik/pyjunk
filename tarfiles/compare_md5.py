@@ -11,6 +11,7 @@ def invalid_file(tarinfo):
 
 args = sys.argv[1:]
 
+print len(args), args
 #sys.exit(42)
 
 if len(args) != 2:
@@ -53,14 +54,15 @@ for tarinfo in newtar:
         if not tarinfo.isfile():
             continue
 
+        if dict_old_tar[filename][1] != tarinfo.size :
+            print filename, ' has new size:', tarinfo.size, 'old:', dict_old_tar[filename][1], 
+
         oldfile = MemberFile(oldtar, dict_old_tar[filename][2])
         newfile = MemberFile(newtar, dict_new_tar[filename])
 
         if oldfile.get_md5() != newfile.get_md5():
-            print filename,  'modified',
+            print filename,  ' md5'
 
-        if dict_old_tar[filename][1] != tarinfo.size :
-            print 'has new size:', tarinfo.size, 'old:', dict_old_tar[filename][1]
 
     else:
         print 'new', filename

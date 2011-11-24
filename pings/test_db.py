@@ -18,6 +18,8 @@ class TestPing(unittest.TestCase):
 
         print db.read_date_order()
 
+        print db.read_date_4_object('sun.com')
+
         self.assertTrue(True)
 
 if __name__ == '__main__':

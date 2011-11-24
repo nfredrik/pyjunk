@@ -15,26 +15,30 @@ class PingDB(object):
         self.c.commit()
 
     def read_responses_order(self):
-        pass
+
         self.conn.execute('select * from pingtable order by response')   # default ascending order
         return self.conn.fetchall()
 
     def read_pingobj_order(self):
-        pass
         self.conn.execute('select * from pingtable order by pingobj')   # default ascending order
         return self.conn.fetchall()
 
 
     def read_ttl_order(self):
-        pass
         self.conn.execute('select * from pingtable order by ttl')   # default ascending order
         return self.conn.fetchall()
 
 
     def read_date_order(self):
-        pass
         self.conn.execute('select * from pingtable order by date')   # default ascending order
         return self.conn.fetchall()
+
+
+    def read_date_4_object(self, object):
+                
+        self.conn.execute('select * from pingtable where pingobj =' + object)   # default ascending order
+        return self.conn.fetchall()
+
 
 
     def db_exist(self):

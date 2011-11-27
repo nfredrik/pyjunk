@@ -11,6 +11,7 @@ class PingDB(object):
             (date text, pingobj text, ttl real, response real)''')
 
     def write(self, date, pingobj, ttl, response):
+        print date
         self.conn.execute('insert into pingtable values (?,?,?,?)', (date, pingobj, ttl, response))
         self.c.commit()
 
@@ -35,8 +36,10 @@ class PingDB(object):
 
 
     def read_date_4_object(self, object):
-                
-        self.conn.execute('select * from pingtable where pingobj =' + object)   # default ascending order
+#        self.str ="select ttl, response, date from pingtable where pingobj = 'oracle.com';"
+        self.str ="select date, ttl, response from pingtable where pingobj = \'" + str(object) +  "\';"
+#        print self.str 
+        self.conn.execute(self.str)
         return self.conn.fetchall()
 
 

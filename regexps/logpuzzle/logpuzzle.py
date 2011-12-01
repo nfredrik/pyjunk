@@ -30,7 +30,7 @@ def read_urls(filename):
   fh = open(filename, 'r')
   string = fh.read()
   urls = re.findall('GET ([\S]+\.jpg) ', string)
-#  print urls
+  print urls
 #  uniq = sets.Set(urls)
 #  print uniq
   url_dict = {} 

@@ -22,19 +22,19 @@ def main():
          **    Period missing. Period assumed.                                                                             37\
         *1026-E****************************                                          **                                 3756\
         **    Source literal is non-numeric - substituting zero                                                         3756'
+#PCB-S-00576, PLS-0: SQL Statement ignored
+#Error at line 280, column 13 in file /srv/systest/us/data//PROD/KGBULB/KG1000.pc
 
 
   first  = re.findall('\*([\d]{4}\-E)[*\s\d]+([A-Za-z\s.-]+)', string)
-#  err_codes  = re.findall('\*([\d]{4}\-E)([\w\-\.]+)(?=\s\d\*)', olle)
-#  err_codes = re.findall(r'\*([\d]{4})\-E .*(\w[\w-.]*)', string)
-#  print err_codes
-#  print first
-#  for f, s  in first:
-#      print f, s
-#  exit(1)
+  second  = re.findall('(PLS-[\d]{1,4}):[\s]+([A-Za-z\ ]+)', string)
 
-  #print err_codes
-#  err_c_dict = defaultdict(set)
+
+#  print second
+#  for s in second:
+#     print s
+#  sys.exit(1)
+
   err_c_dict = {}
 
   for f, s  in first:
@@ -43,6 +43,14 @@ def main():
           err_c_dict[f] = 1 
       else:
           err_c_dict[f] += 1 
+
+  for f, s  in second:
+      f += ' ' + s.strip()
+      if f not in err_c_dict:
+          err_c_dict[f] = 1 
+      else:
+          err_c_dict[f] += 1 
+
 
   for k, v in err_c_dict.items():
       print v, ':', k

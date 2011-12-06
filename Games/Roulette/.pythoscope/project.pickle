@@ -1,0 +1,19 @@
+Äcpythoscope.store
+Project
+q)Åq}q(Upoints_of_entryq}qUpathqU!/Users/frsv/pyjunk/Games/RouletteqUcode_trees_managerqcpythoscope.code_trees_manager
+FilesystemCodeTreesManager
+q	)Åq
+}q(U_cached_code_treeqNUcode_trees_pathqU8/Users/frsv/pyjunk/Games/Roulette/.pythoscope/code-treesqubU_modulesq}q(U
+outcome.pyqcpythoscope.store
+Module
+q)Åq}q(Uerrorsq]qUparentqNUcreatedqGA”∑†gé=Uimportsq]qUchangedqâUsubpathqhUprojectqhUobjectsq]qcpythoscope.store
+Class
+q )Åq!}q"(Ubasesq#]q$Uobjectq%aUuser_objectsq&]q'Unameq(UOutcomeq)Umoduleq*hUmethodsq+]q,(cpythoscope.store
+Method
+q-)Åq.}q/(Uis_generatorq0âUargsq1]q2(Uselfq3Unameq4Uoddsq5eh(U__init__q6Uklassq7h!ubh-)Åq8}q9(h0âh1]q:(Uselfq;Uamountq<eh(U	winAmountq=h7h!ubh-)Åq>}q?(h0âh1]q@(UselfqAUotherqBeh(U__eq__qCh7h!ubh-)ÅqD}qE(h0âh1]qF(UselfqGUotherqHeh(U__ne__qIh7h!ubh-)ÅqJ}qK(h0âh1]qLUselfqMah(U__str__qNh7h!ubeubaU
+test_casesqO]qPubUtests/test_outcome.pyqQh)ÅqR}qS(UerrorsqT]qUUparentqVNUcreatedqWGA”∑†jËXˇUimportsqX]qYUunittestqZaUchangedq[âUsubpathq\hQUprojectq]hUobjectsq^]q_cpythoscope.store
+TestClass
+q`)Åqa}qb(UnameqcUTestOutcomeqdhVhRhX]qehZah[âUassociated_modulesqf]qghaU
+test_casesqh]qi(cpythoscope.store
+TestMethod
+qj)Åqk}ql(hcUtest___eq__qmhVhaubhj)Åqn}qo(hcUtest___init__qphVhaubhj)Åqq}qr(hcUtest___ne__qshVhaubhj)Åqt}qu(hcUtest___str__qvhVhaubhj)Åqw}qx(hcUtest_winAmountqyhVhaubeubahh]qzhaaubuUnew_tests_directoryq{Utestsq|ub.

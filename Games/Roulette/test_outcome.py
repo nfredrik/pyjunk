@@ -1,6 +1,10 @@
 import unittest
 from outcome import Outcome
 
+"""
+
+"""
+
 class TestOutcome(unittest.TestCase):
     def setUp(self):
         self.first = Outcome('one', 17)

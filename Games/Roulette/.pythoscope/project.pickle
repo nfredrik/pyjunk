@@ -3,17 +3,18 @@ Project
 q)q}q(Upoints_of_entryq}qUpathqU!/Users/frsv/pyjunk/Games/RouletteqUcode_trees_managerqcpythoscope.code_trees_manager
 FilesystemCodeTreesManager
 q	)q
-}q(U_cached_code_treeqNUcode_trees_pathqU8/Users/frsv/pyjunk/Games/Roulette/.pythoscope/code-treesqubU_modulesq}q(U
-outcome.pyqcpythoscope.store
+}q(U_cached_code_treeqNUcode_trees_pathqU8/Users/frsv/pyjunk/Games/Roulette/.pythoscope/code-treesqubU_modulesq}q(Ubin.pyqcpythoscope.store
 Module
-q)q}q(Uerrorsq]qUparentqNUcreatedqGAÓ· g=Uimportsq]qUchangedq‰UsubpathqhUprojectqhUobjectsq]qcpythoscope.store
+q)q}q(Uerrorsq]qUparentqNUcreatedqGAÓ·ôEÑXOUimportsq]qUchangedq‰UsubpathqhUprojectqhUobjectsq]qcpythoscope.store
 Class
-q )q!}q"(Ubasesq#]q$Uobjectq%aUuser_objectsq&]q'Unameq(UOutcomeq)Umoduleq*hUmethodsq+]q,(cpythoscope.store
+q )q!}q"(Unameq#UBinq$Umoduleq%hUbasesq&]q'Uobjectq(aUuser_objectsq)]q*Umethodsq+]q,(cpythoscope.store
 Method
-q-)q.}q/(Uis_generatorq0‰Uargsq1]q2(Uselfq3Unameq4Uoddsq5eh(U__init__q6Uklassq7h!ubh-)q8}q9(h0‰h1]q:(Uselfq;Uamountq<eh(U	winAmountq=h7h!ubh-)q>}q?(h0‰h1]q@(UselfqAUotherqBeh(U__eq__qCh7h!ubh-)qD}qE(h0‰h1]qF(UselfqGUotherqHeh(U__ne__qIh7h!ubh-)qJ}qK(h0‰h1]qLUselfqMah(U__str__qNh7h!ubeubaU
-test_casesqO]qPubUtests/test_outcome.pyqQh)qR}qS(UerrorsqT]qUUparentqVNUcreatedqWGAÓ· jèXÿUimportsqX]qYUunittestqZaUchangedq[‰Usubpathq\hQUprojectq]hUobjectsq^]q_cpythoscope.store
+q-)q.}q/(Uis_generatorq0‰h#U__init__q1Uargsq2]q3(Uselfq4U	*outcomesq5eUklassq6h!ubh-)q7}q8(h0‰h#Uaddq9h2]q:(Uselfq;Uoutcomeq<eh6h!ubh-)q=}q>(h0‰h#U__str__q?h2]q@UselfqAah6h!ubeubaU
+test_casesqB]qCubU
+outcome.pyqDh)qE}qF(h]qGhNhGAÓ·ôEÓ¼Üh]qHh‰hU
+outcome.pyqIhhh]qJh )qK}qL(h#UOutcomeqMh%hEh&]qNUobjectqOah)]qPh+]qQ(h-)qR}qS(h0‰h#U__init__qTh2]qU(UselfqVUnameqWUoddsqXeh6hKubh-)qY}qZ(h0‰h#U	winAmountq[h2]q\(Uselfq]Uamountq^eh6hKubh-)q_}q`(h0‰h#U__eq__qah2]qb(UselfqcUotherqdeh6hKubh-)qe}qf(h0‰h#U__ne__qgh2]qh(UselfqiUotherqjeh6hKubh-)qk}ql(h0‰h#U__hash__qmh2]qnUselfqoah6hKubh-)qp}qq(h0‰h#U__str__qrh2]qsUselfqtah6hKubeubahB]quubUtests/test_outcome.pyqvh)qw}qx(Uerrorsqy]qzUparentq{NUcreatedq|GAÓ· jèXÿUimportsq}]q~UunittestqaUchangedq€‰UsubpathqhvUprojectq‚hUobjectsqƒ]q„cpythoscope.store
 TestClass
-q`)qa}qb(UnameqcUTestOutcomeqdhVhRhX]qehZah[‰Uassociated_modulesqf]qghaU
-test_casesqh]qi(cpythoscope.store
+q…)q†}q‡(UnameqˆUTestOutcomeq‰h{hwh}]qŠhah€‰Uassociated_modulesq‹]qŒhEaU
+test_casesq]q(cpythoscope.store
 TestMethod
-qj)qk}ql(hcUtest___eq__qmhVhaubhj)qn}qo(hcUtest___init__qphVhaubhj)qq}qr(hcUtest___ne__qshVhaubhj)qt}qu(hcUtest___str__qvhVhaubhj)qw}qx(hcUtest_winAmountqyhVhaubeubahh]qzhaaubuUnew_tests_directoryq{Utestsq|ub.
+q)q}q‘(hˆUtest___eq__q’h{h†ubh)q“}q”(hˆUtest___init__q•h{h†ubh)q–}q—(hˆUtest___ne__q˜h{h†ubh)q™}qš(hˆUtest___str__q›h{h†ubh)qœ}q(hˆUtest_winAmountqh{h†ubeubah]qŸh†aubUtests/test_bin.pyq h)q¡}q¢(h]q£hNhGAÓ·ôEÚA¯h]q¤Uunittestq¥ah‰hh hhh]q¦h…)q§}q¨(h#UTestBinq©hh¡h]qªh¥ah‰Uassociated_modulesq«]q¬hahB]q­(h)q®}q¯(h#Utest___init__q°hh§ubh)q±}q²(h#Utest___str__q³hh§ubh)q´}qµ(h#Utest_addq¶hh§ubeubahB]q·h§aubUtest_outcome.pyq¸h)q¹}qº(h]q»hNhGAÓ·ôEÖ†Yh]q¼(Uunittestq½Uoutcomeq¾UOutcomeq¿†qÀeh‰hh¸hhh]qÁh…)qÂ}qÃ(h#UTestOutcomeqÄhh¹h]qÅ(h½hÀeh‰h«]qÆhB]qÇ(h)qÈ}qÉ(h#UsetUpqÊhhÂubh)qË}qÌ(h#Utest___eq__qÍhhÂubh)qÎ}qÏ(h#Utest___ne__qĞhhÂubh)qÑ}qÒ(h#Utest___id_comparisionqÓhhÂubh)qÔ}qÕ(h#Utest_winAmountqÖhhÂubh)q×}qØ(h#UtearDownqÙhhÂubeubahB]qÚhÂaubuUnew_tests_directoryqÛUtestsqÜub.

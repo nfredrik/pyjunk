@@ -22,6 +22,8 @@ class TestOutcome(unittest.TestCase):
         # self.assertEqual(expected, outcome.__str__())
         print id(self.first)
         print id(self.second)
+        print hash(self.first)
+        print hash(self.second)
         self.assertTrue(self.first is self.second)
 
     def test_winAmount(self):

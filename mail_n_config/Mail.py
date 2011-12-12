@@ -20,7 +20,7 @@ class Mail(object):
         msg['Subject'] = 'Test from PyMOTW'
 
         try:
-            self.server.set_debuglevel(False)
+            self.server.set_debuglevel(True)
 
             # identify ourselves, prompting server for supported features
             self.server.ehlo()

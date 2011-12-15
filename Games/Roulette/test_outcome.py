@@ -28,10 +28,10 @@ class TestOutcome(unittest.TestCase):
         print id(self.second)
         self.assertTrue(self.first is self.second)
 
-    def test_winAmount(self):
+    def test_win_amount(self):
         # outcome = Outcome(name, odds)
         # self.assertEqual(expected, outcome.winAmount(amount))
-        self.assertTrue((2 * 32) == self.third.winAmount(2))
+        self.assertTrue((2 * 32) == self.third.win_amount(2))
 
     def tearDown(self):
         first = second = third = None

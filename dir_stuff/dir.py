@@ -1,5 +1,5 @@
 import os 
-path = "/tmp"
+path = "../Games"
 
 def enumeratepaths(path=path): 
     """Returns the path to all the files in a directory recursively""" 

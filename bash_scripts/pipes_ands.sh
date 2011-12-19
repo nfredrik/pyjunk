@@ -15,3 +15,5 @@ echo han heter $name2
 
 ## second statement executes IF first statement went wrong (false)
 (ls | grep nisse > /dev/null) || echo nisse finns inte 
+
+

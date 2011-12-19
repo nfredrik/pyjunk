@@ -17,17 +17,13 @@ def main(repopath, rev):
 
     # Check if attempt to commit in tag
     log_msg = commands.getoutput(SVNLOOK +' changed -r '+ rev + ' ' + repopath)
-    if (re.match('^U\W.*tags\/.*$', log_msg.rstrip()) != None):
-        # send mail to team leaders?
-        mail = Mail(to = 'fredrik.svard@bolagsverket.se',
-                    username =  'The configuration team',
-                    password = 'halli hallo',
-                    server =  'ad01.bolagsverket.se',
-                    )
+    if (re.match('^A\W.*tags\/.*$', log_msg.rstrip()) != None):
 
-        mail.send('Created new tag:' + repopath + ' revision' + rev)
+        sys.stderr.write('Created new tag:' + repopath + ' revision' + rev)
+        sys.exit(1)           
 
-    sys.exit(0)
+    sys.stderr.write(log_msg)
+    sys.exit(1)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

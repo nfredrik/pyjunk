@@ -79,3 +79,8 @@ print '------------------------'
 for file in dict_old_tar:
     if file not in dict_new_tar:
         print file
+
+
+
+if __name__ == '__main__':
+  main()

@@ -12,7 +12,7 @@ class MockTest(unittest.TestCase):
 
     def testsenasteNAV(self):
 
-       morningstar = Morningstar(dict['didner'])
+       morningstar = Morningstar('didner')
 
        #put the monkey patch in place
        morningstar.geturl = Mock()

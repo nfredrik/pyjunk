@@ -1,3 +1,5 @@
+from stockStuff import stockStuff
+from dictionary import dict
 import re
 import urllib
 """
@@ -6,9 +8,10 @@ import urllib
 #http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000IWH7&programid=0000000000c-datum">NAV-datum<div class="helpbutton" style="display:inline;">
 """
 
-class Morningstar(object):
-    def __init__(self,  url):
-        self.url = url
+class Morningstar(stockStuff):
+    def __init__(self,  name):
+        stockStuff.__init__(self, name)
+        self.url = dict[name]
 
     def geturl(self, url):
         self.sock = urllib.urlopen(url)

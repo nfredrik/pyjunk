@@ -1,5 +1,4 @@
 import smtplib
-import email.utils
 from email.mime.text import MIMEText
 import getpass
 
@@ -15,8 +14,8 @@ class Mail(object):
         # Create message 
         msg = MIMEText('be careful')
         msg.set_unixfrom('configuration management')
-        msg['To'] = email.utils.formataddr(('Recipient', self.to_email))
-        msg['From'] = email.utils.formataddr(('no_reply.cm@bolagsverket.se', 'no_reply.cm@bolagsverket.se'))
+#        msg['To'] = email.utils.formataddr(('Recipient', self.to_email))
+#        msg['From'] = email.utils.formataddr(('no_reply.cm@bolagsverket.se', 'no_reply.cm@bolagsverket.se'))
         msg['Subject'] = mesg
 
         try:

@@ -36,7 +36,7 @@ for modulename in [os.path.splitext(x)[0]
         print "found %s tests in %r" % (testsuite.countTestCases(), modulename)
         mainsuite.addTest(testsuite)
 
-verbosity = 1
+verbosity = 10
 if '-v' in sys.argv[1:]:
     verbosity = 2
 

@@ -34,17 +34,19 @@ def main():
 #        print filepath
         (path,filename) = os.path.split(filepath)
 
+        # EFTPAM_IPF_01
         # Check if IPF file AND  no extension *.pl OR digits
-        if re.match("[A-Z0-9]+IPF[A-Z0-9]+$",  filename):
+        if re.match("[A-Z0-9]+\_IPF\_[A-Z0-9]+$",  filename):
             # Rename file with extention *.pl
-            print 'found *.pl candidate',  filename
+            #print 'found *.pl candidate',  filename
             print filepath, ' to', path+ '/' + filename + '.pl'
-            os.rename(filepath, path + '/' + filename + '.pl')
+            #os.rename(filepath, path + '/' + filename + '.pl')
         elif re.match("[A-Z0-9]+$",  filename):
         # Else Check if file with no extention
             # Rename file with extention *.sh
-            print 'found *.sh candidate',  filename
-            os.rename(filepath, path + '/' + filename + '.sh')
+            #print 'found *.sh candidate',  filename
+            print filepath, ' to', path+ '/' + filename + '.sh'
+            #os.rename(filepath, path + '/' + filename + '.sh')
 
 
 

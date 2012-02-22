@@ -41,6 +41,10 @@ Compiling NB0130.o -> NB0130.so
 compilcob.sh -f FS3145
 """
 
+# http://byggserver02:8080/job/unireg_build/ws/fwk/us/cobol/anim/AKAP-SP.lst.gz
+url = 'http://byggserver02:8080/job/unireg_build/ws/fwk/us/cobol/anim/'
+extension = '.lst.gz'
+cobext ='.cob'
 
 class Module(object):
     def __init__(self, name, URL):
@@ -120,8 +124,15 @@ csv_writer.writerow([sum])
 for module in modules:
     print module, module.get_errors()
     # Print name of module
-    csv_writer.writerow([module]+ [err for err in module.get_errors() ])
+    csv_writer.writerow([module]+ [err for err in module.get_errors()]+[url+module.__str__()+extension]+[url+module.__str__() + cobext])  
 
     # Get and print errors, error row and URL to repository for module:
 
 print sum
+
+print url
+print module
+print extension
+all =url+module.__str__()+extension
+print all
+#print url+module+extention

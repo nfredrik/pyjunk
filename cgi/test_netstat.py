@@ -8,7 +8,8 @@ class TestNetstat(unittest.TestCase):
 
     def test_get_port_status(self):
         netstat = Netstat()
-        self.assertEqual('LISTEN', netstat.get_port_status(631))
+        self.assertEqual('LISTEN', netstat.get_port_status('631'))
+        self.assertEqual('LISTEN', netstat.get_port_status('632'))
 
 if __name__ == '__main__':
     unittest.main()

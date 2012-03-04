@@ -23,14 +23,14 @@ class Netstat(Command):
         Get status of port.
         """
 
-        print 'portno:', portno,
+#        print 'portno:', portno,
 #        print self.port_status
 #        self.result = re.search('\d.\d.\d.\d\:' + str(portno) + '*([\w\d]*)' , self.port_status)
         self.result = re.search(r"\d*.\d*.\d*.\d*\:" + str(portno) + "\s*\d*.\d*.\d*.\d*\:[\*\d]*\s*([\w\_\d]*)" , self.port_status)
 
         if self.result != None:
             return str(self.result.group(1))
-        return 'Not present'
+        return 'DOWN'
 
 #        self.tnt = re.search(r"ttl=(\d*) time=(\d*.\d*)", cmd.get_string_output())
  #       self.ttl = self.tnt.group(1)

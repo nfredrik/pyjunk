@@ -26,5 +26,5 @@ class URLAgent(Thread):
 
 
 if __name__ == '__main__':
-    hosts = 3
+    hosts = 25
     URLer(hosts)

@@ -1,0 +1,2301 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   PAOBT.
+PGMDOK*******************************************************************
+      * P R O G R A M B E S K R I V N I N G
+      *
+      * BENÄMNING: REG AV FRITEXT FÖR OMBILDNING TILL BANKAB.
+      *
+      * PROGRAM: TEST*RETULB.QAOBT / PROD*RETULB.QAOBT
+      * TKOD: PAOBT/QAOBT(TEST)          BILD: 927,PAOBT1
+      *
+      * AUTHOR...: BO ERIKSSON          PRV BOLAG     DAT: 2001-09-20
+      *******************************************************************
+      *
+      *    BESKRIVNING AV BEARBETNING SAKNAS.
+      *
+      *
+      * ÄNDRINGSLOGG  (fallande datumordning)
+      * 01-09-20 BOE  BAF-PROJEKTET : SKAPAT PROGRAMMET.
+      * ------------------------------------------------------------------
+      ******************************************************************
+      *
+      * V E R B A L   P R O G R A M B E S K R I V N I N G
+      *
+      * DATABASAREOR.: ANVÄNDS EJ (.)
+      *
+      * RDMS-TABELLER: BA070_FIRMA  (SR)    proc BO-BA070-RT
+      *                BA206_FOAVVI (SR/SU) proc BO-BA331-WT,-RT
+      *                BA331_GTXTRE (SR/SU) proc BO-BA331-WT,-RT
+      *                BA300_OBJEKT (SR)    proc BO-BA300-RT
+      *                BA310_OBJDNR (SR)    proc BO-BA310-RT
+      *                BA380_KORRI  (SR/SU) proc BO-BA380-WT,-RT
+      *                FD020_HANDLI (SR)    proc BO-FD020-RT
+      *                FD060_ATGARD (SR/SU) proc BO-FD060-WT,-RT
+      *                FD080_ATGREL (SR)    proc BO-FD080-RT
+      *
+      * KOPPLINGAR BILD OCH TABELLER:
+      * S927-STATUS        -> BA300_STATUSXX (EX BA300_STATUSKK)
+      * S927-SEKEL         -> BA300_SEKEL
+      * S927-ORGNR         -> BA300_ORGNR
+      * S927-LOPNR         -> BA300_LOPNR
+      * S927-FIRMA1        -> BA070_FIRMA1
+      * S927-FIRMA2        -> BA070_FIRMA2
+      * S927-RAD           -> BA331_RAD
+      *
+      *
+      * FUNKTIONTANGENTER:
+      * F4  = Uppdatering fritext (QAOBT4)
+      * F5  = Bläddring framåt (QAOBT5)
+      * F6  = Bläddring bakåt (QAOBT6)
+      * F7  = Bläddring till viss sida (QAOBT7)
+      * F8  = Ingång från föregående transaktion (QAOBT8)
+      * F9  = Hopp till meny (QAND/QINF)
+      * F11 = Borttag av fritext (QAOBTB)
+      * F15 = Ingång från företrädarbild (QAOBTF)
+      * F21 = Hjälpbild (QHLP)
+      *
+      * SCRATCHAREA: TEST*UCPROC.BO-SCRAREA
+      *
+      * ARBETSAREOR: TEST*UCPROC.BO-WORKAREA
+      *
+      *
+      * Programmet uppdaterar/visar FRITEXT för ett objekt.
+      * TXTRED används för redigering av text.
+      * Uppdatering kan bara ske av vissa användarbehörigheter. För att
+      * enbart titta räcker det med infobehörighet.
+      * FRITEXT lagras i RDMS-TABELL BA331_GTXTRE.
+      *
+      * Texterna är kopplade till EN 'MASTER' tabell BA254_OMBAAB.
+      * I tabellen BA254_OMBAAB flaggas ändring den här bildens text
+      * med markering i ANDRTXT. Tabellen BA254_OMBAAB har även en
+      * markering ANDROMB, vilken indikerar ändring i MASTER-bilden.
+      *
+      * Åtgärd för att kunna uppdatera bilden: OMBAB/OMBTST/OMBVE/OMBFO
+      *
+      *
+      * BEARBETNING:
+      *
+      * XXXXXXXXXXXXXXXXXXXXXXX
+      * -----------------------------------------------------------------
+PGMDOK********************************************************************
+      *                                                                 ACUCOB
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       SOURCE-COMPUTER. UNISYS-2200.
+       OBJECT-COMPUTER. UNISYS-2200.
+HPCO72*SPECIAL-NAMES.                                                   ACUCOB
+HPSPNA*SPECIAL-NAMES.
+HPSPNA*    CONSOLE       IS CONSOLE                                     ACUCOB
+HPSPNA*    CONSOLE       IS CONSOLE
+HPSPNA*    CARD-READER   IS CARD-READER                                 ACUCOB
+HPSPNA*    CARD-READER   IS CARD-READER
+HPSPNA*    PRINTER       IS PRINTER.                                    ACUCOB
+HPSPNA*    PRINTER       IS PRINTER.
+HPSPNA SPECIAL-NAMES.
+HPCLLA*  COPY HP-SPECIAL-NAMES.
+HPCLLA   COPY 'HP-SPECIAL-NAMES'.
+       DATA DIVISION.
+??????*SUBSCHEMA SECTION.
+??????*INVOKE SUBSCHEMA PRDSSC0101
+??????*    IN FILE PRDSCHUABS
+??????*    OF SCHEMA PRDSCH01.
+       WORKING-STORAGE SECTION.
+HPINPE      EXEC SQL INCLUDE 'WKHPMIG' END-EXEC.
+HPCINC*COPY 'HP-SWITCHES'.
+HPCINC     EXEC SQL INCLUDE 'HP-SWITCHES' END-EXEC.
+           EXEC SQL  BEGIN DECLARE SECTION  END-EXEC.
+HPCINC*    COPY BOTSSS030FTD  IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BOTSSS030FTD END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BOTSSS030FTD' END-EXEC.
+HPCINV*    INVOKE TABLE BA070_FIRMA  IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA070_FIRMA END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA070_FIRMA' END-EXEC.
+HPCINV*    INVOKE TABLE BA254_OMBAAB IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA254_OMBAAB END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA254_OMBAAB' END-EXEC.
+HPCINV*    INVOKE TABLE BA300_OBJEKT IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA300_OBJEKT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA300_OBJEKT' END-EXEC.
+HPCINV*    INVOKE TABLE BA310_OBJDNR IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA310_OBJDNR END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA310_OBJDNR' END-EXEC.
+HPCINV*    INVOKE TABLE BA331_GTXTRE IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA331_GTXTRE END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA331_GTXTRE' END-EXEC.
+HPCINV*    INVOKE TABLE BA350_EXTANT IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA350_EXTANT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA350_EXTANT' END-EXEC.
+HPCINV*    INVOKE TABLE BA380_KORRI  IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE BA380_KORRI END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BA380_KORRI' END-EXEC.
+HPCINV*    INVOKE TABLE FD020_HANDLI IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE FD020_HANDLI END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'FD020_HANDLI' END-EXEC.
+HPCINV*    INVOKE TABLE FD040_RUBRIC IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE FD040_RUBRIC END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'FD040_RUBRIC' END-EXEC.
+HPCINV*    INVOKE TABLE FD060_ATGARD IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE FD060_ATGARD END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'FD060_ATGARD' END-EXEC.
+HPCINV*    INVOKE TABLE FD080_ATGREL IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE FD080_ATGREL END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'FD080_ATGREL' END-EXEC.
+HPCINV*    INVOKE TABLE FD085_F8INFO IN PRDSCHEMA FROM REPOSITORY.
+HPCLLA*    EXEC SQL INCLUDE FD085_F8INFO END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'FD085_F8INFO' END-EXEC.
+           EXEC SQL  END DECLARE SECTION  END-EXEC.
+       01  INDIKATORER.
+      *
+      ***  VISAR OM ÅTGÄRDSTYPERNA FINNS FÖR ÄRENDET
+      *
+           05 IND-OMBAB               PIC 9.
+           88 OMBAB-FINNS             VALUE 1.
+           88 OMBAB-SAKNAS            VALUE 0.
+           05 IND-OMBTST              PIC 9.
+           88 OMBTST-FINNS            VALUE 1.
+           88 OMBTST-SAKNAS           VALUE 0.
+           05 IND-OMBVE               PIC 9.
+           88 OMBVE-FINNS             VALUE 1.
+           88 OMBVE-SAKNAS            VALUE 0.
+           05 IND-OMBFO               PIC 9.
+           88 OMBFO-FINNS             VALUE 1.
+           88 OMBFO-SAKNAS            VALUE 0.
+      *01  W-INREG                PIC 9(2).
+       01  W-RADNR                PIC 9(8).
+       01  WW-DATUM               PIC 9(8).
+       01  WW-DATUM-RE REDEFINES WW-DATUM.
+           05 WW-HHAA             PIC 9(4).
+           05 WW-MM               PIC 9(2).
+           05 WW-DD               PIC 9(2).
+       01  W927-DATUM.
+           05 W927-HHAA          PIC 9(4).
+           05 W927-STR1          PIC X(1)    VALUE '-'.
+           05 W927-MM            PIC 9(2).
+           05 W927-STR2          PIC X(1)    VALUE '-'.
+           05 W927-DD            PIC 9(2).
+       01  WW-ORGNR.
+           05 WW-ORGNR1           PIC 9(6).
+           05 WW-ORGNR2           PIC 9(4).
+      *01  WW-PNR                 PIC 9(10).
+      *01  WW-PNR-REF    REDEFINES WW-PNR.
+      *    05 WW-PNR1             PIC 9(6).
+      *    05 WW-PNR2             PIC 9(4).
+      *01  WW-PNR-REF2   REDEFINES WW-PNR.
+      *    05 WW-PNR-AA           PIC 9(2).
+      *    05 WW-PNR-MM           PIC 9(2).
+      *    05 WW-PNR-MM-REF REDEFINES WW-PNR-MM.
+      *       10 WW-PNR-M1        PIC 9(1).
+      *       10 WW-PNR-M2        PIC 9(1).
+      *    05 WW-PNR-DD           PIC 9(2).
+      *    05 WW-PNR-NR           PIC 9(4).
+      *01  W-AREUHAND-RAD.
+      *    05 FILLER                 PIC X(28)    VALUE
+      *       'ÄRENDEN UNDER HANDLÄGGNING: '.
+      *    05 W-AREUHAND-ANTAL       PIC Z9.
+      *
+      *** VARIABLER FÖR TXTRED
+      *
+       01  WTXT-TOTSIDNR      PIC S9(2).
+       01  W-TXTRED-VARIABLER.
+      *  ANTAL RADER MED LÖPANDE TEXT PER SIDA MAX 18
+          05  W-ANTRADSID          PIC 9(5)    VALUE 14 BINARY.
+          05  W-ANTRAD             PIC 9(5)    VALUE 0  BINARY.
+          05  SX-QS                PIC 9(5)    VALUE 1 BINARY.
+          05  SF4-QS               PIC 9(5)    VALUE 1 BINARY.
+          05  SLUT                 PIC 9(5)    VALUE 1 BINARY.
+          05  W-TEXT               PIC 9(5)    VALUE 0 BINARY.
+              88  TEXT-SLUT                    VALUE 1.
+          05  W-RAD                PIC X(80)    VALUE SPACE.
+      *   ANTAL RADER PER SIDA * 80 POS PER RAD
+          05  W-JMF-BILD           PIC X(1120)   VALUE SPACE.
+       01  W-TXTRED-FELRAD.
+           05  FILLER              PIC X(23)    VALUE
+            'FEL I TXTRED, FELKOD = '.
+           05  W-TXTFELKOD         PIC 99.
+           05  FILLER              PIC X(13)    VALUE
+            '  KOMMANDO = '.
+           05 W-TXTKOMMANDO        PIC XX.
+       01  INDIKATORER.
+      ***  VISAR OM DET FINNS FRITEXT PÅ ÄRENDET
+           05 FRITEXT-IND          PIC 9.
+           88 FRITEXT-FINNS        VALUE 1.
+           88 FRITEXT-SAKNAS       VALUE 0.
+      ***  VISAR OM ÅTGÄRD *-MÄRKTS ELLER EJ
+           05 W-ATGARDER           PIC 9.
+           88 ATGARDER-FINNS       VALUE 1.
+           88 ATGARDER-SAKNAS      VALUE 0.
+      *
+      ***  SCRATCH-AREA, 1792 TECKEN
+      *
+HPCINC*    COPY BO-SCRAREA IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-SCRAREA END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-SCRAREA' END-EXEC.
+           05 W-PGM-AREA-RE REDEFINES W-PGM-AREA.
+              10 FILLER                 PIC X(1300).
+      *** GENERELL AREA FÖR GENERELLA RUTINER
+      *
+HPCINC*    COPY BO-WORKAREA IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-WORKAREA END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-WORKAREA' END-EXEC.
+      *** AREA FÖR SETFUN-SP
+      *
+HPCINC*    COPY BO-SETFUN IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-SETFUN END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-SETFUN' END-EXEC.
+      *** COMM-AREA FÖR TXTRED
+      *
+HPCINC*    COPY RETDDD003TXD IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE RETDDD003TXD END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'RETDDD003TXD' END-EXEC.
+      **** FELHANTERING MED FELTXT-SP.
+      *
+HPCINC*    COPY BO-FELTXT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FELTXT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FELTXT' END-EXEC.
+      *
+      *** BILDAREA OCH ÖVRIGA DPS-AREOR
+      *
+HPCINC*    COPY SCREEN-PAOBT1-927 IN RESCRE.
+HPCLLA*    EXEC SQL INCLUDE SCREEN-PAOBT1-927 END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'SCREEN-PAOBT1-927' END-EXEC.
+HPCINC*    COPY INFO-BUFFER.
+HPCLLA*    EXEC SQL INCLUDE INFO-BUFFER END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'INFO-BUFFER' END-EXEC.
+HPCINC*    COPY SCREEN-BUFFER.
+HPCLLA*    EXEC SQL INCLUDE SCREEN-BUFFER END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'SCREEN-BUFFER' END-EXEC.
+HPCINC*    COPY PAGE-STATUS.
+HPCLLA*    EXEC SQL INCLUDE PAGE-STATUS END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'PAGE-STATUS' END-EXEC.
+HPCINC*    COPY DPSSTATUSCOB.
+HPCLLA*    EXEC SQL INCLUDE DPSSTATUSCOB END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'DPSSTATUSCOB' END-EXEC.
+HPCINC*    COPY SENDERROR.
+HPCLLA*    EXEC SQL INCLUDE SENDERROR END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'SENDERROR' END-EXEC.
+HPCINC*    COPY GETLINE.
+HPCLLA*    EXEC SQL INCLUDE GETLINE END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'GETLINE' END-EXEC.
+PADSEN 01  PADS-SLUT   PIC X(80) VALUE '** F22 **'.
+PADSEN 01  PADS-FUNCNR PIC 9(2).
+PADSEN 01  PADS-PROGID PIC X(6).
+HPCINC*    COPY DPS-DEVICE-PACKET.
+HPCLLA*    EXEC SQL INCLUDE DPS-DEVICE-PACKET END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'DPS-DEVICE-PACKET' END-EXEC.
+HPCINC*    COPY REXMIT-BUFF.
+HPCLLA*    EXEC SQL INCLUDE REXMIT-BUFF END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'REXMIT-BUFF' END-EXEC.
+HPCINC*    COPY DPS-OPTIONS.
+HPCLLA*    EXEC SQL INCLUDE DPS-OPTIONS END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'DPS-OPTIONS' END-EXEC.
+HPCSTG*COMMON-STORAGE SECTION.
+       PROCEDURE DIVISION.
+HPRDYT     CALL 'CheckReadyTrace' USING z'PAOBT',
+HPRDYT       z'@(#)unknown' RETURNING HP-READY-TRACE.
+HPRDYT     IF HP-READY-TRACE = 1 THEN
+HPRDYT       READY TRACE
+HPRDYT     END-IF.
+HPCO72*PGMSEC    SECTION.                                               ACUCOB
+HPCO72 PGMSEC    SECTION.
+       PAOBT SECTION.
+       PAOBT-SEQ.
+           PERFORM A-INITIERA.
+           PERFORM B-BEARBETA.
+           PERFORM C-AVSLUTA.
+       PAOBT-SEQ-END.
+           EXIT.
+      *-----------------------------------------------------------------
+       A-INITIERA SECTION.
+       A-INITIERA-SEQ.
+           MOVE SPACE             TO RDMS-LAGE.
+           MOVE SPACE             TO CONSOL-DISP, CONSOL-FORT.
+           MOVE 'PAOBT'           TO CONSOL-PGM.
+           CALL 'RSA$INIT'.
+           CALL 'D$INIT' USING DPS-STATUS, INFO-BUFFER.
+           IF STATUS-FATAL
+               GO TO DPS-FATAL.
+TESTEN*    DISPLAY 'D$INIT: ' INFO-PROGRAM-ID.
+           MOVE INFO-TERMID       TO FUNPID.
+PADSEN     IF INFO-DEMAND = 'Y' AND INFO-FUNCTION-KEY > 0
+PADSEN        MOVE 24 TO RETRANSMIT-ROW-COORDINATE
+PADSEN        MOVE 80 TO RETRANSMIT-COLUMN-COORDINATE
+PADSEN        CALL 'D$RETRANSMIT' USING DPS-STATUS DPS-OPTIONS
+PADSEN                                  DPS-RETRANSMIT-BUFFER
+PADSEN        MOVE INFO-FUNCTION-KEY TO PADS-FUNCNR
+PADSEN        STRING INFO-PROGRAM-ID DELIMITED SPACE
+PADSEN               PADS-FUNCNR     DELIMITED SIZE
+PADSEN               INTO PADS-PROGID
+PADSEN        MOVE   PADS-PROGID  TO INFO-PROGRAM-ID.
+PADSEN
+PADSEN     IF INFO-DEMAND = 'Y' AND INFO-FUNCTION-KEY = 22
+PADSEN        CALL 'D$CLCONV'   USING DPS-STATUS
+PADSEN        CALL 'D$ENDMSG'   USING DPS-STATUS PADS-SLUT
+PADSEN        CALL 'D$TERM'     USING DPS-STATUS
+HPCSTO*       STOP RUN.
+HPCGOB        GOBACK.
+PADSEN     IF INFO-DEMAND = 'Y'
+PADSEN        CALL 'PADS$'
+PADSEN        CALL 'D$SETCV' USING DPS-STATUS.
+PADSEN
+           CALL 'BEHOR' USING INFO-BUFFER.
+           MOVE INFO-PROGRAM-ID   TO CONSOL-TEXT.
+           CALL 'D$GETUFLD' USING DPS-STATUS, WU-USERBUFFER.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+PADSEN     IF INFO-DEMAND = 'Y'
+PADSEN        MOVE 1         TO WU-BEH (36)
+PADSEN        MOVE 1         TO WU-BEH (4).
+           PERFORM X1-BLANKA-BILD.
+           MOVE 2                    TO LNG.
+           MOVE 9                    TO FKN (1).
+           IF INFO-PROGRAM-ID (2:1) = 'A'
+              MOVE 'PATAX9'          TO TCODE (1)
+           ELSE
+              MOVE 'PINF'            TO TCODE (1).
+           MOVE SPACE                TO TEXTIN (1).
+           MOVE 21                   TO FKN (2).
+           IF INFO-PROGRAM-ID (2:1) = 'A'
+              MOVE 'PAOBTL'          TO TCODE (2)
+           ELSE
+              MOVE 'PIOBTL'          TO TCODE (2).
+           MOVE 'Y'                  TO TEXTIN (2).
+      *
+      **** VI HÄMTAR DAGENS DATUM
+      *
+           CALL 'DAGDAT-SP' USING WA-DAGDAT-AREA.
+TESTEN*    DISPLAY 'WA-DAGDAT-AREA: ' WA-DAGDAT-AREA.
+       A-INITIERA-SEQ-END.
+           EXIT.
+      *-----------------------------------------------------------------
+       B-BEARBETA SECTION.
+       B-BEARBETA-SEQ.
+      *
+      ***** PAOBT4  = F4,   UPPDATERING                    ******
+      ***** PAOBT2  = F5,   BLÄDDRING FRAMÅT               ******
+      ***** PAOBT2  = F6,   BLÄDDRING BAKÅT                ******
+      ***** PAOBT2  = F7,   BLÄDDRING VISS SIDA            ******
+      ***** PAOBT9  = F9,   TILL DELMENY                   ******
+      ***** PAOBTB  = F11,  BORTTAG AV TEXT                ******
+      ***** PAOBTF  = F15,  PENDLA TILLBAKA TILL QAOB/PAOB ******
+      ***** PAOBTL  = F21,  HJÄLP                          ******
+      ***** PAOBT22 = F22,  TILLBAKA TILL INLOGGNINGSMENY  ******
+      *
+BOETST*    DISPLAY 'PAOBT, BEARBETA-SEQ: ' INFO-PROGRAM-ID UPON CONSOLE.
+           IF INFO-PROGRAM-ID = 'PAOBTF'  OR  'PIOBTF'
+              PERFORM BA-PAOBT
+           ELSE
+           IF INFO-PROGRAM-ID = 'PAOBT4'
+              PERFORM BB-PAOBT4
+           ELSE
+           IF INFO-PROGRAM-ID = 'PAOBT5' OR 'PAOBT6' OR 'PAOBT7'  OR
+                                'PIOBT5' OR 'PIOBT6' OR 'PIOBT7'
+              PERFORM BC-PAOBT5
+           ELSE
+           IF INFO-PROGRAM-ID = 'PAOBTB'
+              PERFORM BD-PAOBTB
+           ELSE
+           IF INFO-PROGRAM-ID = 'PAOBTL' OR 'PIOBTL'
+              PERFORM BF-PAOBTL.
+       B-BEARBETA-SEQ-END.
+           EXIT.
+      *---- ENDAST F15 -------------------------------------------------
+       BA-PAOBT SECTION.
+       BA-PAOBT-SEQ.
+      *********************************************************
+      *********************************************************
+      ***
+      ***  VI KOMMER IN FÖRSTA GÅNGEN MED PAOBTF / PIFATF
+      ***  ELLER QAOBTF/QIOBTF.
+      ***  NYCKLAR FINNS I W-BLB-DINR/DINRAR SAMT W-BLB-INTERNID
+      ***
+      *********************************************************
+      *********************************************************
+           MOVE SPACE           TO S927-FELTEXT.
+      **** KOMMER ENDAST IN VIA F15 FRÅN QAOB.
+HPSCR4*    CALL 'D$GETSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'GETSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+               GO TO DPS-FATAL.
+BOETST*    DISPLAY 'PAOBT: ' W-BLB-GRUNDTKOD ' ' W-BLB-TKOD ' ' GET-LINE
+BOETST*                     UPON CONSOLE.
+           MOVE W-GEN-NYCKEL         TO WI-AREA.
+***********IF INFO-PROGRAM-ID = 'PIOBT ' OR 'PIOBT8'  OR 'PIOBTF'
+           IF INFO-PROGRAM-ID = 'PIOBTF'
+              MOVE 'PIOB'            TO WI-TKOD
+              MOVE 'PINF'            TO W-BLB-FUNK (9).
+***********IF INFO-PROGRAM-ID = 'PAOBT ' OR 'PAOBT8'  OR 'PAOBTF'
+           IF INFO-PROGRAM-ID = 'PAOBTF'
+              MOVE 'PAOB'            TO WI-TKOD
+              MOVE 'PATA'            TO W-BLB-FUNK (9).
+HPCDOP     INITIALIZE SCREEN-PAOBT1-927 FILLER ALL TO VALUE
+           CALL 'D$OPEN' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+                GO TO DPS-FATAL.
+           MOVE WI-AREA  TO S927-TKOD.
+           MOVE WI-AREA  TO W-GEN-NYCKEL.
+BOETST*    DISPLAY 'PAOBT: ' W-BLB-GRUNDTKOD ' ' W-BLB-TKOD ' BEGUPD'
+BOETST*                     UPON CONSOLE.
+      *------------------------------------------BEGIN THREAD
+           PERFORM R1-BEGIN-UPDATE.
+      *------------------------------------------USE SCHEMA
+           PERFORM R1-USE.
+           MOVE 'N'                      TO S927-VARNING1-INT.
+           MOVE 'N'                      TO S927-VARNING1-HIGH.
+           MOVE SPACE                    TO S927-VARNING1.
+       BA-INFO-ANDR-SEL.
+      *--- HOPPA TILL ÄNDRING OM POS 2 ÄR ANNAT ÄN 'I'
+           IF NOT (INFO-PROGRAM-ID = 'PIOBTF')
+              GO TO BA-INFO-ANDR-ALT1.
+      *------------------------  INFO
+011107     MOVE 'PIOB'             TO W-BLB-TKOD.
+           MOVE 'PAOB'             TO W-BLB-GRUNDTKOD.
+      *--- BO-SCRRED-D ERSÄTTS MED DATA FRÅN SCRATCHAREA
+           IF NOT (W-BLB-OBJTYP = 'SB ')
+              MOVE 'DENNA TRANSAKTION ÄR INTE ANVÄNDBAR FÖR DEN HÄR OBJE
+      -            'KTTYPEN'
+                                   TO ERROR-MESSAGE
+              MOVE 6               TO ERROR-X
+              MOVE 1               TO ERROR-Y
+              GO TO BA-VISA-ADMIT.
+           PERFORM X7-HAMTA-GTXTRE-FORSTA.
+           IF FRITEXT-SAKNAS
+              MOVE 'OMBILDNING TILL BANKAB, TEXT SAKNAS'
+                    TO ERROR-MESSAGE.
+           PERFORM X6-HAMTA-HANDLI.
+           PERFORM XA-SPARRA-BILD.
+      *---- KOLLAR OM EXTERNA ANTECKNINGAR FINNS.
+           PERFORM EXTANT-INFO.
+           IF FD020-KORRMARK = 'J'  AND
+              FD020-KORRKLARDAT = 0
+              MOVE 'KORRIGERING AV REGISTRERADE UPPGIFTER PÅGÅR'
+                                    TO ERROR-MESSAGE.
+      *--- OM DET INTE FINNS BA331-GTXTRE SÅ SKALL
+      *--- F5/F6/F7 EJ FUNGERA
+       BA-PAOBT-TEXTFINNS-SEL.
+           IF FRITEXT-SAKNAS
+              GO TO BA-PAOBT-TEXTFINNS-SEL-END.
+           ADD 1                    TO LNG.
+           MOVE 5                   TO FKN (LNG).
+           MOVE 'PIOBT5'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           ADD 1                    TO LNG.
+           MOVE 6                   TO FKN (LNG).
+           MOVE 'PIOBT6'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           ADD 1                    TO LNG.
+           MOVE 7                   TO FKN (LNG).
+           MOVE 'PIOBT7'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           MOVE 'PIOBT5'            TO W-BLB-FUNK (5).
+           MOVE 'PIOBT6'            TO W-BLB-FUNK (6).
+           MOVE 'PIOBT7'            TO W-BLB-FUNK (7).
+       BA-PAOBT-TEXTFINNS-SEL-END.
+           ADD 1                    TO LNG.
+           MOVE 15                  TO FKN (LNG).
+           MOVE 'PIOBXF'            TO TCODE (LNG).
+           MOVE SPACE               TO TEXTIN (LNG).
+           MOVE 'PIOBXF'            TO W-BLB-FUNK (15).
+           MOVE 6                   TO ERROR-X.
+           MOVE 1                   TO ERROR-Y.
+           GO TO BA-INFO-ANDR-SEL-END.
+       BA-INFO-ANDR-ALT1.
+      *------------------------  ÄNDRING
+011107     MOVE 'PAOB'             TO W-BLB-TKOD.
+           MOVE 'PAOB'             TO W-BLB-GRUNDTKOD.
+      *--- HÄMTA ÄRENDE UTIFRÅN W-BLB-DINR... ETC
+           PERFORM X12-HAMTA-ARENDE.
+           IF W-BLB-GENSTAT = 'F'
+              GO TO BA-VISA-ADMIT.
+           IF FD020-STARTDAT = ZERO
+              MOVE 'FEL, ÄRENDET EJ PÅBÖRJAT PÅ PATA-BILDEN'
+                                       TO ERROR-MESSAGE
+              GO TO BA-VISA-ADMIT.
+           MOVE W-BLB-DINRAR         TO BA254-DINRAR.
+           MOVE W-BLB-DINR           TO BA254-DINR.
+      *------------------------------------------------ SELECT
+           PERFORM R2-SEL01-BA254-OMBAAB.
+           IF RDMS-NODATA
+**************MOVE 'FASTA OMBILDNINGSUPPGIFTER SAKNAS, OBLIGATORISKT FÖR
+**************     ' FRITEXT'
+              MOVE 'FEL, UPPDATERA OBLIGATORISKA UPPGIFTER FÖRE FRITEXT'
+                                   TO ERROR-MESSAGE
+              MOVE 6               TO ERROR-X
+              MOVE 1               TO ERROR-Y
+              GO TO BA-VISA-ADMIT.
+      *----------------- KONTROLL AV ÄRENDE-STATUS
+           PERFORM BO-KOLLDNR-STATUS.
+BOETST*    DISPLAY 'PAOBT, ARENDESTATUS: ' W-ARENDE-STATUS UPON CONSOLE.
+      *----------------- KONTROLL OM BILDEN EV SKALL SPÄRRAS
+           PERFORM KOLLA-SPARRNING.
+BOETST*    DISPLAY 'PAOBT, SPÄRR: ' W-BILD-SPARR ' ' W-BLB-SPARR
+BOETST*                                             UPON CONSOLE.
+           IF W-BILD-SPARR NOT = 'J'
+              ADD 1                 TO LNG
+              MOVE 4                TO FKN (LNG)
+              MOVE 'PAOBT4'         TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG)
+              MOVE 'PAOBT4'         TO W-BLB-FUNK (4)
+              ADD 1                 TO LNG
+              MOVE 11               TO FKN (LNG)
+              MOVE 'PAOBTB'         TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG)
+              MOVE 'PAOBTB'         TO W-BLB-FUNK (11).
+           ADD 1                    TO LNG.
+           MOVE 5                   TO FKN (LNG).
+           MOVE 'PAOBT5'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           ADD 1                    TO LNG.
+           MOVE 6                   TO FKN (LNG).
+           MOVE 'PAOBT6'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           ADD 1                    TO LNG.
+           MOVE 7                   TO FKN (LNG).
+           MOVE 'PAOBT7'            TO TCODE (LNG).
+           MOVE 'Y'                 TO TEXTIN (LNG).
+           ADD 1                    TO LNG.
+           MOVE 15                  TO FKN (LNG).
+           MOVE 'PAOBXF'            TO TCODE (LNG).
+           MOVE SPACE               TO TEXTIN (LNG).
+           MOVE 'PAOBT5'            TO W-BLB-FUNK (5).
+           MOVE 'PAOBT6'            TO W-BLB-FUNK (6).
+           MOVE 'PAOBT7'            TO W-BLB-FUNK (7).
+           MOVE 'PAOBXF'            TO W-BLB-FUNK (15).
+           IF W-BILD-SPARR = 'J'
+              MOVE S927-SIDA-XCO      TO ERROR-X
+              MOVE S927-SIDA-YCO      TO ERROR-Y
+           ELSE
+              MOVE S927-RAD-XCO (1)   TO ERROR-X
+              MOVE S927-RAD-YCO (1)   TO ERROR-Y.
+       BA-INFO-ANDR-SEL-END.
+           PERFORM X2-REGDATUM.
+           PERFORM X4-REDIGERA-HUVUD.
+      *
+      **** ÖPPNAR MOT TEXTRED
+      *
+           PERFORM X8-HAMTA-GTXTRE.
+           GO TO BA-ARENDE-FINNS-POSIT-END.
+       BA-ARENDE-FINNS-ADMIT.
+           PERFORM XA-SPARRA-BILD.
+           MOVE 1                        TO ERROR-Y.
+           MOVE 6                        TO ERROR-X.
+       BA-ARENDE-FINNS-POSIT-END.
+      *------- SÄTT F8
+       BA-FUNK-F8-SEL.
+           IF INFO-PROGRAM-ID = 'PAOB  '   OR
+                                'PAOBT8'   OR
+                                'PAOBTF'
+              GO TO BA-FUNK-F8-ALT1.
+           PERFORM BO-F8INFO.
+           ADD 1                    TO LNG.
+           MOVE 8                   TO FKN (LNG).
+           MOVE W-F8INFO-TKOD       TO TCODE (LNG).
+           MOVE SPACE               TO TEXTIN (LNG).
+           MOVE W-F8INFO-TKOD       TO W-BLB-FUNK (8).
+           GO TO BA-FUNK-F8-SEL-END.
+       BA-FUNK-F8-ALT1.
+           PERFORM BO-F8UPPD.
+           ADD 1                    TO LNG.
+           MOVE 8                   TO FKN (LNG).
+           MOVE W-F8UPPD-TKOD       TO TCODE (LNG).
+           MOVE SPACE               TO TEXTIN (LNG).
+           MOVE W-F8UPPD-TKOD       TO W-BLB-FUNK (8).
+       BA-FUNK-F8-SEL-END.
+           GO TO BA-VISA-POSIT-END.
+       BA-VISA-ADMIT.
+           PERFORM XA-SPARRA-BILD.
+           MOVE 1                        TO ERROR-Y.
+           MOVE 6                        TO ERROR-X.
+       BA-VISA-POSIT-END.
+           GO TO BA-NYCKEL-SEL-END.
+       BA-FELAKTIG-INGANG.
+           PERFORM XA-SPARRA-BILD.
+           MOVE 'FELAKTIG INGÅNG, ANVÄND PAOB'
+                                         TO ERROR-MESSAGE.
+           MOVE 1                        TO ERROR-Y.
+           MOVE 6                        TO ERROR-X.
+       BA-NYCKEL-SEL-END.
+      *------------------------------------------END THREAD
+           PERFORM R1-END-THREAD.
+           CALL 'SETFUNB-SP' USING RETKOD, TABELL.
+           IF RETKOD NOT = ZERO
+              MOVE 1                  TO FELTXT-FTXTNUM
+              MOVE S927-TKOD-XCO     TO ERROR-X
+              MOVE S927-TKOD-YCO     TO ERROR-Y
+              GO TO INDATA-FEL.
+       BA-PAOBT-SEQ-END.
+           EXIT.
+      *----F4 UPPDATERING-----------------------------------------------
+       BB-PAOBT4 SECTION.
+       BB-PAOBT4-SEQ.
+      **********************************************************
+      **********************************************************
+      *
+      ***  UPPDATERING F4 = PAOBT4.
+      *
+      **********************************************************
+      **********************************************************
+      *
+      ***  LÄSER IN SCRATCH-AREA    ***
+      *
+HPSCR4*    CALL 'D$GETSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'GETSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           MOVE W-SCRAREA       TO CONSOL-TEXT.
+           CALL 'D$READ' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF STATUS-WARNING
+              CALL 'D$FLDERR' USING DPS-STATUS, SCREEN-PAOBT1-927
+              CALL 'D$TERM' USING DPS-STATUS
+              IF STATUS-FATAL
+                 GO TO DPS-FATAL.
+      *------------------------------------------BEGIN THREAD
+           PERFORM R1-BEGIN-UPDATE.
+      *------------------------------------------USE SCHEMA
+           PERFORM R1-USE.
+           MOVE 'N'                      TO S927-VARNING1-INT.
+           MOVE 'N'                      TO S927-VARNING1-HIGH.
+           MOVE SPACE                    TO S927-VARNING1.
+      *----------- KOLLAR OM NÅGON ANNAN HAR AVSLUTAT ÄRENDET ---------
+      *----------- EFTER DET ATT VI HA TAGIT UPP BILDEN.      --------
+      *----------- HAR NÅGON GJORT DET KAN INGEN UPPDATERING  --------
+      *----------- TILLÅTAS.                                  --------
+           PERFORM X6-HAMTA-HANDLI.
+      *----------------- KONTROLL AV ÄRENDE-STATUS
+           PERFORM BO-KOLLDNR-STATUS.
+      *----------------- KONTROLL OM BILDEN EV SKALL SPÄRRAS
+           PERFORM KOLLA-SPARRNING.
+           IF W-BILD-SPARR = 'J'
+              MOVE 'FEL, ÄRENDET AVSLUTAT SE PATA-BILDEN'
+                                       TO ERROR-MESSAGE
+              MOVE 1                   TO ERROR-Y
+              MOVE 6                   TO ERROR-X
+              GO TO INDATA-FELDISP.
+      *------------------------------------------LOCK TABLE BA331_GTXTRE
+           PERFORM R2-LOCSUQ-BA331-GTXTRE.
+      *-------  UPPDATERING  -------------------------------
+       BB-UPPDATERA-SEQ.
+      *
+      ***  ÖPPNAR "TXTRED" OCH LÄSER AKTUELL SIDA
+      ***  FÖR ATT JÄMFÖRA MED BILDEN
+      *
+           MOVE 'OP'                 TO TXT-KOMMANDO.
+           MOVE INFO-SHORT-TERMID    TO TXT-ARBETSNAMN.
+           COMPUTE TXT-DAFALTLANGD = W-ANTRADSID * 80.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+           MOVE W-GEN-RADNR          TO TXT-PARM (1).
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE TXT-DATA-FALT       TO W-JMF-BILD.
+       BB-TXTUPPD-SEL.
+           IF  S927-REPEAT-1-DATA-ST = W-JMF-BILD
+               GO TO BB-TXTUPPD-SEL-END.
+      *
+      ***** SPARAR FÖREGÅENDE TEXT VID KORRIGERING
+      *
+           PERFORM SPARA-KORR-TEXT.
+      *
+      ***  BILDEN HAR BLIVIT FÖRÄNDRAD
+      ***  UPPDATERAR TEXTRED
+      *
+           MOVE SPACE TO TXT-DATA-FALT.
+           MOVE S927-REPEAT-1-DATA-ST  TO TXT-DATA-FALT.
+           MOVE 'IN'                    TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'            USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'         USING DFHCOMMAREA.
+      *
+      ***  TXT-STAT = 23 INNEBÄR RADER MER ÄN TXT-RADMAX
+      *
+           IF TXT-STAT = 23
+               MOVE 35                TO FELTXT-FTXTNUM
+               MOVE S927-RAD-XCO (1) TO ERROR-X
+               MOVE S927-RAD-YCO (1) TO ERROR-Y
+               GO TO INDATA-FEL.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT          TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO      TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD   TO ERROR-TEXT
+               MOVE S927-TKOD-XCO    TO ERROR-X
+               MOVE S927-TKOD-YCO    TO ERROR-Y
+               GO TO INDATA-FELDISP.
+      *
+      ***  FÅR TILLBAKA SAMMA SIDA NU REDIGERAD
+      ***  SÅVIDA INTE 'SISTA RAD' HAR BLANKATS UT
+      *
+           COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+HPDIV0*                                 (W-ANTRADSID - 1).
+HPDIV0                                  (W-ANTRADSID - 1) 
+HPDIV0      ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR.
+           IF  W-GEN-SIDNR > WTXT-TOTSIDNR
+      *    **** (LÄSNING AV FÖREGÅENDE SIDA FRÅN TXTRED) ****
+               SUBTRACT  1                  FROM  W-GEN-SIDNR
+               COMPUTE  TXT-PARM (1) =
+                                     (W-GEN-SIDNR * (W-ANTRADSID - 1))
+                                     - (W-ANTRADSID - 2)
+               MOVE 'DS'                    TO  TXT-KOMMANDO
+??????*        CALL  'TXTRED'    USING  DFHCOMMAREA
+??????         CALL  'TXTRED-SP' USING  DFHCOMMAREA
+               IF  NOT (TXT-STAT = ZERO OR 24)
+                   MOVE  TXT-STAT           TO  W-TXTFELKOD
+                   MOVE  TXT-KOMMANDO       TO  W-TXTKOMMANDO
+                   MOVE  W-TXTRED-FELRAD    TO  ERROR-TEXT
+                   MOVE  S927-TKOD-YCO     TO  ERROR-Y
+                   MOVE  S927-TKOD-XCO     TO  ERROR-X
+                   GO TO  INDATA-FELDISP.
+           MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST.
+           IF TXT-RADANT = ZERO
+               MOVE ZERO            TO S927-TOTSIDA
+               MOVE 1               TO W-GEN-SIDNR  W-GEN-RADNR
+           ELSE
+              MOVE TXT-FORADN       TO W-GEN-RADNR
+              COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+                                        (W-ANTRADSID - 1)
+HPDIV0         ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR 
+HPDIV0        END-COMPUTE
+              MOVE WTXT-TOTSIDNR TO S927-TOTSIDA.
+           MOVE W-GEN-SIDNR         TO S927-SIDA.
+       BB-TXTUPPD-SEL-END.
+      *------- DELETE AV ALLA POSTER I RDMS-TABELL HÄR
+      *------- INNAN VI GÅR VIDARE
+           MOVE W-BLB-DINRAR       TO BA331-DINRAR.
+           MOVE W-BLB-DINR         TO BA331-DINR.
+           MOVE 'PAOBT'            TO BA331-TXTTYP.
+      *------------------------------------------------- DELETE
+           PERFORM R2-DEL01-BA331-GTXTRE.
+      *
+      ***  HÄMTAR TEXT FRÅN TXTRED
+      *
+           PERFORM SF4-TXTRED.
+           MOVE 1             TO BA331-RADNR.
+       BB-TEXTANDR-ITR.
+           IF TEXT-SLUT
+               GO TO BB-TEXTANDR-ITR-END.
+           MOVE W-BLB-DINRAR          TO BA331-DINRAR.
+           MOVE W-BLB-DINR            TO BA331-DINR.
+           MOVE 'PAOBT'               TO BA331-TXTTYP.
+           MOVE W-RAD                 TO BA331-RAD.
+      *------------------------------------------------- INSERT
+           PERFORM R2-INS01-BA331-GTXTRE.
+           PERFORM SF4-TXTRED.
+           ADD 1 TO BA331-RADNR.
+           GO TO BB-TEXTANDR-ITR.
+       BB-TEXTANDR-ITR-END.
+           PERFORM X9-HAMTA-OMBAAB.
+           IF RDMS-NODATA
+              MOVE 'FEL, FASTA OMBILDNINGSUPPGIFTER SAKNAS'
+                                       TO ERROR-MESSAGE
+              MOVE 1                   TO ERROR-Y
+              MOVE 6                   TO ERROR-X
+              GO TO INDATA-FELDISP.
+           PERFORM R2-LOCSUQ-BA254-OMBAAB.
+           MOVE 'Ä'         TO BA254-ANDRTXT
+           PERFORM R2-UPD01-BA254-OMBAAB.
+           IF NOT RDMS-OK
+              MOVE 'UPDEN GICK ÅT SKOGEN' TO CONSOL-DISP
+              GO                          TO RDMS-FATAL.
+       BB-UPPD-ATGARD-POSIT.
+      *--- KONVM-ÄRENDEN KAN SAKNA FD060-POST
+           IF FD040-RUBRICERING = 'KONVM'
+              GO TO BB-UPPD-ATGARD-ADMIT.
+           MOVE ZERO        TO W-ATGARDER.
+           MOVE 'OMBAB'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBTST'    TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBVE'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBFÖ'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+       BB-UPPD-ATGARD-SEL.
+           IF ATGARDER-SAKNAS
+              GO TO BB-UPPD-ATGARD-ALT1.
+           MOVE 'UPPDATERING KLAR     '       TO ERROR-MESSAGE.
+           MOVE S927-RAD-XCO (1)              TO ERROR-X.
+           MOVE S927-RAD-YCO (1)              TO ERROR-Y.
+           GO TO BB-UPPD-ATGARD-SEL-END.
+       BB-UPPD-ATGARD-ALT1.
+      *--- PÅGÅENDE KORRIGERING AV HDL MED KORRBEHÖRIGHET
+      *--- ÄR OKAY, MEN FD060-POST KAN SAKNAS
+           IF(FD020-KORRMARK = 'J' AND
+              FD020-KORRKLARDAT = ZERO) AND
+              WU-BEH (32) = 1
+              GO TO BB-UPPD-ATGARD-ALT2.
+           MOVE 'FEL, ÅTGÄRDER FÖR OMBILDNING SAKNAS' TO ERROR-MESSAGE.
+           MOVE 6                              TO ERROR-X.
+           MOVE 1                              TO ERROR-Y.
+      *    INDATA-FELDISP = ROLLBACK.
+           GO TO INDATA-FELDISP.
+      *    GO TO BB-UPPD-ATGARD-SEL-END.
+       BB-UPPD-ATGARD-ALT2.
+           MOVE 'UPPDATERING KLAR     '     TO ERROR-MESSAGE.
+           MOVE S927-RAD-XCO (1)            TO ERROR-X.
+           MOVE S927-RAD-YCO (1)            TO ERROR-Y.
+       BB-UPPD-ATGARD-SEL-END.
+           GO TO BB-UPPD-ATGARD-POSIT-END.
+       BB-UPPD-ATGARD-ADMIT.
+      *--- PÅGÅENDE KORRIGERING AV HDL MED KORRBEHÖRIGHET
+      *--- ÄR OKAY, MEN FD060-POST KAN SAKNAS
+           IF(FD020-KORRMARK = 'J' AND
+              FD020-KORRKLARDAT = ZERO) AND
+              WU-BEH (32) = 1
+              GO TO BB-UPPD-ATGARD-POSIT-END.
+           MOVE 'FEL, ÅTGÄRD FINNS EJ  '       TO ERROR-MESSAGE.
+           MOVE 6                              TO ERROR-X.
+           MOVE 1                              TO ERROR-Y.
+      *    INDATA-FELDISP = ROLLBACK.
+           GO TO INDATA-FELDISP.
+       BB-UPPD-ATGARD-POSIT-END.
+      *------------------------------------------END THREAD
+           PERFORM R1-END-THREAD.
+       BB-UPPDATERA-SEQ-END.
+           EXIT.
+       BB-PAOBT4-SEQ-END.
+           EXIT.
+      *----   BLÄDDRING  -------------------------------------------
+       BC-PAOBT5 SECTION.
+       BC-PAOBT5-SEQ.
+      **********************************************************
+      **********************************************************
+      *
+      ***  BLÄDDRING: FRAMÅT    F5 = PAOBT5, PIFTX5
+      ***             BAKÅT     F6 = PAOBT6, PIFTX6
+      ***             VISS SIDA F7 = PAOBT7, PIFTX7
+      *
+      **********************************************************
+      **********************************************************
+      *
+      ***  LÄSER IN SCRATCH-AREA    ***
+      *
+HPSCR4*    CALL 'D$GETSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'GETSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$READ' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF STATUS-WARNING
+              CALL 'D$FLDERR' USING DPS-STATUS, SCREEN-PAOBT1-927
+              CALL 'D$TERM' USING DPS-STATUS
+              IF STATUS-FATAL
+                 GO TO DPS-FATAL.
+      *------------------------------------------BEGIN THREAD
+           PERFORM R1-BEGIN-UPDATE.
+      *------------------------------------------USE SCHEMA
+           PERFORM R1-USE.
+           MOVE W-GEN-NYCKEL     TO WI-AREA.
+           MOVE W-GEN-NYCKEL     TO S927-TKOD.
+      *
+      ***  LÄSER MOTSVARANDE BILD ATT JÄMFÖRA
+      *
+           MOVE 'OP'                TO TXT-KOMMANDO.
+           MOVE INFO-SHORT-TERMID         TO TXT-ARBETSNAMN.
+           COMPUTE TXT-DAFALTLANGD = W-ANTRADSID * 80.
+??????*    CALL 'TXTRED'            USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'         USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+           MOVE W-GEN-RADNR          TO TXT-PARM (1).
+??????*    CALL 'TXTRED'            USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'         USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE TXT-DATA-FALT       TO W-JMF-BILD.
+       BC-BLADDR-STOM-SEL.
+           IF  S927-REPEAT-1-DATA-ST = W-JMF-BILD
+               GO TO BC-BLADDR-STOM-ALT1.
+      *
+      ***  BILDEN HAR BLIVIT FÖRÄNDRAD
+      ***  UPPDATERAR TEXTRED
+      *
+           MOVE SPACE                   TO TXT-DATA-FALT.
+           MOVE S927-REPEAT-1-DATA-ST  TO TXT-DATA-FALT.
+           MOVE 'IN'                    TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'            USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'         USING DFHCOMMAREA.
+      *
+      ***  TXT-STAT = 23 INNEBÄR RADER MER ÄN TXT-RADMAX
+      *
+           IF TXT-STAT = 23
+               MOVE 35                TO FELTXT-FTXTNUM
+               MOVE S927-RAD-XCO (1) TO ERROR-X
+               MOVE S927-RAD-YCO (1) TO ERROR-Y
+               GO TO INDATA-FEL.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT          TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO      TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD   TO ERROR-TEXT
+               MOVE S927-TKOD-XCO    TO ERROR-X
+               MOVE S927-TKOD-YCO    TO ERROR-Y
+               GO TO INDATA-FELDISP.
+      *
+      ***  FÅR TILLBAKA SAMMA SIDA NU REDIGERAD
+      ***  SÅVIDA INTE 'SISTA RAD' HAR BLANKATS UT
+      *
+           COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+HPDIV0*                                 (W-ANTRADSID - 1).
+HPDIV0                                  (W-ANTRADSID - 1) 
+HPDIV0      ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR.
+           IF  W-GEN-SIDNR > WTXT-TOTSIDNR
+      *    **** (LÄSNING AV FÖREGÅENDE SIDA FRÅN TXTRED) ****
+               SUBTRACT  1                  FROM  W-GEN-SIDNR
+               COMPUTE  TXT-PARM (1) =
+                                     (W-GEN-SIDNR * (W-ANTRADSID - 1))
+                                     - (W-ANTRADSID - 2)
+               MOVE 'DS'                    TO  TXT-KOMMANDO
+??????*        CALL  'TXTRED'    USING  DFHCOMMAREA
+??????         CALL  'TXTRED-SP' USING  DFHCOMMAREA
+               IF  NOT (TXT-STAT = ZERO OR 24)
+                   MOVE  TXT-STAT           TO  W-TXTFELKOD
+                   MOVE  TXT-KOMMANDO       TO  W-TXTKOMMANDO
+                   MOVE  W-TXTRED-FELRAD    TO  ERROR-TEXT
+                   MOVE  S927-TKOD-YCO     TO  ERROR-Y
+                   MOVE  S927-TKOD-XCO     TO  ERROR-X
+                   GO TO  INDATA-FELDISP.
+           MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST.
+           IF TXT-RADANT = ZERO
+               MOVE ZERO            TO S927-TOTSIDA
+               MOVE 1               TO W-GEN-SIDNR  W-GEN-RADNR
+           ELSE
+              MOVE TXT-FORADN       TO W-GEN-RADNR
+             COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+                                        (W-ANTRADSID - 1)
+HPDIV0        ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR 
+HPDIV0       END-COMPUTE
+             MOVE WTXT-TOTSIDNR TO S927-TOTSIDA.
+           MOVE W-GEN-SIDNR         TO S927-SIDA.
+           GO TO BC-BLADDR-STOM-SEL-END.
+       BC-BLADDR-STOM-ALT1.
+      *
+      ***  INGEN ÄNDRING HAR SKETT ALLTSÅ BLÄDDRAR VI
+      *
+           EXIT.
+       BC-INGENANDR-SEL.
+           IF NOT (INFO-PROGRAM-ID = 'PAOBT5' OR 'PIOBT5')
+               GO TO  BC-INGENANDR-ALT1.
+      *
+      ***  BLÄDDRING MED F5
+      *
+           COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+HPDIV0*                                 (W-ANTRADSID - 1).
+HPDIV0                                  (W-ANTRADSID - 1) 
+HPDIV0      ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR.
+       BC-FRAM-SEL.
+           IF W-GEN-SIDNR NOT < WTXT-TOTSIDNR
+               GO TO BC-FRAM-ALT1.
+      *
+      ***  BLÄDDRING FRAMÅT
+      *
+           COMPUTE TXT-PARM (1) = W-GEN-RADNR + (W-ANTRADSID - 1).
+           MOVE TXT-PARM (1)   TO W-GEN-RADNR.
+           ADD  1              TO W-GEN-SIDNR.
+           GO TO BC-FRAM-SEL-END.
+       BC-FRAM-ALT1.
+      *
+      ***  BLÄDDRING TILL FÖRSTA SIDAN VID F5 FRÅN SISTA SIDAN
+      *
+           MOVE 1        TO TXT-PARM (1).
+           MOVE 1        TO W-GEN-RADNR.
+           MOVE 1        TO W-GEN-SIDNR.
+       BC-FRAM-SEL-END.
+           GO TO BC-INGENANDR-SEL-END.
+       BC-INGENANDR-ALT1.
+           IF NOT (INFO-PROGRAM-ID = 'PAOBT6' OR 'PIOBT6')
+               GO TO  BC-INGENANDR-ALT2.
+      *
+      ***  BLÄDDRING MED F6
+      *
+       BC-BAK-SEL.
+           IF W-GEN-SIDNR = 1
+               GO TO BC-BAK-ALT1.
+      *
+      ***  BLÄDDRING BAKÅT
+      *
+           COMPUTE TXT-PARM (1) = W-GEN-RADNR - (W-ANTRADSID - 1).
+           MOVE TXT-PARM (1)   TO W-GEN-RADNR.
+           SUBTRACT 1          FROM W-GEN-SIDNR.
+           GO TO BC-BAK-SEL-END.
+       BC-BAK-ALT1.
+      *
+      ***  BLÄDDRING TILL SISTA SIDAN VID F6 OCH FRÅN FÖRSTA SIDAN
+      *
+           COMPUTE WTXT-TOTSIDNR = (TXT-RADANT - 2 + W-ANTRADSID) /
+HPDIV0*                                 (W-ANTRADSID - 1).
+HPDIV0                                  (W-ANTRADSID - 1) 
+HPDIV0      ON SIZE ERROR MOVE 0 TO WTXT-TOTSIDNR.
+           MOVE WTXT-TOTSIDNR   TO W-GEN-SIDNR.
+           COMPUTE TXT-PARM (1) = (W-GEN-SIDNR * (W-ANTRADSID - 1)) -
+                                (W-ANTRADSID - 2).
+           MOVE TXT-PARM (1)    TO W-GEN-RADNR.
+       BC-BAK-SEL-END.
+           GO TO BC-INGENANDR-SEL-END.
+       BC-INGENANDR-ALT2.
+           EXIT.
+       BC-SIDA-SEL.
+      *
+      ***  BLÄDDRING MED F7
+      *
+           IF S927-SIDA < 1 OR > S927-TOTSIDA
+               GO TO BC-SIDA-ALT1.
+      *
+      ***  BLÄDDRING TILL EN BESTÄMD SIDA
+      *
+           COMPUTE TXT-PARM (1) = (S927-SIDA * (W-ANTRADSID - 1)) -
+                                  (W-ANTRADSID - 2).
+           MOVE TXT-PARM (1)    TO W-GEN-RADNR.
+           MOVE S927-SIDA      TO W-GEN-SIDNR.
+           GO TO BC-SIDA-SEL-END.
+       BC-SIDA-ALT1.
+      *
+      ***  FEL BLÄDDRING, SIDVAL UTANFÖR GRÄNSER
+      *
+           MOVE 34               TO FELTXT-FTXTNUM.
+           MOVE S927-SIDA-XCO   TO ERROR-X.
+           MOVE S927-SIDA-YCO   TO ERROR-Y.
+           GO TO INDATA-FEL.
+       BC-SIDA-SEL-END.
+           EXIT.
+       BC-INGENANDR-SEL-END.
+      *
+      ***  LÄSNING AV BEGÄRD SIDA FRÅN TXTRED
+      *
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE TXT-DATA-FALT   TO S927-REPEAT-1-DATA-ST.
+           MOVE W-GEN-SIDNR     TO S927-SIDA.
+       BC-BLADDR-STOM-SEL-END.
+           MOVE S927-SIDA-XCO        TO ERROR-X.
+           MOVE S927-SIDA-YCO        TO ERROR-Y.
+           MOVE 'BLÄDDRING UTFÖRD'         TO ERROR-MESSAGE.
+      *------------------------------------------END THREAD
+           PERFORM R1-END-THREAD.
+       BC-PAOBT5-SEQ-END.
+           EXIT.
+      *---- BORTTAG ----------------------------------------------------
+       BD-PAOBTB SECTION.
+       BD-PAOBTB-SEQ.
+      **********************************************************
+      **********************************************************
+      *
+      ***  BORTTAG  F11 = PAOBTB.
+      *
+      **********************************************************
+      **********************************************************
+      *
+      ***  LÄSER IN SCRATCH-AREA    ***
+      *
+HPSCR4*    CALL 'D$GETSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'GETSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$READ' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF STATUS-WARNING
+              CALL 'D$FLDERR' USING DPS-STATUS, SCREEN-PAOBT1-927
+              CALL 'D$TERM' USING DPS-STATUS
+              IF STATUS-FATAL
+                 GO TO DPS-FATAL.
+           MOVE W-GEN-NYCKEL     TO WI-AREA.
+           MOVE W-GEN-NYCKEL     TO S927-TKOD.
+           MOVE W-SCRAREA       TO CONSOL-TEXT.
+      *------------------------------------------BEGIN THREAD
+           PERFORM R1-BEGIN-UPDATE.
+      *------------------------------------------USE SCHEMA
+           PERFORM R1-USE.
+      *----------- KOLLAR OM NÅGON ANNAN HAR AVSLUTAT ÄRENDET ---------
+      *----------- EFTER DET ATT VI HA TAGIT UPP BILDEN.      --------
+      *----------- HAR NÅGON GJORT DET KAN INGEN UPPDATERING  --------
+      *----------- TILLÅTAS.                                  --------
+           PERFORM X6-HAMTA-HANDLI.
+      *----------------- KONTROLL AV ÄRENDE-STATUS
+           PERFORM BO-KOLLDNR-STATUS.
+      *----------------- KONTROLL OM BILDEN EV SKALL SPÄRRAS
+           PERFORM KOLLA-SPARRNING.
+           IF W-BILD-SPARR = 'J'
+              MOVE 'FEL, ÄRENDET AVSLUTAT SE PATA-BILDEN'
+                                       TO ERROR-MESSAGE
+              MOVE 1                   TO ERROR-Y
+              MOVE 6                   TO ERROR-X
+              GO TO INDATA-FELDISP.
+           MOVE W-BLB-DINRAR       TO BA331-DINRAR.
+           MOVE W-BLB-DINR         TO BA331-DINR.
+           MOVE 'PAOBT'            TO BA331-TXTTYP.
+      *---------------- KOLLAR OM DET VERKLIGEN FINNS NÅGOT SPARAT
+           PERFORM R2-SEL01-BA331-GTXTRE.
+           IF RDMS-NODATA
+              MOVE 'INGET FANNS SPARAT, INGET TOGS BORT'
+                        TO ERROR-MESSAGE
+              MOVE 6    TO ERROR-X
+              MOVE 1    TO ERROR-Y
+              GO TO INDATA-FELDISP.
+      *------------------------------------------LOCK TABLE BA331_GTXTRE
+           PERFORM R2-LOCSUQ-BA331-GTXTRE.
+      *
+      ***** SPARAR FÖREGÅENDE TEXT VID KORRIGERING
+      *
+           PERFORM SPARA-KORR-TEXT.
+      *---------------- DELETE ALLA RADER PÅ ÄRENDET      DELETE
+           MOVE W-BLB-DINRAR       TO BA331-DINRAR.
+           MOVE W-BLB-DINR         TO BA331-DINR.
+           MOVE 'PAOBT'            TO BA331-TXTTYP.
+           PERFORM R2-DEL01-BA331-GTXTRE.
+           PERFORM X1-BLANKA-BILD.
+           PERFORM X4-REDIGERA-HUVUD.
+       BD-FRDINR-SEL.
+           IF FD020-FRDINRAR = ZERO  AND
+              FD020-FRDINR   = ZERO
+              GO TO BD-FRDINR-SEL-END.
+      *--------- HÄMTAR FÖREGÅENDE ÄRENDE
+           MOVE FD020-FRDINRAR     TO BA310-DINRAR.
+           MOVE FD020-FRDINR       TO BA310-DINR.
+      *------------------------------------------------
+           PERFORM R2-SEL01-BA310-OBJDNR.
+           IF RDMS-NODATA
+              MOVE 'SYSTEMFEL, FRDINR SAKNAS I BA310' TO ERROR-MESSAGE
+              MOVE S927-TKOD-XCO     TO ERROR-X
+              MOVE S927-TKOD-YCO     TO ERROR-Y
+              GO TO INDATA-FELDISP.
+           MOVE W-BLB-VERSION      TO W-VERSION.
+           MOVE BA310-VERSION      TO W-BLB-VERSION.
+      *
+      **** LÄSER MED FRDINRAR, FRDINR
+      *
+           PERFORM XB-LYFT-BA331-GTXTRE.
+           MOVE W-VERSION  TO W-BLB-VERSION.
+       BD-FRDINR-SEL-END.
+           EXIT.
+       BD-UPPD-FOAVVI-POSIT.
+           PERFORM X9-HAMTA-OMBAAB.
+           IF RDMS-NODATA
+              MOVE 'SYSTEMFEL, BA254-OMBAAB SAKNAS' TO ERROR-MESSAGE
+              MOVE S927-TKOD-XCO     TO ERROR-X
+              MOVE S927-TKOD-YCO     TO ERROR-Y
+              GO TO INDATA-FELDISP.
+           PERFORM R2-LOCSUQ-BA254-OMBAAB.
+           MOVE SPACE TO BA254-ANDRTXT.
+           PERFORM R2-UPD01-BA254-OMBAAB.
+       BD-UPPD-ATGARD-POSIT.
+      *--- KONVM-ÄRENDEN KAN SAKNA FD060-POSTER
+           IF FD040-RUBRICERING = 'KONVM'
+              GO TO BD-UPPD-ATGARD-ADMIT.
+           MOVE ZERO        TO W-ATGARDER.
+***********MOVE 'PAOB'      TO W-BLB-GRUNDTKOD.
+           MOVE 'OMBAB'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBTST'    TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBVE'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+           MOVE 'OMBFÖ'     TO W-FD060-ATGTYP2.
+           PERFORM BO-ATGTST.
+           IF W-BLB-GENSTAT = 'R'
+              MOVE 1                    TO W-ATGARDER
+              MOVE '*'                  TO FD060-UMARK
+              MOVE WU-USERID            TO FD060-HDLKOD
+              PERFORM R2-UPD01-FD060-ATGARD.
+       BD-UPPD-ATGARD-SEL.
+           IF ATGARDER-SAKNAS
+              GO TO BD-UPPD-ATGARD-ALT1.
+           MOVE 'INREGISTRERADE UPPGIFTER BORTTAGNA'
+                                              TO ERROR-MESSAGE.
+           MOVE S927-RAD-XCO (1)              TO ERROR-X.
+           MOVE S927-RAD-YCO (1)              TO ERROR-Y.
+           GO TO BD-UPPD-ATGARD-SEL-END.
+       BD-UPPD-ATGARD-ALT1.
+      *--- PÅGÅENDE KORRIGERING AV HDL MED KORR-BEHÖRIGHET ÄR OK.
+      *--- FÖR ÖVRIGA ÄR DETTA FEL, SKALL LEDA TILL ROLLBACK.
+           IF(FD020-KORRMARK = 'J' AND
+              FD020-KORRKLARDAT = ZERO) AND
+              WU-BEH (32) = 1
+              MOVE ' INREGISTRERADE UPPGIFTER BORTTAGNA '
+                                       TO ERROR-MESSAGE
+              MOVE 6                   TO ERROR-X
+              MOVE 1                   TO ERROR-Y
+              GO TO BD-UPPD-ATGARD-SEL-END.
+           MOVE ' FEL, ÅTGÄRD FINNS EJ'  TO ERROR-MESSAGE.
+           MOVE 6                        TO ERROR-X.
+           MOVE 1                        TO ERROR-Y.
+           GO TO INDATA-FELDISP.
+       BD-UPPD-ATGARD-SEL-END.
+           GO TO BD-UPPD-ATGARD-POSIT-END.
+       BD-UPPD-ATGARD-ADMIT.
+           MOVE 'INREGISTRERADE UPPGIFTER BORTTAGNA'
+                                               TO ERROR-MESSAGE.
+           MOVE S927-RAD-XCO (1)              TO ERROR-X.
+           MOVE S927-RAD-YCO (1)              TO ERROR-Y.
+       BD-UPPD-ATGARD-POSIT-END.
+      *------------------------------------------END THREAD
+           PERFORM R1-END-THREAD.
+       BD-PAOBTB-SEQ-END.
+           EXIT.
+      *---- HOPP TILL QHLP ---------------------------------------------
+       BF-PAOBTL SECTION.
+       BF-PAOBTL-SEQ.
+      **********************************************************
+      **********************************************************
+      *
+      ***  PAGING: HOPP TILL QHLP F21 = PAOBTL ELLER PIFTXL
+      *
+      **********************************************************
+      **********************************************************
+      *
+       BF-PAOBT-PAGING-SEL.
+BOETST*    DISPLAY 'PAOBT, PAG-SEL: ' INFO-PROGRAM-ID  UPON CONSOLE.
+           IF NOT (INFO-PROGRAM-ID = 'PAOBTL' OR 'PIOBTL')
+                   GO TO BF-PAOBT-PAGING-SEL-END.
+HPSCR4*    CALL 'D$GETSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'GETSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+       BF-PAOBTL-HELP-SEL.
+BOETST*    DISPLAY 'PAOBT, HELP-SEL: ' W-BLB-HLP  UPON CONSOLE.
+      *------ NÄR MAN KOMMER TILLBAKA FRÅN PHLP
+           IF W-BLB-HLP = 'J'
+              GO TO BF-PAOBTL-HELP-ALT1.
+      *------ NÄR MAN REDAN SPARAT I PAGING
+BOETST*    DISPLAY 'PAOBT, ALT-2: ' W-BLB-PAGENR  UPON CONSOLE.
+           IF W-BLB-HLP = SPACE AND
+              W-BLB-PAGENR > 0
+              GO TO BF-PAOBTL-HELP-ALT2.
+      *------ NÄR MAN SKA SPARA I PAGING
+BOETST*    DISPLAY 'PAOBT, ALT-3: ' W-BLB-PAGENR  UPON CONSOLE.
+           IF W-BLB-PAGENR = 0
+              GO TO BF-PAOBTL-HELP-ALT3.
+           GO TO BF-PAOBTL-HELP-SEL-END.
+       BF-PAOBTL-HELP-ALT1.
+           MOVE W-GEN-NYCKEL   TO S927-TKOD.
+BOETST*    DISPLAY 'PAOBT, HELP-ALT1 FÖREOP: ' DPS-STATUS UPON CONSOLE.
+HPCDOP     INITIALIZE SCREEN-PAOBT1-927 FILLER ALL TO VALUE
+           CALL 'D$OPEN' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+BOETST*    DISPLAY 'PAOBT, HELP-ALT1 EFTEOP: ' DPS-STATUS UPON CONSOLE.
+           CALL 'D$PAGEST' USING DPS-STATUS, PAGE-STATUS-BUFFER.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           MOVE STORED-DATA-PAGES               TO PAGE-NR.
+BOETST*    DISPLAY 'PAOBT, HELP-ALT1 EFTEST: ' PAGE-NR    UPON CONSOLE.
+           CALL 'D$RETR' USING DPS-STATUS, SCREEN-PAOBT1-927, PAGE-NR.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+BOETST*    DISPLAY 'PAOBT, HELP-ALT1 EFTERE: ' PAGE-NR    UPON CONSOLE.
+           IF W-BLB-FUNK (1) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 1               TO FKN (LNG)
+              MOVE W-BLB-FUNK (1)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (2) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 2               TO FKN (LNG)
+              MOVE W-BLB-FUNK (2)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (3) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 3               TO FKN (LNG)
+              MOVE W-BLB-FUNK (3)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (4) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 4               TO FKN (LNG)
+              MOVE W-BLB-FUNK (4)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (5) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 5               TO FKN (LNG)
+              MOVE W-BLB-FUNK (5)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (6) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 6               TO FKN (LNG)
+              MOVE W-BLB-FUNK (6)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (7) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 7               TO FKN (LNG)
+              MOVE W-BLB-FUNK (7)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (8) NOT = SPACE
+              ADD 1                TO LNG
+              MOVE 8               TO FKN (LNG)
+              MOVE W-BLB-FUNK (8)  TO TCODE (LNG)
+              MOVE 'Y'             TO TEXTIN (LNG).
+           IF W-BLB-FUNK (10) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 10               TO FKN (LNG)
+              MOVE W-BLB-FUNK (10)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (11) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 11               TO FKN (LNG)
+              MOVE W-BLB-FUNK (11)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (12) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 12               TO FKN (LNG)
+              MOVE W-BLB-FUNK (12)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (13) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 13               TO FKN (LNG)
+              MOVE W-BLB-FUNK (13)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (14) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 14               TO FKN (LNG)
+              MOVE W-BLB-FUNK (14)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (15) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 15               TO FKN (LNG)
+              MOVE W-BLB-FUNK (15)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (16) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 16               TO FKN (LNG)
+              MOVE W-BLB-FUNK (16)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (17) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 17               TO FKN (LNG)
+              MOVE W-BLB-FUNK (17)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (18) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 18               TO FKN (LNG)
+              MOVE W-BLB-FUNK (18)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (19) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 19               TO FKN (LNG)
+              MOVE W-BLB-FUNK (19)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           IF W-BLB-FUNK (20) NOT = SPACE
+              ADD 1                 TO LNG
+              MOVE 20               TO FKN (LNG)
+              MOVE W-BLB-FUNK (20)  TO TCODE (LNG)
+              MOVE 'Y'              TO TEXTIN (LNG).
+           CALL 'SETFUNB-SP' USING RETKOD, TABELL.
+           IF RETKOD NOT = ZERO
+              MOVE 1                  TO FELTXT-FTXTNUM
+              MOVE S927-TKOD-XCO     TO ERROR-X
+              MOVE S927-TKOD-YCO     TO ERROR-Y
+              GO TO INDATA-FEL.
+           MOVE SPACE     TO W-BLB-HLP.
+           GO TO BF-PAOBTL-HELP-SEL-END.
+       BF-PAOBTL-HELP-ALT2.
+           IF INFO-PROGRAM-ID = 'PAOBTL'
+011107        MOVE 'PAOB'     TO W-BLB-TKOD.
+           IF INFO-PROGRAM-ID = 'PIOBTL'
+011107        MOVE 'PIOB'     TO W-BLB-TKOD.
+           MOVE 'J'        TO W-BLB-HLP.
+           MOVE 'PHLPXL'   TO PASOFF-TRANS.
+HPSCR4*    CALL 'D$PUTSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'PUTSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$PASSOFF' USING DPS-STATUS, PASOFF-TRANS.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$TERM' USING DPS-STATUS.
+           IF STATUS-FATAL
+               GO TO DPS-FATAL.
+       BF-PAOBTL-HELP-ALT3.
+BOETST*    DISPLAY 'PAOBT, ALT-3,SEQ: ' DPS-STATUS    UPON CONSOLE.
+           CALL 'D$READ' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$RELEASE' USING DPS-STATUS.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$STORE' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF INFO-PROGRAM-ID = 'PAOBTL'
+011107        MOVE 'PAOB'     TO W-BLB-TKOD.
+           IF INFO-PROGRAM-ID = 'PIOBTL'
+011107        MOVE 'PIOB'     TO W-BLB-TKOD.
+           MOVE 'J'        TO W-BLB-HLP.
+           MOVE 'PHLPXL'   TO PASOFF-TRANS.
+BOETST*    DISPLAY 'PAOBT, ALT-3,SEQ: ' W-BLB-HLP     UPON CONSOLE.
+HPSCR4*    CALL 'D$PUTSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'PUTSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$PASSOFF' USING DPS-STATUS, PASOFF-TRANS.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$TERM' USING DPS-STATUS.
+           IF STATUS-FATAL
+               GO TO DPS-FATAL.
+       BF-PAOBTL-HELP-SEL-END.
+           EXIT.
+       BF-PAOBT-PAGING-SEL-END.
+           EXIT.
+      *----AVSLUTANDE BEARBETNING---------------------------------------
+       C-AVSLUTA SECTION.
+       C-AVSLUTA-SEQ.
+      **************************************************
+      **************************************************
+      *
+      * AVSLUTANDE BEHANDLING
+      * SKRIVER PUSCRATCHAREA, GÖR SENDERROR MED SPACE
+      * OCH SÄNDER BILDEN
+      *
+      **************************************************
+      **************************************************
+HPSCR4*    CALL 'D$PUTSCR' USING DPS-STATUS, W-SCRAREA.
+HPSCR4     CALL 'PUTSCRHP' USING DPS-STATUS W-SCRAREA LENGTH OF
+HPSCR4     W-SCRAREA.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF INFO-PROGRAM-ID (2:1) = 'I'
+           AND W-BLB-OBJREGDAT > ZERO
+              MOVE W-EXTANT-INFO-TEXT TO S927-EXTANT
+              MOVE W-EXTANT-INT       TO S927-EXTANT-INT
+              MOVE W-EXTANT-HIGH      TO S927-EXTANT-HIGH
+           ELSE
+              MOVE SPACE              TO S927-EXTANT.
+           CALL 'D$SEND' USING DPS-STATUS, SCREEN-PAOBT1-927.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           IF  INFO-TERMINAL-TYPE = 'IBM3270'
+           AND ERROR-Y = 1
+               ADD 1 TO ERROR-X.
+           IF  INFO-TERMINAL-TYPE = 'IBM3270'
+           AND ERROR-Y = 0
+               MOVE 2 TO ERROR-X
+               MOVE 1 TO ERROR-Y.
+      *    DISPLAY ' ERROR-MESSAGE  ' ERROR-MESSAGE UPON CONSOLE.
+           CALL 'D$SENDERR' USING DPS-STATUS, ERROR-MESSAGE,
+                                  ERROR-COORDINATES.
+           IF STATUS-FATAL
+              GO TO DPS-FATAL.
+           CALL 'D$TERM' USING DPS-STATUS.
+           IF STATUS-FATAL
+               GO TO DPS-FATAL.
+       C-AVSLUTA-SEQ-END.
+           EXIT.
+      ******************************************************************
+      **** FELHANTERING MED FELTXT-SP, DVS RDMS-FATAL/DPS-FATAL/INDATA-FEL
+      ******************************************************************
+??????*    COPY BOTSSS031FTP IN UCPROC.                                 ACUCOB
+HPCO72*    COPY BOTSSS030FTP IN UCPROC.                                 ACUCOB
+HPCINC*    COPY BOTSSS030FTP IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BOTSSS030FTP END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BOTSSS030FTP' END-EXEC.
+      ******************************************************************
+      **** VISSA STANDARDMÄSSIGA RDMS-ANROP, EXEMPELVIS BEGIN THREAD ETC.
+      ******************************************************************
+HPCO72*     COPY BOTSSS030RDP IN UCPROC.                                ACUCOB
+HPCINC*     COPY BOTSSS030RDP IN UCPROC.
+HPCLLA*     EXEC SQL INCLUDE BOTSSS030RDP END-EXEC.
+HPCLLA      EXEC SQL INCLUDE 'BOTSSS030RDP' END-EXEC.
+      ******************************************************************
+      **** HÄR SKALL DU LÄGGA EV ANROP MOT RDMS-TABELLER.
+      **** ANROPEN SKALL LIGGA I COPYS,EN PER TABELL.
+      ******************************************************************
+HPCINC*    COPY BO-BA070-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA070-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA070-RT' END-EXEC.
+HPCINC*    COPY BO-BA254-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA254-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA254-RT' END-EXEC.
+HPCINC*    COPY BO-BA254-WT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA254-WT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA254-WT' END-EXEC.
+HPCINC*    COPY BO-BA300-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA300-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA300-RT' END-EXEC.
+HPCINC*    COPY BO-BA310-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA310-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA310-RT' END-EXEC.
+HPCINC*    COPY BO-BA331-WT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA331-WT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA331-WT' END-EXEC.
+HPCINC*    COPY BO-BA331-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA331-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA331-RT' END-EXEC.
+HPCINC*    COPY BO-BA350-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA350-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA350-RT' END-EXEC.
+HPCINC*    COPY BO-BA380-WT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA380-WT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA380-WT' END-EXEC.
+HPCINC*    COPY BO-BA380-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA380-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA380-RT' END-EXEC.
+HPCINC*    COPY BO-FD020-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD020-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD020-RT' END-EXEC.
+HPCINC*    COPY BO-FD040-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD040-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD040-RT' END-EXEC.
+HPCINC*    COPY BO-FD060-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD060-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD060-RT' END-EXEC.
+HPCINC*    COPY BO-FD060-WT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD060-WT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD060-WT' END-EXEC.
+HPCINC*    COPY BO-FD080-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD080-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD080-RT' END-EXEC.
+HPCINC*    COPY BO-FD085-RT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-FD085-RT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-FD085-RT' END-EXEC.
+      *---------  REDIGERA SCRATCH-AREA OM INGÅNG ÄR ORGNR
+HPCINC*    COPY BO-SCRRED-O IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-SCRRED-O END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-SCRRED-O' END-EXEC.
+      *---------  REDIGERA SCRATCH-AREA OM INGÅNG ÄR DINR
+HPCINC*    COPY BO-SCRRED-D IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-SCRRED-D END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-SCRRED-D' END-EXEC.
+      *---------  KOLL AV TKOD
+HPCINC*    COPY BO-TKODTST  IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-TKODTST END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-TKODTST' END-EXEC.
+      *---------  KOLL AV ÅTGÄRD
+HPCINC*    COPY BO-ATGTST   IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-ATGTST END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-ATGTST' END-EXEC.
+      *---------  F8 VID ÄRENDE
+HPCINC*    COPY BO-F8UPPD   IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-F8UPPD END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-F8UPPD' END-EXEC.
+      *---------  F8 VID INFO
+HPCINC*    COPY BO-F8INFO   IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-F8INFO END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-F8INFO' END-EXEC.
+      *---------  KONTROLL AV ÄRENDE-STATUS
+HPCINC*    COPY BO-KOLLDNR  IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-KOLLDNR END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-KOLLDNR' END-EXEC.
+      *---------  LÄSA ÄLDRE ÄRENDEN
+      *    COPY BO-NASTADNR IN UCPROC.
+      *---------  LÄSA NYARE ÄRENDEN
+      *    COPY BO-PRIORDNR IN UCPROC.
+      *---------  KONTROLL AV SPÄRRNING AV BILDEN
+HPCINC*    COPY BO-KOLLSPARR IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-KOLLSPARR END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-KOLLSPARR' END-EXEC.
+      *---------  KONTROLLERAR OM EXTERNA ANTECKNINGAR FINNS
+HPCINC*    COPY EXTANT-INFO IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE EXTANT-INFO END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'EXTANT-INFO' END-EXEC.
+       X1-BLANKA-BILD SECTION.
+      ******************************************************************
+      *    BLANKAR BILDEN
+      ******************************************************************
+       X1-SEQ.
+           MOVE SPACE               TO S927-VARNING1
+                                       S927-STATUSRAD
+                                       S927-ORGNR
+                                       S927-OBJTYP
+                                       S927-DINR
+                                       S927-REGDAT
+                                       S927-FIRMA1
+                                       S927-FIRMA2
+                                       S927-REGDAT
+                                       S927-EXTANT
+                                       S927-FIRMAFORTS
+                                       S927-FELTEXT
+                                       S927-RAD      (1)
+                                       S927-RAD      (2)
+                                       S927-RAD      (3)
+                                       S927-RAD      (4)
+                                       S927-RAD      (5)
+                                       S927-RAD      (6)
+                                       S927-RAD      (7)
+                                       S927-RAD      (8)
+                                       S927-RAD      (9)
+                                       S927-RAD      (10)
+                                       S927-RAD      (11)
+                                       S927-RAD      (12)
+                                       S927-RAD      (13)
+                                       S927-RAD      (14).
+           MOVE ZERO                TO S927-SIDA
+                                       S927-TOTSIDA.
+       X1-SEQ-END.
+           EXIT.
+       X2-REGDATUM SECTION.
+      ******************************************************************
+      *    REDIGERAR REG-DATUM
+      ******************************************************************
+       X2-SEQ.
+           EXIT.
+       X2-REG-KONV-DAT-SEL.
+           IF FD020-AVSLUTSDAT = 0
+              GO X2-REG-KONV-DAT-SEL-END.
+           IF FD020-REG = 'J'
+              MOVE WW-RED-REGDAT      TO WW-RED-TEXT.
+           IF FD020-REG = 'K'
+              MOVE WW-RED-KONV        TO WW-RED-TEXT.
+           MOVE FD020-AVSLUTSDAT      TO WW-DATUM.
+           MOVE WW-HHAA               TO WW-RED-HHAA.
+           MOVE WW-MM                 TO WW-RED-MM.
+           MOVE WW-DD                 TO WW-RED-DD.
+           MOVE WW-RED-DATUM          TO S927-REGDAT.
+       X2-REG-KONV-DAT-SEL-END.
+           EXIT.
+       X2-SEQ-END.
+           EXIT.
+       X3-BLANKA-SCRAREA SECTION.
+      ******************************************************************
+      *    BLANKAR W-SCRAREA
+      ******************************************************************
+       X3-SEQ.
+           INITIALIZE            W-GEN-AREA.
+           INITIALIZE            W-PGM-AREA-RE.
+       X3-SEQ-END.
+           EXIT.
+       X4-REDIGERA-HUVUD SECTION.
+      ******************************************************************
+      *    REDIGERAR BILDEN FRÅN SCRAREA.
+      ******************************************************************
+       X4-SEQ.
+           MOVE W-BLB-STATUSRAD    TO S927-STATUSRAD.
+           MOVE W-BLB-SEKEL        TO WW-RED-SEKEL.
+           MOVE W-BLB-ORGNR        TO WW-ORGNR.
+           IF W-BLB-ORGNR = ZERO
+              MOVE SPACE           TO WW-RED-ORGNR1
+              MOVE SPACE           TO WW-RED-STR1
+              MOVE SPACE           TO WW-RED-ORGNR2
+           ELSE
+              MOVE WW-ORGNR1       TO WW-RED-ORGNR1
+              MOVE '-'             TO WW-RED-STR1
+              MOVE WW-ORGNR2       TO WW-RED-ORGNR2.
+           IF W-BLB-LOPNR = ZERO
+              MOVE SPACE           TO WW-RED-STR2
+              MOVE SPACE           TO WW-RED-LOPNR
+           ELSE
+              MOVE '-'             TO WW-RED-STR2
+              MOVE W-BLB-LOPNR     TO WW-RED-LOPNR.
+           MOVE WW-RED-ORGNR       TO S927-ORGNR.
+           IF W-BLB-OBJTYP = SPACE
+              MOVE SPACE           TO S927-OBJTYP
+           ELSE
+              MOVE W-BLB-OBJTYP    TO S927-OBJTYP.
+       X4-DINR-SEL.
+           IF W-BLB-DINR = ZERO
+              GO TO X4-DINR-SEL-END.
+           MOVE SPACE              TO W-VADINR-RAD.
+           MOVE W-BLB-DINRAR       TO W-VADINR-DINRAR.
+           MOVE W-BLB-DINR         TO W-VADINR-DINR.
+           MOVE 'T'                TO W-VADINR-KOD.
+           CALL 'VADINR-SP' USING W-VADINR-AREA.
+           IF W-VADINR-STATUS = 'F'
+              PERFORM XA-SPARRA-BILD
+              MOVE 'FEL I VADINR-SP' TO ERROR-TEXT
+              MOVE 6                 TO ERROR-X
+              MOVE 1                 TO ERROR-Y
+              GO TO INDATA-FELDISP.
+           MOVE W-VADINR-RAD       TO S927-DINR.
+       X4-DINR-SEL-END.
+           MOVE W-BLB-FIRMA1       TO S927-FIRMA1.
+           MOVE W-BLB-FIRMA2       TO S927-FIRMA2.
+           IF W-BLB-FIRMAFORTS = 'J'
+              MOVE 'FORTS'         TO S927-FIRMAFORTS
+           ELSE
+              MOVE SPACE           TO S927-FIRMAFORTS.
+       X4-SEQ-END.
+           EXIT.
+       X6-HAMTA-HANDLI SECTION.
+       X6-HAMTA-HANDLI-SEQ.
+           MOVE W-BLB-DINRAR         TO FD020-DINRAR.
+           MOVE W-BLB-DINR           TO FD020-DINR.
+      *------------------------------------------------ SELECT
+           PERFORM R2-SEL01-FD020-HANDLI.
+           IF RDMS-NODATA
+              PERFORM XA-SPARRA-BILD
+              MOVE 'FEL, DIARENUMMER SAKNAS  ' TO ERROR-MESSAGE
+              MOVE 6                           TO ERROR-X
+              MOVE 1                           TO ERROR-Y
+              GO TO INDATA-FELDISP.
+       X6-HAMTA-HANDLI-SEQ-END.
+           EXIT.
+BOEOK  X7-HAMTA-GTXTRE-FORSTA SECTION.
+       X7-HAMTA-GTXTRE-FORSTA-SEQ.
+           MOVE ZERO                 TO FRITEXT-IND.
+           MOVE W-BLB-DINRAR         TO BA331-DINRAR.
+           MOVE W-BLB-DINR           TO BA331-DINR.
+           MOVE 'PAOBT'              TO BA331-TXTTYP.
+      *------------------------------------------------ SELECT
+           PERFORM R2-SEL01-BA331-GTXTRE.
+           IF RDMS-OK
+              MOVE 1    TO FRITEXT-IND.
+      *------------------------------------------------ DECLARE CURSOR
+      *    PERFORM R2-DEC01-BA331-GTXTRE.
+      *------------------------------------------------ OPEN    CURSOR
+      *    PERFORM R2-OPE01-BA331-GTXTRE.
+      *------------------------------------------------ FETCH FIRST
+      *    PERFORM R2-FET01-BA331-GTXTRE.
+      *    IF RDMS-OK
+      *       MOVE 1    TO FRITEXT-IND.
+      *
+      *------------------------------------------------ CLOSE   CURSOR
+      *    PERFORM R2-CLO01-BA331-GTXTRE.
+       X7-HAMTA-GTXTRE-FORSTA-SEQ-END.
+           EXIT.
+BOEOK  X8-HAMTA-GTXTRE SECTION.
+       X8-HAMTA-GTXTRE-SEQ.
+           MOVE W-BLB-DINRAR         TO BA331-DINRAR.
+           MOVE W-BLB-DINR           TO BA331-DINR.
+           MOVE 'PAOBT'              TO BA331-TXTTYP.
+      *------------------------------------------------ DECLARE CURSOR
+           PERFORM R2-DEC01-BA331-GTXTRE.
+      *------------------------------------------------ OPEN    CURSOR
+           PERFORM R2-OPE01-BA331-GTXTRE.
+      *------------------------------------------------ FETCH (FIRST)
+           PERFORM R2-FET01-BA331-GTXTRE.
+       X8-GTXTRE-SEL.
+           IF NOT RDMS-OK
+              GO TO X8-GTXTRE-ALT1.
+       X8-GTXTRE-ITR.
+           IF RDMS-NODATA
+              GO TO X8-GTXTRE-ITR-END.
+           MOVE BA331-RAD          TO W-RAD.
+           PERFORM SX-TXTRED.
+      *------------------------------------------------ FETCH (NEXT)
+           PERFORM R2-FET01-BA331-GTXTRE.
+           GO TO X8-GTXTRE-ITR.
+       X8-GTXTRE-ITR-END.
+      *-------------- STÄNGER TXTRED
+           MOVE SLUT                   TO W-TEXT.
+           PERFORM SX-TXTRED.
+           MOVE 1                      TO W-GEN-RADNR.
+           MOVE 1                      TO W-GEN-SIDNR.
+           IF TXT-RADANT = ZERO
+              MOVE ZERO                TO S927-SIDA
+              MOVE ZERO                TO S927-TOTSIDA
+           ELSE
+              COMPUTE S927-TOTSIDA = (TXT-RADANT - 1 + W-ANTRADSID) /
+HPDIV0*                            (W-ANTRADSID - 1).
+HPDIV0                             (W-ANTRADSID - 1) 
+HPDIV0         ON SIZE ERROR MOVE 0 TO S927-TOTSIDA.
+           IF TXT-RADANT > ZERO
+              MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST
+           ELSE
+              MOVE SPACE               TO S927-REPEAT-1-DATA-ST.
+           MOVE 1                      TO S927-SIDA.
+           GO TO X8-GTXTRE-SEL-END.
+       X8-GTXTRE-ALT1.
+      *
+      **** HÄR HAMNAR VI OM DET INTE FINNS NÅGRA BA331-TEXTRADER.
+      **** FÖR ATT TXTRED SKALL FUNGERA SÅ MÅSTE VI FORMATTERA HÄR.
+      *
+      * ------------- STÄNGER TXTRED
+           MOVE SLUT                   TO W-TEXT.
+           PERFORM SX-TXTRED.
+           MOVE 1                      TO W-GEN-RADNR.
+           MOVE 1                      TO W-GEN-SIDNR.
+           IF TXT-RADANT = ZERO
+              MOVE ZERO                TO S927-TOTSIDA
+           ELSE
+              COMPUTE S927-TOTSIDA = (TXT-RADANT - 1 + W-ANTRADSID) /
+HPDIV0*                            (W-ANTRADSID - 1).
+HPDIV0                             (W-ANTRADSID - 1) 
+HPDIV0         ON SIZE ERROR MOVE 0 TO S927-TOTSIDA.
+           IF TXT-RADANT > ZERO
+              MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST
+           ELSE
+              MOVE SPACE               TO S927-REPEAT-1-DATA-ST.
+           MOVE 1                      TO S927-SIDA.
+           IF TXT-RADANT = ZERO AND
+              (INFO-PROGRAM-ID = 'PAOB  ' OR 'PAOBT8' OR 'PAOBTF')
+              MOVE '/'                 TO S927-REPEAT-1-DATA-ST.
+       X8-GTXTRE-SEL-END.
+           EXIT.
+       X8-HAMTA-GTXTRE-SEQ-END.
+           EXIT.
+BOEOK  X9-HAMTA-OMBAAB SECTION.
+       X9-HAMTA-OMBAAB-SEQ.
+HPCINC*    COPY BO-BA254-IT IN UCPROC.
+HPCLLA*    EXEC SQL INCLUDE BO-BA254-IT END-EXEC.
+HPCLLA     EXEC SQL INCLUDE 'BO-BA254-IT' END-EXEC.
+           MOVE W-BLB-DINRAR    TO BA254-DINRAR.
+           MOVE W-BLB-DINR      TO BA254-DINR.
+           PERFORM R2-SEL01-BA254-OMBAAB.
+       X9-HAMTA-FOAVVI-SEQ-END.
+           EXIT.
+      *X10-SKAPA-FOAVVI SECTION.
+      *X10-SKAPA-FOAVVI-SEQ.
+      *    MOVE W-BLB-DINRAR           TO BA206-DINRAR.
+      *    MOVE W-BLB-DINR             TO BA206-DINR.
+      *    MOVE W-BLB-INTERNID         TO BA206-INTERNID.
+      *    MOVE SPACE                  TO BA206-ANDRFOR.
+      *    MOVE 'Ä'                    TO BA206-ANDRTXT.
+      *    MOVE SPACE                  TO BA206-FAMARK.
+      *    MOVE SPACE                  TO BA206-AVVROSTR.
+      *    MOVE SPACE                  TO BA206-LRATT.
+      *    MOVE SPACE                  TO BA206-TVSKILJ.
+      *    MOVE SPACE                  TO BA206-ROSTMAJ.
+      *    MOVE SPACE                  TO BA206-AVSTFO.
+      *    MOVE ZERO                   TO BA206-AVSTFOFOM.
+      *
+      *    PERFORM R2-INS01-BA206-FOAVVI.
+      *X10-SKAPA-FOAVVI-SEQ-END.
+      *    EXIT.
+X12-SE X12-HAMTA-ARENDE SECTION.
+       X12-HAMTA-ARENDE-SEQ.
+           MOVE W-BLB-INTERNID     TO BA300-INTERNID.
+           PERFORM R2-SEL01-BA300-OBJEKT.
+           IF RDMS-NODATA
+              MOVE 'P12-BA300 SAKNAS' TO ERROR-MESSAGE
+              GO TO X12-FELUT.
+           MOVE W-BLB-INTERNID     TO BA310-INTERNID.
+           MOVE W-BLB-DINRAR       TO BA310-DINRAR.
+           MOVE W-BLB-DINR         TO BA310-DINR.
+           PERFORM R2-SEL01-BA310-OBJDNR.
+           IF RDMS-NODATA
+              MOVE 'P12-BA310 SAKNAS' TO ERROR-MESSAGE
+                GO TO X12-FELUT.
+           MOVE W-BLB-DINRAR       TO FD020-DINRAR.
+           MOVE W-BLB-DINR         TO FD020-DINR.
+           PERFORM R2-SEL01-FD020-HANDLI.
+           IF RDMS-NODATA
+              MOVE 'P12-FD020 SAKNAS' TO ERROR-MESSAGE
+              GO TO X12-FELUT.
+           GO TO X12-HAMTA-ARENDE-SEQ-END.
+       X12-FELUT.
+           MOVE 'P12-DATA SAKNAS' TO ERROR-MESSAGE.
+           MOVE 'F'               TO W-BLB-GENSTAT.
+       X12-HAMTA-ARENDE-SEQ-END.
+           EXIT.
+       XA-SPARRA-BILD SECTION.
+       XA-SPARRA-BILD-SEQ.
+           MOVE 'D'                     TO S927-RAD-DYN  (1)
+                                           S927-RAD-DYN  (2)
+                                           S927-RAD-DYN  (3)
+                                           S927-RAD-DYN  (4)
+                                           S927-RAD-DYN  (5)
+                                           S927-RAD-DYN  (6)
+                                           S927-RAD-DYN  (7)
+                                           S927-RAD-DYN  (8)
+                                           S927-RAD-DYN  (9)
+                                           S927-RAD-DYN  (10)
+                                           S927-RAD-DYN  (11)
+                                           S927-RAD-DYN  (12)
+                                           S927-RAD-DYN  (13)
+                                           S927-RAD-DYN  (14).
+       XA-SPARRA-BILD-SEQ-END.
+           EXIT.
+BOEOK  XB-LYFT-BA331-GTXTRE SECTION.
+       XB-LYFT-BA331-GTXTRE-SEQ.
+      *------------ TAR HÄR FRAM FRITEXT FRÅN FÖREGÅENDE ÄRENDE
+           MOVE FD020-FRDINRAR         TO BA331-DINRAR.
+           MOVE FD020-FRDINR           TO BA331-DINR.
+           MOVE 'PAOBT'                TO BA331-TXTTYP.
+      *------------------------------------------------ DECLARE CURSOR
+           PERFORM R2-DEC01-BA331-GTXTRE.
+      *------------------------------------------------ OPEN    CURSOR
+           PERFORM R2-OPE01-BA331-GTXTRE.
+      *------------------------------------------------ FETCH FIRST
+           PERFORM R2-FET01-BA331-GTXTRE.
+           MOVE 1 TO SX-QS.
+       XB-GTXTRE-SEL.
+           IF NOT RDMS-OK
+              GO TO XB-GTXTRE-ALT1.
+       XB-GTXTRE-ITR.
+           IF RDMS-NODATA
+              GO TO XB-GTXTRE-ITR-END.
+           MOVE BA331-RAD          TO W-RAD.
+           MOVE BA331-RADNR        TO W-RADNR.
+           PERFORM SX-TXTRED.
+           MOVE W-BLB-DINRAR       TO BA331-DINRAR.
+           MOVE W-BLB-DINR         TO BA331-DINR.
+           MOVE 'PAOBT'            TO BA331-TXTTYP.
+           MOVE W-RAD              TO BA331-RAD.
+           MOVE W-RADNR            TO BA331-RADNR.
+           PERFORM R2-INS01-BA331-GTXTRE.
+      *------------------------------------------------ FETCH FIRST
+           PERFORM R2-FET01-BA331-GTXTRE.
+           GO TO XB-GTXTRE-ITR.
+       XB-GTXTRE-ITR-END.
+      *-------------- STÄNGER TXTRED
+           MOVE SLUT                   TO W-TEXT.
+           PERFORM SX-TXTRED.
+           MOVE 1                      TO W-GEN-RADNR.
+           MOVE 1                      TO W-GEN-SIDNR.
+           IF TXT-RADANT = ZERO
+              MOVE ZERO                TO S927-SIDA
+              MOVE ZERO                TO S927-TOTSIDA
+           ELSE
+              COMPUTE S927-TOTSIDA = (TXT-RADANT - 1 + W-ANTRADSID) /
+HPDIV0*                            (W-ANTRADSID - 1).
+HPDIV0                             (W-ANTRADSID - 1) 
+HPDIV0         ON SIZE ERROR MOVE 0 TO S927-TOTSIDA.
+           IF TXT-RADANT > ZERO
+              MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST
+           ELSE
+011122        MOVE '/'                 TO S927-REPEAT-1-DATA-ST.
+011122********MOVE SPACE               TO S927-REPEAT-1-DATA-ST.
+           MOVE 1                      TO S927-SIDA.
+           GO TO XB-GTXTRE-SEL-END.
+       XB-GTXTRE-ALT1.
+      *
+      **** HÄR HAMNAR VI OM DET INTE FINNS NÅGRA BA331-TEXTRADER.
+      **** FÖR ATT TXTRED SKALL FUNGERA SÅ MÅSTE VI FORMATTERA HÄR.
+      *
+      *-------------- STÄNGER TXTRED
+           MOVE SLUT                   TO W-TEXT.
+           PERFORM SX-TXTRED.
+           MOVE 1                      TO W-GEN-RADNR.
+           MOVE 1                      TO W-GEN-SIDNR.
+           IF TXT-RADANT = ZERO
+              MOVE ZERO                TO S927-TOTSIDA
+           ELSE
+              COMPUTE S927-TOTSIDA = (TXT-RADANT - 1 + W-ANTRADSID) /
+HPDIV0*                            (W-ANTRADSID - 1).
+HPDIV0                             (W-ANTRADSID - 1) 
+HPDIV0         ON SIZE ERROR MOVE 0 TO S927-TOTSIDA.
+           IF TXT-RADANT > ZERO
+              MOVE TXT-DATA-FALT       TO S927-REPEAT-1-DATA-ST
+           ELSE
+              MOVE SPACE               TO S927-REPEAT-1-DATA-ST.
+           MOVE 1                      TO S927-SIDA.
+       XB-GTXTRE-SEL-END.
+      *------------------------------------------------ CLOSE   CURSOR
+           PERFORM R2-CLO01-BA331-GTXTRE.
+       XB-LYFT-BA331-GTXTRE-SEQ-END.
+           EXIT.
+BOEOK  KOLLA-SPARRNING SECTION.
+       KOLLA-SPARRNING-SEQ.
+      *--------  SPÄRRAR EV  HELA BILDEN ELLER VISSA FÄLT.
+      *--------  PÅ DENNA BILD ÄR VISSA FÄLT = HELA BILDEN.
+           MOVE ZERO                   TO IND-OMBAB.
+           MOVE ZERO                   TO IND-OMBTST.
+           MOVE ZERO                   TO IND-OMBVE.
+           MOVE ZERO                   TO IND-OMBFO.
+           PERFORM BO-GEN-SPARR.
+           IF W-BLB-SPARR = 'S'
+              MOVE 'J' TO W-BILD-SPARR
+           ELSE
+              IF W-ARENDE-STATUS = 1 OR 3 OR 6
+                 MOVE 'OMBAB'  TO W-FD060-ATGTYP2
+                 PERFORM BO-SPARR
+                 IF W-BLB-SPARR = ' '
+                    MOVE 1 TO IND-OMBAB
+                 END-IF
+                 MOVE 'OMBTST' TO W-FD060-ATGTYP2
+                 PERFORM BO-SPARR
+                 IF W-BLB-SPARR = ' '
+                    MOVE 1 TO IND-OMBTST
+                 END-IF
+                 MOVE 'OMBVE'  TO W-FD060-ATGTYP2
+                 PERFORM BO-SPARR
+                 IF W-BLB-SPARR = ' '
+                    MOVE 1 TO IND-OMBVE
+                 END-IF
+                 MOVE 'OMBFÖ' TO W-FD060-ATGTYP2
+                 PERFORM BO-SPARR
+                 IF W-BLB-SPARR = ' '
+                    MOVE 1 TO IND-OMBFO
+                 END-IF
+           END-IF.
+           IF  OMBAB-SAKNAS
+           AND OMBTST-SAKNAS
+           AND OMBVE-SAKNAS
+           AND OMBFO-SAKNAS
+              MOVE 'J' TO W-BILD-SPARR.
+           IF  W-BILD-SPARR = 'J'
+               PERFORM XA-SPARRA-BILD.
+       KOLLA-SPARRNING-SEQ-END.
+           EXIT.
+BOEOK  SX-TXTRED SECTION.
+      *****************************************************
+      ***  SEKVENSIELL UPPDAT AV "TXTRED"
+      ***  ANVÄNDS VID ENTER FÖR ATT LÄGGA UPP ALL TEXT                 MAACUC
+      ****************************************************
+       SX-TXTRED-SEQ.
+           GO TO SX-QS1 SX-QS2 SX-QS3
+                 DEPENDING ON SX-QS.
+       SX-QS1.
+      *
+      ***  FORMATTERING AV "TXTRED"
+      *
+           MOVE 'FO'                 TO TXT-KOMMANDO.
+           MOVE INFO-SHORT-TERMID    TO TXT-ARBETSNAMN.
+           COMPUTE TXT-DAFALTLANGD = W-ANTRADSID * 80.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+      *
+      ***  FÖRSTA "SIDAN" TILL TXTRED BÖRJAR MED INDEX 1 (ETT)
+      *
+           SET TXT-RIND     TO 1.
+           MOVE SPACE       TO TXT-DATA-FALT.
+       SX-SIDAN1DEL-SEL.
+           IF TEXT-SLUT
+               GO TO SX-SIDAN1DEL-SEL-END.
+       SX-SIDAN1-ITR.
+           IF TEXT-SLUT  OR  TXT-RIND > W-ANTRADSID
+               GO TO SX-SIDAN1-ITR-END.
+           MOVE W-RAD       TO TXT-RAD (TXT-RIND).
+           SET  TXT-RIND    UP BY 1.
+           MOVE 2           TO SX-QS.
+           GO TO  SX-TXTRED-SEQ-END.
+       SX-QS2.
+           GO TO  SX-SIDAN1-ITR.
+       SX-SIDAN1-ITR-END.
+           MOVE 'US'                 TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+       SX-SIDAN1DEL-SEL-END.
+           EXIT.
+       SX-REST-ITR.
+           IF TEXT-SLUT
+               GO TO SX-REST-ITR-END.
+      *
+      ***  RESTERANDE "SIDOR" BÖRJAR MED INDEX 2 (TVÅ)
+      *
+           SET TXT-RIND     TO 2.
+       SX-SIDA-ITR.
+           IF TEXT-SLUT  OR  TXT-RIND > W-ANTRADSID
+               GO TO SX-SIDA-ITR-END.
+           MOVE W-RAD       TO TXT-RAD (TXT-RIND).
+           SET  TXT-RIND    UP BY 1.
+           MOVE 3           TO SX-QS.
+           GO TO  SX-TXTRED-SEQ-END.
+       SX-QS3.
+           GO TO  SX-SIDA-ITR.
+       SX-SIDA-ITR-END.
+           MOVE 'US'                 TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           GO TO SX-REST-ITR.
+       SX-REST-ITR-END.
+      *
+      ***  LÄSER FÖRSTA SIDAN FÖR ATT PRESENTERA PÅ BILDEN
+      *
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+           MOVE  1                   TO TXT-PARM (1).
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+       SX-TXTRED-SEQ-END.
+           EXIT.
+       SF4-TXTRED SECTION.
+      *******************************************************
+      ***  SEKVENSIELL LÄSNING AV "TXTRED"
+      ***  ANVÄNDS VID F4-UPPDATERING FÖR ATT LÄSA ALL TEXT
+      *******************************************************
+       SF4-TXTRED-SEQ.
+           GO TO SF4-QS1 SF4-QS2
+                 DEPENDING ON SF4-QS.
+       SF4-QS1.
+           MOVE 1                    TO TXT-PARM (1).
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           MOVE 1           TO W-ANTRAD.
+           MOVE SPACE       TO W-RAD.
+       SF4-STOM-ITR.
+           IF W-ANTRAD > TXT-RADANT
+               GO TO SF4-STOM-ITR-END.
+           SET  TXT-RIND    TO 1.
+       SF4-SIDA-ITR.
+           IF W-ANTRAD > TXT-RADANT OR  TXT-RIND > W-ANTRADSID
+               GO TO SF4-SIDA-ITR-END.
+           MOVE TXT-RAD (TXT-RIND)   TO W-RAD.
+           SET  TXT-RIND UP BY 1.
+           ADD 1            TO W-ANTRAD.
+           MOVE 2           TO SF4-QS.
+           GO TO  SF4-TXTRED-SEQ-END.
+       SF4-QS2.
+           GO TO  SF4-SIDA-ITR.
+       SF4-SIDA-ITR-END.
+           ADD W-ANTRADSID           TO TXT-PARM (1).
+           MOVE 'DS'                 TO TXT-KOMMANDO.
+??????*    CALL 'TXTRED'             USING DFHCOMMAREA.
+??????     CALL 'TXTRED-SP'          USING DFHCOMMAREA.
+           IF NOT (TXT-STAT = ZERO OR 24)
+               MOVE TXT-STAT         TO W-TXTFELKOD
+               MOVE TXT-KOMMANDO     TO W-TXTKOMMANDO
+               MOVE W-TXTRED-FELRAD  TO ERROR-TEXT
+               MOVE S927-TKOD-XCO   TO ERROR-X
+               MOVE S927-TKOD-YCO   TO ERROR-Y
+               GO TO INDATA-FELDISP.
+           GO TO SF4-STOM-ITR.
+       SF4-STOM-ITR-END.
+           MOVE  SLUT       TO W-TEXT.
+       SF4-TXTRED-SEQ-END.
+           EXIT.
+       SPARA-KORR-TEXT SECTION.
+       SPARA-KORR-TEXT-SEQ.
+           EXIT.
+       SPARA-KORR-SEL.
+           IF NOT (FD020-KORRMARK = 'J' AND
+                   FD020-KORRKLARDAT = ZERO)
+              GO TO SPARA-KORR-SEL-END.
+           MOVE W-BLB-DINRAR       TO BA331-DINRAR.
+           MOVE W-BLB-DINR         TO BA331-DINR.
+           MOVE 'PAOBT'            TO BA331-TXTTYP.
+      *------------------------------------------------- CURSOR
+           PERFORM R2-DEC01-BA331-GTXTRE.
+           PERFORM R2-OPE01-BA331-GTXTRE.
+           PERFORM R2-FET01-BA331-GTXTRE.
+       SPARA-KORR-TEXT-SEL.
+           IF RDMS-NODATA
+              GO TO SPARA-KORR-TEXT-ALT1.
+      *---- VI SKAPAR EN KORRIGERINGSRAD MED BILDNAMN OCH HDL-KOD
+           MOVE WA-DAGDAT-NUM        TO BA380-UPPDDAT.
+           MOVE WA-DAGTID-NUM        TO BA380-UPPDTID.
+           MOVE W-BLB-DINRAR         TO BA380-DINRAR.
+           MOVE W-BLB-DINR           TO BA380-DINR.
+           MOVE 1                    TO BA380-RADNR.
+           MOVE W-BLB-GRUNDTKOD      TO BA380-TKOD.
+           MOVE W-BLB-GRUNDTKOD      TO W-BA380KORRI-TKOD.
+           MOVE WU-USERID            TO W-BA380KORRI-HDL.
+           MOVE SPACE                TO W-BA380KORRI-TEXT.
+           MOVE W-BA380KORRI-RAD     TO BA380-RAD.
+           PERFORM R2-INS01-BA380-KORRI.
+       SPARA-KORR-ITR.
+           IF RDMS-NODATA
+              GO TO SPARA-KORR-ITR-END.
+      *---- VI SKAPAR EN KORRIGERINGSRAD PER FRITEXTRAD
+           MOVE WA-DAGDAT-NUM        TO BA380-UPPDDAT.
+           MOVE WA-DAGTID-NUM        TO BA380-UPPDTID.
+           MOVE W-BLB-DINRAR         TO BA380-DINRAR.
+           MOVE W-BLB-DINR           TO BA380-DINR.
+           ADD 1                     TO BA380-RADNR.
+           MOVE W-BLB-GRUNDTKOD      TO BA380-TKOD.
+           MOVE BA331-RAD            TO BA380-RAD.
+           PERFORM R2-INS01-BA380-KORRI.
+           PERFORM R2-FET01-BA331-GTXTRE.
+           GO TO SPARA-KORR-ITR.
+       SPARA-KORR-ITR-END.
+           GO TO SPARA-KORR-TEXT-SEL-END.
+       SPARA-KORR-TEXT-ALT1.
+      *------------ VI SKAPAR EN ENDA KORRIGERINGSRAD
+      *------------ HANDLÄGGARE, DATUM OCH TID.
+           MOVE WA-DAGDAT-NUM        TO BA380-UPPDDAT.
+           MOVE WA-DAGTID-NUM        TO BA380-UPPDTID.
+           MOVE W-BLB-DINRAR         TO BA380-DINRAR.
+           MOVE W-BLB-DINR           TO BA380-DINR.
+           MOVE 1                    TO BA380-RADNR.
+           MOVE W-BLB-GRUNDTKOD      TO BA380-TKOD.
+           MOVE W-BLB-GRUNDTKOD      TO W-BA380KORRI-TKOD.
+           MOVE WU-USERID            TO W-BA380KORRI-HDL.
+           MOVE 'TEXT KORRIGERAT'
+                                     TO W-BA380KORRI-TEXT.
+           MOVE W-BA380KORRI-RAD     TO BA380-RAD.
+           PERFORM R2-INS01-BA380-KORRI.
+       SPARA-KORR-TEXT-SEL-END.
+           PERFORM R2-CLO01-BA331-GTXTRE.
+       SPARA-KORR-SEL-END.
+           EXIT.
+       SPARA-KORR-TEXT-SEQ-END.
+           EXIT.
+
+HPVERS* @(#) $Revision: PAOBT.pco $

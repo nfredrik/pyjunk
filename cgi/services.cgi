@@ -5,6 +5,13 @@ from netstat import Netstat
 #discard         9/tcp           sink null
 #discard         9/udp           sink null
 
+
+def set_colour(status):
+    if status == 'LISTEN':
+        print "<td bgcolor=#00FF00 >" + status + "</td>"
+    else:
+        print "<td bgcolor=#FF0000 >" + status + "</td>"
+
 dict = {}
 for line in open("/etc/services"):
     test = re.search('(^[a-zA-Z\-\_\d]+)\s*(\d+)', line)
@@ -44,13 +51,15 @@ print "<td><b>Status:</b></td>"
 print "</tr>"
 print "<tr>"
 print "<td>631</td>"
-print "<td>" + netstat.get_port_status(631) + "</td>"
+#print "<td bgcolor=#00FF00 >" + netstat.get_port_status(631) + "</td>"
+set_colour(netstat.get_port_status(631))
 print "</tr>"
 
 for m in sum:
     print "<tr>"
     print "<td>" + m + "</td>"
-    print "<td>" + netstat.get_port_status(str(dict[m])) + " </td>"
+#    print "<td>" + netstat.get_port_status(str(dict[m])) + " </td>"
+    set_colour(netstat.get_port_status(str(dict[m])))
     print "</tr>"
 print "</table>" 
 

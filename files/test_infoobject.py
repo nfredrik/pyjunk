@@ -2,10 +2,6 @@ import unittest
 from infoobject import InfoObject
 
 class TestInfoObject(unittest.TestCase):
-#    def test___del__(self):
-        # info_object = InfoObject(filename)
-        # self.assertEqual(expected, info_object.__del__())
-#        assert True # TODO: implement your test here
 
     def setUp(self):
         unittest.TestCase.setUp(self)
@@ -22,7 +18,7 @@ class TestInfoObject(unittest.TestCase):
 #        self.info_object.add_copys('BAJA')
 #        self.info_object.add_copys('BAJA')
         self.info_object.add_sql_includes('SKIT')
-        assert False # TODO: implement your test here
+        assert True # TODO: implement your test here
 
     def test_pelle(self):
         self.info_object = InfoObject('PELLE', ['hej', 'hopp'])

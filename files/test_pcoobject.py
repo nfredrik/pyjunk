@@ -28,6 +28,8 @@ class TestPcoObject(unittest.TestCase):
 
     def test_get_pot_rm_stuff(self):
         print 'No of comments:' , len(self.pco_object.get_pot_rm_stuff())
+        for n in self.pco_object.get_pot_rm_stuff():
+            print n
         assert isinstance(self.pco_object.get_pot_rm_stuff(), list)
 if __name__ == '__main__':
     unittest.main()

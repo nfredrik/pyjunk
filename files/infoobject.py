@@ -1,5 +1,9 @@
 class InfoObject(object):
     def __init__(self, filename, proclist):
+        """
+        filename - name of info file 
+        proclist - path to copys
+        """
         self.filename = filename
         self.fh = open(self.filename, 'w')
         self.fh.write('<PGM_INFO>:'+ filename + ' /PROD/RETULB UCOB\n')
@@ -12,8 +16,6 @@ class InfoObject(object):
 
     def add_sql_includes(self, includes):
         self.fh.write('<COPY>:/RDMS/DEFS/' + includes + '\n')
-#        self.fh.write('<COPY>:/RDMS/DEF/' + includes + '\n')
-#        self.fh.write('<COPY>:/RDMS/DEF/  HEJHOPP!!!!\n')
 
     def add_copys(self, proc, copys):
         self.fh.write('<COPY>:/PROD/' + proc + '/' + copys + '\n')
@@ -21,5 +23,6 @@ class InfoObject(object):
     def add_copys_system(self, copys):
         self.fh.write('<COPY>:/SYSTEM/' + copys + '\n')
 
-
+    def __del__(self):
+        self.fh.close()
 

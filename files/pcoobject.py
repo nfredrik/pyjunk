@@ -13,7 +13,6 @@ class PcoObject(object):
         self.name = re.search('PROGRAM\-ID\.[\s]*([\w]*)', self.string)
         if self.name != None:
             return self.name.group(1)
-        pass
 
     def get_sql_include(self):
         """
@@ -36,9 +35,10 @@ class PcoObject(object):
         self.copys_system = re.findall('COPY[\s]+([\w\d\-]+)\.', self.string)
         return self.copys_system
 
-    def get_number_of_rows(self):
+    def get_pot_rm_stuff(self):
         """
-        Return of rows without comments
+        Return found in COPYs in a list 
         """
-        pass
-    
+#        self.copys = re.findall('(^HPC[A-Z\d]{3}\*.*)', self.string)
+        self.copys = re.findall('(HPC[A-Z\d]*\*.*)', self.string)
+        return self.copys

@@ -1,4 +1,6 @@
 import unittest
+import os
+import types
 from pcoobject import PcoObject
 
 class TestPcoObject(unittest.TestCase):
@@ -11,33 +13,21 @@ class TestPcoObject(unittest.TestCase):
         assert True # TODO: implement your test here
 
     def test_get_filename(self):
-        # pco_object = PcoObject(filename)
-        # self.assertEqual(expected, pco_object.get_filename())
-#        pco_object = PcoObject('PAOB.pco')
-        print 'Hurra:', self.pco_object.get_filename()
-        assert False # TODO: implement your test here
+        self.filename = 'PAOB.pco'
+        self.assertEqual(os.path.splitext(self.filename)[0], self.pco_object.get_filename())
 
     def test_get_copys(self):
-        # self.assertEqual(expected, pco_object.get_copys())
-        print 'COPYS:' + '-' * 40
-        print self.pco_object.get_copys()
-        assert True # TODO: implement your test here
+        # self.assertEqual(expected, self.pco_object.get_copys())
+        assert isinstance(self.pco_object.get_copys(), list)
 
     def test_get_copys_system(self):
-        print 'COPYS SYSTEM:' + '-' * 40
-        print self.pco_object.get_copys_system()
-        assert True # TODO: implement your test here
-
-    def test_get_number_of_rows(self):
-        # pco_object = PcoObject(filename)
-        # self.assertEqual(expected, pco_object.get_number_of_rows())
-        assert True # TODO: implement your test here
+        assert isinstance(self.pco_object.get_copys_system(), list)
 
     def test_get_sql_include(self):
-        # pco_object = PcoObject(filename)
-        print 'INCLUDES:' + '-' * 40
-        print self.pco_object.get_sql_include()
-        assert True # TODO: implement your test here
+        assert isinstance( self.pco_object.get_sql_include(), list)
 
+    def test_get_pot_rm_stuff(self):
+        print 'No of comments:' , len(self.pco_object.get_pot_rm_stuff())
+        assert isinstance(self.pco_object.get_pot_rm_stuff(), list)
 if __name__ == '__main__':
     unittest.main()

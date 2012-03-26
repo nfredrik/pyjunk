@@ -2,6 +2,8 @@ import os
 import sys
 from filestatus import FileStatus
 
+OK, ERROR = 0, 1
+
 def enumeratepaths(path): 
     """Returns the path to all the files in a directory recursively""" 
     path_collection = []
@@ -20,17 +22,14 @@ def main(args):
     print 'usage: <file to count>'
     sys.exit(1)
 
-#  print args
 
-#  print filenames
-#  return 0
- 
-#  for dirpath, dirnames, fname in os.walk(args[0]):
-#      filenames.append()
-
+  # Get files including path
   filenames = enumeratepaths(args[0])
 
   dict = {} 
+
+
+  # For every file, split in rows, words, finally tokens
   for filename in filenames: 
 
       file = FileStatus(filename)
@@ -49,9 +48,7 @@ def main(args):
                       dict[token] += 1
 
   new = {}
-  #  for key, value in  dict.items():
   for key, value in  sorted(dict.iteritems(), key=lambda(k,v):(v,k),reverse=True):
-#      print key,'  :  ', hex(ord(key)),'  :  ',  value
       new[hex(ord(key))] = value
   
   ascii_ext = False
@@ -61,14 +58,14 @@ def main(args):
       if hex(ord(key)) == '0x0':
           print "============ Non printable chars =========="
       elif hex(ord(key))== '0x21':
-          print "============ ASCII start token ============"
+          print "============ ASCII tokens ============"
       elif ord(key) > 0x7e and not ascii_ext:
-          print "============ ASCII extended start token ============"
+          print "============ ASCII extended tokens ============"
           ascii_ext = True
 
       print key, hex(ord(key)), val
 
-  return 0
+  return OK
 
 if __name__ == '__main__':
   sys.exit(main(sys.argv[1:]))

@@ -2,6 +2,8 @@ import os
 import sys
 from filestatus import FileStatus
 
+OK, ERROR = 0, 1
+
 def enumeratepaths(path): 
     """Returns the path to all the files in a directory recursively""" 
     path_collection = []
@@ -12,12 +14,14 @@ def enumeratepaths(path):
     return path_collection
 
 
+def is_binary(filename):
+    return os.system("file -b" + filename + " | grep text > /dev/null")
 
 
 def main(args):
 
   if not args:
-    print 'usage: <file to count>'
+    print 'usage: <directory to search> <token to search>'
     sys.exit(1)
 
 #  print args
@@ -29,12 +33,13 @@ def main(args):
 #      filenames.append()
 
   filenames = enumeratepaths(args[0])
+  token = args[1]
+  print token, hex(int(token,16))
 
-  dict = {} 
+  dict = []
   for filename in filenames: 
 
-      file = FileStatus(filename)
-      if not file.regular_file: continue
+#      if not is_binary(filename): continue
 
       fh = open(filename, 'r')
       string = fh.read()
@@ -42,11 +47,15 @@ def main(args):
 
       for line in string.split():
           for words in line.split():
-              for token in words:
-                  if token not in dict:
-                      dict[token] = 1
-                  else:
-                      dict[token] += 1
+              for stoken in words:
+#                  print hex(ord(stoken))
+                  if hex(ord(stoken)) == hex(int(token, 16)):
+                      dict.append(filename)
+
+
+  print dict
+  return OK
+
 
   new = {}
   #  for key, value in  dict.items():
@@ -61,9 +70,9 @@ def main(args):
       if hex(ord(key)) == '0x0':
           print "============ Non printable chars =========="
       elif hex(ord(key))== '0x21':
-          print "============ ASCII start token ============"
+          print "============ ASCII tokens ============"
       elif ord(key) > 0x7e and not ascii_ext:
-          print "============ ASCII extended start token ============"
+          print "============ ASCII extended tokens ============"
           ascii_ext = True
 
       print key, hex(ord(key)), val

@@ -1,15 +1,13 @@
 class InfoObject(object):
-    def __init__(self, filename, proclist):
+    def __init__(self, name, filename, filepath, proclist):
         """
         filename - name of info file 
         proclist - path to copys
         """
-        self.filename = filename
-        self.fh = open(self.filename, 'w')
-        self.fh.write('<PGM_INFO>:'+ filename + ' /PROD/RETULB UCOB\n')
+        self.fh = open(filename, 'w')
+        self.fh.write('<PGM_INFO>:'+ name + ' ' + filepath + ' UCOB\n')
 
         self.fh.write('<PATH_COPY>:/RDMS/DEFS\n')
-        self.fh.write('<PATH_COPY>:/SYSTEM\n')
 
         for proc in proclist:
             self.fh.write('<PATH_COPY>:/PROD/' + proc + '\n')

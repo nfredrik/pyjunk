@@ -32,6 +32,15 @@ class PcoObject(object):
         self.copys = re.findall('COPY[\s]+([\w\d\-]+)[\s]+IN[\s]+([\w\d\-]+)', self.string)
         return self.copys
 
+    def get_uniq_copys(self):
+
+        self.copypaths = {}
+        self.copys = self.get_copys()
+        for self.module, self.copypath in self.copypaths:
+            if self.copypath not in self.copypaths:
+                self.copypaths[self.copypath]=1
+        return self.copypaths
+
     def get_copys_system(self):
         """
         Return found in COPYs in a list 

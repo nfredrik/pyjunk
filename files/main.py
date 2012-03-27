@@ -42,24 +42,13 @@ def main():
         sys.exit(42) 
 
     for pco_object in pco_files:
-        print 'pco file:', pco_object.get_filename()
-        print 'pco filepath:', pco_object.get_filepath()
 
         # Get found copys in pco file
         copys = pco_object.get_copys()
 
-        # Get copypaths
-        proc = {}
-        for module, copypath in copys:
-            if copypath not in proc:
-                proc[copypath] = 1
-
-        #    print proc
-
-        # Get system copys
+        # Get copypaths, system copys, includes
+        proc = pco_object.get_uniq_copys()
         system_copys = pco_object.get_copys_system()
-
-        # Get sql includes
         includes = pco_object.get_sql_include()
 
         # Create a info object and copypaths
@@ -67,19 +56,13 @@ def main():
                                  info_root + '/'+  pco_object.get_filename(),
                                  pco_object.get_filepath(), [k  for k in proc.iterkeys() ])    
 
- #       print "SYSTEM COPYS" * 10
         for copy in system_copys:
-            #       print copy
             info_object.add_copys_system(copy)
 
-#        print "COPYS" * 10
         for (mod, proc) in copys:
-        #        print proc, mod
             info_object.add_copys(proc, mod)
 
-#        print "INCLUDES" * 10
         for include in includes:
-        #        print include
             info_object.add_sql_includes(include)
 
 if __name__ == '__main__':

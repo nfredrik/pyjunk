@@ -28,41 +28,37 @@ def main():
     info_root = args[1]
 
     pco_files = []
+
+    # Build a list of pco objects
     for dirpath, dirnames, filenames in os.walk(pco_root):
        for filename in filenames:
            if filename.endswith('pco'):
                pco_files.append(PcoObject(dirpath + '/' + filename, dirpath.strip('.')))
                
-               if os.path.splitext(filename)[0] != pco_files[-1].get_filename():
-                   print 'filename:', os.path.splitext(filename)[0],  'and program-id:' , pco_files[-1].get_filename(), 'differs'
-                   sys.exit(42)
-
+               if os.path.splitext(filename)[0] != pco_files[-1].get_program_id():
+                   print 'filename:', os.path.splitext(filename)[0],  'and program-id:' , pco_files[-1].get_program_id(), 'differs'
+                   
     if len(pco_files) == 0:
         print 'No files to treat!'
         sys.exit(42) 
 
+    # Iterate and generate a info file for every pco file
     for pco_object in pco_files:
 
-        # Get found copys in pco file
-        copys = pco_object.get_copys()
-
-        # Get copypaths, system copys, includes
+        # Get copypaths
         proc = pco_object.get_uniq_copys()
-        system_copys = pco_object.get_copys_system()
-        includes = pco_object.get_sql_include()
 
-        # Create a info object and copypaths
+        # Create a info object and add copypaths
         info_object = InfoObject(pco_object.get_filename(),
                                  info_root + '/'+  pco_object.get_filename(),
                                  pco_object.get_filepath(), [k  for k in proc.iterkeys() ])    
 
-        for copy in system_copys:
-            info_object.add_copys_system(copy)
 
-        for (mod, proc) in copys:
+        # Populate info file with copys and includes
+        for (mod, proc) in pco_object.get_copys():
             info_object.add_copys(proc, mod)
 
-        for include in includes:
+        for include in pco_object.get_sql_include():
             info_object.add_sql_includes(include)
 
 if __name__ == '__main__':

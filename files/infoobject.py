@@ -7,6 +7,7 @@ class InfoObject(object):
         self.fh = open(filename, 'w')
         self.fh.write('<PGM_INFO>:'+ name + ' ' + filepath + ' UCOB\n')
 
+        self.fh.write('<PATH_COPY>:/SYSTEM\n')
         self.fh.write('<PATH_COPY>:/RDMS/DEFS\n')
 
         for proc in proclist:

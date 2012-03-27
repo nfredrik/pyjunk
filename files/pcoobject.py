@@ -1,4 +1,5 @@
 import re
+import os
 
 class PcoObject(object):
     def __init__(self, filename, filepath):
@@ -8,9 +9,16 @@ class PcoObject(object):
          self.string = self.fh.read()
 
     def get_filename(self):
+        return  os.path.basename(os.path.splitext(self.filename)[0])
+
+    def get_program_id(self):
         """
         Return the filename as a string 
         """
+        self.name = re.search('PROGRAM\-ID\.[\s]*(\'[\w]*\')', self.string)
+        if self.name != None:
+            return self.name.group(1)
+
         self.name = re.search('PROGRAM\-ID\.[\s]*([\w]*)', self.string)
         if self.name != None:
             return self.name.group(1)
@@ -36,7 +44,7 @@ class PcoObject(object):
 
         self.copypaths = {}
         self.copys = self.get_copys()
-        for self.module, self.copypath in self.copypaths:
+        for self.module, self.copypath in self.copys:
             if self.copypath not in self.copypaths:
                 self.copypaths[self.copypath]=1
         return self.copypaths

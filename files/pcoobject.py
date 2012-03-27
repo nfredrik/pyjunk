@@ -1,8 +1,9 @@
 import re
 
 class PcoObject(object):
-    def __init__(self, filename):
+    def __init__(self, filename, filepath):
          self.filename = filename
+         self.filepath = filepath
          self.fh = open(filename,'r')
          self.string = self.fh.read()
 
@@ -13,6 +14,9 @@ class PcoObject(object):
         self.name = re.search('PROGRAM\-ID\.[\s]*([\w]*)', self.string)
         if self.name != None:
             return self.name.group(1)
+
+    def get_filepath(self):
+        return self.filepath
 
     def get_sql_include(self):
         """

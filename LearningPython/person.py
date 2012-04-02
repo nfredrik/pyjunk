@@ -35,6 +35,7 @@ class CManager(object):
         self.person.giveRaise(self, percent + bonus)
 
     def lastName(self):
+        print 'hejhej'
         return self.person.lastName()
 
     def __getattr__(self, attr):
@@ -67,9 +68,9 @@ if __name__ == '__main__':
 
     mockPerson = Mock()
     mockPerson.lastName.return_value = 'Larsson'
-    mockPerson.__str__.return_value = 'PelleStina'
-
+#    mockPerson.__str__.return_value = 'PelleStina'
+    mockPerson.person = 'Orvar'
 
     john = CManager('Fredrik Svard', 50000000, person=mockPerson)
     print(john.lastName())    
-    #print(john) 
+    print(john) 

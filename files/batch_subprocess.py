@@ -16,7 +16,7 @@ class Batch(object):
         self.filename = ecl
         self.res = (False,  1000)
         self.t0 = time.time()
-#        (self.status, self.output) = commands.getstatusoutput(ecl)
+        print 'ecl:', ecl
         self.output = subprocess.Popen(ecl, shell=True, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 
         self.output.wait()
@@ -25,14 +25,8 @@ class Batch(object):
             print "There were some errors"
         stdout_value =  self.output.communicate()[0]
         self.out = repr(stdout_value) 
-#        print self.out
-#        sys.exit(42)
-#        print self.filename, 'started...'
-        # find output file in stdout
-#        print ecl
         self.etime = time.time() - self.t0
         self.file = re.search('REDIRECTING  DEFAULT  OUTPUT  TO: (.*)', self.out)
-#        print self.output
 
         # Return if the outfile not is found
         if self.file == None: 
@@ -40,14 +34,11 @@ class Batch(object):
       
          # open output file and search for return code from execution 
         self.logfile = self.file.group(1).rstrip('\\n\'')
-#        print self.filename
-#        sys.exit(42)
         self.fh = open(self.logfile, 'r')
         self.string = self.fh.read()
         self.fh.close()
 
         # Search for return code in ecl log
-#        self.name = re.search('Return code for program \[LK1000\] is \[([\d]+)\]', self.string)
         self.name = re.search('Return code for program \[.*\] is \[([\d]+)\]', self.string)
         if self.name != None and self.name.group(1) == '0': 
             self.res = (True, 0)
@@ -77,20 +68,18 @@ def enumeratepaths(path):
     for dirpath, dirnames, filenames in os.walk(path):
 
         if dirpath.find('.svn') != -1: continue
-#            print dirpath
-#            sys.exit(42)
 
         for file in filenames:
             fullpath = os.path.join(dirpath, file)
             path_collection.append(fullpath)
-#    sys.exit(42)
+
     return path_collection
 
 def ecl_file(file):
     # #!/usr/bin/env execute.sh
     fh = open(file, 'r')
     string = fh.readline()
-#    print 'string:', string
+
     if string.find('execute.sh') == -1 :
         return False
     return True
@@ -101,6 +90,10 @@ def main(args):
         print 'usage: <dir of ecls>'
         sys.exit(1)
 
+
+    # Remove old logs? or what is it?
+    # /srv/utv/devenvs/fsv/us/log/runstreams/PR/*
+    #  /srv/utv/devenvs/fsv/us/data/*
     # Get files 
     filenames = enumeratepaths(args[0])
 
@@ -109,9 +102,14 @@ def main(args):
     # Lets traverse through
     for filename in filenames:
 
+        notest = ['./AV7001D', './AV0110F1', './AV5058D']
+
         # Check every file
         if ecl_file(filename):
-#            print 'filename:', filename
+            if filename in notest: 
+                print 'skipping:', filename
+                continue
+
             ecls.append(Batch(filename))
 
 

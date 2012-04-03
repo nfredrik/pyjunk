@@ -4,7 +4,11 @@ class InfoObject(object):
         filename - name of info file 
         proclist - path to copys
         """
-        self.fh = open(filename, 'w')
+        fh = open(filename, 'w')
+        self.write_it(fh, name, filename, filepath, proclist)
+
+    def write_it(self, fh, name, filename, filepath, proclist):
+        self.fh = fh
         self.fh.write('<PGM_INFO>:'+ name + ' ' + filepath + ' UCOB\n')
 
         self.fh.write('<PATH_COPY>:/SYSTEM\n')
@@ -12,6 +16,7 @@ class InfoObject(object):
 
         for proc in proclist:
             self.fh.write('<PATH_COPY>:/PROD/' + proc + '\n')
+
 
     def add_sql_includes(self, includes):
         self.fh.write('<COPY>:/RDMS/DEFS/' + includes + '\n')
@@ -25,3 +30,24 @@ class InfoObject(object):
     def __del__(self):
         self.fh.close()
 
+
+if __name__ == '__main__':
+
+    from StringIO import StringIO
+    from tempfile import mkstemp
+
+    # create temp file
+    fh, abspath = mkstemp()
+  
+    info_obj = InfoObject('filename',abspath,'.', ['test', 'nisse']) 
+
+    fh = StringIO("""  
+                  Nisse
+                  """)
+
+    info_obj.write_it(fh, 'pgminfoname',abspath,'.', ['copy_path_test', 'copy_pathnisse'])
+    info_obj.add_sql_includes('include_hej_hoo')
+    info_obj.add_copys('procen', 'hej hoo')
+    info_obj.add_copys_system('hej hoo')
+
+    print fh.getvalue()

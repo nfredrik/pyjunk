@@ -6,7 +6,11 @@ class PcoObject(object):
          self.filename = filename
          self.filepath = filepath
          self.fh = open(filename,'r')
-         self.string = self.fh.read()
+         self.read_from_file(self.fh)
+
+    def read_from_file(self, fh):
+         self.string = fh.read()
+
 
     def get_filename(self):
         return  os.path.basename(os.path.splitext(self.filename)[0])
@@ -63,3 +67,28 @@ class PcoObject(object):
 #        self.copys = re.findall('(^HPC[A-Z\d]{3}\*.*)', self.string)
         self.copys = re.findall('(HPC[A-Z\d]*\*.*)', self.string)
         return self.copys
+
+
+if __name__ == '__main__':
+
+    from StringIO import StringIO
+    from tempfile import mkstemp
+
+    # create temp file
+    fh, abspath = mkstemp()
+
+    pco_obj = PcoObject(abspath, '.')
+    fh = StringIO("""  PROGRAM-ID.   LK1000.
+                          EXEC SQL INCLUDE 'BOBSSS030FTD' END-EXEC.
+                          COPY BO-FELTXT    IN UCPROC.
+                          COPY HP-SWITCHES.
+                          HPCALL*
+                  """)
+
+    pco_obj.read_from_file(fh)
+    print 'program id:', pco_obj.get_program_id()
+    print 'includes:', pco_obj.get_sql_include()
+    print 'copys:', pco_obj.get_copys()
+    print 'uniq copys:', pco_obj.get_uniq_copys()
+    print 'copys_system:',pco_obj.get_copys_system()
+    print 'pot_rm_stuff:', pco_obj.get_pot_rm_stuff()

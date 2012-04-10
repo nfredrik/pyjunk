@@ -18,20 +18,22 @@ class DefectModel:
             return row[0]
  
     def _dbselect(self, query):
-        connection = sqlite3.connect('TMS')
+        connection = sqlite3.connect('./TMS')
         cursorObj = connection.cursor()
-        results = cursorObj.execute(query)
-        connection.commit()
-        cursorObj.close()
+        cursorObj.execute(query)
+#        connection.commit()
+#        cursorObj.close()
+        results = cursorObj.fetchall()
+#        print 'results:', results
         return results
  
 class DefectView:
  
     def summary(self, summary, defectid):
         print "#### Defect Summary for defect# %d####\n%s" % (defectid,summary)
- 
+
     def defectList(self, list, category):
-        print "#### Defect List for %s ####\n" % category
+        print "#### Defect List for %s ####" % category
         for defect in list:
             print defect
  

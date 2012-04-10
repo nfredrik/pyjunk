@@ -1,7 +1,6 @@
 import sqlite3
-import types
  
-class DefectModel:
+class DefectModel(object):
  
     def getDefectList(self, component):
         query = '''select ID from defects where Component = '%s' ''' %component
@@ -21,13 +20,9 @@ class DefectModel:
         connection = sqlite3.connect('./TMS')
         cursorObj = connection.cursor()
         cursorObj.execute(query)
-#        connection.commit()
-#        cursorObj.close()
-        results = cursorObj.fetchall()
-#        print 'results:', results
-        return results
+        return cursorObj.fetchall()
  
-class DefectView:
+class DefectView(object):
  
     def summary(self, summary, defectid):
         print "#### Defect Summary for defect# %d####\n%s" % (defectid,summary)
@@ -37,19 +32,16 @@ class DefectView:
         for defect in list:
             print defect
  
-class Controller:
+class Controller(object):
  
-    def __init__(self):
-        pass
+    def __init__(self, model=DefectModel(), view=DefectView()):
+        self.model = model
+        self.view  = view
  
     def getDefectSummary(self, defectid):
-        model = DefectModel()
-        view   = DefectView()
-        summary_data = model.getSummary(defectid)
-        return view.summary(summary_data, defectid)
+        summary_data = self.model.getSummary(defectid)
+        return self.view.summary(summary_data, defectid)
  
     def getDefectList(self, component):
-        model = DefectModel()
-        view   = DefectView()
-        defectlist_data = model.getDefectList(component)
-        return view.defectList(defectlist_data, component)
+        defectlist_data = self.model.getDefectList(component)
+        return self.view.defectList(defectlist_data, component)

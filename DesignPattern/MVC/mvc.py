@@ -31,6 +31,21 @@ class DefectView(object):
         print "#### Defect List for %s ####" % category
         for defect in list:
             print defect
+
+class FileDefectView(object):
+ 
+    def __init__(self, filename):
+        self.fh = open(filename, 'wb')
+    def __del__(self):
+        self.fh.close()
+
+    def summary(self, summary, defectid):
+        self.fh.write( "#### Defect Summary for defect# %d####\n%s" % (defectid,summary))
+
+    def defectList(self, list, category):
+        self.fh.write( "\n#### Defect List for %s ####" % category)
+        for defect in list:
+            self.fh.write('\n' + str(defect))
  
 class Controller(object):
  

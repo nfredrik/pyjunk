@@ -1,4 +1,5 @@
 import mvc
+
 from mock import Mock
 
 controller = mvc.Controller()
@@ -16,15 +17,27 @@ controller.getDefectList('ABC')
 controller.getDefectList('XYZ')
 
 
-MockModel = Mock()
+Model = mvc.DefectModel()
 
-MockModel.getDefectList.return_value = ['37','98']
-MockModel.getSummary.return_value = 33
+Model.getDefectList = Mock()
+Model.getDefectList.return_value = ['37','98']
+Model.getSummary  = Mock()
+Model.getSummary.return_value = 33
 
 
-controller1 = mvc.Controller(model=MockModel())
+controller1 = mvc.Controller(model=Model)
 
-print 'Mocking'
+print 'Mocking Model'
 
 controller1.getDefectSummary(3)
 controller1.getDefectList('XYZ')
+
+
+print 'Alternative View'
+
+View = mvc.FileDefectView('testview')
+
+controller2 = mvc.Controller(view=View)
+
+controller2.getDefectSummary(3)
+controller2.getDefectList('XYZ')

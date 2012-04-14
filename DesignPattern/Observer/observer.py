@@ -22,7 +22,9 @@ class TechForum(Publisher):
             self._listOfUsers.append(userObj)
 
     def unregister(self, userObj):
-        self._listOfUsers.remove(userObj)
+        if userObj in self._listOfUsers:
+            self._listOfUsers.remove(userObj)
+
     def notifyAll(self):
         for objects in self._listOfUsers:
             objects.notify(self.postname)

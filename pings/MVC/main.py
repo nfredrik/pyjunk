@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
+from altview import PlotObject
 from control import Control
+
 import sys
 
 OK,ERROR = 0,1
@@ -12,6 +14,12 @@ def main(args):
   control = Control()
 
   control.get_list()
+
+
+  print 'test alternative'
+  altview = PlotObject()
+  control1 = Control(view=altview)
+  control1.get_list()
 
   return OK
 

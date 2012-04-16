@@ -11,36 +11,41 @@ class PlotObject(object):
         # Set the vertical range from 0 to 100
         factor = 8 - 1 
         max_y = 20 * factor
+        max_x = 250
         # Chart size of 200x125 pixels and specifying the range for the Y axis
-        self.chart = SimpleLineChart(40*factor, 25*factor, y_range=[0, max_y])
+        self.chart = SimpleLineChart(width=50*factor, height=25*factor, 
+                                     title='ping ftp.sunet.se',
+#                                     legend=True,
+                                     x_range=[0, max_x],                                      
+                                     y_range=[0, max_y])
 
 
         # Set the line colour to blue
-        self.chart.set_colours(['0000FF'])
+        self.chart.set_colours(colours=['0000FF'])
 
-        # Set the vertical stripes
-        self.chart.fill_linear_stripes(Chart.CHART, 0, 'CCCCCC', 0.2, 'FFFFFF', 0.2)
+        # Set the vertical stripes:arguments area, angle etc.
+        #self.chart.fill_linear_stripes(Chart.CHART, 0, 'CCCCCC', 0.2, 'FFFFFF', 0.2)
 
         # Set the horizontal dotted lines
-        #self.chart.set_grid(0, 5*factor, factor, factor)
+        #self.chart.set_grid(x_step=0, y_step=5*factor, line_segment=factor, blank_segment=factor)
 
         # The Y axis labels contains 0 to 100 skipping every 25, but remove the
         # first number because it's obvious and gets in the way of the first X
         # label.
-        left_axis = range(0, max_y + 1, 5 * factor)
+        left_axis = range(0, max_y + 1, 25)
         left_axis[0] = ''
-        self.chart.set_axis_labels(Axis.LEFT, left_axis)
+        self.chart.set_axis_labels(axis_type=Axis.LEFT, values=left_axis)
 
         # X axis labels
-        self.chart.set_axis_labels(Axis.BOTTOM, \
+        self.chart.set_axis_labels(axis_type=Axis.BOTTOM, \
 #        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'])
-        ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+        values= [ ' ', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
 
     def plot(self, data):
 
-        self.chart.add_data(data)
+        self.chart.add_data(data=data)
 
-        self.chart.download('misse.png')
+        self.chart.download(file_name='misse.png')
 
 
 if __name__ == '__main__':

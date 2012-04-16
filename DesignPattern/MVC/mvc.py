@@ -55,8 +55,8 @@ class Controller(object):
  
     def getDefectSummary(self, defectid):
         summary_data = self.model.getSummary(defectid)
-        return self.view.summary(summary_data, defectid)
+        self.view.summary(summary_data, defectid)
  
     def getDefectList(self, component):
         defectlist_data = self.model.getDefectList(component)
-        return self.view.defectList(defectlist_data, component)
+        self.view.defectList(defectlist_data, component)

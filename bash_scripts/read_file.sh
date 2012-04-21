@@ -1,9 +1,16 @@
 
 ###############################################################
 # 
-# This is an conditionally nightly build, i.e. every
-# midnight we will check if there is been any updating on trunk
-# If so, there will be an build
+# This is a conditionally nightly build, i.e. every
+# midnight we will check if there has is been any updating on
+# trunk,  if so there will be an build
+#
+# Short description:
+# The job will save the subversion global number in an
+# file before doing an update/check out on the trunk 
+# If the new global subversion number is higher than the
+# one saved on file we will do an build.
+#
 #
 # Build Envirnoment -> 
 # Run buildstep before SCM runs ->
@@ -23,15 +30,14 @@ SUBVERSION_1=40
 
 echo $SUBVERSION_1 > $TMPFILESVN
 
-# Check that the file could be created, mark as failure
-# and make sure that someone is emailed!
+# Check that the file could be created, if not
+# mark as failure and make sure that someone is emailed!
 if [[ ! -e $TMPFILESVN ]]; then
     echo "could not create: ${TMPFILESVN}"
     exit $ERROR
 fi
 
 ###############################################################
-# Jenkins
 #
 # Build -> execute shell
 #
@@ -67,14 +73,14 @@ SVN_NEW_GLOBAL_REV_NO=$SUBVERSION_1
 
 
 # If current version, SVN_NEW_GLOBAL_REV_NO is equal no build
-# will be launched, just exit
+# will be launched, just exit gracefully
 if [[    $SVN_NEW_GLOBAL_REV_NO  == $SVN_OLD_GLOBAL_REV_NO  ]]; then
     echo "Nothing has happened since last night quit!"
     echo "old :${SVN_OLD_GLOBAL_REV_NO} new :${SVN_NEW_GLOBAL_REV_NO}"
     exit $OK
 fi
 
-# This should never happen, if exit!
+# This should never happen, if exit hard!
 if (($SVN_NEW_GLOBAL_REV_NO  < $SVN_OLD_GLOBAL_REV_NO)) ; then
     echo "Something is totally wrong here, old higher value than new!"
     echo "old ${SVN_OLD_GLOBAL_REV_NO} new: ${SVN_NEW_GLOBAL_REV_NO}"

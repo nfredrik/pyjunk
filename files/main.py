@@ -42,7 +42,7 @@ def main():
         print 'No files to treat!'
         sys.exit(42) 
 
-    # Iterate and generate a info file for every pco file
+    # Iterate and generate an info file for every pco file
     for pco_object in pco_files:
 
         # Get copypaths

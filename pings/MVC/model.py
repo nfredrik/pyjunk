@@ -12,6 +12,12 @@ class Model(object):
     def write(self, date, pingobj, ttl, response):
         self.conn.execute('insert into pingtable values (?,?,?,?)', (date, pingobj, ttl, response))
         self.c.commit()
+        
+    def _get_time_range(self, dest, fromdate, todate):
+        self.conn.execute('select (?) from pingtable where date between (?) and (?)', (dest, fromdate, todate))   
+        
+    def get_time_range(self, dest, fromdate, todate):
+        return [ x[-1] for x in self._get_time_range(dest, fromdate, todate) ]     
 
     def get_response_order(self):
 

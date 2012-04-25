@@ -45,7 +45,10 @@ def main(args):
                       dict.append(filename)
 
 
-  print dict
+#  print dict
+  for item in dict:
+      print item
+
   return OK
 
 if __name__ == '__main__':

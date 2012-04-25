@@ -9,10 +9,15 @@ class PcoObject(object):
          self.read_from_file(self.fh)
 
     def read_from_file(self, fh):
+         """
+         Separate open() and read() to be able to Mcok.
+         """
          self.string = fh.read()
 
-
     def get_filename(self):
+        """
+        Extract filename without extension
+        """
         return  os.path.basename(os.path.splitext(self.filename)[0])
 
     def get_program_id(self):
@@ -28,6 +33,9 @@ class PcoObject(object):
             return self.name.group(1)
 
     def get_filepath(self):
+        """
+        Get filepath from input
+        """
         return self.filepath
 
     def get_sql_include(self):
@@ -45,7 +53,9 @@ class PcoObject(object):
         return self.copys
 
     def get_uniq_copys(self):
-
+        """
+        Collect uniqe copy paths 
+        """
         self.copypaths = {}
         self.copys = self.get_copys()
         for self.module, self.copypath in self.copys:
@@ -62,7 +72,7 @@ class PcoObject(object):
 
     def get_pot_rm_stuff(self):
         """
-        Return found in COPYs in a list 
+        Return found COPYs in a list 
         """
 #        self.copys = re.findall('(^HPC[A-Z\d]{3}\*.*)', self.string)
         self.copys = re.findall('(HPC[A-Z\d]*\*.*)', self.string)

@@ -33,19 +33,60 @@ class SharedMem(object):
     
 class Packet(object):
     def __init__(self,buffer):
-        self.sourceAddress = struct.unpack_from('B', buffer,0),struct.unpack_from('B', buffer,1),struct.unpack_from('B', buffer,2),struct.unpack_from('B', buffer,3)
-        self.destinationAddress = struct.unpack_from('B', buffer,4),struct.unpack_from('B', buffer,5),struct.unpack_from('B', buffer,6),struct.unpack_from('B', buffer,7)
-        self.sourcePort = struct.unpack_from('B', buffer,8),struct.unpack_from('B', buffer,9)
-        self.destinationPort = struct.unpack_from('B', buffer,10),struct.unpack_from('B', buffer,11)
-        self.protocolUsed = struct.unpack_from('B', buffer,12),struct.unpack_from('B', buffer,13)
-        self.timeStamp = struct.unpack_from('B', buffer,14),struct.unpack_from('B', buffer,15),struct.unpack_from('B', buffer,16),struct.unpack_from('B', buffer,17)
+       
+        self.sourceAddress = self.destinationAddress = self.sourcePort =  self.destinationPort = self.protocolUsed =  self.timeStamp =''
         
+        for i in range(3):
+            self.sourceAddress+= self._get_byte(buffer, i) + '.'
+        self.sourceAddress+=self._get_byte(buffer, 3)
+        
+        for i in range(4,7):
+            self.destinationAddress+= self._get_byte(buffer, i) + '.'
+        self.destinationAddress+= self._get_byte(buffer, 7)
+        
+        #self.destinationAddress = struct.unpack_from('B', buffer,4),struct.unpack_from('B', buffer,5),struct.unpack_from('B', buffer,6),struct.unpack_from('B', buffer,7)
+        #self.sourcePort = struct.unpack_from('B', buffer,8),struct.unpack_from('B', buffer,9)
+        
+        self.sourcePort+= self._get_byte(buffer, 8)
+        self.sourcePort+= self._get_byte(buffer, 9)
+        
+        #self.destinationPort = struct.unpack_from('B', buffer,10),struct.unpack_from('B', buffer,11)
+        self.destinationPort+= self._get_byte(buffer,10)
+        self.destinationPort+= self._get_byte(buffer,11)
+        
+        #self.protocolUsed = struct.unpack_from('B', buffer,12),struct.unpack_from('B', buffer,13)
+        self.protocolUsed+= self._get_byte(buffer,12)
+        self.protocolUsed+= self._get_byte(buffer,13)
+        
+        #self.timeStamp = struct.unpack_from('B', buffer,14),struct.unpack_from('B', buffer,15),struct.unpack_from('B', buffer,16),struct.unpack_from('B', buffer,17)
+        for i in range(14,17):
+            self.timeStamp+= self._get_byte(buffer, i) + ':'
+        self.timeStamp+= self._get_byte(buffer, 17)
+                
+        
+    def _get_byte(self, bits, offset):
+        """
+        Turn from binary to integer and than string
+        """
+        return str(struct.unpack_from('B', bits, offset)[0])
     
     def get_from_ip(self):
         return self.sourceAddress
     
     def get_to_ip(self):
         return self.destinationAddress
+    
+    def get_src_port(self):
+        return self.sourcePort
+    
+    def get_dest_port(self):
+        return self.destinationPort
+    
+    def get_protocol_used(self):
+        return self.protocolUsed
+    
+    def get_timestamp(self):
+        return self.timeStamp
     
 def main(argv):
     
@@ -55,10 +96,7 @@ def main(argv):
     packets = []
     for i in range(0,56):
         
-        print 'Im in....'
         bytes = sharedmem.read()
-        
-        print 'bytes:', len(bytes)
         
         if len(bytes):
             packet = Packet(bytes)
@@ -70,7 +108,11 @@ def main(argv):
     for p in packets:
         print 'Looping'
         print p.get_from_ip()    
-    
+        print p.get_to_ip()
+        print p.get_src_port()
+        print p.get_dest_port()
+        print p.get_protocol_used()
+        print p.get_timestamp()
 if __name__ == '__main__':
     
   sys.exit(main(sys.argv[1:]))      

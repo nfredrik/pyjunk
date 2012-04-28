@@ -23,7 +23,7 @@ class SharedMem(object):
         try:
             return self.fh.read(18)
         except:
-            return 0
+            return ''
         
 
     
@@ -94,7 +94,7 @@ def main(argv):
     sharedmem = SharedMem('./devmem')
     
     packets = []
-    for i in range(0,56):
+    for i in range(0,57):
         
         bytes = sharedmem.read()
         
@@ -104,15 +104,17 @@ def main(argv):
         else:
             break
         
-    print 'Start printing'        
+    print 'Start printing'       
+    cntr = 0 
     for p in packets:
-        print 'Looping'
-        print p.get_from_ip()    
-        print p.get_to_ip()
-        print p.get_src_port()
-        print p.get_dest_port()
-        print p.get_protocol_used()
-        print p.get_timestamp()
+        print '==== Packet #', cntr, '===='
+        print 'to ip:', p.get_from_ip()    
+        print 'from ip:', p.get_to_ip()
+        print 'src port', p.get_src_port()
+        print 'dest port', p.get_dest_port()
+        print 'protocol used', p.get_protocol_used()
+        print 'timestamp', p.get_timestamp()
+        cntr+=1
 if __name__ == '__main__':
     
   sys.exit(main(sys.argv[1:]))      

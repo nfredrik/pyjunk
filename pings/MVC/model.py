@@ -17,7 +17,9 @@ class Model(object):
         self.conn.execute('select (?) from pingtable where date between (?) and (?)', (dest, fromdate, todate))   
         
     def get_time_range(self, dest, fromdate, todate):
-        return [ x[-1] for x in self._get_time_range(dest, fromdate, todate) ]     
+        self._get_time_range(dest, fromdate, todate)
+        return self.conn.fetchall()  
+        return [ x[1] for x in self.conn.fetchall() ]     
 
     def get_response_order(self):
 

@@ -24,7 +24,9 @@ if __name__ == '__main__':
     queryResult, errorMessage = oracle.runSqlQuery(sqlCommand='select employees_seq.nextval from jobs;')
     
     #example 3: call stored procedure
-    queryResult, errorMessage = oracle.runSqlQuery(sqlCommand='execute  secure_dml;Õ;')
+    queryResult, errorMessage = oracle.runSqlQuery(sqlCommand='execute  secure_dml;')
+    
+    oracle.session
     
     
     

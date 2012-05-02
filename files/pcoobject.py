@@ -34,7 +34,7 @@ class PcoObject(object):
         """
         Return found SQL INCLUDES in a list 
         """
-        self.sqls = re.findall('[^\*][\s]*EXEC[\s]*SQL[\s]*INCLUDE[\s]*\'([\w\d\-]+)\'[\s]*END\-EXEC\.', self.string)
+        self.sqls = re.findall('^[\s]*EXEC[\s]*SQL[\s]*INCLUDE[\s]*\'([\w\d\-]+)\'[\s]*END\-EXEC\.', self.string)
         return self.sqls
 
     def get_copys(self):
@@ -83,6 +83,11 @@ if __name__ == '__main__':
                           COPY BO-FELTXT    IN UCPROC.
                           COPY HP-SWITCHES.
                           HPCALL*
+                          
+                          * EXEC SQL INCLUDE 'SUSANNE' END-EXEC.
+                          * COPY FREDDE-FELTXT    IN UCPROC.
+                          *COPY DELL-SWITCHES.
+                          * HPREMOV*
                   """)
 
     pco_obj.read_from_file(fh)

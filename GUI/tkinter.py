@@ -1,31 +1,32 @@
 				
 #!/usr/bin/python
 import sys, time
-from Tkinter import *
-
-class Logger(Frame):
+#from Tkinter import *
+import Tkinter
+class Logger(Tkinter.Frame):
     def __init__(self):
-        Frame.__init__(self)
-        self.pack(expand=YES, fill=BOTH)
+        Tkinter.Frame.__init__(self)
+        self.pack(expand=Tkinter.YES, fill=Tkinter.BOTH)
         self.master.title("Timestamp logging application")
         self.tslist = []
-        self.tsdisp = Text(height=6, width=25)
-        self.count = StringVar()
-        self.cntdisp = Message(font=('Sans',24),
+        self.tsdisp = Tkinter.Text(height=20, width=25)
+        self.count = Tkinter.StringVar()
+        self.cntdisp = Tkinter.Message(font=('Sans',24),
                                textvariable=self.count)
-        self.log = Button(text="Log Timestamp",
+        self.log = Tkinter.Button(text="Log Timestamp",
                           command=self.log_timestamp)
-        self.quit = Button(text="Quit", command=sys.exit)
-        self.tsdisp.pack(side=LEFT)
+        self.quit = Tkinter.Button(text="Quit", command=sys.exit)
+        self.tsdisp.pack(side=Tkinter.LEFT)
         self.cntdisp.pack()
-        self.log.pack(side=TOP, expand=YES, fill=BOTH)
-        self.quit.pack(side=BOTTOM, fill=BOTH)
+        self.log.pack(side=Tkinter.TOP, expand=Tkinter.YES, fill=Tkinter.BOTH)
+        self.quit.pack(side=Tkinter.BOTTOM, fill=Tkinter.BOTH)
     def log_timestamp(self):
         stamp = time.ctime()
-        self.tsdisp.insert(END, stamp+"\n")
-        self.tsdisp.see(END)
+        self.tsdisp.insert(Tkinter.END, stamp+"\n")
+        self.tsdisp.see(Tkinter.END)
         self.tslist.append(stamp)
         self.count.set("% 3d" % len(self.tslist))
 
 if __name__=='__main__':
     Logger().mainloop()
+    

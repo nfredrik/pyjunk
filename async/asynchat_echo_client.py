@@ -40,6 +40,7 @@ class EchoClient(asynchat.async_chat):
     def found_terminator(self):
         self.logger.debug('found_terminator()')
         received_message = ''.join(self.received_data)
+        self.logger.debug('found_terminator, length:%d', len(received_message))
         if received_message == self.message:
             self.logger.debug('RECEIVED COPY OF MESSAGE')
         else:
@@ -56,3 +57,7 @@ class EchoProducer(asynchat.simple_producer):
         response = asynchat.simple_producer.more(self)
         self.logger.debug('more() -> (%s bytes)\n"""%s"""', len(response), response)
         return response
+    
+   # def __init__(self):
+    #    logger = logging.getLogger('EchoProducer')
+    #    print('EchoProducer __init__')

@@ -6,6 +6,7 @@ class EchoHandler(asynchat.async_chat):
     """Handles echoing messages from a single client.
     """
 
+    # FIXME: Where are these defined???
     # Artificially reduce buffer sizes to illustrate
     # sending and receiving partial messages.
     ac_in_buffer_size = 64

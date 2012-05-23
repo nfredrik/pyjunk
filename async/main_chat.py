@@ -11,9 +11,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 address = ('localhost', 0) # let the kernel give us a port
 server = EchoServer(address)
-ip, port = server.address # find out what port we were given
+# ip, port = server.address # find out what port we were given
 
 message_data = open('lorem.txt', 'r').read()
-client = EchoClient(ip, port, message=message_data)
+client = EchoClient(server.get_ip(), server.get_port(), message=message_data)
 
 asyncore.loop()

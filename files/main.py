@@ -4,24 +4,21 @@ from command import Command
 from pcoobject import PcoObject
 from infoobject import InfoObject
 
-def main():
-
-
-    args = sys.argv[1:]
+def main(args):
 
     if not args or len(args) != 2:
         print 'usage: <pco-dir> <info-dir> '
-        sys.exit(1)
+        return 1
 
 
     if not os.path.exists(args[0]):
         print 'Did not find pco file dir'
-        sys.exit(1)
+        return 1
 
 
     if not os.path.exists(args[1]):
         print 'Did not find info file directory'
-        sys.exit(1)
+        return 1
 
 
     pco_root = args[0]
@@ -40,7 +37,7 @@ def main():
                    
     if len(pco_files) == 0:
         print 'No files to treat!'
-        sys.exit(42) 
+        return 42 
 
     # Iterate and generate an info file for every pco file
     for pco_object in pco_files:
@@ -61,6 +58,8 @@ def main():
         for include in pco_object.get_sql_include():
             info_object.add_sql_includes(include)
 
+    return 0
+ 
 if __name__ == '__main__':
-    main()
+    sys.exit(main(args=sys.argv[1:]))
 

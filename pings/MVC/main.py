@@ -15,6 +15,8 @@ def main(args):
   control = Control()
   control.get_list()
 
+  return OK
+  
   print 'test alternative'
   altview = PlotObject()
   control1 = Control(view=altview)

@@ -2,7 +2,7 @@ import os
 import sys
 import shutil
 from filestatus import FileStatus
-from command import Command
+#from command import Command
 from operator import itemgetter
 
 OK, ERROR = 0, 1
@@ -34,16 +34,13 @@ def main(args):
     dir_list.sort(cmp=None, key=itemgetter(1), reverse=False)
     
     
-    # Print infomation of list
-    print dir_list   
-    print dir_list[:len(dir_list)-SAVEDAYS]
-    rm_dir_list = dir_list[:len(dir_list)-SAVEDAYS]    
-    
-    # Delete all but youngest days
-    if dir_list[:len(dir_list)-SAVEDAYS]:
+    # Delete all _but_ SAVEDAYS
+    if dir_list[:len(dir_list)-SAVEDAYS] and len(dir_list) > SAVEDAYS:
         for dir in dir_list[:len(dir_list)-SAVEDAYS]:
             print 'Want to delete:', dir[0]
-            #shutil.rmtree()
+            shutil.rmtree(dir[0])
+    else:
+        print 'Nothing to delete'
  
     return OK
  

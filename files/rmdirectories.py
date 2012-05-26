@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import logging
 from filestatus import FileStatus
 from operator import itemgetter
 
@@ -17,10 +18,20 @@ def enumeratedir(path):
 
 def main(args):
     """
-    Script to delete a number directories but saving latest ones, based on SAVDAYS.
+    Script to delete a number directories but saving latest ones, i.e. SAVDAYS.
     Nothing deleted if number directories are less than SAVEDAYS.
     """
+    
+    # Configure how logging should be presented
+    logging.basicConfig(level=logging.DEBUG,
+                    format='%(name)s: %(message)s',
+                    )
+    
+    # Create logger instance
+    logger = logging.getLogger('removing directories')
+    
     # Get the directories that need to be checked
+    logger.debug('Get directories')
     dirs = enumeratedir(DIRECTORYS)
     
     dir_list = []
@@ -36,13 +47,16 @@ def main(args):
     # Delete all _but_ SAVEDAYS
     if dir_list[:len(dir_list)-SAVEDAYS] and len(dir_list) > SAVEDAYS:
         for dir in dir_list[:len(dir_list)-SAVEDAYS]:
-            print 'Want to delete:', dir[0]
+            logger.debug('Want to delete: %s', dir[0])
             shutil.rmtree(dir[0])
-    else:
-        print 'Nothing to delete'
+    else: 
+        logger.debug('Nothing to delete')
  
     return OK
- 
+
+#
+# TODO: Add error handling too rmtree
+
 if __name__ == '__main__':
     sys.exit(main(args=sys.argv[1:]))
 

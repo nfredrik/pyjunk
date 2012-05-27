@@ -9,7 +9,9 @@ from operator import itemgetter
 OK,ERROR = 0, 1
 DIRECTORYS = '.'
 SAVEDAYS= 2
-LOG_FILENAME= 'loggfiler.log'
+LOG_FILENAME= 'logfile.log'
+MAX_LOGFILE_BYTES = 20000
+MAX_LOGFILES=3
 
 def enumeratedir(path):
     """Returns all the directories in a directory as a list"""
@@ -20,8 +22,8 @@ def enumeratedir(path):
 
 def main(args):
     """
-    Script to delete a number directories but saving latest ones, i.e. SAVDAYS.
-    Nothing deleted if number directories are less than SAVEDAYS.
+    Script to delete a number directories but saving latest ones, i.e. SAVEDAYS.
+    Nothing deleted if number directories are less or equal than SAVEDAYS.
     """
     
     # Configure how logging should be presented
@@ -34,8 +36,8 @@ def main(args):
     
     # Add the log message handler to the logger
     #handler = logging.handlers.RotatingFileHandler(LOG_FILENAME,
-    #                                           maxBytes=20000,
-    #                                           backupCount=5,
+    #                                           maxBytes=MAX_LOGFILE_BYTES,
+    #                                           backupCount=MAX_LOGFILES,
     #                                           )
     #logger.addHandler(handler)
     
@@ -57,14 +59,17 @@ def main(args):
     if dir_list[:len(dir_list)-SAVEDAYS] and len(dir_list) > SAVEDAYS:
         for dir in dir_list[:len(dir_list)-SAVEDAYS]:
             logger.debug('Want to delete: %s', dir[0])
+            # Ignore error handling if we should fail to delete
             shutil.rmtree(dir[0],ignore_errors=True)
     else: 
-        logger.debug('Nothing to delete')
+        logger.debug('Nothing to delete:')
+        for dir in dir_list:
+            logger.debug('We got: %s',dir[0])
  
     return OK
 
 #
-# TODO: Add error handling too rmtree
+# TODO: Decide, make this a jenkins job or cron?
 
 if __name__ == '__main__':
     sys.exit(main(args=sys.argv[1:]))

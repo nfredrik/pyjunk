@@ -14,3 +14,6 @@ class FileStatus(object):
         return S_IMODE(self.mode) & ( S_IXUSR | S_IXGRP | S_IXOTH)
     def size_of(self):
         return self.size
+    
+    def get_creation_date(self):
+        return self.mtime

@@ -1,16 +1,16 @@
 #Complex Parts
 import time
 class TC1:
-                def run(self):
-                                print "###### In Test 1 ######"
-                                time.sleep(1)
-                                print "Setting up"
-                                time.sleep(1)
-                                print "Running test"
-                                time.sleep(1)
-                                print "Tearing down"
-                                time.sleep(1)
-                                print "Test Finished\n"
+    def run(self):
+                    print "###### In Test 1 ######"
+                    time.sleep(1)
+                    print "Setting up"
+                    time.sleep(1)
+                    print "Running test"
+                    time.sleep(1)
+                    print "Tearing down"
+                    time.sleep(1)
+                    print "Test Finished\n"
 class TC2:
                 def run(self):
                                 print "###### In Test 2 ######"

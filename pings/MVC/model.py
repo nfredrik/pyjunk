@@ -17,7 +17,9 @@ class Model(object):
         self.conn.execute('select (?) from pingtable where date between (?) and (?)', (dest, fromdate, todate))   
         
     def get_time_range(self, dest, fromdate, todate):
-        return [ x[-1] for x in self._get_time_range(dest, fromdate, todate) ]     
+        self._get_time_range(dest, fromdate, todate)
+        return self.conn.fetchall()  
+        return [ x[1] for x in self.conn.fetchall() ]     
 
     def get_response_order(self):
 
@@ -38,12 +40,13 @@ class Model(object):
         self.conn.execute('select * from pingtable order by date')   # default ascending order
         return self.conn.fetchall()
 
-
+    # FIXME: get_date_4_object to not work
     def get_date_4_object(self, object):
-#        self.str ="select ttl, response, date from pingtable where pingobj = 'oracle.com';"
-        self.str ="select date, ttl, response from pingtable where pingobj = \'" + str(object) +  "\';"
-#        print self.str 
-        self.conn.execute(self.str)
+        self.str ='select ttl, response, date from pingtable where pingobj = \'oracle.com\';'
+#        self.str ="select date, ttl, response from pingtable where pingobj = \'" + str(object) +  "\';"
+        #print self.str 
+        self.conn.execute('select ttl, response, date from pingtable where pingobj = \'oracle.com\'')
+        print 'all:', self.conn.fetchall()
         return self.conn.fetchall()
 
     def __del__(self):

@@ -8,5 +8,6 @@ class Control(object):
         self.view = view
 
     def get_list(self):
-        self.list = self.model.get_date_4_object(object='oracle.com')
+        #self.list = self.model.get_date_4_object(object='oracle.com')
+        self.list = self.model.get_date_order()
         self.view.list(list=self.list)

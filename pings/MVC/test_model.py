@@ -37,7 +37,10 @@ class TestModel(unittest.TestCase):
         self.assertEqual(NoneType, type(self.model.write(date= '2012-01-12', pingobj ='svards.eu', ttl= '23', response = '1')))
 
     def test_get_time_range(self):
-        print self.model.get_time_range('svards.eu', '2012-01-12', '2012-04-01')
-        
+#        print self.model.get_time_range('svards.eu', '2012-01-12', '2012-04-01')
+        test =  self.model.get_time_range('svards.eu', '2012-01-12', '2012-04-01')
+        for i in test:
+            print i[-1]
+            
 if __name__ == '__main__':
     unittest.main()

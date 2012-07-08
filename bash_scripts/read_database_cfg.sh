@@ -2,6 +2,24 @@
 
 echo 'hej'
 
+#
+# TODO:
+# Should following sqlscript be commited to databas: UTV100?
+# Answer yes or no!
+# 
+# Logging of all actions? with wrapping logs?
+# path to logfile in config file?
+#
+# Check for empty sqlscript!
+# 
+# Check if sqlplus is executable
+#
+# Check if database is up and running!
+#
+# Verify that from config file variables are none empty!
+#
+
+
 echo "Reading config ..." >&2
 
 source ./database.cfg
@@ -12,5 +30,6 @@ echo "Config for TOMA: $TOMA"
 
 if [[ $NISSE != "" ]];
 then
-   echo 'nisse not defined'
+   echo 'nisse  defined'
 fi
+

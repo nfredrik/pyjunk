@@ -33,3 +33,13 @@ then
    echo 'nisse  defined'
 fi
 
+# Chapter 48.05
+case "${NISSE+X}" in
+
+X)
+    echo "Hurra"
+    ;;
+*) 
+    echo "Noo"
+    ;;
+esac

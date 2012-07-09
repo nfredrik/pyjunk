@@ -43,3 +43,19 @@ X)
     echo "Noo"
     ;;
 esac
+
+
+LS='./janne'
+
+
+if [[ -f $LS  ]]
+then
+    echo 'janne exists '
+fi
+
+if [[  -e $LS ]]
+then
+    echo ' and is executable'
+fi
+
+

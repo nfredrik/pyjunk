@@ -14,9 +14,12 @@ echo 'hej'
 # 
 # Check if sqlplus is executable
 #
-# Check if database is up and running!
+# Check if database is up and running! like jenkins checks
 #
 # Verify that from config file variables are none empty!
+#
+# Ask what database to be updated? utv1, test, accept, prod?
+# 
 #
 
 
@@ -57,5 +60,14 @@ if [[  -e $LS ]]
 then
     echo ' and is executable'
 fi
+
+if [[ ! -s $LS ]]
+then
+    echo ' and is  empty'
+fi
+
+# Chapter 46.13
+echo -n "Type the filename:"
+read FILENAME
 
 

@@ -22,6 +22,21 @@ echo 'hej'
 # 
 #
 
+function function_exists
+{
+    FUNCTION_NAME=$1
+
+    [ -z "$FUNCTION_NAME" ] && return 1
+
+    declare -F "$FUNCTION_NAME" > /dev/null 2>&1
+
+    if [[ $? != 0 ]];
+    then
+        echo 'could not find:' $FUNCTION_NAME 
+    fi 
+    return $?
+}
+
 
 echo "Reading config ..." >&2
 
@@ -30,6 +45,8 @@ echo "Config for NISSE: $NISSE"
 echo "Config for JANNE: $JANNE"
 echo "Config for TOM: $TOM"
 echo "Config for TOMA: $TOMA"
+
+function_exists justPrin && justPrint
 
 if [[ $NISSE != "" ]];
 then

@@ -154,12 +154,10 @@ def check_sudoku(grid):
     # Check only one in row 
     for row in grid:
         r = {}
-        print row
         for d in row:
             if d not in r or d == 0:
                 r[d] = 1
             else:
-                print '1'
                 return False
             
     # Check only digit in column
@@ -169,7 +167,6 @@ def check_sudoku(grid):
             if row[col] not in c or row[col] == 0:
                 c[row[col]] = 1
             else:
-                print '2'
                 return False
                            
     # Check cube
@@ -181,13 +178,12 @@ def check_sudoku(grid):
                 if d not in cube or d == 0:
                     cube[d] = 1
                 else:
-                    print '3'
                     return False    
             
     return True
 
 
-def solve_sudoku(grid):
+def old_solve_sudoku(grid):
     x = 0
     for row in grid:
         y = 0
@@ -217,6 +213,37 @@ def solve_sudoku(grid):
     else:
         return False            
 
+import copy
+
+def solve_sudoku(__grid):
+    
+    res = check_sudoku(__grid)
+    if res is None or res is False:
+        return res
+    
+    grid = copy.deepcopy(__grid)
+    #grid = list(__grid)
+
+    for row in range(0,9):
+        for col in range(0,9):
+            if grid[row][col] == 0:
+                for n in range(1,10):
+                    grid[row][col] = n        
+                    #print '.',
+                    result = solve_sudoku(grid)
+                    
+                    if result is True:
+                        return result
+                    
+                return False
+    print grid                
+    return grid    
+                    
+          
 
 
-print solve_sudoku(easy)
+
+
+solution = solve_sudoku(easy)
+print solution
+print 'Finished!'

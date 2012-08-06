@@ -10,15 +10,16 @@
 #
 ############ constants
 
-apps = ["/Applications/LibreOffice.app/Contents/MacOS/soffice.bin"
-     ]
+apps = ["/Applications/LibreOffice.app/Contents/MacOS/soffice.bin"]
+          
+#apps = ["/Applications/Opera.app/Contents/MacOS/Opera"   ]
 
 file_list = ["test.doc"]
 
-fuzz_output = "./fuzzed.doc"
+fuzz_output = "/Users/frsv/Documents/workspace/pyjunk/udacity/swtesting/fuzzed.doc"
 
 FuzzFactor = 250
-num_tests = 10000
+num_tests = 1
 ############# code
 
 import math
@@ -26,6 +27,7 @@ import random
 import string
 import subprocess
 import time
+num_craches = 0
 
 for i in range(num_tests):
   file_choice = random.choice(file_list)
@@ -42,14 +44,18 @@ for i in range(num_tests):
 
   open(fuzz_output, 'wb').write(buf)
 
-  print 'call with:'
-  print 'app', app
-  print 'fuzz_output', fuzz_output
+  print 'j:',j
   
   process = subprocess.Popen([app, fuzz_output])
 
-  time.sleep(4)
+  time.sleep(10)
   crashed = process.poll()
 
   if not crashed:
     process.terminate()
+  else:
+    num_crashes = num_crashes + 1
+    print "Crash# " + str(num_crashes) + " for fuzzed file " + file_choice
+    log_crash_fname = "crashed_fuzzfile_" + str(num_crashes) + ".cir"
+    open(log_crash_fname,'wb').write(buf)
+    

@@ -19,6 +19,22 @@
 # whether it is valid or not. If it is valid, it returns True, 
 # otherwise it returns False.
 
+def is_luhn_valid(n):
+    # Make sure we have a string, remove any spaces and reverse it
+    n = ''.join(str(n).split())[::-1]
+    print 'n:', n
+    assert n.isdigit() # Check we only have numbers
+    tot = 0
+    for d in range(len(n)):
+        if d % 2:
+            x = int(n[d]) * 2
+            tot += x - 9 if x > 9 else x
+        else:    
+            tot += int(n[d])
+        d += 1
+    return tot % 10 == 0
+
+
 def luhn_algo(list, even):
 
     cntr = 0
@@ -42,7 +58,7 @@ def luhn_algo(list, even):
     return False
 
 
-def is_luhn_valid(n):
+def old_is_luhn_valid(n):
 
     count = len(str(n))
     str_int_list = list(str(n))

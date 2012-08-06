@@ -100,56 +100,29 @@ hard = [[1,0,0,0,0,7,0,9,0],
         [0,4,0,0,0,0,0,0,7],
         [0,0,7,0,0,0,3,0,0]]
 
-def old_check_sudoku(grid):
-    
-    # Sanity checks
-    if len(grid) != 9:
-        return None
-    
-    for row in grid:
-        if len(row) != 9:
-            return None       
-    
-    # Check only one in row 
-    for row in grid:
-        r = {}
-        for d in row:
-            if d not in r or d == 0:
-                r[d] = 1
-            else:
-                return False
-            
-    # Check only digit in column
-    for col in range(9):
-        c = {}
-        for row in grid:
-            if row[col] not in c or row[col] == 0:
-                c[row[col]] = 1
-            else:
-                return False
-                           
-    # Check cube
-    for x in [0,3,6]:
-        cube = {}
-        for row in grid[x:x+3]:
- 
-            for d in row[x:x+3]:
-                if d not in cube or d == 0:
-                    cube[d] = 1
-                else:
-                    return False    
-            
-    return True
+
 
 def check_sudoku(grid):
     
     # Sanity checks
+    
+    if type(grid)!=list:
+        print '1',
+        return None
+    
     if len(grid) != 9:
+        print '2',
         return None
     
     for row in grid:
-        if len(row) != 9:
-            return None       
+        if len(row) != 9 or type(row) != list:
+            print '3', row, len(row), type(row)
+            return None
+        
+        for i in row:
+            if type(i)!= int or i not in range(0,10):
+                print '4',
+                return None     
     
     # Check only one in row 
     for row in grid:
@@ -183,67 +156,62 @@ def check_sudoku(grid):
     return True
 
 
-def old_solve_sudoku(grid):
-    x = 0
-    for row in grid:
-        y = 0
-        for d in row:
-            if d == 0:
-                for i in range(1,10):
-                    print 'x:',x, 'y:',y, 'value', i
-                    grid[x][y] = i
-                    
-                    result = check_sudoku(grid)
-                    
-                    if result == True:
-                        print 'hurra'
-                        break
-                    elif result == False:
-                        print 'nej'
-                    elif result == None:
-                        print 'none?'
-                           
-            y+=1
-        x+=1            
-    
-    print grid
-    
-    if check_sudoku(grid) == True:
-        return grid
-    else:
-        return False            
 
 import copy
 
 def solve_sudoku(__grid):
     
     res = check_sudoku(__grid)
-    if res is None or res is False:
+    if res in [None, False]:
+        #print 'jeh...'
         return res
     
     grid = copy.deepcopy(__grid)
-    #grid = list(__grid)
 
     for row in range(0,9):
         for col in range(0,9):
             if grid[row][col] == 0:
                 for n in range(1,10):
                     grid[row][col] = n        
-                    #print '.',
                     result = solve_sudoku(grid)
                     
-                    if result is True:
+                    if result is not False:
                         return result
                     
-                return False
-    print grid                
+                return False              
     return grid    
                     
-          
 
+def ret_value(s):
+    if s is False:
+        print 'False'
+    elif s is None:
+        print 'None' 
+    else:
+        print 'OK'
+        
+                     
 
+print 'ill_formed',
+i = solve_sudoku(ill_formed)
+ret_value(i)
 
+print 'invalid',
+inva = solve_sudoku(invalid)
+ret_value(inva)
 
-solution = solve_sudoku(easy)
-print solution
+print 'valid',
+solve_sudoku(valid)
+i = solve_sudoku(ill_formed)
+ret_value(i)
+print 'easy',
+solve_sudoku(easy)
+i = solve_sudoku(ill_formed)
+ret_value(i)
+print 'hard',
+solution = solve_sudoku(hard)
+i = solve_sudoku(ill_formed)
+ret_value(i)
+
+        
 print 'Finished!'

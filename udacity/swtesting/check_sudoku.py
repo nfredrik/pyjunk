@@ -106,14 +106,10 @@ def check_sudoku(grid):
     
     # Sanity checks
     
-    if type(grid)!=list:
+    if type(grid)!=list or len(grid) != 9:
         print '1',
         return None
-    
-    if len(grid) != 9:
-        print '2',
-        return None
-    
+       
     for row in grid:
         if len(row) != 9 or type(row) != list:
             print '3', row, len(row), type(row)
@@ -163,7 +159,6 @@ def solve_sudoku(__grid):
     
     res = check_sudoku(__grid)
     if res in [None, False]:
-        #print 'jeh...'
         return res
     
     grid = copy.deepcopy(__grid)
@@ -192,26 +187,26 @@ def ret_value(s):
         
                      
 
-print 'ill_formed',
-i = solve_sudoku(ill_formed)
-ret_value(i)
+#print 'ill_formed',
+#i = solve_sudoku(ill_formed)
+#ret_value(i)
 
-print 'invalid',
-inva = solve_sudoku(invalid)
-ret_value(inva)
+#print 'invalid',
+#inva = solve_sudoku(invalid)
+#ret_value(inva)
 
-print 'valid',
-solve_sudoku(valid)
-i = solve_sudoku(ill_formed)
-ret_value(i)
+#print 'valid',
+#solve_sudoku(valid)
+#i = solve_sudoku(ill_formed)
+#ret_value(i)
 print 'easy',
 solve_sudoku(easy)
 i = solve_sudoku(ill_formed)
 ret_value(i)
-print 'hard',
-solution = solve_sudoku(hard)
-i = solve_sudoku(ill_formed)
-ret_value(i)
+#print 'hard',
+#solution = solve_sudoku(hard)
+#i = solve_sudoku(ill_formed)
+#ret_value(i)
 
         
 print 'Finished!'

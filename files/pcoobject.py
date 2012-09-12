@@ -42,7 +42,17 @@ class PcoObject(object):
         """
         Return found SQL INCLUDES in a list 
         """
+<<<<<<< local
+<<<<<<< local
+        self.sqls = re.findall('HPC[A-Z\d]*[\s]*EXEC[\s]*SQL[\s]*INCLUDE[\s]*\'([\w\d\-]+)\'[\s]*END\-EXEC\.', self.string)
+=======
+=======
+>>>>>>> other
         self.sqls = re.findall('EXEC[\s]*SQL[\s]*INCLUDE[\s]*\'([\w\d\-]+)\'[\s]*END\-EXEC\.', self.string)
+<<<<<<< local
+>>>>>>> other
+=======
+>>>>>>> other
         return self.sqls
 
     def get_copys(self):
@@ -88,6 +98,21 @@ if __name__ == '__main__':
     fh, abspath = mkstemp()
 
     pco_obj = PcoObject(abspath, '.')
+<<<<<<< local
+<<<<<<< local
+    fh = StringIO("""  PROGRAM-ID.   LK1000.
+                 HPCLLA         EXEC SQL INCLUDE 'BOBSSS030FTD' END-EXEC.
+                          COPY BO-FELTXT    IN UCPROC.
+                          COPY HP-SWITCHES.
+                          HPCALL*
+                          
+                          * EXEC SQL INCLUDE 'SUSANNE' END-EXEC.
+                          * COPY FREDDE-FELTXT    IN UCPROC.
+                          *COPY DELL-SWITCHES.
+                          * HPREMOV*
+=======
+=======
+>>>>>>> other
     fh = StringIO(""" 
 HPCINC*COPY 'HP-SWITCHES'.
 HPCINC     EXEC SQL INCLUDE 'HP-SWITCHES' END-EXEC.
@@ -100,10 +125,17 @@ HPCLLA*    EXEC SQL INCLUDE BA070_FIRMA END-EXEC.
 HPCLLA     EXEC SQL INCLUDE 'BA070_FIRMA' END-EXEC.
 HPCINV*    INVOKE TABLE BA254_OMBAAB IN PRDSCHEMA FROM REPOSITORY.
 HPCLLA*    EXEC SQL INCLUDE BA254_OMBAAB END-EXEC.
+<<<<<<< local
+>>>>>>> other
+=======
+>>>>>>> other
                   """)
 
     pco_obj.read_from_file(fh)
+    assert "LK1000" == pco_obj.get_program_id()
+
     print 'program id:', pco_obj.get_program_id()
+
     print 'includes:', pco_obj.get_sql_include()
     print 'copys:', pco_obj.get_copys()
     print 'uniq copys:', pco_obj.get_uniq_copys()

@@ -7,8 +7,13 @@ DPS=$3
 DB=$4
 TUXEDO=$5
 PGM=$6
+DELIVERY=$7
 
-DELIVERY=/program/Arkiv-Leveranser
+
+#  Revisions:
+#  0.1 Removed ECL from delivery, added DB instead!
+#
+
 
 #######################################################################
 assert ()                 #  If condition false,
@@ -83,53 +88,60 @@ doIt()
     rm -fr $TMP_DEST
 
 }
-#######################################################################
 
 
+####################################################
+echo 'Remove tmp directory!'
+####################################################
 
-
+rm -fr $WORKSPACE/tmp/pgm
+rm -fr $WORKSPACE/tmp/ecl
+rm -fr $WORKSPACE/tmp/dps
 
 ####################################################
 echo 'PGM!'
 ####################################################
-
+    
     #  Check if there's any PGM to deliver
     if [[ $PGM = true ]]; then
-    
-        TMP_DEST=tmp/pgm/$TAG_NAME
+
+        TMP_DEST=$WORKSPACE/tmp/pgm/$TAG_NAME
         TMP_DEST_SO=$TMP_DEST/cobol/so
+        TMP_DEST_LINAGE=$TMP_DEST/cobol/linage
     
         # Create the destination directory if not already there
         if [[ ! -d $TMP_DEST_SO ]]; then
             mkdir -p $TMP_DEST_SO 
+            mkdir -p $TMP_DEST_LINAGE 
         fi
     
         # Copy shared object files
-        cp $WORKSPACE/src/fwk/us/cobol/so/*.so $TMP_DEST_SO  
-
-        #    cp $WORKSPACE/pgm/New_Configuration.bin/*.so $TMP_DEST_SO  
+        cp $WORKSPACE/src/New_Configuration.bin/*.so $TMP_DEST_SO  
+        cp $WORKSPACE/tmp/*.linage $TMP_DEST_LINAGE
+    
     
         doIt $TAG_NAME PGM $TMP_DEST
-
     else
        echo 'No PGM to deliver'
     fi
 
+
+
 ####################################################
 echo 'DPS!'
 ####################################################
-
+    
     #  Check if there's any DPS to deliver
     if [[ $DPS = true ]]; then
 
         TMP_DEST=$WORKSPACE/tmp/dps/$TAG_NAME
-
+    
         # Create the destination directory if not already there
         if [[ ! -d $TMP_DEST ]]; then
-            mkdir -p $TMP_DEST
+            mkdir -p $TMP_DEST 
         fi
-
-        cp -r  $WORKSPACE/src/dps/* $TMP_DEST
+    
+        cp -r  $WORKSPACE/src/dps/* $TMP_DEST  
 
         doIt $TAG_NAME DPS $TMP_DEST
 
@@ -137,22 +149,21 @@ echo 'DPS!'
        echo 'No DPS to deliver'
     fi
 
-
 ####################################################
 echo 'DB!'
 ####################################################
-
+    
     #  Check if there's any DB to deliver
     if [[ $DB = true ]]; then
 
         TMP_DEST=$WORKSPACE/tmp/db/$TAG_NAME
-
+    
         # Create the destination directory if not already there
         if [[ ! -d $TMP_DEST ]]; then
-            mkdir -p $TMP_DEST
+            mkdir -p $TMP_DEST 
         fi
-
-        cp -r  $WORKSPACE/src/db/* $TMP_DEST
+    
+        cp -r  $WORKSPACE/src/db/* $TMP_DEST  
 
         chmod ugo+x $(find . -name *.sh)
 
@@ -174,5 +185,11 @@ echo 'TUXEDO!'
        echo 'No TUXEDO to deliver'
     fi
 
+# Last but not least, copy release notes
+    cp   $WORKSPACE/*.html  ${DELIVERY}/${TAG_NAME}
+    sudo chown -R urfapp:framework ${DELIVERY}/${TAG_NAME}/*.html
+    exit 0    
 
-    exit 0
+
+
+

@@ -3,8 +3,8 @@ set -x
 
 TAG_NAME=$1
 WORKSPACE=$2
-DELIVERY=/program/Arkiv-Leveranser
-
+#DELIVERY=/program/Arkiv-Leveranser
+DELIVERY=$3
 
 #  Revisions:
 #  0.1 Removed ECL from delivery, added DB instead!

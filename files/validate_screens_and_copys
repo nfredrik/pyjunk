@@ -1,0 +1,220 @@
+#!/usr/bin/env python
+
+import os
+import re
+import sys
+import gzip
+import struct
+import copy
+import fnmatch
+
+OK, ERROR = 0, 1
+
+# Filepathes relative to this script
+SCREENFILE_PATH ='../dps/screens/SCREEN$FILE'
+SCREEN_COPY_PATH ='../pgm' 
+VERSIONS_PROPERTIES_PATH='../dps/screens/versions.properties'
+
+class Screen(object):
+
+    def __init__(self, scr):
+        self.name = os.path.basename(scr)
+        self.out = gzip.open(scr, 'rb')
+        data = self.out.read()
+        self.len =  len(data)
+        # TODO: restore, find a better solution later
+        self.out.seek(0)
+    def get_len(self):
+        return self.len
+    def get_name(self):
+        return self.name
+    def read_byte(self):
+        return str(struct.unpack_from('B', self.out.read(1))[0])
+
+class StateMachine(object):
+    
+    def __init__(self):
+
+        # The String: 'screenFileq'  before the checksum. 8 bytes more have to be read after this!!
+        self.lst = [ str(ord(x)) for x in 'screenFileq' ]
+        self.reset_ptr()
+        
+    def compare(self, test):
+        if test == self.lst[self.ptr]:
+            
+            # Indicate that it's the last byte?
+            if (self.ptr +1) == self.get_len():
+                return True
+            
+            # Not the last byte
+            self.ptr+= 1
+            return False
+        
+        # No hit, get back to beginning of the pattern
+        self.reset_ptr()
+        return None
+                       
+    def get_len(self):
+        return len(self.lst)
+    
+    def reset_ptr(self):
+        self.ptr = 0
+
+class Versions(object):
+    def __init__(self):
+        self.ver={}
+        fh = open(VERSIONS_PROPERTIES_PATH)
+        self.data = fh.read().split()
+
+        # Filter out check number 
+        for item in self.data:
+            res = re.match('SCREEN\$FILE\.([\w]+\.[\d]+)\=([\d]+)', item)
+            if res != None:
+                self.ver[res.group(1)+'.scr'] = int(res.group(2))
+        self.len = len(res.group(2)) 
+
+    def get_len(self):
+        return self.len      
+        
+    def get_version_dict(self): 
+        return self.ver
+
+class ScreenCopy(object):
+    def __init__(self, file, filename):
+        self.fh = open(file)
+        self.filename = filename
+        self.all = self.fh.read().split('\n')
+        # Filter out the check number
+        for c in self.all:
+            res = re.search(r'CHECK\-NUMBER(.*)COMP VALUE ([\d]*).',c)
+            if res != None:
+                self.check_number = res.group(2)
+                return
+            else:
+                self.check_number = 13
+ 
+    def get_filename(self):
+        return self.filename
+
+    def get_check_number(self):
+        return int(self.check_number)
+
+
+
+def main(args):
+
+    return_code = OK
+
+    state_machine = StateMachine()
+    version = Versions()
+    version_screens = version.get_version_dict()
+
+    screen_copys = {}
+
+    # Find all screen copy files and add to list
+    for item in version_screens:
+        itm = item.split('.')   
+        for root, dirs, files in os.walk(SCREEN_COPY_PATH): 
+            sum =   'SCREEN-'+ itm[0] + '-' + itm[1] + '.cpy'
+            for  filename in fnmatch.filter(files, sum):
+                path = os.path.join(root, filename)
+                screen_copys[item] = ScreenCopy(path,sum)
+
+
+    print '==============================================================='
+    print 'Compare versions.properties check number with screen copy file:'
+    print '==============================================================='
+
+    no_of_copys = 0
+    for item in version_screens:
+
+        # First, check if the copy exist 
+        if item in screen_copys:
+            no_of_copys+=1
+            if version_screens[item] != screen_copys[item].get_check_number():
+                print screen_copys[item].get_filename(), ':', screen_copys[item].get_check_number(), \
+                ',version.properties:',version_screens[item], \
+                'ERROR'
+                return_code = ERROR 
+
+        else:
+            tcopy = item.split('.')
+            print 'SCREEN-'+ tcopy[0]+'-'+tcopy[1]+'.cpy', 'defined in versions.properties but not found ERROR'
+            return_code = ERROR 
+
+    print
+    print 'Number of screen copy files:', no_of_copys
+
+      
+    # Collect all screen files!
+    screens = []
+    for root, dirs, files in os.walk(SCREENFILE_PATH):
+        for file in files:
+            if file.endswith('.scr'):
+                screens.append(Screen(os.path.join(root, file)))
+
+    print
+    print '==============================================================='
+    print 'Defined in versions.properties but NOT Not found in directory:'
+    print '==============================================================='
+
+    for version_screen in version_screens:
+        flip = False
+        for screen in screens:
+            if version_screen == screen.get_name():
+                flip =True
+                break
+
+        if not flip :
+            print  version_screen, 'defined in versions.properties but not found ERROR' 
+            return_code = ERROR 
+    
+    print
+    print '========================================================================'
+    print 'Compare check number in versions.properties with check number in screen'
+    print '========================================================================'
+
+    counter = 0  
+    for screen in screens:
+
+        index= 0
+        for i in  range(screen.get_len()):
+            res = state_machine.compare(screen.read_byte())
+            if res != None:
+                if res == True:
+                    # We found the 'screenFileq', i.e, break out
+                    break
+            index+=1
+
+        if screen.get_len() == index:
+             print screen.get_name(), ',Did not find checksum.ERROR'
+             return_code = ERROR 
+             continue
+
+        # We need to read 6 more bytes before start reading check number
+        for i in  range(6):
+            screen.read_byte()
+
+        # Turn the check number to a list of hex bytes to be able to diff
+        hex_string = "%08x" % version_screens[screen.get_name()]
+        hex_list = [hex_string[i:i+2] for i in range(0,len(hex_string), 2)]
+
+        # Compare byte from byte MSB to LSB
+        for hex_str in hex_list:
+            screen_byte = int(screen.read_byte())
+            hex_int = int(hex_str,base=16)
+            
+            if  hex_int != screen_byte:
+                print os.path.basename(screen.get_name()), ' and version.properties differs ERROR'
+                return_code = ERROR 
+                # Do not need to compare the rest since the first is wrong
+                break
+
+        counter+=1
+
+
+    print 'Number for screens:', counter
+    return return_code
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:])) 

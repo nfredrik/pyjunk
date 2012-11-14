@@ -1,0 +1,23 @@
+<html>
+<body>
+<h2> Lista deployment över en  period</h2>
+<form action="/cgi-bin/deploy" method="post" target="_blank">
+<h3>Arkiv</h3>
+<input type="radio" name="archive" value="POC" /> POC
+<input type="radio" name="archive" value="Test" /> Test
+<input type="radio" name="archive" value="Prod" checked/> Produktion
+<input type="radio" name="archive" value="Olle" checked/> Olle
+<h3> Typ av deployment </h3>
+<input type="radio" name="deploy" value="full" /> Full
+<input type="radio" name="deploy" value="patch" checked/> Patch
+<input type="radio" name="deploy" value="all" checked/> Allt
+<h3> Period </h3>
+<input type="radio" name="period" value="week" checked/> Vecka
+<input type="radio" name="period" value="month" /> Månad
+<input type="radio" name="period" value="all" /> Allt
+<br>
+<br>
+<input type="submit" value="Välj" />
+</form>
+</body>
+</html>

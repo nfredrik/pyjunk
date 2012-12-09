@@ -5,12 +5,15 @@ import urllib2
 
 if sys.platform == 'win32':
     from pywinusb import hid
+    
+Success, Building, Failure = 0, 1, 2    
 
 class JenkinsJobError(Exception):pass
 
 class JenkinsJob(object): 
 
-    jenkinsUrl = "http://192.168.1.64:8080/job/"
+#    jenkinsUrl = "http://192.168.1.67:8080/job/"
+    jenkinsUrl = "http://192.168.0.2:8080/job/"
 
     def __init__(self,jobName):
         self.jobName = jobName
@@ -19,25 +22,33 @@ class JenkinsJob(object):
         try:
             self.all = self.jenkinsUrl + self.jobName + "/lastBuild/api/json"
             print self.all
-            jenkinsStream   = urllib2.urlopen( self.all )
+            jenkinsStream   = urllib2.urlopen( self.all, timeout=2 )
             buildStatusJson = json.load( jenkinsStream )
-            
+            print 'buildStatusJson', buildStatusJson
         except urllib2.HTTPError, e:
-            print "URL Error: " + str(e.code) 
+            print "HTTP Error: " + str(e.code) 
             print "      (job name [" + self.jobName + "] probably wrong)"
             raise JenkinsJobError('No contact::%s' % e) 
+        except urllib2.URLError, e:
+            raise JenkinsJobError('URLError::%s' % e) 
+
         except Exception, e:        
             print "Another error: " + str(e.code)    
             raise Exception(e)           
         except:
             raise JenkinsJobError('Failed to parse json')      
 
+        if buildStatusJson.has_key('building'):
+            if buildStatusJson["building"] == True :
+                return Building
+
+
         if buildStatusJson.has_key( "result" ):      
             print "[" + self.jobName + "] build status: " + buildStatusJson["result"]
             if buildStatusJson["result"] != "SUCCESS" :
-                return False
+                return Failure
             else:
-                return True
+                return Success
     
 
 class USBDeviceGeneric(object):
@@ -69,10 +80,13 @@ class USBDevice(object):
         self.device.open()
     
     def set_status(self,value=True):    
-        if True:
+        if value == Success:
             self.setLEDColor(self.COLORS['GREEN'])
-        else:
+        elif value == Failure:
             self.setLEDColor(self.COLORS['RED'])   
+        elif value == Building:
+            self.setLEDColor(self.COLORS['YELLOW'])            
+                
     
     def setLEDColor(color):
         report = self.device.find_output_reports()[ 0 ]

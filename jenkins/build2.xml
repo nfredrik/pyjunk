@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <project default="three">
+     <target name="one">
+        <echo>Running One</echo>
+     </target>
+
+     <target name="two" depends="one">
+        <echo>Running Two</echo>
+     </target>
+
+     <target name="three" depends="two">
+        <echo>Running Three</echo>
+     </target>
+  </project>

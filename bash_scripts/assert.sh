@@ -16,7 +16,8 @@ assert ()                 #  If condition false,
 
   lineno=$2
 
-  if [ ! $1 ] 
+#  if [ ! $1 ] 
+  if [[ ! -n $1 || ! $1 ]] 
   then
     echo "Assertion failed:  \"$1\""
     echo "File \"$0\", line $lineno"    # Give name of file and line number.
@@ -29,7 +30,7 @@ assert ()                 #  If condition false,
 #######################################################################
 
 
-a=5
+a=3
 b=4
 condition="$a -lt $b"     #  Error message and exit from script.
                           #  Try setting "condition" to something else
@@ -38,6 +39,11 @@ condition="$a -lt $b"     #  Error message and exit from script.
 assert "$condition" $LINENO
 # The remainder of the script executes only if the "assert" does not fail.
 
+
+assert " " $LINENO
+
+var=''
+assert $var $LINENO
 
 # Some commands.
 # Some more commands . . .

@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+import sys
+
+
+class ExampleErr(Exception): pass
+
+
+class Example(object):
+    def __init__(self):
+        raise ExampleErr('wrong')
+
+
+try:
+    example = Example()
+except:
+    exc_traceback = sys.exc_info()[2]
+    stack_list = []
+    while 1:
+        stack_list.append(exc_traceback.tb_frame.f_code.co_name)
+        if not exc_traceback.tb_next:
+            break
+        exc_traceback = exc_traceback.tb_next
+
+      # The next is an almost-human-readable
+      # description of where the fault occurred
+       print("something went wrong in %s" % stack_list)

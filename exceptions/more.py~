@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+except:
+        (exc_class, exc_object, exc_traceback) = sys.exc_info()
+        alert("""internal and completely unexpected problem,
+        manifested as %s""" % str(exc_class))

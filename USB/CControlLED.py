@@ -39,7 +39,8 @@ ColorsLock = threading.Lock()
 KeepRunning = True
 KeepRunningLock = threading.Lock()
 
-Device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+##Device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+Device = hid.HidDeviceFilter( vendor_id = 0x1d34, product_id = 0x0002 ).get_devices()
 if Device is None or 'MAIL' not in `Device`:
     print "Device not found"
     raise Exception("Device not found")
@@ -96,7 +97,7 @@ def readCControlPage(url, build_name, FailColor="RED", SuccessColor="GREEN", Bui
     print("Build status for %s is %s (%s)" % (build_name, status, failure))
     if ("waiting" in status) and ("" == failure):
         #print("State: 1")
-        newColors = [SuccessColor]
+        newColors = [SuccessColor] 
     elif ("waiting" in status) and ("" != failure):
         #print("State: 2")
         newColors = [FailColor, "BLANK"]

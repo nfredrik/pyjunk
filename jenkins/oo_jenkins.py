@@ -3,8 +3,8 @@ import time
 import json
 import urllib2
 
-if sys.platform == 'win32':
-    from pywinusb import hid
+#if sys.platform == 'win32':
+from pywinusb import hid
     
 Success, Building, Failure = 0, 1, 2    
 
@@ -102,13 +102,14 @@ class USBDevice(object):
     
     toggle = True
     
-    def __init__(self, v, i):pass
+    def old__init__(self, v, i):pass
     
-    def new__init__(self,vendorid, id):
+    def __init__(self):
         try:
-            self.device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+            #self.device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+            self.device = hid.HidDeviceFilter( vendor_id = 0x1d34, product_id = 0x0004 ).get_devices()[ 0 ]    
         except:    
-            raise USBDeviceError("Device not found")
+            raise USBDeviceError("Device could not be found")
         
         self.device.open()
     
@@ -128,10 +129,10 @@ class USBDevice(object):
         elif val == Building:
             self.setLEDColor(self.COLORS['YELLOW'])            
             
-    def setLEDColor(self, color):
+    def oldsetLEDColor(self, color):
         print 'setLEDColor got:',  color           
     
-    def new_setLEDColor(color):
+    def setLEDColor(self, color):
         report = self.device.find_output_reports()[ 0 ]
         report[ 0xff000001 ][ 0 ] = color
         report.send()   
@@ -145,7 +146,7 @@ def main(args):
 
         # Create Jenkins job instance(s), take care of exceptions
         thjob = JenkinsJob("5th")
-        usbdev = USBDevice(123, 456)
+        usbdev = USBDevice()
         # Create USB device instance, take care of exceptions
         
         # Loop eternally only break if user wants to.

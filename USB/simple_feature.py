@@ -34,7 +34,7 @@ def read_values(target_usage):
             print "The target device was found, but the requested usage does not exist!\n"
     #
 if __name__ == '__main__':
-    target_usage = hid.get_full_usage_id(0xff00, 0x02) # generic vendor page, usage_id = 2
+    target_usage = hid.get_full_usage_id(0x1d34, 0x0004) # generic vendor page, usage_id = 2
     # go for it!
     read_values(target_usage)
 

@@ -2,6 +2,7 @@ import sys
 import time
 import json
 import urllib2
+import pprint
 
 #if sys.platform == 'win32':
 from pywinusb import hid
@@ -106,8 +107,8 @@ class USBDevice(object):
     
     def __init__(self):
         try:
-            #self.device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
-            self.device = hid.HidDeviceFilter( vendor_id = 0x1d34, product_id = 0x0004 ).get_devices()[ 0 ]    
+            self.device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+            #self.device = hid.HidDeviceFilter( vendor_id = 0x1d34, product_id = 0x0004 ).get_devices()[ 0 ]    
         except:    
             raise USBDeviceError("Device could not be found")
         
@@ -133,8 +134,30 @@ class USBDevice(object):
         print 'setLEDColor got:',  color           
     
     def setLEDColor(self, color):
+        
+        print 'Got:', color
         report = self.device.find_output_reports()[ 0 ]
         report[ 0xff000001 ][ 0 ] = color
+        report.send()
+        time.sleep(5)
+        return   
+
+        print 'trying to set color...'
+        reports = self.device.find_output_reports()
+        print 'type(report):', type(reports)
+        #pp  = pprint.PrettyPrinter(indent=4)
+        #pp.pprint(report)
+        for report in reports:
+            print "1 The report has %s, has this usage items" % repr(report)
+            print type(report)
+            
+            #for item in report:
+            #    print ' counting...'
+            #    print "2\t%s" % repr(item) 
+                           
+        print 'we got further...', color    
+        report[16] = color
+        print 'just before report.send'
         report.send()   
 
 
@@ -172,9 +195,15 @@ def main(args):
     except KeyboardInterrupt, e:
         print'User interrupt!'
         usbdev.setLEDColor(USBDevice.COLORS['BLANK'])
-    except Exception, e:
-        print "Exception: " + str(e) 
-        print 'Last resort, none of the above catched the exception...'
+#    except Exception, e:
+#        print "Exception: " + str(e) 
+#        print 'Last resort, none of the above catched the exception...'
+    except:
+        
+        (exc_class, exc_object, exc_traceback) = sys.exc_info()
+        print"""internal and completely unexpected problem,
+        manifested as %s""" % str(exc_class)
+
                  
 if __name__ == '__main__':
   sys.exit(main(sys.argv))

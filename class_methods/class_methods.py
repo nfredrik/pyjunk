@@ -1,53 +1,68 @@
 #!/usr/bin/env python
+
+import sys
+
 class ClassMethods(object):
 
-    def __new__(self):
-        pass
-    def __init__(self,args):
-        pass
+    def __new__(cls):
+        print 'new'
+        return super(ClassMethods,cls).__new__(cls)
+
+    def __init__(self):
+        print 'init'
+        self.x = 1
+        self.y = 2
+
     def __del__(self):
-        pass
+        print 'del'
     def __repr__(self):
-        pass
+        print 'repr'
+        return '<%s>' % self.__class__.__name__
+        
     def __str__(self):
-        pass
+        print 'str'
     def __cmp__(self,other):
-        pass
+        print 'cmp'
     def __index__(self):
-        pass
+        print 'index'
     def __hash__(self):
-        pass
+        print 'hash'
     def __getattr__(self,name):
-        pass
-    def __getattribute__(self):
-        pass
+        print 'getattr'
+    def __getattribute__(self,name):
+        print 'getattribute'
     def __setattr__(self,name,attr):
-        pass
+        print 'setattr'
     def __delattr__(self,name):
-        pass
+        print 'delattr'
     def __call__(self,args, kwargs):
-        pass
+        print 'call'
     def __lt__(self,other):
-        pass
+        print 'lt'
     def __le__(self,other):
-        pass
+        print 'le'
     def __lt__(self,other):
-        pass
+        print 'lt'
     def __gt__(self,other):
-        pass
+        print 'gt'
     def __ge__(self,other):
-        pass
+        print 'ge'
     def __eq__(self,other):
-        pass
+        print 'eq'
     def __ne__(self,other):
-        pass
+        print 'ne'
     def __nonzero__(self):
-        pass
+        print 'nonzero'
 
 
+def main(args):
 
+    a = ClassMethods()
+    # get repr working
+    a
 
-
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
 
 
 

@@ -2,12 +2,16 @@
 
 import sys
 
-#from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.etree.ElementTree import * 
 from xml.dom import minidom
 
 
+#--------------------------------------------------------------------
+def echo_message(top, msg):
+    subchild = SubElement(top, 'echo')
+    subchild.set('message',msg)
 
+#--------------------------------------------------------------------
 
 def prettify(elem):
     """Return a pretty-printed XML string for the Element.
@@ -27,10 +31,6 @@ def set_project(top):
     comment = Comment('Generated for bolagsverket ab!')
     top.append(comment)
 
-#--------------------------------------------------------------------
-def echo_message(top, msg):
-    subchild = SubElement(top, 'echo')
-    subchild.set('message',msg)
 
 #--------------------------------------------------------------------
 def set_taskdefs(top):
@@ -49,21 +49,20 @@ def set_taskdefs(top):
     child.set('name','cobollink')
     child.set('classname','com.microfocus.ant.TaskCobolLink')
 
-
-    child = SubElement(top, 'taskdef')
-    child.set('name','mfdestfilelist')
-    child.set('classname','com.microfocus.ant.TypeDestinationFileList')
-
     child = SubElement(top, 'taskdef')
     child.set('uri','antlib:net.sf.antcontrib')
     child.set('resource','net/sf/antcontrib/antlib.xml')
     child.set('classpath','lib/ant-contrib-1.0b3.jar')
 
-    child = SubElement(top, 'taskdef')
+    child = SubElement(top, 'typedef')
+    child.set('name','mfdestfilelist')
+    child.set('classname','com.microfocus.ant.TypeDestinationFileList')
+
+    child = SubElement(top, 'typedef')
     child.set('name','mffilelist')
     child.set('classname','com.microfocus.ant.TypeFileList')
 
-    child = SubElement(top, 'taskdef')
+    child = SubElement(top, 'typedef')
     child.set('name','mfdirlist')
     child.set('classname','com.microfocus.ant.TypeDirectiveList')
 
@@ -84,7 +83,7 @@ def set_os_spec_init(top):
 
     child = SubElement(top, 'target')
     child.set('name','os.init.unix')
-    child.set('if','os.unix')
+    child.set('if','unix')
 
     subchild = SubElement(child, 'property')
     subchild.set('name','ddlext')
@@ -143,8 +142,9 @@ def set_cobol_compiler_directives(top):
     subchild.set('name','MAX-ERROR')
     subchild.set('value','100')
 
-    subchild = SubElement(child, 'directive')
-    subchild.set('value','COPYEXT&quot;cpy,,&quot;')
+    subchild = SubElement(child, 'directives')
+    #subchild.set('value','COPYEXT&quot;cpy,,&quot;')
+    subchild.set('value','COPYEXT"cpy,,"')
 
     subchild = SubElement(child, 'directive')
     subchild.set('name','SOURCETABSTOP')
@@ -156,10 +156,9 @@ def set_cobol_compiler_directives(top):
 #--------------------------------------------------------------------
 def set_cobol_source_files(top):
     child = SubElement(top, 'mffilelist')
-    child.set('id','cobol_directive_set_1')
+    child.set('id','cobol_file_set_1')
     child.set('srcdir','${basedir}')
     child.set('type','srcfile')
-
 
     # Iterate over all cobol files
     child = SubElement(child, 'file')
@@ -279,7 +278,7 @@ def set_configuration_targets(top):
 
     # Iterate
     subchild = SubElement(child, 'cobollink')
-    subchild.set('desdir','${basedir}/New_Configuration.bin')
+    subchild.set('destdir','${basedir}/New_Configuration.bin')
     module='FUNK'
     subchild.set('destfile',module)  ###
     subchild.set('desttype','dll/cso')
@@ -289,7 +288,46 @@ def set_configuration_targets(top):
     subchild.set('objectdir','${basedir}/New_Configuration.bin')
     subchild.set('objectfile',module+'${objext}') ###
 
-    pass
+
+    child = SubElement(top, 'target')
+    child.set('name','New_Configuration.FileCompile')
+    child.set('depends','init')
+    subchild = SubElement(child, 'ac:for')
+    subchild.set('list','${filesList}')
+    subchild.set('param','filename')
+    subchild.set('keepgoing','true')
+    subchild.set('trim','true')
+    subchild2 = SubElement(subchild, 'sequential')
+    subchild3 = SubElement(subchild2, 'ac:if')
+    subchild4 = SubElement(subchild3, 'not')
+    subchild5 = SubElement(subchild4, 'isset')
+    subchild5.set('property','isCancelled')
+    subchild6 = SubElement(subchild3, 'then')
+    subchild7 = SubElement(subchild6, 'ac:antcallback')
+    subchild7.set('target','FileCompile.New_Configuration.@{filename}')
+    subchild7.set('inheritAll','true')
+    subchild7.set('return','isCancelled')
+    subchild8 = SubElement(subchild7, 'param')
+    subchild8.set('name','filename')
+    subchild8.set('value','@{filename}')
+
+    child = SubElement(top, 'target')
+    child.set('name','clean.cfg.New_Configuration')
+    child.set('depends','init')
+    child1 = SubElement(child, 'cobolclean')
+    child1.set('desttype','dll')
+    child1.set('destdir','${basedir}/New_Configuration.bin')
+    child1.set('debug','true')
+    child2 = SubElement(child1, 'mffilelist')
+    child2.set('refid','cobol_file_set_1')
+
+    child = SubElement(top, 'target')
+    child.set('name','pre.build.cfg.New_Configuration')
+    child.set('depends','init')
+
+    child = SubElement(top, 'target')
+    child.set('name','post.build.cfg.New_Configuration')
+    child.set('depends','init')
 
 #--------------------------------------------------------------------
 def set_general_targets(top):
@@ -304,7 +342,8 @@ def set_general_targets(top):
 
     child = SubElement(top, 'target')
     child.set('name','init')
-    child.set('depends','os.init,os.init.windows,os.init.unix')
+    #child.set('depends','os.init,os.init.windows,os.init.unix')
+    child.set('depends','os.init, os.init.unix')
     subchild = SubElement(child, 'property')
     subchild.set('environment','env')
     subchild = SubElement(child, 'property')

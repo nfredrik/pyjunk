@@ -38,8 +38,9 @@ Colors = DEFAULT_COLORS
 ColorsLock = threading.Lock()
 KeepRunning = True
 KeepRunningLock = threading.Lock()
-
+# 1294, pID=1320
 Device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devices()[ 0 ]
+##Device = hid.HidDeviceFilter( vendor_id = 0x1d34, product_id = 0x0004 ).get_devices()
 if Device is None or 'MAIL' not in `Device`:
     print "Device not found"
     raise Exception("Device not found")
@@ -96,7 +97,7 @@ def readCControlPage(url, build_name, FailColor="RED", SuccessColor="GREEN", Bui
     print("Build status for %s is %s (%s)" % (build_name, status, failure))
     if ("waiting" in status) and ("" == failure):
         #print("State: 1")
-        newColors = [SuccessColor]
+        newColors = [SuccessColor] 
     elif ("waiting" in status) and ("" != failure):
         #print("State: 2")
         newColors = [FailColor, "BLANK"]
@@ -139,18 +140,21 @@ try:
         ColorsLock.acquire()
         currentColors = Colors[:]
         ColorsLock.release()
-        sp = Popen("svn log -r HEAD --username someuser --password somepassword http://dev1.sentrigo.com/svn/Sensor/HedgehogSensor", stdout=PIPE, shell=True)
-        lastCommit = sp.communicate()[0]
+        ##sp = Popen("svn log -r HEAD --username someuser --password somepassword http://dev1.sentrigo.com/svn/Sensor/HedgehogSensor", stdout=PIPE, shell=True)
+        ##lastCommit = sp.communicate()[0]
         newColors = []
-        if 'slavik' in lastCommit.lower():
-            newColors = ['VIOLET', 'BLANK']
+        if False:
+            pass
+        #if 'slavik' in lastCommit.lower():
+        #    newColors = ['VIOLET', 'BLANK']
         else:
-            newColors = readCControlPage(r'http://192.168.150.228:9090/', 'Sensor_trunk')
+            newColors=[]
+            #newColors = readCControlPage(r'http://192.168.150.228:9090/', 'Sensor_trunk')
             if newColors == []:
                 failCount += 1
                 print("Fail count++ (%d)" % failCount)
-                if failCount > 10:
-                    newColors = ["BLUE", "BLANK"]
+                if failCount > 0:
+                    newColors = ["RED", "BLANK"]
         if newColors != currentColors and newColors != []:
             ColorsLock.acquire()
             Colors = newColors

@@ -226,15 +226,16 @@ def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/li
     subchild.set('objectfile','${basename}${objext}')
 
 #--------------------------------------------------------------------
-def set_object_files(top, module='FUNK'):
-
+def set_object_files_header(top):
     child = SubElement(top, 'mffilelist')
     child.set('id','cobol.default.object.files')
-    # child.set('srcdir','${basedir}/${cfgtargetdir}" type="objfile')
     child.set('srcdir','${basedir}/${cfgtargetdir}')
     child.set('type','objfile')
+    return child
 
-    # Iterate
+#--------------------------------------------------------------------
+def set_object_files(child, module='FUNK'):
+
     subchild = SubElement(child, 'file')
     subchild.set('name',module+'${objext}')
 
@@ -444,7 +445,13 @@ def main(args):
 
     comment = Comment('****************** Object files ******************')
     top.append(comment)
-    set_object_files(top)
+
+    child = set_object_files_header(top)
+    set_object_files(child)
+    set_object_files(child, module='BEHOR')
+
+    #for module, path in cobol_dict.items():
+    #    set_object_files(child, module=module)
 
     comment = Comment('****************** Configuration targets ******************')
     top.append(comment)

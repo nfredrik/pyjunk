@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import os
 
 from xml.etree.ElementTree import * 
 from xml.dom import minidom
@@ -16,7 +17,6 @@ def echo_message(top, msg):
 def prettify(elem):
     """Return a pretty-printed XML string for the Element.
     """
-#    rough_string = ElementTree.tostring(elem, 'utf-8')
     rough_string = tostring(elem, 'utf-8')
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent="  ")
@@ -71,9 +71,6 @@ def set_taskdefs(top):
 def set_os_spec_init(top):
     child = SubElement(top, 'target')
     child.set('name','os.init')
-
-    #subchild = SubElement(child, 'condition')
-    #subchild.set('property','windows')
 
     subchild = SubElement(child, 'condition')
     subchild.set('property','unix')
@@ -143,32 +140,26 @@ def set_cobol_compiler_directives(top):
     subchild.set('value','100')
 
     subchild = SubElement(child, 'directives')
-    #subchild.set('value','COPYEXT&quot;cpy,,&quot;')
     subchild.set('value','COPYEXT"cpy,,"')
 
     subchild = SubElement(child, 'directive')
     subchild.set('name','SOURCETABSTOP')
     subchild.set('value','4')
 
-
-    pass
-
 #--------------------------------------------------------------------
-def set_cobol_source_files(top):
+def set_cobol_source_files_header(top):
     child = SubElement(top, 'mffilelist')
     child.set('id','cobol_file_set_1')
     child.set('srcdir','${basedir}')
     child.set('type','srcfile')
-
-    # Iterate over all cobol files
+    return child
+ 
+   ###
+def set_cobol_source_files(child,module='FUNK',relpath='pgm/BLB/FUNK'):
+    """ Iterate over all cobol files"""
     child = SubElement(child, 'file')
-    module='FUNK'
-    child.set('name',module+'.pco')        ###
-    relfilepath='pgm/BLB/FUNK'
-    child.set('srcdir','pgm/BLB/FUNK')  ###
-
-
-    pass
+    child.set('name',module+'.pco')     
+    child.set('srcdir',relpath)
 
 #--------------------------------------------------------------------
 def set_cobol_copybooks_locations(top):
@@ -179,18 +170,14 @@ def set_cobol_copybooks_locations(top):
     child.set('type','copybook')
     child.set('name','${src}')
 
-    pass
-
 #--------------------------------------------------------------------
-def  set_cobol_source_files_and_directives(top):
+def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/lib/jenkins/workspace/fsvTest/src/',relpath='pgm/BLB/FUNK/' ):
 
-    # Iterate
+    """Iterate for all cobol modules"""
 
-    workspace='/var/lib/jenkins/workspace/fsvTest/src/'
-    filepath= workspace + 'pgm/BLB/FUNK/FUNK.pco'   ###
+    filepath= workspace + relpath + module +'.pco'
 
     child = SubElement(top, 'mfdirlist')
-    #child.set('id','dirset.New_Configuration./srv/utv/devenvs/fsv/us/src37/pgm/BLB/FUNK/FUNK.pco')  ###
     child.set('id','dirset.New_Configuration.'+ filepath )  ###
     child.set('refid','cobol_directive_set_1')
 
@@ -198,7 +185,6 @@ def  set_cobol_source_files_and_directives(top):
     child.set('refid','cobol.copybook.locations')
 
     child = SubElement(top, 'target')
-    #child.set('name','FileCompile.New_Configuration./srv/utv/devenvs/fsv/us/src37/pgm/BLB/FUNK/FUNK.pco')  ###
     child.set('name','FileCompile.New_Configuration.'+ filepath )  ###
     child.set('depends','init')
 
@@ -224,38 +210,36 @@ def  set_cobol_source_files_and_directives(top):
 
     subchild = SubElement(child, 'basename')
     subchild.set('property','basename')
+    subchild.set('file','${filename}')
     subchild.set('suffix','pco')
 
 
     subchild = SubElement(child, 'cobollink')
-    subchild.set('property','basename')
     subchild.set('destdir','${basedir}/New_Configuration.bin')
     subchild.set('destfile','${basename}')
     subchild.set('desttype','dll/cso')
     subchild.set('entrypoint','')
-    subchild.set('is64bit','true')
     subchild.set('threadedRts','true')
+    subchild.set('is64bit','true')
     subchild.set('objectdir','${basedir}/New_Configuration.bin')
+    subchild.set('debug','true')
     subchild.set('objectfile','${basename}${objext}')
-    pass
 
 #--------------------------------------------------------------------
-def set_object_files(top):
+def set_object_files(top, module='FUNK'):
 
     child = SubElement(top, 'mffilelist')
     child.set('id','cobol.default.object.files')
-    child.set('srcdir','${basedir}/${cfgtargetdir}" type="objfile')
+    # child.set('srcdir','${basedir}/${cfgtargetdir}" type="objfile')
+    child.set('srcdir','${basedir}/${cfgtargetdir}')
+    child.set('type','objfile')
 
     # Iterate
     subchild = SubElement(child, 'file')
-    module='FUNK'
-    #subchild.set('name','FUNK${objext}')
     subchild.set('name',module+'${objext}')
 
-    pass
-
 #--------------------------------------------------------------------
-def set_configuration_targets(top):
+def set_configuration_targets_header(top):
     child = SubElement(top, 'target')
     child.set('name','cobol.cfg.New_Configuration')
     child.set('depends','init')
@@ -275,11 +259,13 @@ def set_configuration_targets(top):
 
     subsubchild = SubElement(subchild, 'mffilelist')
     subsubchild.set('refid','cobol_file_set_1')
+    return child
+
+def set_configuration_targets(child, module='FUNK' ):
 
     # Iterate
     subchild = SubElement(child, 'cobollink')
     subchild.set('destdir','${basedir}/New_Configuration.bin')
-    module='FUNK'
     subchild.set('destfile',module)  ###
     subchild.set('desttype','dll/cso')
     subchild.set('entrypoint','')
@@ -288,6 +274,8 @@ def set_configuration_targets(top):
     subchild.set('objectdir','${basedir}/New_Configuration.bin')
     subchild.set('objectfile',module+'${objext}') ###
 
+
+def set_configuration_targets_end(top):
 
     child = SubElement(top, 'target')
     child.set('name','New_Configuration.FileCompile')
@@ -332,7 +320,6 @@ def set_configuration_targets(top):
 #--------------------------------------------------------------------
 def set_general_targets(top):
 
-
     child = SubElement(top, 'target')
     child.set('name','init.New_Configuration')
     subchild = SubElement(child, 'property')
@@ -342,7 +329,6 @@ def set_general_targets(top):
 
     child = SubElement(top, 'target')
     child.set('name','init')
-    #child.set('depends','os.init,os.init.windows,os.init.unix')
     child.set('depends','os.init, os.init.unix')
     subchild = SubElement(child, 'property')
     subchild.set('environment','env')
@@ -359,7 +345,6 @@ def set_general_targets(top):
     subchild.set('name','forceCompile')
     subchild.set('value','true')
 
-
     child = SubElement(top, 'target')
     child.set('name','cobolbuild')
     child.set('depends','init,init.New_Configuration')
@@ -372,8 +357,6 @@ def set_general_targets(top):
     subchild = SubElement(child, 'antcall')
     subchild.set('target','post.build.${cfgtarget}')
     subchild.set('inheritAll','true')
-
-
 
     child = SubElement(top, 'target')
     child.set('name','compileNoBms')
@@ -393,8 +376,33 @@ def set_general_targets(top):
     subchild.set('inheritAll','true')
 
 #--------------------------------------------------------------------
+def create_cobol_dict(workSpace):
+    cobol_files ={}
+    for root, dirs, files in os.walk(workSpace):
+        for file in files:
+            if file.endswith('.pco'):
+                #print file
+                relpath = root.replace(workSpace,'')
+                #print relpath
+                cobol_files[file.replace('.pco','')]= root.replace(workSpace,'')
+
+    return cobol_files
 
 def main(args):
+
+    #JenkinsWorkspace = args[1]
+    #workSpace= JenkinsWorkspace + '/src/'
+    workSpace='/var/lib/jenkins/workspace/fsvTest/src/'
+
+    #buildFile = args[2]
+
+    cobol_dict = create_cobol_dict(workSpace)
+    #print cobol_dict
+
+    #for key, value in cobol_dict.items():
+    #    print key, value
+
+    #return 1
 
     top = Element('project')
 
@@ -412,7 +420,13 @@ def main(args):
 
     comment = Comment('****************** COBOL source files ******************')
     top.append(comment)
-    set_cobol_source_files(top)
+    child = set_cobol_source_files_header(top)
+    # Iterate
+    set_cobol_source_files(child)
+    set_cobol_source_files(child,module='BEHOR',relpath='pgm/BLB/INLFIL1')
+    
+    #for module, path in cobol_dict.items():
+    #    set_cobol_source_files(child,module=module,relpath=path)
 
     comment = Comment('****************** COBOL copybook locations ******************')
     top.append(comment)
@@ -420,7 +434,13 @@ def main(args):
 
     comment = Comment('****************** COBOL Source Files and Directive Set ******************')
     top.append(comment)
+    # Iterate
     set_cobol_source_files_and_directives(top)
+    #set_cobol_source_files_and_directives(top,module='BEHOR',workspace='/var/lib/jenkins/workspace/fsvTest/src/',relpath= 'pgm/BLB/INLFIL1/')
+    set_cobol_source_files_and_directives(top,module='BEHOR',workspace=workSpace,relpath= 'pgm/BLB/INLFIL1/')
+
+    #for module, path in cobol_dict.items():
+    #    set_cobol_source_files_and_directives(top,module=module,workspace=workSpace,relpath= path)
 
     comment = Comment('****************** Object files ******************')
     top.append(comment)
@@ -428,29 +448,25 @@ def main(args):
 
     comment = Comment('****************** Configuration targets ******************')
     top.append(comment)
-    set_configuration_targets(top)
+    child = set_configuration_targets_header(top)
+    # Iterate
+    set_configuration_targets(child)
+    set_configuration_targets(child, module='BEHOR')
+
+    #for module, path in cobol_dict.items():
+    #    set_configuration_targets(child, module=module)
+
+    set_configuration_targets_end(top)
 
     comment = Comment('****************** General targets ******************')
     top.append(comment)
     set_general_targets(top)
-    
-
-#    child_with_tail = SubElement(top, 'child_with_tail')
-#    child_with_tail.text = 'This child has regular text.'
-#    child_with_tail.tail = 'And "tail" text.'
-
-#    child_with_entity_ref = SubElement(top, 'child_with_entity_ref')
-#    child_with_entity_ref.text = 'This & that'
 
     print prettify(top)
 
-
-
-
-
-
-
-
+    # Save everything to file
+    #with open(buildFile,'wb') as fw:
+    #    fw.write(prettify(top))
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

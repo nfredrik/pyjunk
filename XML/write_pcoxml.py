@@ -171,11 +171,12 @@ def set_cobol_copybooks_locations(top):
     child.set('name','${src}')
 
 #--------------------------------------------------------------------
-def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/lib/jenkins/workspace/fsvTest/src/',relpath='pgm/BLB/FUNK/' ):
+def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/lib/jenkins/workspace/fsvTest/src',relpath='pgm/BLB/FUNK' ):
 
     """Iterate for all cobol modules"""
 
-    filepath= workspace + relpath + module +'.pco'
+    #filepath= workspace + relpath + module +'.pco'
+    filepath= workspace +  relpath + '/' + module +'.pco'
 
     child = SubElement(top, 'mfdirlist')
     child.set('id','dirset.New_Configuration.'+ filepath )  ###
@@ -393,7 +394,7 @@ def main(args):
 
     #JenkinsWorkspace = args[1]
     #workSpace= JenkinsWorkspace + '/src/'
-    workSpace='/var/lib/jenkins/workspace/fsvTest/src/'
+    workSpace='/var/lib/jenkins/workspace/fsvTest/src'
 
     #buildFile = args[2]
 
@@ -423,11 +424,11 @@ def main(args):
     top.append(comment)
     child = set_cobol_source_files_header(top)
     # Iterate
-    set_cobol_source_files(child)
-    set_cobol_source_files(child,module='BEHOR',relpath='pgm/BLB/INLFIL1')
+    #set_cobol_source_files(child)
+    #set_cobol_source_files(child,module='BEHOR',relpath='pgm/BLB/INLFIL1')
     
-    #for module, path in cobol_dict.items():
-    #    set_cobol_source_files(child,module=module,relpath=path)
+    for module, path in cobol_dict.items():
+        set_cobol_source_files(child,module=module,relpath=path)
 
     comment = Comment('****************** COBOL copybook locations ******************')
     top.append(comment)
@@ -436,32 +437,31 @@ def main(args):
     comment = Comment('****************** COBOL Source Files and Directive Set ******************')
     top.append(comment)
     # Iterate
-    set_cobol_source_files_and_directives(top)
-    #set_cobol_source_files_and_directives(top,module='BEHOR',workspace='/var/lib/jenkins/workspace/fsvTest/src/',relpath= 'pgm/BLB/INLFIL1/')
-    set_cobol_source_files_and_directives(top,module='BEHOR',workspace=workSpace,relpath= 'pgm/BLB/INLFIL1/')
+    #set_cobol_source_files_and_directives(top)
+    # set_cobol_source_files_and_directives(top,module='BEHOR',workspace=workSpace,relpath= 'pgm/BLB/INLFIL1/')
 
-    #for module, path in cobol_dict.items():
-    #    set_cobol_source_files_and_directives(top,module=module,workspace=workSpace,relpath= path)
+    for module, path in cobol_dict.items():
+        set_cobol_source_files_and_directives(top,module=module,workspace=workSpace,relpath= path)
 
     comment = Comment('****************** Object files ******************')
     top.append(comment)
 
     child = set_object_files_header(top)
-    set_object_files(child)
-    set_object_files(child, module='BEHOR')
+    #set_object_files(child)
+    #set_object_files(child, module='BEHOR')
 
-    #for module, path in cobol_dict.items():
-    #    set_object_files(child, module=module)
+    for module, path in cobol_dict.items():
+        set_object_files(child, module=module)
 
     comment = Comment('****************** Configuration targets ******************')
     top.append(comment)
     child = set_configuration_targets_header(top)
     # Iterate
-    set_configuration_targets(child)
-    set_configuration_targets(child, module='BEHOR')
+    #set_configuration_targets(child)
+    #set_configuration_targets(child, module='BEHOR')
 
-    #for module, path in cobol_dict.items():
-    #    set_configuration_targets(child, module=module)
+    for module, path in cobol_dict.items():
+        set_configuration_targets(child, module=module)
 
     set_configuration_targets_end(top)
 

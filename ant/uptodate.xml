@@ -25,7 +25,13 @@
 
 <target name="FUNK">
 <uptodate property="FUNK.pco.newer" targetfile="FUNK.so">
-<srcfiles dir="." includes="FUNK.pco, COPYBOOK1.cpy, COPYBOOK3.cpy"/>
+    <filelist>
+        id="copybooks" 
+        dir="."
+        files="FUNK.pco
+           COPYBOOK1.cpy
+            COPYBOOK3.cpybar.xml"
+    </filelist>
 </uptodate>
 </target>
 

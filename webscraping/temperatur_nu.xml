@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<rss version="2.0">
+        <channel>
+        <title>Temperatur.nu API 1.12  - Din url är inte korrekt signerad, clientnyckeln kan tillfälligt blockeras - /tnu_1.12.php</title>
+        <link>http://wiki.temperatur.nu/index.php/Api</link>
+        <item>
+                <title>Linköping/Jägarvallen</title>
+                <id>jagarvallen</id>
+                <temp>7.8</temp>
+                <dist>2.5</dist>
+                <graph>http://www2.timg.nu/graph/jagarvallen-1day-300-200-0-0-0-1-8-n.png</graph>
+        </item>
+        <item>
+                <title>Linköping/Malmen (METAR)</title>
+                <id>malmen</id>
+                <temp>8.3</temp>
+                <dist>2.8</dist>
+                <graph>http://www2.timg.nu/graph/malmen-1day-300-200-0-0-0-1-8-n.png</graph>
+        </item>
+        <item>
+                <title>Linköping/Skäggetorp</title>
+                <id>skaggetorp</id>
+                <temp>9.1</temp>
+                <dist>5.2</dist>
+                <graph>http://www2.timg.nu/graph/skaggetorp-1day-300-200-0-0-0-1-8-n.png</graph>
+        </item>
+        </channel>
+</rss>

@@ -2,23 +2,28 @@
 <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
 <target name="init">
- 
-   <touch file="COPYBOOK3.cpy"/>   
-  <sleep seconds="2"/>
-   <touch file="FUNK.so"/>
-    <touch file="LK1000.so"/>
-  <touch file="FUNK.pco"/>
-  <touch file="LK1000.pco"/>
- 
-    <touch file="COPYBOOK1.cpy"/> 
+   <mkdir dir="kalle"/>
+   <mkdir dir="pelle"/>
+   <touch file="FUNK.pco"/>
 
+ 
+    <touch file="pelle/COPYBOOK1.cpy"/> 
+ <touch file="kalle/COPYBOOK3.cpy"/>   
+   <sleep seconds="2"/>
+  
+   <touch file="FUNK.so"/>  
+ 
+
+ 
 </target>
 
 <target name="NISSE">
 <outofdate>
           <sourcefiles>
             
-            <filelist id="dot" dir="." files="FUNK.pco, COPYBOOK1.cpy, COPYBOOK3.cpy"/> 
+            <filelist  dir="." files="FUNK.pco"/> 
+            <filelist  dir="pelle" files="COPYBOOK1.cpy"/> 
+            <filelist  dir="kalle" files="COPYBOOK3.cpy"/> 
           </sourcefiles>
           <targetfiles path="./FUNK.so"/>
           <sequential>

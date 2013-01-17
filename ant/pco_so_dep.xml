@@ -1,0 +1,30 @@
+<project default="runtest">
+
+<target name="init">
+  <touch file="old.txt"/>
+  <sleep seconds="2"/>
+  <touch file="new.txt"/>
+</target>
+ 
+<target name="check.new.newer">
+  <uptodate targetfile="new.txt" srcfile="old.txt" property="new.newer"/>
+</target>
+
+<target name="check.old.newer">
+  <uptodate targetfile="old.txt" srcfile="new.txt" property="old.newer"/>
+</target>
+
+<target name="is.old.newer" if="old.newer">
+  <echo message="old is newer than new"/>
+</target>
+
+<target name="is.new.newer" if="new.newer">
+  <echo message="new is newer than old"/>
+</target>
+
+<target name="runtest" 
+  depends="init, check.old.newer, check.new.newer, is.old.newer, is.new.newer">
+  <echo message="done"/>
+</target>
+
+</project>

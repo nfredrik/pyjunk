@@ -1,0 +1,48 @@
+<project name="sample-build" default="" basedir=".">
+
+<target name="init" />
+
+<!-- comments on this target -->
+<!-- uptodate: Sets a property if one or more target files are up-to-date with respect to corresponding source files. -->
+
+<target name="init-skip-properties" description="initializes the skip properties" depends="init">
+   <uptodate srcfile="create-database.timestamp" targetfile="middlegen.timestamp" 
+      property="middlegen.skip" value="true"/>
+         <echo message="init skip executing" /> 
+</target>
+ 
+<target name="create-database" description="runs sql script file on dbms to create db"
+   depends="init-skip-properties">
+
+
+   
+     
+      <echo message="sql executing" />      
+   
+   <touch file="create-database.timestamp"/>
+</target>
+
+<!-- comments on this target -->
+<!-- unless:the name of the property that must not be set in order for this target to execute -->
+<target
+   name="middlegen"
+   description="Runs Middlegen to create Entity Beans "
+   depends="create-database"
+   unless="middlegen.skip" >
+       
+
+
+   
+      
+      <echo message="middlegen executing" /> 
+      
+
+
+   
+   <touch file="middlegen.timestamp"/>
+</target>
+
+<target name="help">
+     <echo message="help executing" /> 
+</target>
+</project> 

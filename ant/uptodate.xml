@@ -1,0 +1,42 @@
+<project default="runtest">
+
+<target name="init">
+  <touch file="LK1000.pco"/>
+  <touch file="COPYBOOK3.cpy"/> 
+     <touch file="FUNK.so"/>
+  <sleep seconds="2"/>
+  <touch file="LK1000.so"/>
+  <touch file="FUNK.pco"/>
+  
+    <touch file="COPYBOOK1.cpy"/> 
+
+
+</target>
+ 
+<target name="check.pco.newer">
+  <uptodate targetfile="LK1000.so" srcfile="LK1000.pco" property="pco.newer"/>
+</target>
+
+
+<target name="is.pco.newer" if="pco.newer">
+  <echo message="LK1000.pco is newer than LK1000.so, start compile"/>
+</target>
+
+
+<target name="FUNK">
+<uptodate property="FUNK.pco.newer" targetfile="FUNK.so">
+<srcfiles dir="." includes="FUNK.pco, COPYBOOK1.cpy, COPYBOOK3.cpy"/>
+</uptodate>
+</target>
+
+<target name="FUNK.compile" if="FUNK.pco.newer">
+  <echo message="FUNK.pco is newer than FUNK.so, start compile"/>
+</target>
+
+
+<target name="runtest" 
+  depends="init, check.pco.newer, is.pco.newer, FUNK,FUNK.compile">
+  <echo message="done"/>
+</target>
+
+</project>

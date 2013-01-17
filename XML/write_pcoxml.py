@@ -1,19 +1,14 @@
 #!/usr/bin/env python
-
 import sys
 import os
-
 from xml.etree.ElementTree import * 
 from xml.dom import minidom
 
-
-#--------------------------------------------------------------------
 def echo_message(top, msg):
     subchild = SubElement(top, 'echo')
     subchild.set('message',msg)
 
 #--------------------------------------------------------------------
-
 def prettify(elem):
     """Return a pretty-printed XML string for the Element.
     """
@@ -30,7 +25,6 @@ def set_project(top):
     top.set('xmlns:ac','antlib:net.sf.antcontrib')
     comment = Comment('Generated for bolagsverket ab!')
     top.append(comment)
-
 
 #--------------------------------------------------------------------
 def set_taskdefs(top):
@@ -65,7 +59,6 @@ def set_taskdefs(top):
     child = SubElement(top, 'typedef')
     child.set('name','mfdirlist')
     child.set('classname','com.microfocus.ant.TypeDirectiveList')
-
 
 #--------------------------------------------------------------------
 def set_os_spec_init(top):
@@ -154,7 +147,7 @@ def set_cobol_source_files_header(top):
     child.set('type','srcfile')
     return child
  
-   ###
+#--------------------------------------------------------------------
 def set_cobol_source_files(child,module='FUNK',relpath='pgm/BLB/FUNK'):
     """ Iterate over all cobol files"""
     child = SubElement(child, 'file')
@@ -175,18 +168,17 @@ def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/li
 
     """Iterate for all cobol modules"""
 
-    #filepath= workspace + relpath + module +'.pco'
     filepath= workspace +  relpath + '/' + module +'.pco'
 
     child = SubElement(top, 'mfdirlist')
-    child.set('id','dirset.New_Configuration.'+ filepath )  ###
+    child.set('id','dirset.New_Configuration.'+ filepath )
     child.set('refid','cobol_directive_set_1')
 
     child = SubElement(top, 'mffilelist')
     child.set('refid','cobol.copybook.locations')
 
     child = SubElement(top, 'target')
-    child.set('name','FileCompile.New_Configuration.'+ filepath )  ###
+    child.set('name','FileCompile.New_Configuration.'+ filepath )
     child.set('depends','init')
 
     subchild = SubElement(child, 'cobol')
@@ -213,7 +205,6 @@ def  set_cobol_source_files_and_directives(top, module='FUNK',workspace='/var/li
     subchild.set('property','basename')
     subchild.set('file','${filename}')
     subchild.set('suffix','pco')
-
 
     subchild = SubElement(child, 'cobollink')
     subchild.set('destdir','${basedir}/New_Configuration.bin')
@@ -263,20 +254,20 @@ def set_configuration_targets_header(top):
     subsubchild.set('refid','cobol_file_set_1')
     return child
 
-def set_configuration_targets(child, module='FUNK' ):
+#--------------------------------------------------------------------
+def set_configuration_targets(child, module='FUNK'):
 
-    # Iterate
     subchild = SubElement(child, 'cobollink')
     subchild.set('destdir','${basedir}/New_Configuration.bin')
-    subchild.set('destfile',module)  ###
+    subchild.set('destfile',module)
     subchild.set('desttype','dll/cso')
     subchild.set('entrypoint','')
     subchild.set('threadedRts','true')
     subchild.set('is64bit','true')
     subchild.set('objectdir','${basedir}/New_Configuration.bin')
-    subchild.set('objectfile',module+'${objext}') ###
+    subchild.set('objectfile',module+'${objext}')
 
-
+#--------------------------------------------------------------------
 def set_configuration_targets_end(top):
 
     child = SubElement(top, 'target')
@@ -327,7 +318,6 @@ def set_general_targets(top):
     subchild = SubElement(child, 'property')
     subchild.set('name','cfgtargetdir')
     subchild.set('value','New_Configuration.bin')
-
 
     child = SubElement(top, 'target')
     child.set('name','init')
@@ -383,31 +373,32 @@ def create_cobol_dict(workSpace):
     for root, dirs, files in os.walk(workSpace):
         for file in files:
             if file.endswith('.pco'):
-                #print file
-                relpath = root.replace(workSpace,'')
-                #print relpath
-                cobol_files[file.replace('.pco','')]= root.replace(workSpace,'')
+                #relpath = root.replace(workSpace,'')
+                cobol_files[file.replace('.pco','')]= root.replace(workSpace +'/','')
 
     return cobol_files
 
+#--------------------------------------------------------------------
 def main(args):
 
+
+
     #JenkinsWorkspace = args[1]
-    #workSpace= JenkinsWorkspace + '/src/'
+    #workSpace= JenkinsWorkspace + '/src'
+
     workSpace='/var/lib/jenkins/workspace/fsvTest/src'
 
     #buildFile = args[2]
 
+    # Create a dictionary to be able to build buildfile :-)
     cobol_dict = create_cobol_dict(workSpace)
-    #print cobol_dict
 
-    #for key, value in cobol_dict.items():
-    #    print key, value
+    for module, path in cobol_dict.items():
+        print module, path
 
-    #return 1
+    return 1
 
     top = Element('project')
-
     set_project(top)
 
     set_taskdefs(top)

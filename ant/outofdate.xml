@@ -17,7 +17,7 @@
  
 </target>
 
-<target name="NISSE">
+<target name="FUNK">
 <outofdate>
           <sourcefiles>
             
@@ -34,7 +34,7 @@
          
 
 <target name="runtest" 
-  depends="init,  NISSE">
+  depends="init,  FUNK">
   <echo message="done"/>
 </target>
 

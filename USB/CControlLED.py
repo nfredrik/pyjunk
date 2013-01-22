@@ -44,12 +44,23 @@ Device = hid.HidDeviceFilter( vendor_id = 0x1294, product_id = 0x1320 ).get_devi
 if Device is None or 'MAIL' not in `Device`:
     print "Device not found"
     raise Exception("Device not found")
+
+print Device
 Device.open()
+
 
 def setLEDColor(color):
     global Device
-    report = Device.find_output_reports()[ 0 ]
+    report = Device.find_output_reports()[0]
+    print 'color:', color
+    print report[ 0xff000001 ]
     report[ 0xff000001 ][ 0 ] = color
+    report[ 0xff000001 ][ 1 ] = color
+    report[ 0xff000001 ][ 2 ] = color
+    report[ 0xff000001 ][ 3 ] = color
+    report[ 0xff000001 ][ 4 ] = color
+    #report[ 0xff000001 ][ 0 ][value] = [0, 0, 0, 0, 0]
+    #report[ 0xff000001 ][ 0 ] = [color,color, color, color, color]
     report.send()
 
 def ColorsBlinkingThread():
@@ -124,7 +135,7 @@ def readCControlPage(url, build_name, FailColor="RED", SuccessColor="GREEN", Bui
     return newColors
     
 def KillEverything():
-    global Device
+    global Device 
     global KeepRunning
     global KeepRunningLock
 
@@ -154,7 +165,8 @@ try:
                 failCount += 1
                 print("Fail count++ (%d)" % failCount)
                 if failCount > 0:
-                    newColors = ["RED", "BLANK"]
+                    #newColors = ["RED", "BLANK"]
+                    newColors = [7, 0]
         if newColors != currentColors and newColors != []:
             ColorsLock.acquire()
             Colors = newColors

@@ -10,7 +10,8 @@ import sys
 import urllib2
 
 ##jenkinsUrl = "https://http://192.168.1.68:8080/job/"
-jenkinsUrl = "http://192.168.1.68:8080/job/"
+jenkinsUrl = "http://localhost:8080/job/"
+#jenkinsUrl = "http://192.168.1.68:8080/job/"
 
 
 #if len( sys.argv ) > 1 :

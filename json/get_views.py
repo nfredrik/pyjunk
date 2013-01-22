@@ -40,9 +40,11 @@ except:
 if buildStatusJson.has_key( "views" ):
     listan = buildStatusJson['views']
     for item in listan:
-        print item
+        
+        print 'view:' + item['name']
         
     print 'yes'
+    print 'test:' + buildStatusJson['views'][4]['name']
 
 print 'the end'          
   

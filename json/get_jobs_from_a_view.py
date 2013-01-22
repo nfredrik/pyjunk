@@ -9,7 +9,13 @@ import json
 import sys
 import urllib2
 
-jenkinsUrl = 'http://localhost:8080/api/json?tree=views[name]'
+
+
+# {"jobs":[{"name":"any_python"},{"name":"create_textfile"}],"name":"nisse"}
+
+# 
+
+jenkinsUrl = 'http://localhost:8080/api/json?tree=views[name,jobs[name]]'
 
 #http://localhost:8080/api/json?tree=views[name]
 json_query='json?tree=views[name]'
@@ -37,13 +43,16 @@ except:
     print "Failed to parse json"
     sys.exit(3)
 
-if buildStatusJson.has_key( "views" ):
-    listan = buildStatusJson['views']
-    for item in listan:
-        print item
-        
-    print 'yes'
+#print buildStatusJson
 
-print 'the end'          
+#if buildStatusJson['views'][4]['name'] == 'nisse':
+#    print 'Julle Julle'
+#    print buildStatusJson['views'][4]['jobs'][0]['name']
+
+for tlist in buildStatusJson['views']:
+    if tlist['name'] == 'nisse':
+        print 'jobs in nisse view:'
+        for job in tlist['jobs']:
+            print job['name']       
   
 

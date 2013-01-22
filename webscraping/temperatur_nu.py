@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 """
-Command line BBC News reader, by oozie <root ooz ie>
+Command line temperatur
 
-$ ./bbcnews.py
 """
 import urllib2
 from xml.parsers import expat

@@ -1,0 +1,13 @@
+<?xml version="1.0"?> 
+<project name="Hello World Project" basedir="." default="info">
+  <property name="sitename" value="www.tutorialspoint.com"/> 
+    <target name="info"> 
+      <echo>Apache Antversion is ${ant.version} - You are at ${sitename} </echo> 
+      <echo>project name:  ${ant.project.name} </echo> 
+      <echo>ant.project.default-target:  ${ant.project.default-target} </echo> 
+      <echo>ant.project.invoked-targets: ${ant.project.invoked-targets} </echo> 
+      <echo>ant.core.lib:  ${ant.core.lib} </echo> 
+      <echo>ant.home:  ${ant.home} </echo> 
+      <echo>ant.library.dir:  ${ant.library.dir} </echo> 
+    </target> 
+</project>

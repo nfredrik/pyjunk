@@ -1,0 +1,850 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:og="http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en" xml:lang="en" dir="ltr">
+ 
+
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>   Twitter-FB Chart  : MusicRow &#8211; Nashville&#039;s Music Industry Publication &#8211; News, Songs From Music City</title>
+
+<link rel="stylesheet" href="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/colors/default/style.css" type="text/css" media="screen" />
+
+
+
+<link rel="alternate" type="application/rss+xml" title="MusicRow &#8211; Nashville&#039;s Music Industry Publication &#8211; News, Songs From Music City RSS Feed" href="http://www.musicrow.com/feed/" />
+
+<link rel="pingback" href="http://www.musicrow.com/xmlrpc.php" />
+
+
+
+			<script type="text/javascript">//<![CDATA[
+			// Google Analytics for WordPress by Yoast v4.2.8 | http://yoast.com/wordpress/google-analytics/
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-3704224-16']);
+							_gaq.push(['_trackPageview']);
+			(function () {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+			//]]></script>
+			<link rel="alternate" type="application/rss+xml" title="MusicRow - Nashville&#039;s Music Industry Publication - News, Songs From Music City &raquo; Twitter-FB Chart Comments Feed" href="http://www.musicrow.com/charts/top-ranking-country-artists/feed/" />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://www.musicrow.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='sharedaddy-css'  href='http://www.musicrow.com/wp-content/plugins/jetpack/modules/sharedaddy/sharing.css?ver=2.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='http://www.musicrow.com/wp-content/themes/wp-inspired_basic/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.musicrow.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://www.musicrow.com/wp-includes/js/comment-reply.min.js?ver=3.5'></script>
+<script type='text/javascript' src='http://www.musicrow.com/wp-includes/js/swfobject.js?ver=2.2-20120417'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.musicrow.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.musicrow.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Directory' href='http://www.musicrow.com/directory33/' />
+<link rel='next' title='Subscribe To MR &amp; RF' href='http://www.musicrow.com/store/subscribe-to-music-row-rowfax/' />
+<meta name="generator" content="WordPress 3.5" />
+<link rel='canonical' href='http://www.musicrow.com/charts/top-ranking-country-artists/' />
+<link rel='shortlink' href='http://wp.me/Py4f9-3mw' />
+<meta property="fb:app_id" content="158639280866917"/>
+<meta property="fb:admins" content=""/>
+<script type='text/javascript'>/* <![CDATA[ */ var _wpaudio = {url: 'http://www.musicrow.com/wp-content/plugins/wpaudio-mp3-player', enc: {}, convert_mp3_links: false, style: {text_font:'Arial, Sans-serif',text_size:'18px',text_weight:'bold',text_letter_spacing:'-1px',text_color:'inherit',link_color:'#24f',link_hover_color:'#02f',bar_base_bg:'#eee',bar_load_bg:'#ccc',bar_position_bg:'#46f',sub_color:'#aaa'}}; /* ]]> */</script>
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Twitter-FB Chart" />
+<meta property="og:url" content="http://www.musicrow.com/charts/top-ranking-country-artists/" />
+<meta property="og:description" content=" " />
+<meta property="og:site_name" content="MusicRow - Nashville&#039;s Music Industry Publication - News, Songs From Music City" />
+<link href="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/style.php" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/js/external.js"></script>
+<script type="text/javascript" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/js/suckerfish.js"></script>
+<!--[if IE 6]>
+<link rel="stylesheet" href="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/style-ie6.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/js/pngfix.js"></script>
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" href="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/style-ie7.css" type="text/css" media="screen" />
+<![endif]-->
+
+
+</head>
+
+<body>
+
+<div id="header" class="clearfix">
+
+	<div id="head-content">
+
+		<div id="sitetitle" onclick="location.href='http://www.musicrow.com';" style="cursor: pointer;">
+			<div class="title"><a href="http://www.musicrow.com">MusicRow &#8211; Nashville&#039;s Music Industry Publication &#8211; News, Songs From Music City</a></div> 
+			<div class="description">Nashville&#039;s Music Industry Publication</div>
+		</div>
+
+		<div id="topnav" class="clearfix">
+						<div class="menu-pages-container"><ul id="menu-pages" class="menu"><li id="menu-item-35905" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-35905"><a href="http://www.musicrow.com/" >Home</a>
+<ul class="sub-menu">
+	<li id="menu-item-35906" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35906"><a href="http://www.musicrow.com/about/" >About</a></li>
+	<li id="menu-item-35914" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35914"><a href="http://www.musicrow.com/about/contact/" >Contact</a></li>
+	<li id="menu-item-35930" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35930"><a href="http://www.musicrow.com/about/use-privacy-policy/" >Use &#038; Privacy Policy</a></li>
+	<li id="menu-item-35925" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35925"><a href="http://www.musicrow.com/about/site-map/" >Site Map</a></li>
+</ul>
+</li>
+<li id="menu-item-35907" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35907"><a href="http://www.musicrow.com/advertise/" >Advertise</a></li>
+<li id="menu-item-35910" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35910"><a href="http://www.musicrow.com/subscribe/" >Purchase Issues</a></li>
+<li id="menu-item-87462" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current-menu-parent current-page-parent current_page_parent current_page_ancestor menu-item-87462"><a href="http://www.musicrow.com/charts/" >Charts</a>
+<ul class="sub-menu">
+	<li id="menu-item-87463" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87463"><a href="http://www.musicrow.com/charts/chart/" >CountryBreakout Chart</a></li>
+	<li id="menu-item-87464" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87464"><a href="http://www.musicrow.com/charts/internet-charts/" >Internet Charts</a></li>
+	<li id="menu-item-87465" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12928 current_page_item menu-item-87465"><a href="http://www.musicrow.com/charts/top-ranking-country-artists/" >Twitter-FB Chart</a></li>
+</ul>
+</li>
+<li id="menu-item-35916" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35916"><a href="http://www.musicrow.com/directory33/" >Directory</a></li>
+<li id="menu-item-35919" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35919"><a href="http://www.musicrow.com/login/" >Log In</a></li>
+<li id="menu-item-35926" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35926"><a href="http://www.musicrow.com/store/" >Subscribe</a>
+<ul class="sub-menu">
+	<li id="menu-item-43470" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43470"><a href="http://www.musicrow.com/store/subscribe-to-musicrow/" >Subscribe to MusicRow</a></li>
+	<li id="menu-item-35929" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35929"><a href="http://www.musicrow.com/store/rowfax/" >Subscribe To RowFax</a></li>
+	<li id="menu-item-35931" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35931"><a href="http://www.musicrow.com/store/subscribe-to-music-row-rowfax/" >Subscribe To MR &#038; RF</a></li>
+	<li id="menu-item-35922" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35922"><a href="http://www.musicrow.com/row_fax2/rowfax-sample/" >RowFax Sample</a></li>
+</ul>
+</li>
+</ul></div>			
+		</div>
+
+	</div>
+
+</div>
+
+<div id="catnav" class="clearfix">
+<div class="catnav-content clearfix">
+		<div class="menu-bottommenu-container"><ul id="menu-bottommenu" class="menu"><li id="menu-item-42693" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42693"><a href="http://www.musicrow.com/category/artist/" >Artist</a></li>
+<li id="menu-item-42697" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42697"><a href="http://www.musicrow.com/category/publishing/" >Publishing</a></li>
+<li id="menu-item-42696" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42696"><a href="http://www.musicrow.com/category/featured/" >Featured</a>
+<ul class="sub-menu">
+	<li id="menu-item-42700" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42700"><a href="http://www.musicrow.com/category/organizations/" >Organizations</a></li>
+	<li id="menu-item-42695" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42695"><a href="http://www.musicrow.com/category/award-shows/" >Awards</a></li>
+	<li id="menu-item-44474" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-44474"><a href="http://www.musicrow.com/category/salesmarketing/" >Sales/Marketing</a></li>
+	<li id="menu-item-56139" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-56139"><a href="http://www.musicrow.com/category/musicfest-2/" >MusicFest</a></li>
+</ul>
+</li>
+<li id="menu-item-42698" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42698"><a href="http://www.musicrow.com/category/radio/" >Radio</a>
+<ul class="sub-menu">
+	<li id="menu-item-42699" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42699"><a href="http://www.musicrow.com/category/radio/programmerplaylist/" >ProgrammerPlaylist</a></li>
+	<li id="menu-item-64928" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64928"><a href="http://www.musicrow.com/charts/chart/" >CountryBreakout Chart</a></li>
+</ul>
+</li>
+<li id="menu-item-42701" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42701"><a href="http://www.musicrow.com/category/touring/" >Touring</a></li>
+<li id="menu-item-42702" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42702"><a href="http://www.musicrow.com/category/reviews/" >Reviews</a></li>
+<li id="menu-item-96700" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-96700"><a href="http://www.rowfax.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-menu','http://www.rowfax.com']);">RowFax</a></li>
+<li id="menu-item-42706" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42706"><a href="http://www.musicrow.com/calendars-2/" >Calendars</a>
+<ul class="sub-menu">
+	<li id="menu-item-42707" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42707"><a href="http://www.musicrow.com/calendars-2/single-releases/" >Single Releases</a></li>
+	<li id="menu-item-42708" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42708"><a href="http://www.musicrow.com/calendars-2/cdalbum-releases/" >Album Releases</a></li>
+	<li id="menu-item-42709" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42709"><a href="http://www.musicrow.com/calendars-2/calendars/" >Industry Events</a></li>
+</ul>
+</li>
+<li id="menu-item-87396" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87396"><a href="http://www.musicrow.com/charts/chart/" >CountryBreakout Chart</a></li>
+<li id="menu-item-46180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12928 current_page_item menu-item-46180"><a href="http://www.musicrow.com/charts/top-ranking-country-artists/" >Twitter-FB Chart</a></li>
+<li id="menu-item-92802" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92802"><a href="http://www.musicrow.com/subscribe/" >InCharge 2012</a></li>
+</ul></div>	</div>
+</div>
+<div id="wrap" class="clearfix">
+	<div id="page" class="clearfix">
+
+		
+
+		<div id="contentleft" class="maincontent">
+
+			
+			<div id="content">
+<br /><br />
+				<div class="content-top">
+					<p id="breadcrumbs"><strong>Twitter &amp; Facebook Rankings</strong></p>
+									</div>
+
+				
+<div class="banner468">
+		 <a href="http://www.musicrow.com/wp-content/plugins/adrotate/adrotate-out.php?track=NTE0LDExLDAsaHR0cDovL3d3dy5tdXNpY3Jvdy5jb20vc3RvcmUvc3Vic2NyaWJlLXRvLW11c2ljcm93Lw="target=blank><img src="http://www.musicrow.com/wp-content/banners/MR-JW-011013-SP.jpg"></a></div>
+
+					2013-01-16					
+						
+							
+							<style type="text/css">
+								.row { background-color: #fff; }
+								td { border: 0px; }
+								.number { padding-left: 7px; font-weight: bold; }
+								.twitter_followers { text-align: center; }
+								.facebook_likes { text-align: center; }
+								.header { background-color: #003366; background-image: url('images/head_bg.jpg'); background-repeat: repeat-x; }
+								.heading { text-align: center; padding: 6px 5px 6px 5px; }
+								.heading img { height: 35px;  }
+								.followers { font-size: 20px; color: #000; }
+								.likes { font-size: 20px; color: #000; }
+								.small { color: #b4b4b5 }
+								img.thumbnail { width: 48px; height: 48px; }
+								.odd { background-color: #D9D9D9; }
+								.even { background-color: #fff; }
+								.sorted {  }
+								#chart { width: 600px; margin: 10px auto 10px auto; border: 1px solid #b4b4b5; }
+								.artist_name { font-size: 20px; }
+								a.twitter_link, a.twitter_link:link { color: #b4b4b5; }
+								a.twitter_link:hover { color: #003366; text-decoration: none; }
+								a.facebook_link, a.facebook_link:link { color: #b4b4b5; }
+								a.facebook_link:hover { color: #003366; text-decoration: none; }
+								.directions { padding: 10px; color: #efefef; text-align: right; vertical-align: bottom; width: 350px; }
+								body { font-family: arial; font-size: 12px; background-color: #EEEEEE; padding: 0px; margin: 0px; }
+								td { font-size: 12px; padding-bottom: 5px; padding-top: 5px;  }
+								img { border: 0px; }
+								a, a:link { color: #000; font-weight: bold; text-decoration: none; }
+								a:hover { text-decoration: underline; }
+								a.white, a:link.white { color: #fff; font-weight: bold; text-decoration: none; }
+								#form { background-color: #D9D9D9; border: 1px solid #999999; padding: 5px 10px 0px 10px; margin: 5px; width:480px; margin: 0px auto; }
+								.statUp { background-color: #d5e7fb; padding: 5px; min-height: 48px; width: 490px; }
+								input { background-color: #EEEEEE; border: 1px solid #999999; padding: 3px; color: #333333; }
+								td.rank { color: #24466B; font-weight: bold; padding-left: 7px; }
+								#footer { text-align: center; padding: 10px; }
+								th { text-align: left; background-color: #24466B; color: #EEEEEE; padding: 3px; font-size: 12px; }
+								.statUpTop { background-image: url('images/statUp_top.jpg'); width: 500px; height: 10px; }
+								.statUpBottom { background-image: url('images/statUp_bottom.jpg'); width: 500px; height: 11px; margin-bottom: 5px; }
+								.followers { text-align: right; color: #666666; }
+
+								#content { padding: 10px; text-align: center; }
+								#lastfm { width: 500px; margin: 0px auto; }
+								#lastfm td { padding: 3px; }
+								.gray {  padding-right: 10px; }
+								td.thumbnail { width: 56px; }
+								td.thumbnail img { margin-top: 10px;}
+								.rank { color: #24466B; font-weight: bold; }
+								font.change { color: #196e08; }
+								#statTable { margin: 0px auto; width: 250px;  border: 2px solid #D9D9D9; padding: 10px; }
+								.asof { color: #999999; }
+
+								.bigger { font-size: 16px;}
+								embed, object { margin: 0px auto; }
+
+								a.statsText { font-size: 11px; color: #18599a; }
+
+								div.stats { text-align: left; }
+								
+								.actv { color: #333333; }
+								.noactv { color: #999999; }
+								
+								#disclaimer { text-align: center; font-size: 14px; font-family:'Georgia','Serif'; }
+								table td { padding: 0px; }
+							</style>
+					
+														<table width="550px" cellpadding="0" cellspacing="0" border="0" id="chart">
+								<thead class="header">
+									<td colspan="3" class="directions header">Sort column by clicking logo.</td><td class="twitter_heading heading header">
+										<a href="?sort=followers" class="sorted"><img src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/twitter_logo.png" alt="Twitter" /></a></td>
+										<td class="facebook_heading heading header">
+										<a href="?sort=facebook_likes" ><img src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/facebook_logo_up.png" alt="Facebook" /></a></td>
+								</thead>
+								<tbody>
+						<tr class="row even"><td class="number">1</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1825696714/image_normal.jpg" class="thumbnail" alt="Taylor Swift" /></td><td><font class="artist_name">Taylor Swift</font><br /><a href="http://www.twitter.com/taylorswift13" class="twitter_link">@taylorswift13</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/TaylorSwift" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >23,224,083</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >38,439,562</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">2</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3048864245/777e6a8888572a0c7a7011ce919d5cf6_normal.jpeg" class="thumbnail" alt="Blake Shelton" /></td><td><font class="artist_name">Blake Shelton</font><br /><a href="http://www.twitter.com/BlakeShelton" class="twitter_link">@BlakeShelton</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/blakeshelton" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >2,540,236</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,833,118</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">3</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2037507660/CB_Album_Cover_copy_normal.jpg" class="thumbnail" alt="Dolly Parton" /></td><td><font class="artist_name">Dolly Parton</font><br /><a href="http://www.twitter.com/dolly_Parton" class="twitter_link">@dolly_Parton</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/DollyParton" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >2,436,114</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >894,875</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">4</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3058589506/20db4ed9fb002f8ce2af748991cc02a9_normal.jpeg" class="thumbnail" alt="Jennette McCurdy" /></td><td><font class="artist_name">Jennette McCurdy</font><br /><a href="http://www.twitter.com/jennettemccurdy" class="twitter_link">@jennettemccurdy</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jennettemccurdy" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >1,938,370</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,397,865</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">5</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2167990745/Screen_Shot_2012-04-26_at_1.43.16_PM_normal.png" class="thumbnail" alt="Brad Paisley" /></td><td><font class="artist_name">Brad Paisley</font><br /><a href="http://www.twitter.com/BradPaisley" class="twitter_link">@BradPaisley</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/bradpaisley" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >1,283,621</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >4,943,067</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">6</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1850726977/CU_twitter_avatar_normal.jpg" class="thumbnail" alt="Carrie Underwood" /></td><td><font class="artist_name">Carrie Underwood</font><br /><a href="http://www.twitter.com/carrieunderwood" class="twitter_link">@carrieunderwood</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/carrieunderwood" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >1,187,353</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >8,029,754</font><br /><font class="small">Likes</font></td>
+
+</tr>
+
+<tr class="row even">
+<td class="number">7</td>
+<td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2574775869/image_normal.jpg" class="thumbnail" alt="Billy Ray Cyrus" /></td>
+<td><font class="artist_name">Billy Ray Cyrus</font><br /><a href="http://www.twitter.com/billyraycyrus" class="twitter_link">@billyraycyrus</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/BillyRayCyrus" class="facebook_link">FB</a></td>
+<td class="twitter_followers"><font class="followers actv" >1,108,681</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >118,578</font><br /><font class="small">Likes</font></td>
+
+</tr>
+<tr class="row odd"><td class="number">8</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3080975956/e55f4442d2bedc627db37bba23ecebaa_normal.jpeg" class="thumbnail" alt="Kenny Chesney" /></td><td><font class="artist_name">Kenny Chesney</font><br /><a href="http://www.twitter.com/kennychesney" class="twitter_link">@kennychesney</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/KennyChesney" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >1,049,688</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >5,024,930</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">9</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2219757451/1198_3_normal.jpg" class="thumbnail" alt="Luke Bryan" /></td><td><font class="artist_name">Luke Bryan</font><br /><a href="http://www.twitter.com/LukeBryanOnline" class="twitter_link">@LukeBryanOnline</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/lukebryan" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >1,001,174</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,833,962</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">10</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3148477329/a86c654941d945ce64fa42355a6d3114_normal.jpeg" class="thumbnail" alt="Lady Antebellum" /></td><td><font class="artist_name">Lady Antebellum</font><br /><a href="http://www.twitter.com/ladyantebellum" class="twitter_link">@ladyantebellum</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/ladyantebellum" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >966,714</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >8,051,484</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">11</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2929251626/d71ad7ba816ec4f170fbd0db50630c3c_normal.png" class="thumbnail" alt="Jason Aldean" /></td><td><font class="artist_name">Jason Aldean</font><br /><a href="http://www.twitter.com/jason_aldean" class="twitter_link">@jason_aldean</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jasonaldean" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >858,570</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >6,584,810</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">12</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2865632071/bbac1f8c59be1d69ede505b044c34dc6_normal.png" class="thumbnail" alt="Kellie Pickler" /></td><td><font class="artist_name">Kellie Pickler</font><br /><a href="http://www.twitter.com/kelliepickler" class="twitter_link">@kelliepickler</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/KelliePickler" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >684,143</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >445,423</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">13</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3040600909/50f697130d6b3ed89cfc18f811225a77_normal.jpeg" class="thumbnail" alt="Scotty McCreery" /></td><td><font class="artist_name">Scotty McCreery</font><br /><a href="http://www.twitter.com/scottymccreery" class="twitter_link">@scottymccreery</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/scottymccreery" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >672,389</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,275,756</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">14</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1239510739/TJ_normal.jpg" class="thumbnail" alt="Travis + Julie" /></td><td><font class="artist_name">Travis + Julie</font><br /><a href="http://www.twitter.com/travisjulie" class="twitter_link">@travisjulie</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/travisjulieduo" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >648,400</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >24,171</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">15</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3148794746/41a61906aaa43457db29eb5cb6061a15_normal.jpeg" class="thumbnail" alt="Julianne Hough" /></td><td><font class="artist_name">Julianne Hough</font><br /><a href="http://www.twitter.com/juliannehough" class="twitter_link">@juliannehough</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JulianneHough" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >636,708</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >122,146</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">16</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2391961523/1qofvy947txlpp935lwj_normal.jpeg" class="thumbnail" alt="Reba McEntire" /></td><td><font class="artist_name">Reba McEntire</font><br /><a href="http://www.twitter.com/reba" class="twitter_link">@reba</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/Reba" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >564,124</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,397,983</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">17</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1144839716/Picture_7_normal.png" class="thumbnail" alt="Keith Urban" /></td><td><font class="artist_name">Keith Urban</font><br /><a href="http://www.twitter.com/KeithUrban" class="twitter_link">@KeithUrban</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/keithurban" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >552,354</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,141,403</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">18</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1467972567/_ENN1432_normal.jpg" class="thumbnail" alt="Lisa Matassa" /></td><td><font class="artist_name">Lisa Matassa</font><br /><a href="http://www.twitter.com/Lisa_Matassa" class="twitter_link">@Lisa_Matassa</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/lisamatassafanpage" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >544,899</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >209,950</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">19</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1894342903/screen-capture-9_normal.png" class="thumbnail" alt="Rascal Flatts" /></td><td><font class="artist_name">Rascal Flatts</font><br /><a href="http://www.twitter.com/rascalflatts" class="twitter_link">@rascalflatts</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/rascalflatts" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >448,910</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >4,735,218</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">20</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2280920196/8a80d4roawjh4n07qmjl_normal.jpeg" class="thumbnail" alt="Zac Brown Band" /></td><td><font class="artist_name">Zac Brown Band</font><br /><a href="http://www.twitter.com/zacbrownband" class="twitter_link">@zacbrownband</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/zacbrownband" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >435,446</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >5,025,250</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">21</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2290790757/image_normal.jpg" class="thumbnail" alt="Jamie Lynn Spears" /></td><td><font class="artist_name">Jamie Lynn Spears</font><br /><a href="http://www.twitter.com/JamieLynnSpears" class="twitter_link">@JamieLynnSpears</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/176419805736299" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >426,256</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >21,039</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">22</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2654053543/a1a7c041a125b075eaff92ca1efae0c7_normal.jpeg" class="thumbnail" alt="Jake Owen" /></td><td><font class="artist_name">Jake Owen</font><br /><a href="http://www.twitter.com/jakeowen" class="twitter_link">@jakeowen</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jakeowen" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >404,791</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >372,787</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">23</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2968249309/6548c1da8a7019f516e7156cfadc8fa0_normal.jpeg" class="thumbnail" alt="Dierks Bentley" /></td><td><font class="artist_name">Dierks Bentley</font><br /><a href="http://www.twitter.com/dierksbentley" class="twitter_link">@dierksbentley</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/dierksbentley" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >402,465</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,331,022</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">24</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2720385525/30390f231284a9eee3698362bee8440f_normal.png" class="thumbnail" alt="Hunter Hayes" /></td><td><font class="artist_name">Hunter Hayes</font><br /><a href="http://www.twitter.com/HunterHayes" class="twitter_link">@HunterHayes</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/HunterHayes" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >385,978</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >379,708</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">25</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2429673736/image_normal.jpg" class="thumbnail" alt="LeAnn Rimes" /></td><td><font class="artist_name">LeAnn Rimes</font><br /><a href="http://www.twitter.com/LeAnnRimes" class="twitter_link">@LeAnnRimes</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/leannrimesmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >383,597</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >188,645</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">26</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2486207819/Lauren_Alaina_normal.jpg" class="thumbnail" alt="Lauren Alaina" /></td><td><font class="artist_name">Lauren Alaina</font><br /><a href="http://www.twitter.com/Lauren_Alaina" class="twitter_link">@Lauren_Alaina</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/LaurenAlaina" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >375,959</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >342,609</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">27</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2827393553/8a1e3fa25b33b317aeb82189908313c7_normal.jpeg" class="thumbnail" alt="Tim McGraw" /></td><td><font class="artist_name">Tim McGraw</font><br /><a href="http://www.twitter.com/TheTimMcGraw" class="twitter_link">@TheTimMcGraw</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/TimMcGraw" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >351,699</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >4,997,621</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">28</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1354711240/shot-02-347_edit_normal.jpeg" class="thumbnail" alt="Jewel" /></td><td><font class="artist_name">Jewel</font><br /><a href="http://www.twitter.com/jeweljk" class="twitter_link">@jeweljk</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jeweljk" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >319,295</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >414,221</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">29</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1175453500/SLtwitimage_normal.jpg" class="thumbnail" alt="Sugarland" /></td><td><font class="artist_name">Sugarland</font><br /><a href="http://www.twitter.com/Sugarlandmusic" class="twitter_link">@Sugarlandmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/sugarland" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >311,227</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >4,115,848</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">30</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3134651091/2cad555aa48ef2eecb64267e2c36e9f2_normal.jpeg" class="thumbnail" alt="The Band Perry" /></td><td><font class="artist_name">The Band Perry</font><br /><a href="http://www.twitter.com/theBandPerry" class="twitter_link">@theBandPerry</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/theBandPerry" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >302,289</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,721,882</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">31</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2878900968/2f72cb87f2efd2770941b319cf987848_normal.jpeg" class="thumbnail" alt="Michelle Branch" /></td><td><font class="artist_name">Michelle Branch</font><br /><a href="http://www.twitter.com/michellebranch" class="twitter_link">@michellebranch</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/MichelleBranch" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >294,208</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >396,641</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">32</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2768392624/e6b50cf2b45ae19498b06acef2b68b6a_normal.jpeg" class="thumbnail" alt="Martina McBride" /></td><td><font class="artist_name">Martina McBride</font><br /><a href="http://www.twitter.com/martinamcbride" class="twitter_link">@martinamcbride</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/martinamcbride" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >291,319</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >512,388</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">33</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2649690672/9dd65b9a577ccbd91e6562a44a039450_normal.jpeg" class="thumbnail" alt="Darius Rucker" /></td><td><font class="artist_name">Darius Rucker</font><br /><a href="http://www.twitter.com/dariusrucker" class="twitter_link">@dariusrucker</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/dariusrucker" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >271,077</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >796,318</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">34</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2908248662/1e08f5850e0259780ece466b3f84fdf6_normal.jpeg" class="thumbnail" alt="Toby Keith" /></td><td><font class="artist_name">Toby Keith</font><br /><a href="http://www.twitter.com/tobykeithmusic" class="twitter_link">@tobykeithmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/tobykeith" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >265,319</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >3,024,557</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">35</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2333452082/dwflry7ik53tu9jz3bpl_normal.jpeg" class="thumbnail" alt="JK Coltrain" /></td><td><font class="artist_name">JK Coltrain</font><br /><a href="http://www.twitter.com/jkcoltrain" class="twitter_link">@jkcoltrain</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jkcoltrain" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >260,756</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >0</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">36</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2649855252/4e4562374606f1be7cf73bb776fcd5b9_normal.png" class="thumbnail" alt="Faith Hill" /></td><td><font class="artist_name">Faith Hill</font><br /><a href="http://www.twitter.com/FaithHill" class="twitter_link">@FaithHill</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/faithhill" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >256,955</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >786,445</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">37</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1525940571/BG_Low-Res__normal.jpg" class="thumbnail" alt="Brantley Gilbert" /></td><td><font class="artist_name">Brantley Gilbert</font><br /><a href="http://www.twitter.com/brantleygilbert" class="twitter_link">@brantleygilbert</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/BrantleyGilbertMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >225,356</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,342,174</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">38</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1583440555/JM_Twitter_thumbnail_normal.jpg" class="thumbnail" alt="Justin Moore" /></td><td><font class="artist_name">Justin Moore</font><br /><a href="http://www.twitter.com/JustinColeMoore" class="twitter_link">@JustinColeMoore</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/moorejustinmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >217,856</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >891,127</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">39</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1361676411/fromthismomenton-book2a_normal.jpg" class="thumbnail" alt="Shania Twain" /></td><td><font class="artist_name">Shania Twain</font><br /><a href="http://www.twitter.com/ShaniaTwain" class="twitter_link">@ShaniaTwain</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/ShaniaTwain" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >211,795</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,523,318</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">40</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2599664196/jqpuli25baqe0eqm89e2_normal.jpeg" class="thumbnail" alt="Little Big Town" /></td><td><font class="artist_name">Little Big Town</font><br /><a href="http://www.twitter.com/LBTmusic" class="twitter_link">@LBTmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/littlebigtown" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >199,542</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >318,700</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">41</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2361699953/qls15b8hlhkqeszo7lqx_normal.jpeg" class="thumbnail" alt="Trace Adkins" /></td><td><font class="artist_name">Trace Adkins</font><br /><a href="http://www.twitter.com/TraceAdkins" class="twitter_link">@TraceAdkins</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/traceadkins" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >191,116</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,684,365</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">42</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1073715704/GettyImages_79495526-1-0_normal.jpg" class="thumbnail" alt="Willie Nelson" /></td><td><font class="artist_name">Willie Nelson</font><br /><a href="http://www.twitter.com/willienelson" class="twitter_link">@willienelson</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/WillieNelson" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >190,084</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,650,572</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">43</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1137294835/SaraEvans-Pink-2010-thumb_normal.jpg" class="thumbnail" alt="Sara Evans" /></td><td><font class="artist_name">Sara Evans</font><br /><a href="http://www.twitter.com/saraevansmusic" class="twitter_link">@saraevansmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/saraevans" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >189,927</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >525,931</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">44</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3080509825/1071e2e96dfbb21abc231cfb50277d3a_normal.jpeg" class="thumbnail" alt="Jessie James" /></td><td><font class="artist_name">Jessie James</font><br /><a href="http://www.twitter.com/thejessicajames" class="twitter_link">@thejessicajames</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JessieJames" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >174,012</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >71,590</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">45</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1645853350/twitter_normal.jpg" class="thumbnail" alt="Chris Young" /></td><td><font class="artist_name">Chris Young</font><br /><a href="http://www.twitter.com/ChrisYoungMusic" class="twitter_link">@ChrisYoungMusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/chrisyoungmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >169,709</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >516,942</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">46</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2210901621/surfb2_normal.jpg" class="thumbnail" alt="Billy Currington" /></td><td><font class="artist_name">Billy Currington</font><br /><a href="http://www.twitter.com/billycurrington" class="twitter_link">@billycurrington</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/BillyCurrington" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >169,426</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >963,454</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">47</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3053794465/115c135f6386cd33fc2aab41e089e5a6_normal.jpeg" class="thumbnail" alt="Payton Rae" /></td><td><font class="artist_name">Payton Rae</font><br /><a href="http://www.twitter.com/PaytonRaeMusic" class="twitter_link">@PaytonRaeMusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/pinkponyrecords" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >159,098</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >77,280</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">48</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2639474130/e794a4c93ff289128ab2e3ff80625366_normal.jpeg" class="thumbnail" alt="Pistol Annies" /></td><td><font class="artist_name">Pistol Annies</font><br /><a href="http://www.twitter.com/PistolAnnies" class="twitter_link">@PistolAnnies</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/Pistolannies" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >152,641</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >327,656</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">49</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2550425071/bf3j89wzefrxw5p9eil8_normal.jpeg" class="thumbnail" alt="Eli Young Band" /></td><td><font class="artist_name">Eli Young Band</font><br /><a href="http://www.twitter.com/EliYoungBand" class="twitter_link">@EliYoungBand</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/eliyoungband" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >149,901</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >639,636</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">50</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2558150455/d172i8qfcmn3pv1mgifs_normal.jpeg" class="thumbnail" alt="Danny Gokey" /></td><td><font class="artist_name">Danny Gokey</font><br /><a href="http://www.twitter.com/dannygokey" class="twitter_link">@dannygokey</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/DannyGokeyOfficial" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >143,594</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >205,406</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">51</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1594632232/2011_Its_All_Good_Hi_Res_normal.jpg" class="thumbnail" alt="Joe Nichols" /></td><td><font class="artist_name">Joe Nichols</font><br /><a href="http://www.twitter.com/JoeNichols" class="twitter_link">@JoeNichols</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JoeNichols" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >125,226</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >143,365</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">52</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2853711883/812e9d43cdd6e93a691224d3a502a132_normal.jpeg" class="thumbnail" alt="Lee Brice" /></td><td><font class="artist_name">Lee Brice</font><br /><a href="http://www.twitter.com/leebrice" class="twitter_link">@leebrice</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/leebricemusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >123,409</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >178,772</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">53</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2576534753/ovdaet9wwzdiskunbnco_normal.jpeg" class="thumbnail" alt="John Rich" /></td><td><font class="artist_name">John Rich</font><br /><a href="http://www.twitter.com/johnrich" class="twitter_link">@johnrich</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/johnrich" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >119,798</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >0</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">54</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2113209807/JoshTurnerPunchingBag_twitter_normal.jpg" class="thumbnail" alt="Josh Turner" /></td><td><font class="artist_name">Josh Turner</font><br /><a href="http://www.twitter.com/joshturnermusic" class="twitter_link">@joshturnermusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/joshturner" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >116,263</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,240,672</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">55</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1532401730/kingstonlowressquare_normal.jpg" class="thumbnail" alt="Kingston" /></td><td><font class="artist_name">Kingston</font><br /><a href="http://www.twitter.com/wearekingston" class="twitter_link">@wearekingston</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/wearekingston" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >114,151</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >4,411</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">56</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1479968549/Alan_photo__1_small_normal.jpg" class="thumbnail" alt="Alan Jackson" /></td><td><font class="artist_name">Alan Jackson</font><br /><a href="http://www.twitter.com/officialjackson" class="twitter_link">@officialjackson</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/OfficialAlanJackson" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >113,948</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,689,168</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">57</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1433575617/RodneyAtkins_normal.jpg" class="thumbnail" alt="Rodney Atkins" /></td><td><font class="artist_name">Rodney Atkins</font><br /><a href="http://www.twitter.com/RodneyAtkins" class="twitter_link">@RodneyAtkins</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/rodneyatkins" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >112,785</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >564,793</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">58</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2809816236/3363aa5407476edbaf217786d7c25138_normal.jpeg" class="thumbnail" alt="Johnny Solinger" /></td><td><font class="artist_name">Johnny Solinger</font><br /><a href="http://www.twitter.com/johnnysolinger" class="twitter_link">@johnnysolinger</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/johnnysolinger" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >108,750</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >2,502</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">59</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2967226617/7fbd336fc847316405647ed49edc36ec_normal.jpeg" class="thumbnail" alt="Gloriana" /></td><td><font class="artist_name">Gloriana</font><br /><a href="http://www.twitter.com/glorianatheband" class="twitter_link">@glorianatheband</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/gloriana" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >101,313</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >117,267</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">60</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2207492911/GA_normal.jpg" class="thumbnail" alt="Gary Allan" /></td><td><font class="artist_name">Gary Allan</font><br /><a href="http://www.twitter.com/garyallan" class="twitter_link">@garyallan</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/8446822431" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >98,784</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >579,797</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">61</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1972446627/web_normal.jpg" class="thumbnail" alt="Easton Corbin" /></td><td><font class="artist_name">Easton Corbin</font><br /><a href="http://www.twitter.com/eastoncorbin" class="twitter_link">@eastoncorbin</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/eastoncorbin" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >98,714</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >293,437</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">62</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2712388913/d8e078303473ab7411246796d8663f6a_normal.png" class="thumbnail" alt="Thompson Square" /></td><td><font class="artist_name">Thompson Square</font><br /><a href="http://www.twitter.com/thompsonsquare" class="twitter_link">@thompsonsquare</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/thompsonsquare" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >93,472</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >282,077</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">63</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1870074087/KipMoore_UpAllNight_72rgb_normal.jpg" class="thumbnail" alt="Kip Moore" /></td><td><font class="artist_name">Kip Moore</font><br /><a href="http://www.twitter.com/KipMooreMusic" class="twitter_link">@KipMooreMusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/KipMooreOfficial" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >91,597</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >85,161</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">64</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2931460685/968520578955319297d128fc3d2545a5_normal.jpeg" class="thumbnail" alt="Craig Morgan" /></td><td><font class="artist_name">Craig Morgan</font><br /><a href="http://www.twitter.com/cmorganmusic" class="twitter_link">@cmorganmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/craigmorganmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >91,100</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >229,737</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">65</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2477655239/7wehhq5qvkjy6f0884dz_normal.jpeg" class="thumbnail" alt="Colt Ford" /></td><td><font class="artist_name">Colt Ford</font><br /><a href="http://www.twitter.com/coltford" class="twitter_link">@coltford</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/coltford" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >90,680</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >645,243</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">66</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3085117933/6ceb923bdd168b9aedae56415a5373c2_normal.jpeg" class="thumbnail" alt="David Nail" /></td><td><font class="artist_name">David Nail</font><br /><a href="http://www.twitter.com/davidnail" class="twitter_link">@davidnail</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/DavidNail" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >81,822</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >72,363</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">67</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2193633705/image_normal.jpg" class="thumbnail" alt="Jerrod Niemann" /></td><td><font class="artist_name">Jerrod Niemann</font><br /><a href="http://www.twitter.com/jrodfromoz" class="twitter_link">@jrodfromoz</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JerrodNiemann" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >81,648</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >136,513</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">68</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/673967725/cvr_crop_twit600_normal.jpg" class="thumbnail" alt="Trisha Yearwood" /></td><td><font class="artist_name">Trisha Yearwood</font><br /><a href="http://www.twitter.com/tycom" class="twitter_link">@tycom</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/TrishaYearwood" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >74,233</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >348,914</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">69</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2525680152/f48mftebjxu4vytsufye_normal.jpeg" class="thumbnail" alt="Hank Williams Jr." /></td><td><font class="artist_name">Hank Williams Jr.</font><br /><a href="http://www.twitter.com/hankjr" class="twitter_link">@hankjr</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/HankJr" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >71,588</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >1,218,840</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">70</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/539262897/brpic_normal.jpeg" class="thumbnail" alt="Christian Kane" /></td><td><font class="artist_name">Christian Kane</font><br /><a href="http://www.twitter.com/ChristianKane01" class="twitter_link">@ChristianKane01</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/ChristianKaneMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >67,218</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >57,190</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">71</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1744392487/LauraBellBundy_normal.jpg" class="thumbnail" alt="Laura Bell Bundy" /></td><td><font class="artist_name">Laura Bell Bundy</font><br /><a href="http://www.twitter.com/LauraBellBundy" class="twitter_link">@LauraBellBundy</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/laurabellbundy" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >66,596</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >52,912</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">72</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2984398945/ffd2045210b5545020339694e9166579_normal.jpeg" class="thumbnail" alt="Katie Armiger" /></td><td><font class="artist_name">Katie Armiger</font><br /><a href="http://www.twitter.com/katiearmiger" class="twitter_link">@katiearmiger</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/armiger1" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >65,783</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >77,880</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">73</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1231896989/KACountryWkly300_normal.jpg" class="thumbnail" alt="Keith Anderson" /></td><td><font class="artist_name">Keith Anderson</font><br /><a href="http://www.twitter.com/kacom" class="twitter_link">@kacom</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/officialkeithanderson" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >63,830</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >36,610</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">74</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1245665608/Screen_shot_2010-12-09_at_1.31.57_PM_normal.png" class="thumbnail" alt="Gretchen Wilson" /></td><td><font class="artist_name">Gretchen Wilson</font><br /><a href="http://www.twitter.com/gw27" class="twitter_link">@gw27</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/gretchenwilson" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >63,306</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >270,348</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">75</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3108820663/fd751b3ab6335ba2bceaed3bdbaa3a4c_normal.jpeg" class="thumbnail" alt="Randy Houser" /></td><td><font class="artist_name">Randy Houser</font><br /><a href="http://www.twitter.com/RandyHouser" class="twitter_link">@RandyHouser</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/RandyHouser" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >63,043</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >78,941</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">76</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2279785658/8d1lrsnii5kflt0mdv7l_normal.jpeg" class="thumbnail" alt="Crystal Bowersox" /></td><td><font class="artist_name">Crystal Bowersox</font><br /><a href="http://www.twitter.com/crystalbowersox" class="twitter_link">@crystalbowersox</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/crystalbowersox" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >58,927</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >194,039</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">77</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2961532291/9bfdc47c40b15799447982145c2f68d0_normal.png" class="thumbnail" alt="Veronica Ballestrini" /></td><td><font class="artist_name">Veronica Ballestrini</font><br /><a href="http://www.twitter.com/veronicabal" class="twitter_link">@veronicabal</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/VeronicaBallestriniMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >58,655</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >80,540</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">78</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3113715881/ad4b43826d3a04c25dd730fbbb68a147_normal.jpeg" class="thumbnail" alt="Chuck Wicks" /></td><td><font class="artist_name">Chuck Wicks</font><br /><a href="http://www.twitter.com/chuckwicksmusic" class="twitter_link">@chuckwicksmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/chuckwicks" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >57,818</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >47,601</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">79</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/551782989/LogoNoOval_normal.gif" class="thumbnail" alt="Randy Rogers Band" /></td><td><font class="artist_name">Randy Rogers Band</font><br /><a href="http://www.twitter.com/rrbchoir" class="twitter_link">@rrbchoir</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/RandyRogersBand" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >54,851</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >332,820</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">80</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1124478758/JO_SWGGY_cvr72_normal.jpg" class="thumbnail" alt="James Otto" /></td><td><font class="artist_name">James Otto</font><br /><a href="http://www.twitter.com/jamesotto" class="twitter_link">@jamesotto</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jamesotto" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >54,568</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >54,731</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">81</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3080788383/0b098cef7e178bc338bce9280a3d6685_normal.jpeg" class="thumbnail" alt="Tyler Matl" /></td><td><font class="artist_name">Tyler Matl</font><br /><a href="http://www.twitter.com/tylermatl" class="twitter_link">@tylermatl</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/tylermatl" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >54,204</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >12,192</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">82</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2735606946/635164d729e09119b7a50ea8c0f3ee2a_normal.jpeg" class="thumbnail" alt="Corey Smith" /></td><td><font class="artist_name">Corey Smith</font><br /><a href="http://www.twitter.com/coreysmithmusic" class="twitter_link">@coreysmithmusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/coreysmithmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >53,689</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >182,878</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">83</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1163295364/Trilogy-MusicRoom_normal.jpg" class="thumbnail" alt="Jo Dee Messina" /></td><td><font class="artist_name">Jo Dee Messina</font><br /><a href="http://www.twitter.com/jodeemessina" class="twitter_link">@jodeemessina</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jodeemessina" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >51,413</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >45,969</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">84</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/3012093601/ca32a4bf00c007e854fd449d6a946b58_normal.jpeg" class="thumbnail" alt="Jimmy Wayne" /></td><td><font class="artist_name">Jimmy Wayne</font><br /><a href="http://www.twitter.com/jimmywayne" class="twitter_link">@jimmywayne</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jimmywayne" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >50,487</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >35,056</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">85</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1737764013/MRTwitter6_normal.png" class="thumbnail" alt="Music Row" /></td><td><font class="artist_name">Music Row</font><br /><a href="http://www.twitter.com/musicrow" class="twitter_link">@musicrow</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/musicrowmag" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >47,334</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >12,037</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">86</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1499276350/josh_and_the_law_smaller_normal.jpg" class="thumbnail" alt="Josh Thompson" /></td><td><font class="artist_name">Josh Thompson</font><br /><a href="http://www.twitter.com/thejoshthompson" class="twitter_link">@thejoshthompson</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JoshThompsonOfficial" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >43,650</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >70,712</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">87</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1594539878/104_normal.gif" class="thumbnail" alt="Montgomery Gentry" /></td><td><font class="artist_name">Montgomery Gentry</font><br /><a href="http://www.twitter.com/mgunderground" class="twitter_link">@mgunderground</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/montgomerygentry" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >42,645</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >287,786</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">88</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1849485634/georgejones_twitterphoto_normal.jpg" class="thumbnail" alt="George Jones" /></td><td><font class="artist_name">George Jones</font><br /><a href="http://www.twitter.com/gjpossum" class="twitter_link">@gjpossum</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/216710610435" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >41,202</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >396,400</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">89</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1546501857/CaseyEJames_normal.jpg" class="thumbnail" alt="Casey James" /></td><td><font class="artist_name">Casey James</font><br /><a href="http://www.twitter.com/CaseyJames" class="twitter_link">@CaseyJames</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/CaseyJamesOfficial" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >39,707</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >80,325</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">90</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2639624537/70c5947c7e21bca5c0edbead146a5e1c_normal.jpeg" class="thumbnail" alt="Canaan Smith" /></td><td><font class="artist_name">Canaan Smith</font><br /><a href="http://www.twitter.com/canaansmith" class="twitter_link">@canaansmith</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/CanaanSmithMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >38,564</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >17,044</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">91</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1143330522/cover_normal.jpg" class="thumbnail" alt="Brooks & Dunn" /></td><td><font class="artist_name">Brooks & Dunn</font><br /><a href="http://www.twitter.com/Brooks_Dunn" class="twitter_link">@Brooks_Dunn</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/BrooksDunn" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >36,542</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >0</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">92</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2239057378/8x10-1_normal.jpg" class="thumbnail" alt="Aaron Lewis" /></td><td><font class="artist_name">Aaron Lewis</font><br /><a href="http://www.twitter.com/AaronLewisMusic" class="twitter_link">@AaronLewisMusic</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/AaronLewisMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >35,799</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >177,876</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">93</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2485868205/0oki13ekkzrz5zphc8o5_normal.jpeg" class="thumbnail" alt="Bucky Covington" /></td><td><font class="artist_name">Bucky Covington</font><br /><a href="http://www.twitter.com/buckycovington" class="twitter_link">@buckycovington</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/buckycovingtonmusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >35,278</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >25,302</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">94</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2628160765/2e63ae7afcfb08784a1e9ea31375c1e7_normal.png" class="thumbnail" alt="Donny Anderson" /></td><td><font class="artist_name">Donny Anderson</font><br /><a href="http://www.twitter.com/DonnyAndersong" class="twitter_link">@DonnyAndersong</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/DonnyAndersonMusic" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >35,172</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >0</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">95</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2846084917/9e03ac142e064f36767da17bdb27f360_normal.png" class="thumbnail" alt="Jack Ingram" /></td><td><font class="artist_name">Jack Ingram</font><br /><a href="http://www.twitter.com/JackIngram" class="twitter_link">@JackIngram</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/jackingram" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >34,377</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >19,066</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">96</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2983615807/090156ee290373f7c4bc48b404ea1e38_normal.jpeg" class="thumbnail" alt="Sunny Sweeney" /></td><td><font class="artist_name">Sunny Sweeney</font><br /><a href="http://www.twitter.com/gettinsweenered" class="twitter_link">@gettinsweenered</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/18777289296" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >32,502</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >41,884</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">97</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1639294263/LauraBryna-6496_normal.jpg" class="thumbnail" alt="Laura Bryna" /></td><td><font class="artist_name">Laura Bryna</font><br /><a href="http://www.twitter.com/laurabryna" class="twitter_link">@laurabryna</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/laurabryna" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >32,066</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >8,065</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">98</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/1284036722/JoshKelley_GeorgiaClay_72rgb_normal.jpg" class="thumbnail" alt="Josh Kelley" /></td><td><font class="artist_name">Josh Kelley</font><br /><a href="http://www.twitter.com/JoshBkelley" class="twitter_link">@JoshBkelley</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/JoshBKelley" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >31,903</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >47,295</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row even"><td class="number">99</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2737673197/98efc34dc20396d0d6133cf180a3bdbf_normal.jpeg" class="thumbnail" alt="Heidi Newfield" /></td><td><font class="artist_name">Heidi Newfield</font><br /><a href="http://www.twitter.com/HeidiNewfield" class="twitter_link">@HeidiNewfield</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/heidinewfield" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >31,702</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >12,293</font><br /><font class="small">Likes</font></td>
+
+</tr><tr class="row odd"><td class="number">100</td><td class="thumbnail" width="56px"><img src="http://a0.twimg.com/profile_images/2677899531/a6561fa677d6557686e0971a29bea14c_normal.jpeg" class="thumbnail" alt="Clay Walker" /></td><td><font class="artist_name">Clay Walker</font><br /><a href="http://www.twitter.com/claywalker" class="twitter_link">@claywalker</a> <font style="color: #ccc">|</font> <a href="http://www.facebook.com/officialclaywalker" class="facebook_link">FB</a></td><td class="twitter_followers"><font class="followers actv" >31,520</font><br /><font class="small">Followers</font></td>
+<td class="facebook_likes"><font class="likes noactv" >163,079</font><br /><font class="small">Likes</font></td>
+
+</tr>
+							</tbody>
+						</table>
+
+							<center><p>To have your artist considered for the chart please email <a href="mailto:jfreeman@musicrow.com">jfreeman@musicrow.com</a><br /><br />Created and maintained by <a href='http://www.aristoworks.com' target='_blank'>aristoworks</a></p></center>
+
+												<center><script type="text/javascript"><!--
+						google_ad_client = "ca-pub-4035889062162515";
+						/* Small Twitter Ad */
+						google_ad_slot = "9905059681";
+						google_ad_width = 336;
+						google_ad_height = 280;
+						//-->
+						</script>
+						<script type="text/javascript"
+						src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+						</script></center>
+							<br />
+
+
+
+			</div>
+
+		</div>
+
+
+		
+		
+		<div id="contentright">
+							
+					<li id="ads">
+					<center>
+					
+					<a href="http://www.musicrow.com/wp-content/plugins/adrotate/adrotate-out.php?track=NDUxLDQsMCxodHRwOi8vd3d3Lm11c2ljcm93LmNvbS9zdG9yZS9zdWJzY3JpYmUtdG8tbXVzaWNyb3cv"target=blank><img src="http://www.musicrow.com/wp-content/banners/subscribe.jpg"></a>					<br><br>
+					
+					<a href="http://www.musicrow.com/wp-content/plugins/adrotate/adrotate-out.php?track=NTExLDUsMCxodHRwOi8vd3d3Lm11c2ljcm93LmNvbS8yMDEyLzEyL2ppbGxpYW4ta29oci13aGF0LXlvdXZlLWRvbmUv"target=blank><img src="http://www.musicrow.com/wp-content/banners/KJ-PP-010713-SB.jpg"></a>					<br><br>
+					
+					<a href="http://www.musicrow.com/wp-content/plugins/adrotate/adrotate-out.php?track=NTIzLDYsMCxodHRwOi8vd3d3LnNvbXVjaG1vb3JlLmNvbQ="target=blank><img src="http://www.musicrow.com/wp-content/banners/moore-ban12009.gif"></a>					<br><br>
+					
+					<a href="http://www.musicrow.com/wp-content/plugins/adrotate/adrotate-out.php?track=NTA5LDcsMCxodHRwOi8vd3d3LmNvdW50cnlyYWRpb3NlbWluYXIuY29t"target=blank><img src="http://www.musicrow.com/wp-content/banners/CRS-Register-010312-SB.jpg"></a>					<br><br>
+					
+					<IFRAME SRC="http://ad.doubleclick.net/adi/N5934.275524.MUSICROWCOMMUNICATI/B7251040;sz=300x250;pc=[TPAS_ID];ord=[timestamp]?" WIDTH=300 HEIGHT=250 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no BORDERCOLOR='#000000'>
+<SCRIPT language='JavaScript1.1' SRC="http://ad.doubleclick.net/adj/N5934.275524.MUSICROWCOMMUNICATI/B7251040;abr=!ie;sz=300x250;pc=[TPAS_ID];ord=[timestamp]?">
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="http://ad.doubleclick.net/jump/N5934.275524.MUSICROWCOMMUNICATI/B7251040;abr=!ie4;abr=!ie5;sz=300x250;pc=[TPAS_ID];ord=[timestamp]?">
+<IMG SRC="http://ad.doubleclick.net/ad/N5934.275524.MUSICROWCOMMUNICATI/B7251040;abr=!ie4;abr=!ie5;sz=300x250;pc=[TPAS_ID];ord=[timestamp]?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Advertisement"></A>
+</NOSCRIPT>
+</IFRAME>					<br><br>
+				
+					 					 <br><br>
+					 
+	            						 <br><br>
+					 
+					
+					 
+					</center>
+					</li>
+					
+					
+					
+						
+
+			<div id="sidebar" class="clearfix">
+<div class="widget-top"></div><div id="search-3" class="widget widget_search"><div class="widget-wrap"><h3 class="widgettitle"><span>Search</span></h3>
+<form id="searchform" method="get" action="http://www.musicrow.com/" ><input type="text" value="Enter Search Terms" onfocus="if (this.value == 'Enter Search Terms') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Search Terms';}" size="18" maxlength="50" name="s" id="searchfield" /><input type="image" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/blank.gif" id="submitbutton" alt="go" /></form>
+</div></div><div class="widget-bottom"></div><div class="widget-top"></div><div id="text-459579018" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle"><span>Dec 2012/Jan 2013</span></h3>			<div class="textwidget"><a href="http://www.musicrow.com/2012/12/on-the-cover-toby-keith-dec-2012jan-2013/">
+
+<img class="alignright size-full wp-image-43356" title="MusicRow" src="http://www.musicrow.com/wp-content/uploads/2012/12/Web-TK.png" alt="" width="150" height="194"/></a>
+
+<b>Oct/Nov â€™12â€”On the Cover: Brad Paisley</b>
+
+<br><a href="http://www.musicrow.com/subscribe/" >Click to buy.</a><br>There are few safe bets in life, even fewer when it comes to entertainment. A new Toby Keith album, however, is as close to a sure thing as can be found. As he releases Hope On The Rocks, Keith is coming off yet another No. 1 country album, Clancyâ€™s Tavern, which included the biggest viral event in the genreâ€™s history, â€œRed Solo Cup.â€� 
+<a href="http://www.musicrow.com/2012/12/on-the-cover-toby-keith-dec-2012jan-2013/" > [Click to Read More]</a></div>
+		</div></div><div class="widget-bottom"></div>			</div>
+
+			<div id="sidebar-bottom" class="clearfix">
+				<div id="sidebar-bottom-left">
+<div class="widget-top"></div><div id="text-459579022" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-7479054363244158";
+/* towerspot */
+google_ad_slot = "0167775928";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+		</div></div><div class="widget-bottom"></div>				</div>	
+
+				<div id="sidebar-bottom-right">
+<div class="widget-top"></div><div id="text-459579020" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle"><span>Album Releases</span></h3>			<div class="textwidget"><p><span style="color: #0000ff;"><strong>January 23</strong></span><br />
+<strong>Buck Owens</strong>/<em>Honky Tonk Man</em>/Omnivore Recordings<br />
+<strong>Don Rich</strong>/<em>Don Rich Sings George Jones</em>/Omnivore Recordings</p>
+<p><span style="color: #0000ff;"><strong>January 29</strong></span><br />
+<strong>Kris Kristofferson</strong>/<em>Feeling Mortal</em><br />
+<strong>Blue Sky Riders</strong>/<em>Finally Home</em><br />
+<strong>Sarah Darling</strong>/Home To Me/Black River Entertainment [digital EP]</p>
+</div>
+		</div></div><div class="widget-bottom"></div>	
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<div id="footer-widgets" class="clearfix maincontent">
+
+	<div class="content clearfix">
+
+		<div class="footer-widget1">
+<div class="widget-top"></div><div id="text-459579023" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle"><span>Connect</span></h3>			<div class="textwidget"><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/musicrowmag" width="300" colorscheme="dark" show_faces="true" stream="false" header="true"></fb:like-box></div>
+		</div></div><div class="widget-bottom"></div>	
+		</div>
+
+		<div class="footer-widget2">
+<div class="widget-top"></div><div id="text-459579030" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle"><span>Aristo International Report</span></h3>			<div class="textwidget">Aristo International Report - December 2012
+
+Click <a href="http://aristomedia.com/newsletter/Page1.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://aristomedia.com']);" target="_blank">HERE</a> to Download.</div>
+		</div></div><div class="widget-bottom"></div><div class="widget-top"></div><div id="rss-3" class="widget widget_rss"><div class="widget-wrap"><h3 class="widgettitle"><span><a class='rsswidget' href='http://www.musicrow.com/?cat=257&#038;feed=rss2' title='Syndicate this content'><img style='border:0' width='14' height='14' src='http://www.musicrow.com/wp-includes/images/rss.png' alt='RSS' /></a> <a class='rsswidget' href='http://www.musicrow.com/' title='Nashville&#039;s Music Industry Publication'>Exclusive Content</a></span></h3><ul><li><a class='rsswidget' href='http://www.musicrow.com/2013/01/the-producers-chair-keith-stegall/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=the-producers-chair-keith-stegall' title='[Subscriber-only] Login/Subscribe [&hellip;]'>The Producerâ€™s Chair: Keith Stegall</a> <span class="rss-date">January 18, 2013</span> <cite>contributor</cite></li><li><a class='rsswidget' href='http://www.musicrow.com/2013/01/weekly-chart-report-11813/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=weekly-chart-report-11813' title='The Band Perry tops the chart this week at No. 1 with &quot;Better Dig Two&quot; after only nine [&hellip;]'>Weekly Chart Report (1/18/13)</a> <span class="rss-date">January 18, 2013</span> <cite>Sherod Robertson</cite></li><li><a class='rsswidget' href='http://www.musicrow.com/2013/01/charlie-cook-on-air-music-row-investments/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=charlie-cook-on-air-music-row-investments' title='Tax time is right around the corner. Most of us are looking at our budgets and making adjustments to spending [&hellip;]'>Charlie Cook On Air: Music Row Investments</a> <span class="rss-date">January 18, 2013</span> <cite>Charlie Cook</cite></li><li><a class='rsswidget' href='http://www.musicrow.com/2013/01/primetime-nashville-episode-10-im-sorry-for-you-my-friend/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=primetime-nashville-episode-10-im-sorry-for-you-my-friend' title='Juliette and Rayna go on tour together, while Deacon quits his stint with The Revel Kings [&hellip;]'>Primetime â€˜Nashvilleâ€™: â€˜Iâ€™m Sorry For You My Friendâ€™</a> <span class="rss-date">January 17, 2013</span> <cite>Jessica Nicholson</cite></li></ul></div></div><div class="widget-bottom"></div>	
+		</div>
+
+		<div class="footer-widget3">
+<div class="widget-top"></div><div id="text-344870631" class="widget widget_text"><div class="widget-wrap"><h3 class="widgettitle"><span>Twitter</span></h3>			<div class="textwidget"><script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: '@musicrow',
+  interval: 5000,
+  title: 'MusicRow TwitterSpeak',
+  subject: 'Across the sky',
+  width: 270,
+  height: 250,
+  theme: {
+    shell: {
+      background: '#a1a9ad',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: true,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    toptweets: false,
+    behavior: 'default'
+  }
+}).render().start();
+</script></div>
+		</div></div><div class="widget-bottom"></div>	
+		</div>
+
+	</div>
+
+</div>
+<div id="footer" class="clearfix">
+
+	<div class="footer-content clearfix">
+
+		&copy; <a href="http://www.musicrow.com">MusicRow &#8211; Nashville&#039;s Music Industry Publication &#8211; News, Songs From Music City</a> 2013. All rights reserved. 615-349-2171. 
+		<a href = "http://www.wp-magazine.com">WordPress Magazine Themes</a>
+		
+<div class="sub-icons">
+
+	<a title="Subscribe via RSS Feed" href="http://www.musicrow.com/feed/"><img class="rss-sub" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/rss2.png" alt="Subscribe via RSS Feed" align="top" /></a>
+
+	<a rel="external" title="Follow Me" href="http://www.twitter.com/musicrow"><img class="twitter-sub" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/twitter2.png" alt="Follow Me" align="top" /></a>
+
+	<a title="Connect on Facebook" rel="external" href="http://www.facebook.com/musicrowmag"><img class="facebook-sub" src="http://www.musicrow.com/wp-content/themes/wp-inspired_basic/images/facebook2.png" alt="Connect on Facebook" align="top" /></a>
+
+
+
+
+</div>
+
+	</div>
+
+</div>
+
+
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/www.musicrow.com\/charts\/top-ranking-country-artists\/":12928}	</script>
+<script type='text/javascript' src='http://www.musicrow.com/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=20121205'></script>
+		<script type="text/javascript" charset="utf-8">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript" charset="utf-8">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="text" name="target_email" id="target_email" value="" />
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="" />
+
+				<label for="source_email">Your Email Address</label>
+				<input type="text" name="source_email" id="source_email" value="" />
+
+			
+			
+			<img style="float: right; display: none" class="loading" src="http://www.musicrow.com/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16" />
+			<input type="submit" value="Send Email" class="sharing_send" />
+			<a href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+		<script type="text/javascript" charset="utf-8">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript" charset="utf-8">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-pinterest' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcompinterest', 'menubar=1,resizable=1,width=650,height=280' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript" charset="utf-8">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=600,height=600' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='http://www.musicrow.com/wp-content/plugins/wpaudio-mp3-player/wpaudio.min.js?ver=3.1'></script>
+<script type='text/javascript' src='http://www.musicrow.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.23'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.musicrow.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.musicrow.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201304'></script>
+<!-- Facebook Comments for WordPress: http://3doordigital.com/wordpress/plugins/facebook-comments/ -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=158639280866917";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+	<script src="http://stats.wordpress.com/e-201304.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:2.1.1',blog:'8119467',post:'12928',tz:'-6'});
+	var load_cmc = function(){linktracker_init(8119467,12928,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script>
+</body>
+
+</html>

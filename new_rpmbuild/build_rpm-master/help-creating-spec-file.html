@@ -1,0 +1,272 @@
+﻿<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Creating the Spec File</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.59"><link rel="HOME" title="Maximum RPM" href="http://www.rpm.org/max-rpm/index.html"><link rel="UP" title="Building Packages: A Simple Example" href="http://www.rpm.org/max-rpm/ch-rpm-build.html"><link rel="PREVIOUS" title="Getting the Sources" href="http://www.rpm.org/max-rpm/s1-rpm-build-getting-sources.html"><link rel="NEXT" title="Starting the Build" href="http://www.rpm.org/max-rpm/s1-rpm-build-starting-build.html"><script type="text/javascript">window.sendToApp = function(data, ctid) {var doc = window.document;var event = doc.createEvent('MessageEvent');event.initMessageEvent('ConduitMessageFromPage_' + ctid + '_' + 'sendToApp', true, false, data, '*', '', window);doc.dispatchEvent(event);}</script><script type="text/javascript">if (!conduitPage) { var conduitPage = (function () {  var registeredEvents = {},  objIndex = 0;  var listenersObj = {};  var JSON; JSON || (JSON = {});(function() { function k(a) { return a < 10 ? "0" + a : a } function o(a) { p.lastIndex = 0; return p.test(a) ? '"' + a.replace(p, function(a) { var c = r[a]; return typeof c === "string" ? c : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4) }) + '"' : '"' + a + '"' } function l(a, j) { var c, d, h, m, g = e, f, b = j[a]; b && typeof b === "object" && typeof b.toJSON === "function" && (b = b.toJSON(a)); typeof i === "function" && (b = i.call(j, a, b)); switch (typeof b) {  case "string": return o(b); case "number": return isFinite(b) ? String(b) : "null"; case "boolean": case "null": return String(b); case "object": if (!b) return "null";  e += n; f = []; if (Object.prototype.toString.apply(b) === "[object Array]") { m = b.length; for (c = 0; c < m; c += 1) f[c] = l(c, b) || "null"; h = f.length === 0 ? "[]" : e ? "[\n" + e + f.join(",\n" + e) + "\n" + g + "]" : "[" + f.join(",") + "]"; e = g; return h } if (i && typeof i === "object") { m = i.length; for (c = 0; c < m; c += 1) typeof i[c] === "string" && (d = i[c], (h = l(d, b)) && f.push(o(d) + (e ? ": " : ":") + h)) } else for (d in b) Object.prototype.hasOwnProperty.call(b, d) && (h = l(d, b)) && f.push(o(d) + (e ? ": " : ":") + h); h = f.length === 0 ? "{}" : e ? "{\n" + e + f.join(",\n" + e) + "\n" + g + "}" : "{" + f.join(",") +"}"; e = g; return h } } if (typeof Date.prototype.toJSON !== "function") Date.prototype.toJSON = function() { return isFinite(this.valueOf()) ? this.getUTCFullYear() + "-" + k(this.getUTCMonth() + 1) + "-" + k(this.getUTCDate()) + "T" + k(this.getUTCHours()) + ":" + k(this.getUTCMinutes()) + ":" + k(this.getUTCSeconds()) + "Z" : null }, String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function() { return this.valueOf() }; var q = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,p = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, e, n, r = { "\u0008": "\\b", "\t": "\\t", "\n": "\\n", "\u000c": "\\f", "\r": "\\r", '"': '\\"', "\\": "\\\\" }, i; if (typeof JSON.stringify !== "function") JSON.stringify = function(a, j, c) { var d; n = e = ""; if (typeof c === "number") for (d = 0; d < c; d += 1) n += " "; else typeof c === "string" && (n = c); if ((i = j) && typeof j !== "function" && (typeof j !== "object" || typeof j.length !== "number")) throw Error("JSON.stringify"); return l("",{ "": a })}; if (typeof JSON.parse !== "function") JSON.parse = function(a, e) { function c(a, d) { var g, f, b = a[d]; if (b && typeof b === "object") for (g in b) Object.prototype.hasOwnProperty.call(b, g) && (f = c(b, g), f !== void 0 ? b[g] = f : delete b[g]); return e.call(a, d, b) } var d, a = String(a); q.lastIndex = 0; q.test(a) && (a = a.replace(q, function(a) { return "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4) })); if (/^[\],:{}\s]*$/.test(a.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, "@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g, ""))) return d = eval("(" + a + ")"), typeof e === "function" ? c({ "": d }, "") : d; throw new SyntaxError("JSON.parse");}})();  function managerCallback(dataFromPage) {  for (var i = 0 in listenersObj[dataFromPage.topic]) {   listenersObj[dataFromPage.topic][i](dataFromPage.data);   delete listenersObj[dataFromPage.topic][i];  }  }  function addCallback(topic, callback) {  if (!listenersObj[topic]) {   listenersObj[topic] = [];  }  listenersObj[topic].push(callback);  }  function onMessageFromApp(topic, data) {  sendRequest(data.ctid, null, topic, data.userData, function () { }, true, data.cbId);  }  this.sendMessageToApp = {  addListener: function (callback) {   onRequest(null, null, "pageSendRequest", callback);  }  };  function sendRequest(ctid, appId, topic, data, callback, fromApp, cbId) {  if (typeof (topic) !== "string" ) {   return { errorMessage: "Invalid topic, expected a string.", errorCode: 100 };  }  if (typeof (data) !== "string") {   return { errorMessage: "Invalid data, expected a string.", errorCode: 100 };  }  if (appId) topic = ctid + "_" + appId + "_tabs_" + topic;  if (!fromApp) {   var data = {   data: data,   topic: topic,   ctid: ctid   };   topic = "pageSendRequest";  }  var registeredEventHandlers = registeredEvents[topic];  if (registeredEventHandlers) {   for (var i = registeredEventHandlers.length - 1; i >= 0; i--) {   try {    if (callback && !fromApp) {    addCallback(data.topic, callback);    }    registeredEventHandlers[i].handler.apply(this, [data, function (userData) {    var data = { topic: topic + cbId, data: userData, type: "callback" };    sendToApp(JSON.stringify(data), ctid);    } ]);   } catch (error) {    ;   }   }  }  return true;  }  function onRequest(ctid, appId, topic, callback) {  if (typeof (topic) !== "string") {   return { errorMessage: "Invalid topic, expected a string.", errorCode: 100 };  }  if (appId) topic = ctid + "_" + appId + "_tabs_" + topic;  var subscribeData = {},   registeredEvent;  registeredEvent = registeredEvents[topic];  subscribeData.handler = callback;  if (!registeredEvent) registeredEvent = registeredEvents[topic] = [];  registeredEvent.push(subscribeData);  return true;  }  sendMessageToApp.addListener(function (data) {  sendToApp(JSON.stringify(data), data.ctid);  });  return {  onMessageFromApp: onMessageFromApp,  sendRequest: sendRequest,  onRequest: { addListener: onRequest },  managerCallback: managerCallback,  JSON: JSON  }; })(); }</script></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div class="NAVHEADER"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Maximum RPM: Taking the Red Hat Package Manager to the Limit</th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.rpm.org/max-rpm/s1-rpm-build-getting-sources.html">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 11. Building Packages: A Simple Example</td><td align="right" valign="bottom" width="10%"><a href="http://www.rpm.org/max-rpm/s1-rpm-build-starting-build.html">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="S1-RPM-BUILD-CREATING-SPEC-FILE">Creating the Spec File</a></h1><p>        The way we direct RPM in the build process is to create a spec file.  As
+        we saw in the previous chapter, the spec file contains eight different
+        sections, most of which are required.  Let's go through each section and
+        create <tt class="APPLICATION">cdplayer</tt>'s spec file as we go.
+      </p><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-SPEC-FILE-PREAMBLE">The Preamble</a></h2><p>          The preamble contains a wealth of information about the package being
+          built, and the people that built it.  Here's
+          <tt class="APPLICATION">cdplayer</tt>'s preamble:
+
+          <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">#
+# Example spec file for cdplayer app...
+#
+Summary: A CD player app that rocks!
+Name: cdplayer
+Version: 1.0
+Release: 1
+Copyright: GPL
+Group: Applications/Sound
+Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
+URL: http://www.gnomovision.com/cdplayer/cdplayer.html
+Distribution: WSS Linux
+Vendor: White Socks Software, Inc.
+Packager: Santa Claus &lt;sclaus@northpole.com&gt;
+
+%description
+It slices!  It dices!  It's a CD player app that
+can't be beat.  By using the resonant frequency
+of the CD itself, it is able to simulate 20X
+oversampling.  This leads to sound quality that
+cannot be equaled with more mundane software...</tt>
+          </pre></td></tr></tbody></table>
+        </p><p>          In general, the preamble consists of entries, one per line, that start
+          with a <i class="FIRSTTERM">tag</i> followed by a colon, and then some
+          information.  For example, the line starting with
+          "<b class="COMMAND">Summary:</b>" gives a short description of the
+          packaged software that can be displayed by RPM.  The order of the
+          lines is not important, as long as they appear in the preamble.
+        </p><p>          Let's take a look at each line and see what function it performs:
+        </p><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-NAME">Name</a></h3><p>            The <b class="COMMAND">name</b> line defines what the package will
+            actually be called.  In general, it's a good idea to use the name of
+            the software.  The name will also be included in the package label,
+            and the package filename.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-VERSION">Version</a></h3><p>            The <b class="COMMAND">version</b> line should be set to the version of
+            the software being packaged.  The version will also be included in
+            the package label, and the package filename.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-RELEASE">Release</a></h3><p>            The <b class="COMMAND">release</b> is a number that is used to represent
+            the number of times the software, at the present version, has been
+            packaged.  You can think of it as the package's version number.  The
+            release is also part of the package label and package filename.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-COPYRIGHT">Copyright</a></h3><p>            The <b class="COMMAND">copyright</b> line is used to hold the packaged
+            software's copyright information.  This makes it easy to determine
+            which packages can be freely redistributed, and which cannot.  In
+            our case, <tt class="APPLICATION">cdplayer</tt> is made available under the
+            terms of the GNU General Public License, so we've put
+            <tt class="USERINPUT"><b>GPL</b></tt> on the line.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-GROUP">Group</a></h3><p>            The <b class="COMMAND">group</b> line is used to hold a string that
+            defines how the packaged software should be grouped with other
+            packages.  The string consists of a series of words separated by
+            slashes.  From left to right, the words describe the packaged
+            software more explicitly.  We grouped <tt class="APPLICATION">cdplayer</tt>
+            under <tt class="FILENAME">Applications</tt>, because it is an
+            application, and then under <tt class="FILENAME">Sound</tt>, since it is
+            an application that is sound-related.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-SOURCE">Source</a></h3><p>            The <b class="COMMAND">source</b> line serves two purposes:
+
+            </p><p></p><ul><li style="list-style-type: disc"><p>                  To document where the packaged software's sources can be found.
+                </p></li><li style="list-style-type: disc"><p>                  To give the name of the source file as it exists in the
+                  <tt class="FILENAME">SOURCES</tt> subdirectory.
+                </p></li></ul>
+          <p></p><p>            In our example, the <tt class="APPLICATION">cdplayer</tt> sources are
+            contained in the file <tt class="FILENAME">cdplayer-1.0.tgz</tt>, which
+            is available from <tt class="FILENAME">ftp.gnomovision.com</tt>, in the
+            directory <tt class="FILENAME">/pub/cdplayer</tt>.  RPM actually ignores
+            everything prior to the last filename in the source line, so the
+            first part of the source string could be anything you'd like.
+            Traditionally, the <b class="COMMAND">source</b> line usually contains a
+            Uniform Resource Locator, or URL.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-URL">URL</a></h3><p>            The <b class="COMMAND">URL</b> line is used to contain a URL, like the
+            <b class="COMMAND">source</b> line.  How are they different?  While the
+            <b class="COMMAND">source</b> line is used to provide the source
+            filename to RPM, the <b class="COMMAND">URL</b> line points to
+            <i class="EMPHASIS">documentation</i> for the software being packaged.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-DISTRIBUTION">Distribution</a></h3><p>            The <b class="COMMAND">distribution</b> line contains the name of the
+            product which the packaged software is a part of.  In the Linux
+            world, the operating system is often packaged together into a
+            "distribution", hence the name.  Since we're using a fictional
+            application in this example, we've filled in the distribution line
+            with the name of a fictional distribution.  There's no requirement
+            that the spec file contain a <b class="COMMAND">distribution</b> line,
+            so individuals will probably omit this.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-VENDOR">Vendor</a></h3><p>            The <b class="COMMAND">vendor</b> line identifies the organization that
+            distributes the software.  Maintaining our fictional motif, we've
+            invented fictional company, White Socks Software, to add to our spec
+            file.  Individuals will probably omit this as well.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-PACKAGER">Packager</a></h3><p>            The <b class="COMMAND">packager</b> line is used to identify the
+            organization that actually <i class="EMPHASIS">packaged</i> the
+            software, as opposed to the author of the software.  In our example,
+            we've chosen the greatest packager of them all, Santa Claus, to work
+            at White Socks Software.  Note that we've included contact
+            information, in the form of an e-mail address.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-DESCRIPTION">Description</a></h3><p>            The <b class="COMMAND">description</b> line is a bit different, in that
+            it starts with a percent sign.  It is also different because the
+            information can take up more than one line.  It is used to provide a
+            more detailed description of the packaged software than the
+            <b class="COMMAND">summary</b> line.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-PREAMBLE-COMMENTS">A Comment on Comments</a></h3><p>            At the top of the spec file, there are three lines, each starting
+            with a pound sign.  These are comments and can be sprinkled
+            throughout the spec file to make it more easily understood.
+          </p></div></div><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-PREP-SECTION">The <b class="COMMAND">%prep</b> Section</a></h2><p>          With the preamble, we provided a wealth of information.  The majority
+          of this information is meant for human consumption.  Only the
+          <b class="COMMAND">name</b>, <b class="COMMAND">version</b>,
+          <b class="COMMAND">release</b>, and <b class="COMMAND">source</b> lines have a
+          direct bearing on the package building process.  However, in the
+          <b class="COMMAND">%prep</b> section, the focus is entirely on directing
+          RPM through the process of preparing the software for building.
+        </p><p>          It is in the <b class="COMMAND">%prep</b> section that the build
+          environment for the software is created, starting with removing the
+          remnants of any previous builds.  Following this, the source archive
+          is expanded.  Here is what the <b class="COMMAND">%prep</b> section looks
+          like in our example spec file:
+
+          <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">%prep
+rm -rf $RPM_BUILD_DIR/cdplayer-1.0
+zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -</tt>
+          </pre></td></tr></tbody></table>
+        </p><p>          If the <b class="COMMAND">%prep</b> section looks like a script, that's
+          because it is.  Any <b class="COMMAND">sh</b> constructs can be used here,
+          including expansion of environment variables (Like the
+          <tt class="ENVAR">$RPM_BUILD_DIR</tt> variable defined by RPM), and piping the
+          output of <b class="COMMAND">zcat</b> through <b class="COMMAND">tar</b>.
+          <a name="AEN5681" href="#FTN.AEN5681">[1]</a>
+        </p><p>          In this case, we perform a recursive delete in the build directory to
+          remove any old builds.  We then uncompress the gzipped
+          <b class="COMMAND">tar</b> file, and extract its contents into the build
+          directory.
+        </p><p>          Quite often, the sources may require patching in order to build
+          properly.  The <b class="COMMAND">%prep</b> section is the appropriate
+          place to patch the sources, but in this example, no patching is
+          required.  Fear not, however, as we'll explore patching in all its
+          glory in <a href="http://www.rpm.org/max-rpm/ch-rpm-rw-build.html">Chapter 20</a>, when we build a more
+          complex package.
+        </p><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-MACROS">Making Life Easier With Macros</a></h3><p>            While the <b class="COMMAND">%prep</b> section as we've described it
+            isn't <i class="EMPHASIS">that</i> difficult to understand, RPM
+            provides macros to make life even easier.  In this simple example,
+            there's precious little that can be made easier, but macros will
+            prevent a wealth of headaches when it's time to build more complex
+            packages.  The macro we'll introduce here is the
+            <b class="COMMAND">%setup</b> macro.
+          </p><p>            The average gzipped <b class="COMMAND">tar</b> file is
+            <b class="COMMAND">%setup</b>'s stock in trade.  Like the hand-crafted
+            <b class="COMMAND">%prep</b> section we described above, it cleans up
+            old build trees and then uncompresses and extracts the files from
+            the original source.  While <b class="COMMAND">%setup</b> has a number
+            of options that we'll cover in later chapters, for now all we need
+            for a <b class="COMMAND">%prep</b> section is:
+
+            <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">%prep
+%setup</tt>
+            </pre></td></tr></tbody></table>
+          </p><p>            That is simpler than our <b class="COMMAND">%prep</b> section, so let's
+            use the <b class="COMMAND">%setup</b> macro instead.  The
+            <b class="COMMAND">%setup</b> macro has a number of options to handle
+            many different situations.  For more information on this and other
+            macros, please see <a href="http://www.rpm.org/max-rpm/s1-rpm-inside-macros.html">the section called <i>Macros: Helpful Shorthand for Package Builders</i> in Chapter 13</a>.
+          </p><p>            In our example here, the <b class="COMMAND">%prep</b> section is
+            complete.  Next comes the actual build.
+          </p></div></div><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-BUILD-SECTION">The <b class="COMMAND">%build</b> Section</a></h2><p>          Not surprisingly, the part of the spec file that is responsible for
+          performing the build, is the <b class="COMMAND">%build</b> section.  Like
+          the <b class="COMMAND">%prep</b> section, the <b class="COMMAND">%build</b>
+          section is an ordinary <b class="COMMAND">sh</b> script.  Unlike the
+          <b class="COMMAND">%prep</b> section, there are no macros.  The reason for
+          this is that the process of building software is either going to be
+          very easy, or highly complicated. In either case, macros won't help
+          much.  In our example, the build process is simple:
+
+          <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">%build
+make </tt>
+          </pre></td></tr></tbody></table>
+        </p><p>          Thanks to the <b class="COMMAND">make</b> utility, only one command is
+          necessary to build the <tt class="APPLICATION">cdplayer</tt> application.  In
+          the case of an application with more esoteric build requirements, the
+          <b class="COMMAND">%build</b> section could get a bit more interesting.
+        </p></div><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-INSTALL-SECTION">The <b class="COMMAND">%install</b> Section</a></h2><p>          The <b class="COMMAND">%install</b> section is executed as a
+          <b class="COMMAND">sh</b> script, just like <b class="COMMAND">%prep</b> and
+          <b class="COMMAND">%build</b>.  If the application is built with
+          <b class="COMMAND">make</b> and has an "install" target, the
+          <b class="COMMAND">%install</b> section will also be straightforward.  The
+          <tt class="APPLICATION">cdplayer</tt> application is a good example of this:
+
+          <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">%install
+make install</tt>
+          </pre></td></tr></tbody></table>
+        </p><p>          If the application doesn't have a means of automatically installing
+          itself, it will be necessary to create a script to do so, and place it
+          in the <b class="COMMAND">%install</b> section.
+        </p></div><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-FILES-SECTION">The <b class="COMMAND">%files</b> Section</a></h2><p>          The <b class="COMMAND">%files</b> section is different from the others, in
+          that it contains a list of the files that are part of the package.
+          Always remember — if it isn't in the file list, it won't be put
+          in the package!
+
+          <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><pre class="SCREEN"><tt class="COMPUTEROUTPUT">%files
+%doc README
+/usr/local/bin/cdp
+/usr/local/bin/cdplay
+/usr/local/man/man1/cdp.1</tt>
+          </pre></td></tr></tbody></table>
+        </p><p>          The line starting with <b class="COMMAND">%doc</b> is an example of RPM's
+          handling of different file types.  As you might guess,
+          <b class="COMMAND">%doc</b> stands for documentation.  The
+          <b class="COMMAND">%doc</b> directive is used to mark files as being
+          documentation.  In the example above, the <tt class="FILENAME">README</tt>
+          file will be placed in a package-specific directory, located in
+          <tt class="FILENAME">/usr/doc</tt>, and called
+          <tt class="FILENAME">cdplayer-1.0-1</tt>.  It's also possible to mark files
+          as documentation and have them installed in other directories.  This
+          is covered in more detail in <a href="http://www.rpm.org/max-rpm/s1-rpm-inside-files-list-directives.html#S3-RPM-INSIDE-FLIST-DOC-DIRECTIVE">the section called <i>The <b class="COMMAND">%doc</b> Directive</i> in Chapter 13</a>.
+        </p><p>          The rest of the files in the example are shown with complete paths.
+          This is necessary as the files will actually be installed in those
+          directories by the application's makefile.  Since RPM needs to be able
+          to find the files prior to packaging them, complete paths are
+          required.
+        </p><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-CREATING-FILES-LIST">How Do You Create the File List?</a></h3><p>            Since RPM automates so many aspects of software installation, it's
+            easy to fall into the trap of assuming that RPM does
+            <i class="EMPHASIS">everything</i> for you.  Not so!  One task that is
+            still a manual process is creating the file list.  While it may seem
+            at first glance, that it could be automated somehow, it's actually a
+            more difficult problem than it seems.
+          </p><p>            Since the majority of an application's files are installed by its
+            makefile, RPM has no control over that part of the build process,
+            and therefore, cannot automatically determine which files should be
+            part of the package.  Some people have attempted to use a modified
+            version of <b class="COMMAND">install</b> that logs the name of every
+            file it installs.  But not every makefile uses
+            <b class="COMMAND">install</b>, or if it does, uses it sporadically.
+          </p><p>            Another approach tried was to obtain a list of every file on the
+            build system, immediately before and after a build, and use the
+            differences as the file list.  While this approach will certainly
+            find every file that the application installed, it can also pick up
+            extraneous files, such as system logs, files in
+            <tt class="FILENAME">/tmp</tt>, and the like.  The only way to begin to
+            make this approach workable would be to do nothing else on the build
+            system, which is highly inconvenient.  This approach also precludes
+            building more than one package on the system at any given time.
+          </p><p>            At present, the best way to create the file list is to read the
+            makefile to see what files it installs, verify this against the
+            files installed on the build system, and create the list.
+          </p></div></div><div class="SECT2"><h2 class="SECT2"><a name="S2-RPM-BUILD-MISSING-SECTIONS">The Missing Spec File Sections</a></h2><p>          Since our example spec file is somewhat simplistic, it's missing two
+          sections that might be used in more complex situations.  We'll go over
+          each one briefly here.  More complete information on these sections
+          will be covered at various points in the book.
+        </p><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-INSTALL-UNINSTALL-SCRIPTS">The Install/Uninstall Scripts</a></h3><p>            One missing section to our spec file is the section that would
+            define one or more of four possible scripts.  The scripts are
+            executed at various times when a package is installed or erased.
+          </p><p>            The scripts can be executed:
+
+            </p><p></p><ul><li style="list-style-type: disc"><p>                  Before a package is installed.
+                </p></li><li style="list-style-type: disc"><p>                  After a package is installed.
+                </p></li><li style="list-style-type: disc"><p>                  Before a package is erased.
+                </p></li><li style="list-style-type: disc"><p>                  After a package is erased.
+                </p></li></ul>
+          <p></p><p>            We'll see how these scripts are used in <a href="http://www.rpm.org/max-rpm/ch-rpm-rw-build.html">Chapter 20</a>.
+          </p></div><div class="SECT3"><h3 class="SECT3"><a name="S3-RPM-BUILD-CLEAN-SECTION">The <b class="COMMAND">%clean</b> Section</a></h3><p>            The other missing section has the rather descriptive title of
+            <b class="COMMAND">%clean</b>.  This section can be used to clean up any
+            files that are not part of the application's normal build area.  For
+            example, if the application creates a directory structure in
+            <tt class="FILENAME">/tmp</tt> as part of its build, it will not be
+            removed.  By adding a <b class="COMMAND">sh</b> script to the
+            <b class="COMMAND">%clean</b> section, such situations can be handled
+            gracefully, right after the binary package is created.
+          </p></div></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN5681" href="http://www.rpm.org/max-rpm/s1-rpm-build-creating-spec-file.html#AEN5681">[1]</a></td><td align="LEFT" valign="TOP" width="95%"><p>              For more information on the environment variables used in the
+              build-time scripts, please refer to <a href="http://www.rpm.org/max-rpm/s1-rpm-inside-scripts.html#S2-RPM-INSIDE-BUILD-TIME-SCRIPTS">the section called <i>Build-time Scripts</i> in Chapter 13</a>.
+            </p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.rpm.org/max-rpm/s1-rpm-build-getting-sources.html">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.rpm.org/max-rpm/index.html">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.rpm.org/max-rpm/s1-rpm-build-starting-build.html">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Getting the Sources</td><td align="center" valign="top" width="34%"><a href="http://www.rpm.org/max-rpm/ch-rpm-build.html">Up</a></td><td align="right" valign="top" width="33%">Starting the Build</td></tr></tbody></table></div></body></html>

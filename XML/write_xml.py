@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 #from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.etree.ElementTree import * 
@@ -13,7 +15,10 @@ def prettify(elem):
     """Return a pretty-printed XML string for the Element.
     """
 #    rough_string = ElementTree.tostring(elem, 'utf-8')
-    rough_string = tostring(elem, 'utf-8')
+    #rough_string = tostring(elem, 'utf-8')
+    #rough_string = tostring(elem, 'ISO-8859-15')
+    rough_string = tostring(elem)
+    # 
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent="  ")
 
@@ -36,6 +41,11 @@ def main(args):
 
     child_with_entity_ref = SubElement(top, 'child_with_entity_ref')
     child_with_entity_ref.text = 'This & that'
+ 
+    for i in range(2):
+        child = SubElement(top, 'filelist')
+        child.set('name','olle')
+  
 
     print prettify(top)
 

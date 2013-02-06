@@ -1,4 +1,8 @@
-class BytesIO(object):
+#from io.BytesIO import BytesIO
+
+from  io import BytesIO
+
+class OldBytesIO(object):
     """ A file-like API for reading and writing bytes objects.
 
     Mostly like StringIO, but write() calls modify the underlying
@@ -31,7 +35,8 @@ class BytesIO(object):
         self.mode = mode
         self.closed = False
         if self.mode == 'w':
-            del buf[:]
+            """TODO: What is the intention?? del of a string? """
+            #del buf[:]
             self._point = 0
         elif self.mode == 'r':
             self._point = 0
@@ -130,10 +135,12 @@ class BytesIO(object):
     
 def main():
     b = bytes()
-    f = BytesIO(b, 'w')
-    f.write(bytes.fromhex('ca fe ba be'))
-    f.write(bytes.fromhex('57 41 56 45'))
-    print b
+    #f = BytesIO(b, 'w')
+    f = BytesIO()
+    #f.write(bytes.fromhex('ca fe ba be'))
+    f.write('57')
+    f.write('98')
+    print f.getvalue()
     
 if __name__ == '__main__':
   main()

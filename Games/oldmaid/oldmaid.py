@@ -1,3 +1,4 @@
+import sys
 class Card(object):
     suitList = ["Clubs", "Diamonds", "Hearts", "Spades"]
     rankList = ["narf", "Ace", "2", "3", "4", "5", "6", "7",
@@ -136,7 +137,13 @@ class OldMaidGame(CardGame):
         if self.hands[i].isEmpty():
             return 0
         neighbor = self.findNeighbor(i)
+        print 'neighbor:',neighbor
+#        try:
         pickedCard = self.hands[neighbor].popCard()
+#        except:
+#            print 'Exception, We got neighbor:', neighbor
+#            sys.exit(42)
+                
         self.hands[i].addCard(pickedCard)
         print "Hand", self.hands[i].name, "picked", pickedCard
         count = self.hands[i].removeMatches()

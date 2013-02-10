@@ -85,11 +85,6 @@ class Hand(Deck):
         else:
             return s + " contains\n" + Deck.__str__(self)
 
-class CardGame:
-    def __init__(self):
-        self.deck = Deck()
-        self.deck.shuffle()
-
 class OldMaidHand(Hand):
     
     def removeMatches(self):
@@ -103,9 +98,12 @@ class OldMaidHand(Hand):
                 print "Hand %s: %s matches %s" % (self.name,card,match)
                 count = count + 1
             return count
+         
+class CardGame:
+    def __init__(self):
+        self.deck = Deck()
+        self.deck.shuffle()
         
- 
-
 class OldMaidGame(CardGame):
 
     def play(self, names):
@@ -134,6 +132,7 @@ class OldMaidGame(CardGame):
         self.printHands()
         
     def playOneTurn(self, i):
+        
         if self.hands[i].isEmpty():
             return 0
         neighbor = self.findNeighbor(i)
@@ -173,16 +172,7 @@ class OldMaidGame(CardGame):
         
         print 'So', loser,'loses.' 
             
-#===============================================================================
-# game = CardGame()
-# franks_hand = OldMaidHand("frank")
-# game.deck.deal([franks_hand], 13)
-# 
-# print 'before:',franks_hand
-# 
-# franks_hand.removeMatches()             
-# 
-# print 'after:', franks_hand
-#===============================================================================
+
+
 game = OldMaidGame()
 game.play(["Allen","Jeff","Chris"])

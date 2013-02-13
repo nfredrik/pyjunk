@@ -1,0 +1,16 @@
+The example module
+======================
+
+Using doctest_simple
+-------------------
+
+This is an example text file in reStructuredText format.  First import
+doctest_simple from the ``example`` module:
+
+>>> from  doctest_simple import *
+
+>>> my_function(2, 3)
+7
+>>> my_function('a', 3)
+'aaa'
+>>>

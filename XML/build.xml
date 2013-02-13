@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<project basedir="." default="cobolbuild" name="src" xmlns:ac="antlib:net.sf.antcontrib">
+  <!-- Generated for bolagsverket ab! -->
+  <taskdef classname="com.microfocus.ant.TaskCobol" name="cobol"/>
+  <echo message="cobol"/>
+  <taskdef classname="com.microfocus.ant.TaskCobolClean" name="cobolclean"/>
+  <taskdef classname="com.microfocus.ant.TaskCobolLink" name="cobollink"/>
+  <taskdef classpath="lib/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml" uri="antlib:net.sf.antcontrib"/>
+  <typedef classname="com.microfocus.ant.TypeDestinationFileList" name="mfdestfilelist"/>
+  <typedef classname="com.microfocus.ant.TypeFileList" name="mffilelist"/>
+  <typedef classname="com.microfocus.ant.TypeDirectiveList" name="mfdirlist"/>
+  <!-- ****************** OS-specific initialisation ****************** -->
+  <target name="os.init">
+    <condition property="unix">
+      <os family="unix"/>
+    </condition>
+  </target>
+  <target if="unix" name="os.init.unix">
+    <property name="ddlext" value=".so"/>
+    <property name="exeext" value=""/>
+    <property name="objext" value=".o"/>
+    <property name="equalsInDir" value="="/>
+    <property name="pathVar" value=":"/>
+    <property name="shell" value="sh"/>
+    <property name="shell.ext" value=".sh"/>
+    <property name="shell.arg" value="-c"/>
+    <property name="script header" value="#!/bin/sh"/>
+  </target>
+  <!-- ****************** COBOL compiler directives ****************** -->
+  <mfdirlist id="cobol_directive_set_1">
+    <directive name="DIALECT" value="MF"/>
+    <directive name="SOURCEFORMAT" value="fixed"/>
+    <directive name="CHARSET" value="ASCII"/>
+    <directive name="MAX-ERROR" value="100"/>
+    <directives value="COPYEXT&quot;cpy,,&quot;"/>
+    <directive name="SOURCETABSTOP" value="4"/>
+  </mfdirlist>
+  <!-- ****************** COBOL source files ****************** -->
+  <mffilelist id="cobol_file_set_1" srcdir="${basedir}" type="srcfile">
+    <file name="FUNK.pco" srcdir="pgm/BLB/FUNK"/>
+    <file name="BEHOR.pco" srcdir="pgm/BLB/INLFIL1"/>
+  </mffilelist>
+  <!-- ****************** COBOL copybook locations ****************** -->
+  <mffilelist id="cobol.copybook.locations">
+    <path name="${src}" type="copybook"/>
+  </mffilelist>
+  <!-- ****************** COBOL Source Files and Directive Set ****************** -->
+  <mfdirlist id="dirset.New_Configuration./var/lib/jenkins/workspace/fsvTest/src/pgm/BLB/FUNK/FUNK.pco" refid="cobol_directive_set_1"/>
+  <mffilelist refid="cobol.copybook.locations"/>
+  <target depends="init" name="FileCompile.New_Configuration./var/lib/jenkins/workspace/fsvTest/src/pgm/BLB/FUNK/FUNK.pco">
+    <cobol destdir="${basedir}/New_Configuration.bin" desttype="obj" forceCompile="${forceCompile}" is64bit="true" threadedRts="true">
+      <mffilelist refid="cobol.copybook.locations"/>
+      <mfdirlist refid="dirset.New_Configuration.${filename}"/>
+      <mffilelist srcdir="${basedir}" type="srcfile">
+        <file name="${filename}"/>
+      </mffilelist>
+    </cobol>
+    <basename file="${filename}" property="basename" suffix="pco"/>
+    <cobollink debug="true" destdir="${basedir}/New_Configuration.bin" destfile="${basename}" desttype="dll/cso" entrypoint="" is64bit="true" objectdir="${basedir}/New_Configuration.bin" objectfile="${basename}${objext}" threadedRts="true"/>
+  </target>
+  <mfdirlist id="dirset.New_Configuration./var/lib/jenkins/workspace/fsvTest/src/pgm/BLB/INLFIL1/BEHOR.pco" refid="cobol_directive_set_1"/>
+  <mffilelist refid="cobol.copybook.locations"/>
+  <target depends="init" name="FileCompile.New_Configuration./var/lib/jenkins/workspace/fsvTest/src/pgm/BLB/INLFIL1/BEHOR.pco">
+    <cobol destdir="${basedir}/New_Configuration.bin" desttype="obj" forceCompile="${forceCompile}" is64bit="true" threadedRts="true">
+      <mffilelist refid="cobol.copybook.locations"/>
+      <mfdirlist refid="dirset.New_Configuration.${filename}"/>
+      <mffilelist srcdir="${basedir}" type="srcfile">
+        <file name="${filename}"/>
+      </mffilelist>
+    </cobol>
+    <basename file="${filename}" property="basename" suffix="pco"/>
+    <cobollink debug="true" destdir="${basedir}/New_Configuration.bin" destfile="${basename}" desttype="dll/cso" entrypoint="" is64bit="true" objectdir="${basedir}/New_Configuration.bin" objectfile="${basename}${objext}" threadedRts="true"/>
+  </target>
+  <!-- ****************** Object files ****************** -->
+  <mffilelist id="cobol.default.object.files" srcdir="${basedir}/${cfgtargetdir}" type="objfile">
+    <file name="FUNK${objext}"/>
+    <file name="BEHOR${objext}"/>
+  </mffilelist>
+  <!-- ****************** Configuration targets ****************** -->
+  <target depends="init" name="cobol.cfg.New_Configuration">
+    <cobol destdir="${basedir}/New_Configuration.bin" desttype="obj" forceCompile="${forceCompile}" is64bit="true" threadedRts="true">
+      <mffilelist refid="cobol.copybook.locations"/>
+      <mfdirlist refid="cobol_directive_set_1"/>
+      <mffilelist refid="cobol_file_set_1"/>
+    </cobol>
+    <cobollink destdir="${basedir}/New_Configuration.bin" destfile="FUNK" desttype="dll/cso" entrypoint="" is64bit="true" objectdir="${basedir}/New_Configuration.bin" objectfile="FUNK${objext}" threadedRts="true"/>
+    <cobollink destdir="${basedir}/New_Configuration.bin" destfile="BEHOR" desttype="dll/cso" entrypoint="" is64bit="true" objectdir="${basedir}/New_Configuration.bin" objectfile="BEHOR${objext}" threadedRts="true"/>
+  </target>
+  <target depends="init" name="New_Configuration.FileCompile">
+    <ac:for keepgoing="true" list="${filesList}" param="filename" trim="true">
+      <sequential>
+        <ac:if>
+          <not>
+            <isset property="isCancelled"/>
+          </not>
+          <then>
+            <ac:antcallback inheritAll="true" return="isCancelled" target="FileCompile.New_Configuration.@{filename}">
+              <param name="filename" value="@{filename}"/>
+            </ac:antcallback>
+          </then>
+        </ac:if>
+      </sequential>
+    </ac:for>
+  </target>
+  <target depends="init" name="clean.cfg.New_Configuration">
+    <cobolclean debug="true" destdir="${basedir}/New_Configuration.bin" desttype="dll">
+      <mffilelist refid="cobol_file_set_1"/>
+    </cobolclean>
+  </target>
+  <target depends="init" name="pre.build.cfg.New_Configuration"/>
+  <target depends="init" name="post.build.cfg.New_Configuration"/>
+  <!-- ****************** General targets ****************** -->
+  <target name="init.New_Configuration">
+    <property name="cfgtargetdir" value="New_Configuration.bin"/>
+  </target>
+  <target depends="os.init, os.init.unix" name="init">
+    <property environment="env"/>
+    <property name="src" value="${basedir}"/>
+    <property name="cfg" value="New_Configuration"/>
+    <property name="cfgtarget" value="cfg.${cfg}"/>
+    <property name="forceCompile" value="true"/>
+  </target>
+  <target depends="init,init.New_Configuration" name="cobolbuild">
+    <antcall inheritAll="true" target="pre.build.${cfgtarget}"/>
+    <antcall inheritAll="true" target="cobol.${cfgtarget}"/>
+    <antcall inheritAll="true" target="post.build.${cfgtarget}"/>
+  </target>
+  <target name="compileNoBms">
+    <antcall inheritAll="true" target="${cfg}.FileCompile"/>
+  </target>
+  <target depends="compileNoBms" name="compile"/>
+  <target depends="init,init.New_Configuration" name="clean">
+    <antcall inheritAll="true" target="clean.${cfgtarget}"/>
+  </target>
+</project>
+

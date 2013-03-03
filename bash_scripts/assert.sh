@@ -1,54 +1,48 @@
 #!/bin/bash
-# assert.sh
+#set -x
 
-#######################################################################
-assert ()                 #  If condition false,
-{                         #+ exit from script
-                          #+ with appropriate error message.
-  E_PARAM_ERR=98
-  E_ASSERT_FAILED=99
+#--------------------------------------------------------------
+function debug 
+{
+    if [ $debug ]; then
+	echo -e $1
+    fi
+}
+
+#--------------------------------------------------------------
+function assert()
+{   
+
+    # If NDEBUG set do not care about assert
+    if [ -n "$NDEBUG" ]
+    then
+        return
+    fi
+
+    # Make sure that we have an argument
+    if [ -z "$1" ] 
+    then
+        echo 'assert: argument not set' $1
+        exit 42
+    fi
+              
+    # Okey here we are, expression true?
+    if [ ! $1 ] 
+    then
+        echo "Assertion failed:  \"$1\""
+        echo 'lineno, function, file:' $(caller 0)
+        exit 42
+    fi  
+}
 
 
-  if [ -z "$2" ]          #  Not enough parameters passed
-  then                    #+ to assert() function.
-    return $E_PARAM_ERR   #  No damage done.
-  fi
+cat nisse &>/dev/null
 
-  lineno=$2
+NDEBUG=true
 
-#  if [ ! $1 ] 
-  if [[ ! -n $1 || ! $1 ]] 
-  then
-    echo "Assertion failed:  \"$1\""
-    echo "File \"$0\", line $lineno"    # Give name of file and line number.
-    exit $E_ASSERT_FAILED
-  # else
-  #   return
-  #   and continue executing the script.
-  fi  
-} # Insert a similar assert() function into a script you need to debug.    
-#######################################################################
+#assert "${?} -eq 0"
 
-
-a=3
+a=8
 b=4
-condition="$a -lt $b"     #  Error message and exit from script.
-                          #  Try setting "condition" to something else
-                          #+ and see what happens.
-
-assert "$condition" $LINENO
-# The remainder of the script executes only if the "assert" does not fail.
-
-
-assert " " $LINENO
-
-var=''
-assert $var $LINENO
-
-# Some commands.
-# Some more commands . . .
-echo "This statement echoes only if the \"assert\" does not fail."
-# . . .
-# More commands . . .
-
-exit $?
+condition="$a -lt $b"
+assert "$condition"

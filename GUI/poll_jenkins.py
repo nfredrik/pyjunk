@@ -16,20 +16,14 @@ flip = False
 
 class View(Subscriber,Frame):
     def __init__(self, master=None):
-       
-        
+             
         Frame.__init__(self, master)
         self.master=master
         self.pack()
         self.createWidgets()        
-        print'view initiated'
         self.Control = Control(view= self)        
         
     def notify(self,postname):
-        #self.txt.delete(1.0, END)
-        print 'View got:', postname.get_status()
-        #self.txt.insert(END, str(postname.get_status()))
-        #self.txt.insert(END, '2')
         (txt, color) = postname.get_status()
         self.l.config(text=txt)
         self.l.config(bg=color)
@@ -37,8 +31,8 @@ class View(Subscriber,Frame):
     def callback(self):
         print self.e.get()
         self.Control.setURL(self.e.get())
-        #self.master.title=self.e.get()
         root.title(self.e.get()) 
+        
     def createWidgets(self):
         self.e = Entry(self.master)
         self.e.pack()
@@ -48,7 +42,6 @@ class View(Subscriber,Frame):
         self.b.pack()
 
         self.l = Label(self.master, 
-        # text="Build ok",
          fg = "black",
          bg = "white",
          font = "Helvetica 16 bold italic")
@@ -94,8 +87,7 @@ class Model(Publisher, threading.Thread):
         self.url=''
         self.result= tuple()
 
-    def setURL(self,url=""):
-        print 'Model got:', url
+    def setURL(self,url=""): 
         self.url = url
         
     def getResultFromJenkins(self):

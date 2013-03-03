@@ -3,8 +3,7 @@
 
 import sys
 
-def main():
-  args = sys.argv[1:]
+def main(args):
 
   if not args:
     print 'usage: [--todir dir] logfile '
@@ -25,4 +24,4 @@ def main():
       print 'nothing found'
 
 if __name__ == '__main__':
-  main()
+    sys.exit(main(sys.argv[1:] or 0))

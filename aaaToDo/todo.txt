@@ -1,0 +1,117 @@
+Projekt för att förbättra min färdigheter i python och OOP
+----------------------------------------------------------
+
+Använda mig av doctest vid prototyping och systemering av projekt
+
+
+CI-lampa
+--------
+
+Få till en fungerande CI-lampa för att använda på bolagsverket.
+Skapa en View-class (utan GUI) som tar emot en notification från
+Modellen och presenterar resultatet.
+
+Problem idag 120218. kontakt med Lampan men det går bara att sätta
+i blått eller släcka den. Alla lösningar på nätet petar på första
+byten och sätter de efterföljande "4 byten" till 4.
+
+Hur gå vidare?
+
+Testa linuxlösningen för att vara säker på att lampan fungerar som
+den ska.
+
+Köra med en USB-sniffer (USB-trace) för att ta reda på hur lampan
+styrs när man kör det normala programmet.
+
+se :  MVC
+
+GUI-ramverk för test
+---------------------
+
+Ett GUI för att initiera tester. En progressbar hur långt testerna
+har avancerat. Använd det som finns på nätet. Vyn frågar vi Control
+hur många tester som körs.
+
+Sätt upp en enhetstest alternativt doctest för att testa ut
+
+Bocka i för att köra testerna i loop.
+y
+Alternativ på svar från modellen, en returkod samt en text som GUIt
+bara behöver returnera.
+
+Vyn kan markera i rött om tester går fel samt svart om dom är okey.
+
+Alternativt ha en bild på en lampa om det har gått fel respektive rätt.
+
+
+
+Statistik på något på nätet, Facebook, Morningstar, endomondo
+-------------------------------------------------------------
+
+
+En infocentral i hallen i Sundbyberg
+------------------------------------
+
+Där man kan presentera tider för buss, tunnelbana, väder osv.
+pingtider till närmasta routern?
+
+
+Skriva det i python och tkinter. På någon hårdvara som är
+liten? 
+
+
+
+Projekt för rasberrydatorn
+--------------------------
+
+- Spara pingtider i sqlite3 kanske för att sen presentera på en websida, bahnhof?
+
+- Lämplig plotprogram för att skicka upp dags, vecko och månadsplot från sqliten, hur göra?
+
+- Sätta upp en termometer för temperatur.nu. Vad är bästa ställe? Arbetsrummet?
+
+- En skärm för att presentera busstider, tunnelbanetider, vilka dagar susanne jobbar?
+  vad som händer i sundbyberg?
+  
+- Har den en kamera?
+
+- Ha koll på om Jocke resp Karro är inloggade på fb, presentera det!
+
+- Samma fast med skype
+
+
+
+
+
+Datorer för olika projekt
+-------------------------
+
+
+Delldatorn på jobbet: Installera en senare linuxdist och prova installera openstack??
+
+acer-laptoppen: Installera senare version linuxdist och kör Jenkins för någon intressant bygge exis det som duvall eller någon annat större?
+
+atom-datorn:
+
+rasberrypi: se ovan.
+
+cybercomdatorn: Kolla om den inte för varm.... Installera vad ???
+
+
+
+Bahnhof
+-------
+
+
+http://www.bahnhof.se/wb177225/
+
+
+FTP-server: privat.bahnhof.se
+
+Användarnamn: wb177225
+
+lösen: 94e6a11d6
+ 
+ 
+
+ 

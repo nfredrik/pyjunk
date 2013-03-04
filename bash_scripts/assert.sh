@@ -10,6 +10,13 @@ function debug
 }
 
 #--------------------------------------------------------------
+#
+# assert()
+#
+# Disabled if NDEBUG defined.
+#
+# Examples, check for result of command: assert "$? -ne 0" "ls on dir directory failed"
+#
 function assert()
 {   
 
@@ -31,6 +38,7 @@ function assert()
     then
         echo "Assertion failed:  \"$1\""
         echo 'lineno, function, file:' $(caller 0)
+        [ -n "$2" ] && {echo $2}
         exit 42
     fi  
 }

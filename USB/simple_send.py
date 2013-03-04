@@ -25,13 +25,18 @@ def click_signal(target_usage, target_vendor_id):
                 # changing find_output_reports() to find_feature_reports()
                 for report in device.find_output_reports():
                     if target_usage in report:
+                        print 'target_usage:%x'% target_usage
                         # found out target!
-                        report[target_usage] = 1 # yes, changing values is that easy
+                        #report[target_usage] = 1 # yes, changing values is that easy
                         # at this point you could change different usages at a time...
                         # and finally send the prepared output report
-                        report.send()               
+                        #report.send()               
                         # now toggle back the signal
-                        report[target_usage] = 0
+                        report[target_usage][0] = 0x1
+                        report[target_usage][1] = 0x4
+                        report[target_usage][2] = 0x4
+                        report[target_usage][3] = 0x4
+                        report[target_usage][4] = 0x4
                         report.send()
                         print "\nUsage clicked!\n"
                         return
@@ -40,8 +45,9 @@ def click_signal(target_usage, target_vendor_id):
         print "The target device was found, but the requested usage does not exist!\n"
     #
 if __name__ == '__main__':
-    target_vendor_id = 0x1234 # just an example, change it to the actual vendor_id
-    target_usage = hid.get_full_usage_id(0xffa0, 0x02) # generic vendor page, usage_id = 2
+    target_vendor_id = 0x1294 # just an example, change it to the actual vendor_id
+    #target_usage = hid.get_full_usage_id(0xffa0, 0x2) # generic vendor page, usage_id = 2
+    target_usage = hid.get_full_usage_id(0xff00, 0x1) # generic vendor page, usage_id = 2
     # go for it!
     click_signal(target_usage, target_vendor_id)
 

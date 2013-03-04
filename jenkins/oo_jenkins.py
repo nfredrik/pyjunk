@@ -135,11 +135,19 @@ class USBDevice(object):
     
     def setLEDColor(self, color):
         
-        print 'Got:', color
+        #print 'Got:', color
         report = self.device.find_output_reports()[ 0 ]
-        report[ 0xff000001 ][ 0 ] = color
-        report.send()
-        time.sleep(5)
+        #report[ 0xff000001 ][ 0 ] = color
+        for i in range(1,10):
+            print 'turn:', i
+            report[ 0xff000001 ][ 0 ] = 7
+            report[ 0xff000001 ][ 1 ] = 4
+            report[ 0xff000001 ][ 2 ] = 4
+            report[ 0xff000001 ][ 3 ] = 4
+            report[ 0xff000001 ][ 4 ] = 4
+            report.send()
+            time.sleep(2)
+            
         return   
 
         print 'trying to set color...'

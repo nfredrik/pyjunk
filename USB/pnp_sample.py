@@ -11,14 +11,14 @@ a target for PnP events, for now this are HID class wise, this means you'll have
 to test if your device 'plug' status has changed.
 """
 
-import wx
+from wx import Frame
 import pywinusb.hid as hid
 
 # feel free to test
-target_vendor_id = 0x1234
-target_product_id = 0x0001
+target_vendor_id = 0x1294
+target_product_id = 0x1320
 
-class MyFrame(wx.Frame,hid.HidPnPWindowMixin):
+class MyFrame(Frame,hid.HidPnPWindowMixin):
     # a device so we could easily discriminate wich devices to look at
     my_hid_target = hid.HidDeviceFilter(vendor_id = target_vendor_id, product_id = target_product_id)
     

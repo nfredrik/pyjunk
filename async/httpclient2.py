@@ -1,5 +1,6 @@
 import asyncore
 import logging
+import logging.handlers
 import socket
 from cStringIO import StringIO
 import urlparse

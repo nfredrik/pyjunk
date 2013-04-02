@@ -1,0 +1,13 @@
+
+130329
+------
+
+0x1294, product_id = 0x1320
+
+Jag har fortfarande inte fått till det med lampan. Den kan blinka men bara
+i blått. Idag sätter alla program in byte i en array av bytes (dom andra sätts
+till 0).
+
+Jag misstänker att någon har ändrats i hårdvaran så man måste göra något
+mer, vad vet jag inte. Tror att man behöver sniffa lite med någon USBsniffer
+i windows.

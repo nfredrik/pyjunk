@@ -1,0 +1,21 @@
+130329
+------
+
+Har en fungerade poll på websida. Kör med microsoft.com. Innan kaj63.se (vilket sänkte sidan). Nu
+är det stabilt.
+
+
+Installera: BeatifulSoup på kortet!
+
+
+
+- Lägga in fler att logga i en rrdplot
+
+- lägg in flera grapher, senaste dygner, veckan, månaden, året
+
+- Lägg in grapher på fonder dgfonder med mera
+
+
+Python har inte interfaces:
+Workarounds:
+(PyProtocols, zope.interface)

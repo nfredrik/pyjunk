@@ -25,6 +25,26 @@ styrs när man kör det normala programmet.
 
 se :  MVC
 
+
+Jenkinsprojekt
+--------------
+
+Bli bra på Jenkins.
+
+- Skriv någon plugin i Jenkins. Utgå från något väligt enkelt.
+
+- Vidareutveckla groovy-skript-skrivandet
+
+- Installera sonar på blvs byggserver.
+
+- Sätt mig in i pipelinepluginsen.
+
+- installera maven, skapa ett projekt med deploy
+
+- skapa ett rpm-projekt
+
+
+
 GUI-ramverk för test
 ---------------------
 
@@ -43,6 +63,17 @@ Vyn kan markera i rött om tester går fel samt svart om dom är okey.
 
 Alternativt ha en bild på en lampa om det har gått fel respektive rätt.
 
+
+
+Bevakning av Didner & Gerge-fonden
+----------------------------------
+
+Hämta OMX för ett datum. Ta fram ett förhållande mot DG-fonden vid det datumet.
+
+Nästkommande dygn skicka ett mail där man får presenterat hur förhållandet
+har förändrats i procent mot den första mätningen.
+
+Som plus lägg på en  förhållandet från föregående dygn.
 
 
 Statistik på något på nätet, Facebook, Morningstar, endomondo
@@ -68,6 +99,8 @@ Projekt för rasberrydatorn
 
 - Lämplig plotprogram för att skicka upp dags, vecko och månadsplot från sqliten, hur göra?
 
+		
+
 - Sätta upp en termometer för temperatur.nu. Vad är bästa ställe? Arbetsrummet?
 
 - En skärm för att presentera busstider, tunnelbanetider, vilka dagar susanne jobbar?
@@ -80,7 +113,10 @@ Projekt för rasberrydatorn
 - Samma fast med skype
 
 
+Få igång Duvalls byggmiljö enligt boken
+---------------------------------------
 
+Installera det som behövs för att köra duvalls CI-miljö för att lära sig använda Jenkins
 
 
 Datorer för olika projekt
@@ -97,11 +133,12 @@ rasberrypi: se ovan.
 
 cybercomdatorn: Kolla om den inte för varm.... Installera vad ???
 
-
+moln i bahnhof: gratis i 3 månader.
 
 Bahnhof
 -------
 
+hemsida på bahnhof
 
 http://www.bahnhof.se/wb177225/
 

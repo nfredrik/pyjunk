@@ -1,0 +1,46 @@
+120329
+------
+
+Här pekar projektet ut ett en URL där lite vendorprogramvara ska ligga,
+men det verkar inte finnas något där. Det kan hända att något har har
+lagts upp där under tiden!
+
+tanka ner mysql
+
+C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software>ant start-db
+Buildfile: C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software\build
+.xml
+
+start-db:
+
+get-deps:
+      [get] Getting: http://www.integratebutton.com/downloads/third-party/mysql-
+connector-java-5.1.20-bin.jar
+      [get] To: C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software\
+lib\mysql-connector-java-5.1.20-bin.jar
+      [get] Error opening connection java.io.IOException: Server returned HTTP r
+esponse code: 403 for URL: http://www.integratebutton.com/downloads/third-party/
+mysql-connector-java-5.1.20-bin.jar
+      [get] Error opening connection java.io.IOException: Server returned HTTP r
+esponse code: 403 for URL: http://www.integratebutton.com/downloads/third-party/
+mysql-connector-java-5.1.20-bin.jar
+      [get] Error opening connection java.io.IOException: Server returned HTTP r
+esponse code: 403 for URL: http://www.integratebutton.com/downloads/third-party/
+mysql-connector-java-5.1.20-bin.jar
+      [get] Can't get http://www.integratebutton.com/downloads/third-party/mysql
+-connector-java-5.1.20-bin.jar to C:\Program Files (x86)\Jenkins\workspace\CI_by
+_example\software\lib\mysql-connector-java-5.1.20-bin.jar
+
+start-db:
+     [java] Fel: Hittar inte eller kan inte ladda huvudklassen org.hsqldb.Server
+
+
+BUILD FAILED
+C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software\build.xml:222: T
+he following error occurred while executing this line:
+C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software\database-integra
+tion.xml:49: Java returned: 1
+
+Total time: 7 seconds
+
+C:\Program Files (x86)\Jenkins\workspace\CI_by_example\software>

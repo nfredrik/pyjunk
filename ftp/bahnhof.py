@@ -1,6 +1,8 @@
 import sys
 from ftplib import FTP
 
+# http://privat.bahnhof.se/wb177225/
+
 def first():
     ftp = FTP('privat.bahnhof.se') 
     
@@ -25,12 +27,21 @@ class myFTP(object):
         print 'upload'
         self.ftp.storbinary('STOR ' + file, open(file, 'rb'))
         
-    #def __del__(self):
+    def __del__(self):
         #pass
-        #print 'del'
-        #self.ftp.quit()
+        print 'del'
+        self.ftp.quit()
         #print 'ftp session terminated' 
+        
 
+class bahnHof(object):
+    def __init__(self):
+        self.bahnhof = myFTP('privat.bahnhof.se', 'wb177225', '94e6a11d6')        
+
+    def upload(self,file):
+        self.bahnhof.upload(file)
+        
+        
 def main(args):
     
     #first()

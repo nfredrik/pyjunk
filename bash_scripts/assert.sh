@@ -36,19 +36,17 @@ function assert()
     # Okey here we are, expression true?
     if [ ! $1 ] 
     then
-        echo "Assertion failed:  \"$1\""
-        echo 'lineno, function, file:' $(caller 0)
-        [ -n "$2" ] && {echo $2}
+        echo -n "Assertion failed:  \"$1\""
+        [ -n "$2" ] && echo ",$2"
+        echo ' lineno, function, file:' $(caller 0)
         exit 42
     fi  
 }
 
+#NDEBUG=true
 
 cat nisse &>/dev/null
-
-NDEBUG=true
-
-#assert "${?} -eq 0"
+assert "${?} -eq 0" "Failed to cat nisse"
 
 a=8
 b=4

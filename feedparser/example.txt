@@ -1,0 +1,4 @@
+import feedparser
+>>> d = feedparser.parse(rawdata)
+>>> d['feed']['title']
+u'Sample Feed'

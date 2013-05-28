@@ -37,13 +37,17 @@ function assert()
     if [ ! $1 ] 
     then
         echo -n "Assertion failed:  \"$1\""
-        [ -n "$2" ] && echo ",$2"
+        [ -n "$2" ] && echo ", $2"
         echo ' lineno, function, file:' $(caller 0)
         exit 42
     fi  
 }
 
 #NDEBUG=true
+
+DIR='pelle'
+
+assert "-d ${DIR}" "Could not find directory:${DIR}"
 
 cat nisse &>/dev/null
 assert "${?} -eq 0" "Failed to cat nisse"

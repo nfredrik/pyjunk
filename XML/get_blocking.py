@@ -2,14 +2,22 @@
 import sys
 from xml.etree import ElementTree
 
-with open('pcobolBuild', 'rt') as f:
+with open('config.xml', 'rt') as f:
     tree = ElementTree.parse(f)
 
-#print tree
+#
+fn = tree.find("blockingJobs/cdbisboCDBI")
+
+print fn
+
+sys.exit(0)
 
 #for node in tree.iter():   2.7 and later
+
+#  tag: blockingJobs
 for node in tree.getiterator():
-    print node.tag, '::', node.attrib
+#    print node.tag, '::', node.attrib
+    print node.tag, '::', node.text
 sys.exit(0)
 
 

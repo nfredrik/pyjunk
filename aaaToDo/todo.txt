@@ -4,6 +4,21 @@ Projekt för att förbättra min färdigheter i python och OOP
 Använda mig av doctest vid prototyping och systemering av projekt
 
 
+kiosken
+-------
+
+Använda webkamera för att trigga närvaro och tända skärmen, går det?
+
+
+Kolla boräntan
+--------------
+
+Jämför den ränta jag har fått på SHB håller gapet till den officiella räntan. 
+
+Räntan kan man läsa från nätet. Min ränta får jag försöka få ut ur en pdf??
+Använd pdfminer kanske?
+
+
 CI-lampa
 --------
 
@@ -11,7 +26,7 @@ Få till en fungerande CI-lampa för att använda på bolagsverket.
 Skapa en View-class (utan GUI) som tar emot en notification från
 Modellen och presenterar resultatet.
 
-Problem idag 120218. kontakt med Lampan men det går bara att sätta
+Problem idag 130218. kontakt med Lampan men det går bara att sätta
 i blått eller släcka den. Alla lösningar på nätet petar på första
 byten och sätter de efterföljande "4 byten" till 4.
 
@@ -43,6 +58,9 @@ Bli bra på Jenkins.
 
 - skapa ett rpm-projekt
 
+- Använda BuildHive!
+
+- Använda CloudMunch!
 
 
 GUI-ramverk för test
@@ -151,4 +169,45 @@ lösen: 94e6a11d6
  
  
 
+
+Jenkinsjobb som skjuter ut en installation på annan dator
+---------------------------------------------------------
+
+- bygga sätta upp paket för installation
  
+- stoppa nuvarande applikation på remotedatorn
+
+- installera den nya version av applikationen på remotedatorn
+
+- Kör tester av applikationen på datorn
+
+- Fånga upp resultatet och visa i Jenkins
+
+
+Routerblockeringar
+------------------
+
+Plocka ut:
+
+-  vilka ip-adresser som accessar mitt nät
+
+- Gör ett DNS-uppslag på dessa
+
+- Visa vid vilka tidpunkter dom accessar nätet
+
+- Hur spara sqlite3, json? något annat?
+
+- Teknik för att filtrera, samma som apache-loggar? generators?
+
+[LAN access from remote] from 62.32.211.195:30049 to 10.0.0.101:6676, Sunday, May 26,2013 18:48:58
+[Service blocked: ICMP_echo_req] from source 172.22.1.45, Sunday, May 26,2013 18:47:35
+[LAN access from remote] from 85.227.221.190:51859 to 10.0.0.101:36641, Sunday, May 26,2013 18:47:30
+[Service blocked: ICMP_echo_req] from source 172.22.1.45, Sunday, May 26,2013 18:47:25
+[LAN access from remote] from 89.235.222.45:42130 to 10.0.0.101:6676, Sunday, May 26,2013 18:46:51
+[LAN access from remote] from 62.151.59.214:3762 to 10.0.0.101:6676, Sunday, May 26,2013 18:46:46
+[Service blocked: ICMP_echo_req] from source 172.22.1.45, Sunday, May 26,2013 18:46:35
+
+
+
+
+-  

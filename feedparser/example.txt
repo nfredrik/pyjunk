@@ -1,4 +1,5 @@
-import feedparser
+>>> from feedparser import *
+>>> rawdata = """<rss version="2.0"> <channel><title>Sample Feed</title></channel></rss>"""
 >>> d = feedparser.parse(rawdata)
 >>> d['feed']['title']
 u'Sample Feed'

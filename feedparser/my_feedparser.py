@@ -4,3 +4,8 @@ rawdata = """<rss version="2.0">
 <title>Sample Feed</title>
 </channel>
 </rss>"""
+
+
+if __name__ == "__main__":
+    
+    p = feedparser

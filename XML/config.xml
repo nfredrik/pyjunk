@@ -1,15 +1,14 @@
-<?xml version='1.0' encoding='UTF-8'?>
 <project>
-  <actions/>
-  <description>&lt;html&gt;&#xd;
-&#xd;
-&lt;h1&gt; FullDeploy&lt;/h1&gt;&#xd;
-  &#xd;
-FullBygge. Alla cobolmoduler kompileras. Tarfilerna heter exvis: D20121206_SVN000301_B0105_&lt;font color=&quot;red&quot;&gt;NAMN_PÅ_BRANCH&lt;/font&gt;  &#xd;
-  och läggs under &lt;b&gt;/program/Test-Leveranser&lt;/b&gt;&#xd;
-&lt;/html&gt;&#xd;
-&#xd;
-&#xd;
+  <actions />
+  <description>&lt;html&gt;
+
+&lt;h1&gt; FullDeploy&lt;/h1&gt;
+  
+FullBygge. Alla cobolmoduler kompileras. Tarfilerna heter exvis: D20121206_SVN000301_B0105_&lt;font color=&quot;red&quot;&gt;NAMN_P&#197;_BRANCH&lt;/font&gt;  
+  och l&#228;ggs under &lt;b&gt;/program/Test-Leveranser&lt;/b&gt;
+&lt;/html&gt;
+
+
 </description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -21,7 +20,7 @@ FullBygge. Alla cobolmoduler kompileras. Tarfilerna heter exvis: D20121206_SVN00
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>cdbisboCDBI</blockingJobs>
+      <blockingJobs>Remelgas</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -40,18 +39,18 @@ FullBygge. Alla cobolmoduler kompileras. Tarfilerna heter exvis: D20121206_SVN00
         <local>src</local>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
-    <excludedRegions></excludedRegions>
-    <includedRegions></includedRegions>
-    <excludedUsers></excludedUsers>
-    <excludedRevprop></excludedRevprop>
-    <excludedCommitMessages></excludedCommitMessages>
-    <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
+    <excludedRegions />
+    <includedRegions />
+    <excludedUsers />
+    <excludedRevprop />
+    <excludedCommitMessages />
+    <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater" />
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector" />
   <concurrentBuild>false</concurrentBuild>
   <customWorkspace>/srv/jenkins/cdbisboFullDeploy</customWorkspace>
   <builders>
@@ -80,18 +79,18 @@ cd $WORKSPACE/src
 $WORKSPACE/src/scripts/check_so_against_pco.sh $WORKSPACE </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># Discard seconds and &apos;-&apos; from BUILD_ID  Note that this command creates propfile
+      <command># Discard seconds and '-' from BUILD_ID  Note that this command creates propfile
 
-echo DATE=$(echo $BUILD_ID | cut -c1-10 | sed &apos;s/\-//g&apos; ) &gt; $WORKSPACE/propsfile
+echo DATE=$(echo $BUILD_ID | cut -c1-10 | sed 's/\-//g' ) &gt; $WORKSPACE/propsfile
 
 # Zero fill with  4 chars
-echo BUILD=$(printf &apos;%04d&apos;  $BUILD_NUMBER) &gt;&gt; $WORKSPACE/propsfile
+echo BUILD=$(printf '%04d'  $BUILD_NUMBER) &gt;&gt; $WORKSPACE/propsfile
 
 # Pick to SVN number from the checkout
 # Zero fill with 6 chars
-echo SVN=$(printf &apos;%06d&apos;  $SVN_REVISION) &gt;&gt; $WORKSPACE/propsfile
+echo SVN=$(printf '%06d'  $SVN_REVISION) &gt;&gt; $WORKSPACE/propsfile
 
-echo PACKAGE=$(echo $SVN_URL | awk &apos;BEGIN{FS=&quot;/&quot;}  {print $7 }&apos; | tr &apos;[:lower:]&apos; &apos;[:upper:]&apos;)  &gt;&gt; $WORKSPACE/propsfile</command>
+echo PACKAGE=$(echo $SVN_URL | awk 'BEGIN{FS="/"}  {print $7 }' | tr '[:lower:]' '[:upper:]')  &gt;&gt; $WORKSPACE/propsfile</command>
     </hudson.tasks.Shell>
     <EnvInjectBuilder plugin="envinject@1.73">
       <info>
@@ -104,8 +103,8 @@ RELEASE_TAG=D${DATE}_SVN${SVN}_B${BUILD}_${PACKAGE}</propertiesContent>
       <command># Build up stuff for mailing
 echo SUBJECT1=&quot;${RELEASE_TAG} deploy&quot;  &gt;&gt; $WORKSPACE/propsfile
 
-export GENERAL=&quot;&lt;html&gt;&lt;h4&gt;Allmänt:&lt;/h4&gt;&lt;p&gt;Deploy av ${RELEASE_TAG} har gjorts.&lt;/p&gt;&quot;
-echo &quot;${GENERAL} &lt;h4&gt;Ändringar:&lt;/h4&gt; &lt;p&gt;${Modifieringar}&lt;/p&gt;&lt;h4&gt;Deployen gjord av:&lt;/h4&gt; ${BUILD_USER}&lt;/html&gt;&quot; &gt; ${RELEASE_TAG}_release_notes.html
+export GENERAL=&quot;&lt;html&gt;&lt;h4&gt;Allm&#228;nt:&lt;/h4&gt;&lt;p&gt;Deploy av ${RELEASE_TAG} har gjorts.&lt;/p&gt;&quot;
+echo &quot;${GENERAL} &lt;h4&gt;&#196;ndringar:&lt;/h4&gt; &lt;p&gt;${Modifieringar}&lt;/p&gt;&lt;h4&gt;Deployen gjord av:&lt;/h4&gt; ${BUILD_USER}&lt;/html&gt;&quot; &gt; ${RELEASE_TAG}_release_notes.html
 
 echo CONTENT=$(cat ${RELEASE_TAG}_release_notes.html) &gt;&gt; $WORKSPACE/propsfile</command>
     </hudson.tasks.Shell>
@@ -130,7 +129,7 @@ $WORKSPACE/src/scripts/d4prod_deploy.sh nodebug $RELEASE_TAG $WORKSPACE /program
     </hudson.plugins.logparser.LogParserPublisher>
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
       <groovyScript>if(manager.build.result.isBetterOrEqualTo(hudson.model.Result.UNSTABLE)) {
-    manager.addShortText(&quot;${manager.build.buildVariables.get(&apos;BUILD_USER&apos;)}&quot;)
+    manager.addShortText("${manager.build.buildVariables.get('BUILD_USER')}")
 }</groovyScript>
       <behavior>0</behavior>
     </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
@@ -139,7 +138,7 @@ $WORKSPACE/src/scripts/d4prod_deploy.sh nodebug $RELEASE_TAG $WORKSPACE /program
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
-            <recipientList></recipientList>
+            <recipientList />
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
@@ -150,7 +149,7 @@ $WORKSPACE/src/scripts/d4prod_deploy.sh nodebug $RELEASE_TAG $WORKSPACE /program
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
           <email>
-            <recipientList></recipientList>
+            <recipientList />
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
@@ -161,10 +160,10 @@ $WORKSPACE/src/scripts/d4prod_deploy.sh nodebug $RELEASE_TAG $WORKSPACE /program
         </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
       </configuredTriggers>
       <contentType>text/html</contentType>
-      <defaultSubject>${ENV,var=&quot;SUBJECT2&quot;}</defaultSubject>
-      <defaultContent>${ENV,var=&quot;MSG&quot;}</defaultContent>
+      <defaultSubject>${ENV,var="SUBJECT2"}</defaultSubject>
+      <defaultContent>${ENV,var="MSG"}</defaultContent>
       <attachmentsPattern>*.txt</attachmentsPattern>
-      <presendScript></presendScript>
+      <presendScript />
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.10">
       <deleteDirs>false</deleteDirs>
@@ -175,6 +174,6 @@ $WORKSPACE/src/scripts/d4prod_deploy.sh nodebug $RELEASE_TAG $WORKSPACE /program
     <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.10">
       <deleteDirs>false</deleteDirs>
     </hudson.plugins.ws__cleanup.PreBuildCleanup>
-    <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.1"/>
+    <org.jenkinsci.plugins.builduser.BuildUser plugin="build-user-vars-plugin@1.1" />
   </buildWrappers>
 </project>

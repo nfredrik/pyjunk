@@ -2,31 +2,39 @@
 import sys
 from xml.etree import ElementTree
 
-with open('config.xml', 'rt') as f:
-    tree = ElementTree.parse(f)
+OK, ERROR = 0,1
 
-#
-fn = tree.find("blockingJobs/cdbisboCDBI")
-
-print fn
-
-sys.exit(0)
-
-#for node in tree.iter():   2.7 and later
-
-#  tag: blockingJobs
-for node in tree.getiterator():
-#    print node.tag, '::', node.attrib
-    print node.tag, '::', node.text
-sys.exit(0)
+#JENKINS_HOME_JOBS_SPACE = '/var/lib/jenkins/jobs/'
+JENKINS_HOME_JOBS_SPACE = './'
+JENKINS_CONFIG_FILE = '/config.xml'
 
 
-for node in tree.getiterator('file'):
-    name = node.attrib.get('name')
-    if name:
-        print ' %s' %  name
+def main(args):
 
-for node in tree.getiterator('file'):
-    name = node.attrib.get('name')
-    if name:
-        print ' %s' %  name
+    if len(args) != 2:
+        print 'Error: We need name of job and name of CDBI-job as argument'
+        return ERROR
+
+    print 'jobname:', args[0]
+    jobname = args[0]
+    print 'CDBIjobname:', args[1]
+    cdbi_jobname = args[1]
+
+    PATH =  JENKINS_HOME_JOBS_SPACE + jobname + JENKINS_CONFIG_FILE
+
+    tree = ElementTree.parse(PATH)
+
+    for node in tree.getiterator():
+        if node.tag == "blockingJobs":
+            print node.tag, '::', node.text
+            node.text = cdbi_jobname
+            tree.write(PATH)
+            return OK
+
+    return ERROR
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:] or [0]))
+
+
+

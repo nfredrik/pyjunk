@@ -63,3 +63,12 @@ if __name__ == '__main__':
         sue.acct = '1234567'
     except:
         print('Bad acct for Sue')
+
+
+    try:
+        sue.addr = '125 main st'
+    except:
+        print ('Bad addr for sue')
+    else:
+        print sue.addr
+        print ('Ok addr for sue')    

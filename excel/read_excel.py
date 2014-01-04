@@ -10,7 +10,8 @@ for row_index in range(sheet.nrows):
     for col_index in range(sheet.ncols):
         #print cellname(row_index,col_index),'-', type(cellname(row_index,col_index)),
         if sheet.cell(row_index,col_index).value != "":
-            if row_index != (sheet.nrows-1):
+            if col_index != (sheet.ncols-1):
                 print ' ' * 4 * row_index, sheet.cell(row_index,col_index).value
             else:
-                print 'Hej ' * 4 * row_index, sheet.cell(row_index,col_index).value,
+                pass
+                #print 'Hej ' * 4 * row_index, sheet.cell(row_index,col_index).value,

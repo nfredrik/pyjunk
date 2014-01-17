@@ -1,0 +1,7 @@
+
+
+Använd en webkamera för att dra igång skärmen.
+
+
+http://www.linuxquestions.org/questions/linux-hardware-18/usb-motion-sensor-for-linux-892545/
+

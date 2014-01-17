@@ -1,0 +1,7 @@
+>>> import time
+>>> print time.clock.__doc__
+clock() -> floating point number
+
+Return the CPU time or real time since the start of the process or since
+the first call to clock().  This has as much precision as the system
+records.

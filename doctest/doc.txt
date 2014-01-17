@@ -1,0 +1,3 @@
+>>> import time
+>>> print time.clock.__doc__
+clock() -> floating point number

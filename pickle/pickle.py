@@ -18,7 +18,7 @@ class Slate:
     def print_changes(self):
         print 'Changelog for Slate object:'
         for k, v in self.history.items():
-            print '%s\t %s' % (k, v)
+            print '1:%s\t 2:%s' % (k, v)
 
     def __getstate__(self):
         # Deliberately do not return self.value or self.last_change.

@@ -11,6 +11,7 @@
 import sys
 import math
 import random
+from collections import defaultdict
 
 def square_root(x, eps = 0.00001):
     assert x >= 0
@@ -36,6 +37,19 @@ class Range:
     def track(self, value):
         # YOUR CODE
         pass
+        if self.min == None:
+             self.min = value
+     
+        if self.max == None:     #both are None
+            self.max = value
+        
+        if self.min > value:
+             self.min = value
+             
+        if self.max < value:
+             self.max = value   
+             
+        self.set.add(value)
             
     def __repr__(self):
         repr(self.type) + " " + repr(self.min) + ".." + repr(self.max)+ " " + repr(self.set)
@@ -48,12 +62,24 @@ class Invariants:
         # e.g. self.vars["sqrt"]["call"]["x"] = Range()
         # holds the range for the argument x when calling sqrt(x)
         self.vars = {}
+        self.vars = defaultdict(lambda : defaultdict(dict))
         
     def track(self, frame, event, arg):
-        if event == "call" or event == "return":
+        if event == "call": # or event == "return":
             # YOUR CODE HERE. 
             # MAKE SURE TO TRACK ALL VARIABLES AND THEIR VALUES
             pass
+            for local in frame.f_locals:
+                range = Range()
+                range.track(frame.f_locals[local])
+                self.vars[frame.f_code.co_name][event][local]= range
+                
+        if event == "return":
+            range = Range()
+            range.track(arg)
+            self.vars[frame.f_code.co_name][event]['ret']= range      
+            
+            
         
     def __repr__(self):
         # Return the tracked invariants
@@ -63,7 +89,10 @@ class Invariants:
                 s += event + " " + function + ":\n"
         
                 for var, range in vars.iteritems():
-                    s += "    assert isinstance(" + var + # YOUR CODE
+                   # s += "    assert isinstance(" + var + # YOUR CODE
+                    s += "    assert isinstance(" + var + ", type(" + repr(range.min) +"))\n"  
+                    s += "    assert " + var + " in set(["+ repr(range.set) + "])\n"  
+                                                        
                     s += "    assert "
                     if range.min == range.max:
                         s += var + " == " + repr(range.min)
@@ -72,7 +101,7 @@ class Invariants:
                     s += "\n"
                     # ADD HERE RELATIONS BETWEEN VARIABLES
                     # RELATIONS SHOULD BE ONE OF: ==, <=, >=
-                    s += "    assert " + var + " >= " + var2 + "\n"               
+                    #s += "    assert " + var + " >= " + var2 + "\n"               
         return s
 
 invariants = Invariants()

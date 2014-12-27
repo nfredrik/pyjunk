@@ -211,3 +211,11 @@ Plocka ut:
 
 
 -  
+
+Tekniker/modulera att lära mig:
+
+yield
+
+humanize
+
+colorama

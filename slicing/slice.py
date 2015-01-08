@@ -11,6 +11,7 @@ DESCRIPTION = slice(6, 40)
 UNIT_PRICE = slice(40, 52)
 QUANTITY = slice(52, 55)
 ITEM_TOTAL = slice(55, None)
-line_items = invoice.split('\n')[2:]
+line_items = invoice.split('\n')[2:]   # remove first and column line 
+
 for item in line_items:
     print item[UNIT_PRICE], item[DESCRIPTION]

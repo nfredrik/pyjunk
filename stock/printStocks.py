@@ -5,12 +5,12 @@ import sys
 def main():
     args = sys.argv[1:]
 
-    stockbuilder = stockBuilder()
+    stockbuilder = stockBuilder("stocks.json")
 
     stocks = stockbuilder.build_stocks()
 
     for s in stocks:
-        print s, s.senasteNAV()
+        print (s, s.senasteNAV())
 
 if __name__ == '__main__':
   main()

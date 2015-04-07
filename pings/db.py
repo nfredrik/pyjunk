@@ -11,7 +11,7 @@ class PingDB(object):
             (date text, pingobj text, ttl real, response real)''')
 
     def write(self, date, pingobj, ttl, response):
-        print date
+        #print date
         self.conn.execute('insert into pingtable values (?,?,?,?)', (date, pingobj, ttl, response))
         self.c.commit()
 
@@ -46,7 +46,7 @@ class PingDB(object):
 
     def db_exist(self):
        self.res = self.conn.execute('SELECT CASE WHEN tbl_name = "name" THEN 1 ELSE 0 END FROM sqlite_master WHERE tbl_name = "name" AND type = "table"')
-       print 'db_exist:', self.res
+       #print 'db_exist:', self.res
 
     def __del__(self):
         # We can also close the cursor if we are done with it

@@ -1,4 +1,5 @@
-import urllib
+import urllib.request  as request
+import requests
 import re
 
 index, deviation = 1,2
@@ -14,8 +15,8 @@ class Bors(object):
         """
         Fetch information from text-tv's excellent webpage
         """
-        self.sock = urllib.urlopen("http://svt.se/svttext/web/pages/202.html")
-        return self.sock.read()
+        self.sock = requests.get("http://svt.se/svttext/web/pages/202.html")
+        return self.sock.text
 
 
     def filter_out(self, html):
@@ -29,6 +30,7 @@ class Bors(object):
         Get the index of the grouping
         """
         self.html = self.get_texttv()
+        #print (self.html)
         self.irma = self.filter_out(self.html)
         return self.irma.group(index)
     def getdeviation(self):

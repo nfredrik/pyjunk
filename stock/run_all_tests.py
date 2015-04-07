@@ -29,11 +29,11 @@ for modulename in [os.path.splitext(x)[0]
     try:
         module = __import__(modulename)
     except ImportError:
-        print "skipping %s" % modulename
+        print ("skipping %s" % modulename)
     else:
         module.PORT = PORT
         testsuite = unittest.findTestCases(module)
-        print "found %s tests in %r" % (testsuite.countTestCases(), modulename)
+        print ("found %s tests in %r" % (testsuite.countTestCases(), modulename))
         mainsuite.addTest(testsuite)
 
 verbosity = 10

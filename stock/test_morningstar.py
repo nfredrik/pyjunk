@@ -12,7 +12,7 @@ class MorningstarTest(unittest.TestCase):
     def testConstructor(self):
        
 #       self.assertRaises(KeyError, Morningstar(' '))
-        print Morningstar('didner')
+        print (Morningstar('didner'))
         pass
 
     def testsenasteNAV(self):

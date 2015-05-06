@@ -1,5 +1,6 @@
 import collections
 import sqlite3
+from dataerror import DataError
 
 
 
@@ -14,9 +15,11 @@ class GenDB(object):
         print(self.no_of_fields)
         # Create table if does not exist
         #part_str = str([x for x in fields.items()])
-
-        self.conn.execute('''create table if not exists ''' + db_name+'''table
-            ('''+ ",".join(fields) + ''')''')
+        try:
+            self.conn.execute('''Create table if not exists ''' + db_name+'''table
+                ('''+ ",".join(fields) + ''')''')
+        except sqlite3.Error as error:
+            raise DataError(error)
 
        # self.conn.execute('''create table if not exists pingtable
        #     (date text, pingobj text, ttl real, response real)''')
@@ -30,11 +33,14 @@ class GenDB(object):
     def write(self, f=[]):
         self.hej =  "'" + "','".join(f) + "'"
         print (self.hej)
+        try:
         #self.conn.execute('insert into ' + self.db_name +'table values' + self.no_of_fields, (f[0], f[1], f[2]))
-        self.conn.executescript('insert into ' + self.db_name +'table values' + self.no_of_fields + ',(' + self.hej +')')
+            self.conn.executescript('insert into ' + self.db_name +'table values' + self.no_of_fields + ',(' + self.hej +')')
         #self.conn.executemany('insert into ' + self.db_name +'table values (?)', self.char_generator(f))
         #self.c.commit()
 
+        except sqlite3.Error as error:
+            raise DataError(error)
 
     def char_generator(self, field):
         for c in field:

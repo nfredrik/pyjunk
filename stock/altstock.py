@@ -1,7 +1,10 @@
 import json
 import re
+import os
 import sys
 import requests
+import logging
+from dataerror import DataError
 from genericdb import GenDB
 from datetime import datetime
 from collections import namedtuple
@@ -12,8 +15,7 @@ from collections import namedtuple
 
 OK, ERROR = 0, 1
 
-''' Inherit Base class to be able to raise own defined exceptions '''
-class DataError(Exception): pass
+_log = logging.getLogger(' ')
 
 ''' Type definition of a complex structure'''
 Stock = namedtuple('Stock', 'name url value date')
@@ -24,20 +26,26 @@ def read_json(file):
 		with open(file) as f:
 			f = f.read()
 			data = json.loads(f)
+		
 		return data
-	except Exception as e:
-		raise DataError(e.__class__, sys.exc_info()[-1].tb_lineno, file)
+
+	except FileNotFoundError as e:
+		raise DataError("Can not load json file: {}".format(e))
+
+#	 	raise NDataError(message ="Cannot Load json file:{}".format(file),
+#	 		             path = '...',
+#	 		             line = sys.exc_info()[-1].tb_lineno)
 
 def geturl(url=''):
 	''' Fetch a request URL'''
+
 	try:
 		sock = requests.get(url)
 		html = sock.text
 		sock.close()
 		return html
-	except Exception as e:
-		raise DataError(e.__class__, sys.exc_info()[-1].tb_lineno, url)
-
+	except requests.exceptions.MissingSchema as e:
+		raise DataError("Cannot fetch requested URL:{}".format(url))
 
 def senasteNAV(url=''):
 	''' Filter out appropriate data from morningstar web page. Need to be 
@@ -48,10 +56,9 @@ def senasteNAV(url=''):
 	nav = re.search('Senaste NAV.*\ ([\d]*\,[\d]*)\ SEK[.]*', html)
 
 	if nav is None:
-		raise DataError(DataError, sys.exc_info()[-1].tb_lineno, url)
+		raise DataError("Cannot find NAV in URL:{}".format(url))
 
 	return nav.group(1).replace(",",".")
-
 
 def build_stocks(file):
 	''' Based on json file content fetch information and add list of
@@ -70,8 +77,9 @@ def build_stocks(file):
 	
 	return stocks
 
-
 def main(args):
+
+	exit_code = ERROR
 
 	try:
 		#assert False, "Putting assert False by purpose ...."
@@ -94,33 +102,27 @@ def main(args):
 		for i in test:
 			db.write([i.name, i.value, i.date])
 
+		exit_code = OK
+
+	except (DataError, EnvironmentError) as error:
 		''' Exceptions casued either input error OR problem with underlaying 
-			infrastructure lik net or sqlite database Log and exit '''
-	except FileNotFoundError as e:
+			infrastructure like net or sqlite database Log and exit.
+			EnvironmentError embraces IOError, OSError 
+		'''
+		_log.error(error)
 
-		print ("File not found: {}, lineno:{}".format(e, sys.exc_info()[-1].tb_lineno))
-		return ERROR
+	except Exception as error:
+		''' Programming error. Trace callback and line number in output 
+		'''
+		_log.exception(error)
 
-	except DataError as e:
-		print("Error: Class, lineno and message: {}".format(e))
+	except :
+		_log.exception("Fundamental problems:{}".format(sys.exc_info()[0]))
 
-#	except sqlite.OperationError as e:  Better as DBException as e:
-#		print ("Problem with sqlite")
-		return ERROR
+	return exit_code
 
-		""" Internal programming error. Collect and Log and exit
-		"""
-	except AssertionError as e:
-		print ("Internal programming error. Log and exit:{}, lineno: {}".format(e, sys.exc_info()[-1].tb_lineno))
-		return ERROR
 
 if __name__ == '__main__':
-
+	logging.basicConfig(level=logging.ERROR) # , filename='errors.log')
 	sys.exit(main(sys.argv[1:]))
 
-
-'''TODO:
-	- Follow EP14 concept, check it out
-	- Make a proper logfile for all exceptions! both for input/infra-problem and
-	  internal programming errors....
-'''

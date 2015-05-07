@@ -19,6 +19,7 @@ class GenDB(object):
             self.conn.execute('''Create table if not exists ''' + db_name+'''table
                 ('''+ ",".join(fields) + ''')''')
         except sqlite3.Error as error:
+            '''http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation'''
             raise DataError(error)
 
        # self.conn.execute('''create table if not exists pingtable

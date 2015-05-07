@@ -4,20 +4,22 @@ import os
 import sys
 import requests
 import logging
+import validictory
+import schema
 from dataerror import DataError
 from genericdb import GenDB
 from datetime import datetime
 from collections import namedtuple
 
-''' Named tuple "class". Work almost as a struct in C.
-    see http://rrees.me/2015/04/28/python-preferring-named-tuples-over-classes/
-'''
 
 OK, ERROR = 0, 1
 
 _log = logging.getLogger(' ')
 
-''' Type definition of a complex structure'''
+''' Named tuple "class". Work almost as a struct in C.
+    see http://rrees.me/2015/04/28/python-preferring-named-tuples-over-classes/
+	Type definition of a complex structure'''
+
 Stock = namedtuple('Stock', 'name url value date')
 
 def read_json(file):
@@ -26,37 +28,49 @@ def read_json(file):
 		with open(file) as f:
 			f = f.read()
 			data = json.loads(f)
-		
+			#schema = {"type": "object", "properties":{"stocks":{["name":"string"]}}}
+			#schema = {"type":"object", "properties":{"array", "minItems":1}}
+			schema = {"type":"object"}
+			#s = open('schema.json')
+			#schema = {"type":"object","properties":{"stocks":{"id":"stocks","type":"array","additionalItems":"false"}},"additionalProperties":"false"}
+			schema = {"type":"object","properties":{"stocks":{"type":"array" }}}
+			#schema = {"type":"object","properties":{"stocks":{"type":["type":"object"] }}}	
+			#schema = {"type":"object","properties":{"stocks":{"id":"stocks","type":"array","items":{"id":"4","type":"object","properties":{"spp global":{"type":"string"}}}}}}		
+			#schema = {"type":"object","properties":{"stocks":{"id":"stocks","type":"array","items":{"id":"3","type":"object","properties":{"spp global":{"id":"spp global","type":"string"}}}}}}
+			# http://jsonschema.net/#/
+			#schema = {"type":"object","properties":{"stocks":{"id":"stocks","type":"array","items":{"id":"auto-generated-schema-594", "type":"object"}}}}
+			schema = {"type":"object","properties":{"stocks":{"id":"stocks","type":"array","items":{"type":"object"}}}}
+			validictory.validate(data, schema)
 		return data
-
 	except FileNotFoundError as e:
 		raise DataError("Can not load json file: {}".format(e))
+
+	except ValueError as e:
+		raise DataError("Wrong format in json file: {}".format(e))
 
 #	 	raise NDataError(message ="Cannot Load json file:{}".format(file),
 #	 		             path = '...',
 #	 		             line = sys.exc_info()[-1].tb_lineno)
 
-def geturl(url=''):
+def geturl(k, url=''):
 	''' Fetch a request URL'''
-
 	try:
 		sock = requests.get(url)
 		html = sock.text
 		sock.close()
 		return html
 	except requests.exceptions.MissingSchema as e:
-		raise DataError("Cannot fetch requested URL:{}".format(url))
+		raise DataError("Cannot fetch {} requested URL:{}".format(k, url))
 
-def senasteNAV(url=''):
-	''' Filter out appropriate data from morningstar web page. Need to be 
-	changed if morningstar
-	changes format'''
+def senasteNAV(k='', url=''):
+	''' Filter out appropriate data from morningstar URL. 
+		Need to be changed if morningstar changes format'''
 	
-	html = geturl(url)
+	html = geturl(k, url)
 	nav = re.search('Senaste NAV.*\ ([\d]*\,[\d]*)\ SEK[.]*', html)
 
 	if nav is None:
-		raise DataError("Cannot find NAV in URL:{}".format(url))
+		raise DataError("Cannot find {} NAV in URL:{}".format(k, url))
 
 	return nav.group(1).replace(",",".")
 
@@ -71,7 +85,7 @@ def build_stocks(file):
 	for i, _ in enumerate(range(len(data["stocks"]))):
 		stock = data["stocks"][i]
 		for k, v in stock.items():
-			s = Stock(name=k, value=senasteNAV(v), url=v,
+			s = Stock(name=k, value=senasteNAV(k,v), url=v,
 					 date=str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 		stocks.append(s)
 	
@@ -103,6 +117,9 @@ def main(args):
 			db.write([i.name, i.value, i.date])
 
 		exit_code = OK
+
+	except KeyboardInterrupt:
+		_log.error('stopped as requested by user')
 
 	except (DataError, EnvironmentError) as error:
 		''' Exceptions casued either input error OR problem with underlaying 

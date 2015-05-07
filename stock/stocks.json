@@ -1,8 +1,8 @@
 {
 "stocks" : [
-{ "didner": "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000IWH7&programid=0000000000c"},
-{ "lannebo": "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P00000F91&programid=0000000000"},
-{"spiltan invest" : "http://www.morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000ULAP&programid=0000000000"},
-{"spp global": "http://www.morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000X2A9&programid=0000000000"}
-]
+			{ "didner": "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000IWH7&programid=0000000000c"},
+			{ "lannebo": "http://morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P00000F91&programid=0000000000"},
+			{"spiltan invest" : "http://www.morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000ULAP&programid=0000000000"},
+			{"spp global": "http://www.morningstar.se/Funds/Quicktake/Overview.aspx?perfid=0P0000X2A9&programid=0000000000"}
+			]
 }

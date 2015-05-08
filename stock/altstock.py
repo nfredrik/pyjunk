@@ -19,7 +19,6 @@ _log = logging.getLogger(' ')
 ''' Named tuple "class". Work almost as a struct in C.
     see http://rrees.me/2015/04/28/python-preferring-named-tuples-over-classes/
 	Type definition of a complex structure'''
-
 Stock = namedtuple('Stock', 'name url value date')
 
 def read_json(file):
@@ -59,7 +58,6 @@ def read_json(file):
 
 def geturl(k, url=''):
 	''' Fetch a request URL'''
-
 	assert k is not None
 	assert url is not None
 
@@ -81,11 +79,12 @@ def senasteNAV(k='', url=''):
 	if nav is None:
 		raise DataError("Cannot find {} NAV in URL:{}".format(k, url))
 
+	''' Pick the digits in the regexp '''	
 	return nav.group(1).replace(",",".")
 
 def build_stocks(file):
-	''' Based on json file content fetch information and add list of
-	Stocks
+	''' Based on json file content fetch information, add list of
+	funds
 	'''
 	stocks = []
 
@@ -107,8 +106,6 @@ def main(args):
 	exit_code = ERROR
 
 	try:
-		#assert False, "Putting assert False by purpose ...."
-
 		''' Load json file with funds that is interesting. It includes URL to 
 		morningstars data about the fund
 		'''
@@ -119,7 +116,6 @@ def main(args):
 		# 	print (i.name, i.value, i.date)
 
 		''' Put the data in a sqlite database for later diagnostics'''
-
 
 		arrray = ["name text", "value text", "date text"]
 		db = GenDB('mystocks', fields= arrray)
@@ -142,7 +138,7 @@ def main(args):
 	# and trace call back. Asserts will lead to these exceptions
 	#	
 	except KeyboardInterrupt:
-		_log.error('stopped as requested by user')
+		_log.error('Stopped as requested by user')
 
 	except (DataError, EnvironmentError) as error:
 		''' Exceptions casued either input error OR problem with underlaying 
@@ -166,3 +162,11 @@ if __name__ == '__main__':
 	logging.basicConfig(level=logging.ERROR) # , filename='errors.log')
 	sys.exit(main(sys.argv[1:]))
 
+
+# TODO:
+# - parsning: python altstocks -i stock.json
+# - Constants for a lot of stuff.
+# - Include som test stuff ...
+# - Invariants on functions?
+# - Mocking functions?
+#- Colors when errors?

@@ -26,10 +26,10 @@ class Publisher(_Publisher):
         if userObj in self._listOfUsers:
             self._listOfUsers.remove(userObj)
 
-    def notifyAll(self, obj):
+    def notifyAll(self):
         for objects in self._listOfUsers:
             #print 'hej', objects
-            objects.notify(self)
+            objects.notify(self.postname)
             
     def writeNewPost(self, postname):
         # User writes a post.
@@ -37,7 +37,7 @@ class Publisher(_Publisher):
         # When submits the post is published and notification is sent to all
         self.notifyAll()
 
-class Subscriber:
+class _Subscriber:
     def __init__(self):
         #make it uninheritable
         pass
@@ -45,17 +45,21 @@ class Subscriber:
         #OVERRIDE
         pass
 
-#class _Subscriber(_Subscriber):
-#    def notify(self,postname):
-#        print 'User1 notfied of a new post: %s' % postname
+class Subscriber(_Subscriber):
+    def __init__(self, name=''):
+        self.name = name
+    def notify(self,postname):
+        print '{name} notified of a new post:{post}'.format(name=self.name, post=postname)
 
 
 
 if __name__ == "__main__":
     techForum = Publisher()
-    user1 = Subscriber()
+    user1 = Subscriber('user1')
+    user2 = Subscriber('user2')
    
     techForum.register(user1)
+    techForum.register(user2)
     techForum.writeNewPost("Observer Pattern inn Python")
     #techForum.unregister(user2)
     techForum.writeNewPost("MVC Pattern in Python")

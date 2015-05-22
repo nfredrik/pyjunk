@@ -1,7 +1,7 @@
 from stockStuff import stockStuff
 from dictionary import dict
 import re
-import urllib.request  as request
+#import urllib.request  as request
 import requests
 """
 #title="Senaste NAV" style="width: 40%"><span class="va\

@@ -10,7 +10,7 @@ def main():
     stocks = stockbuilder.build_stocks()
 
     for s in stocks:
-        print (s, s.senasteNAV())
+        print (s.__str__, s.senasteNAV())
 
 if __name__ == '__main__':
   main()

@@ -21,36 +21,28 @@ class TestStock(unittest.TestCase):
         self.assertRaises(ValueError, self.goog.update, datetime(2014, 2, 13), -1)
 
     def test_stock_price_should_give_the_latest_price(self):
-        self.goog.update(datetime(2104, 2, 12), price=10)
-        self.goog.update(datetime(2104, 2, 13), price=8.4)
-        self.assertAlmostEqual(8.4, self.goog.price, delta=0.0001)
+        self.goog.update(datetime(2104, 2, 13), price=10)
+        self.goog.update(datetime(2104, 2, 12), price=8.4)
+        self.assertAlmostEqual(10, self.goog.price, delta=0.0001)
+
+    def given_a_series_of_prices(self, prices):
+        timestamps = [datetime(2014, 2, 11), datetime(2014, 2, 12), datetime(2014, 2, 13)]
+        for timestamp, price in zip(timestamps, prices):
+            self.goog.update(timestamp, price)        
 
     def test_increasing_trend_is_true(self):
-        timestamps = [datetime(2014, 2, 11), datetime(2014, 2, 12), datetime(2014, 2, 13)]
         prices = [8, 10, 12]
-        
-        for timestamp, price in zip(timestamps, prices):
-            self.goog.update(timestamp, price)
-
+        self.given_a_series_of_prices(prices)    
         self.assertTrue(self.goog.is_increasing_trend())
 
-# These are not refactoring tests it's adding tests, remark
     def test_increasing_trend_is_false_if_price_decreases(self):
-        timestamps = [datetime(2014, 2, 11), datetime(2014, 2, 12), datetime(2014, 2, 13)]
-        prices = [8, 12, 10]
-        
-        for timestamp, price in zip(timestamps, prices):
-            self.goog.update(timestamp, price)
-
+        prices = [8, 12, 10]    
+        self.given_a_series_of_prices(prices)    
         self.assertFalse(self.goog.is_increasing_trend())
 
     def test_increasing_trend_is_false_if_price_equal(self):
-        timestamps = [datetime(2014, 2, 11), datetime(2014, 2, 12), datetime(2014, 2, 13)]
         prices = [8, 10, 10]
-        
-        for timestamp, price in zip(timestamps, prices):
-            self.goog.update(timestamp, price)
-
+        self.given_a_series_of_prices(prices)            
         self.assertFalse(self.goog.is_increasing_trend())
 
 

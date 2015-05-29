@@ -1,7 +1,7 @@
 from datetime import timedelta
 from enum import Enum
-from event import Event
-from timeseries import TimeSeries, MovingAverage, NotEnoughDataException
+from .event import Event
+from .timeseries import TimeSeries, MovingAverage, NotEnoughDataException
 
 class StockSignal(Enum):
     buy = 1
@@ -34,7 +34,7 @@ class Stock:
         
     def is_increasing_trend(self):
         try:
-            return self.price_history[-3].price < self.price_history[-2].price < self.price_history[-1].price 
+            return self.history[-3].value < self.history[-2].value < self.history[-1].value 
         except IndexError:
             return False
 

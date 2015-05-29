@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime  # remark to writer sidan 18
-from stock import Stock
+from ..stock import Stock
 
 
 class TestStock(unittest.TestCase):

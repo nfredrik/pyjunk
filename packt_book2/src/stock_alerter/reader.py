@@ -1,3 +1,4 @@
+import csv
 from datetime import datetime
 
 class ListReader:
@@ -17,12 +18,16 @@ class FileReader:
 		"""Returns the next update everytime the method is called"""
 		with open(self.filename, "r") as fp:
 			data = fp.read()
-			lines = csv.reader(data) 
+			#lines1 = csv.reader(data)
+			#print (lines1)
+			lines = data.split()
+			#print(lines)  
 			for line in lines:
-				symbol, timestamp, price = line
+				#print(line.split(","))
+				symbol, timestamp, price = line.split(",")
 				yield(symbol,
-					datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f)",
-					int(price)))
+					datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f"),
+					int(price))
 
 
 from yahoo_finance import Share
@@ -44,15 +49,19 @@ class HTTPReader:
 				s = Share(symbol)
 				tmp = s.get_trade_datetime().split()
 				timestamp = tmp[0]+'T'+tmp[1]+'.00'
-				dict[symbol] = [s.get_price(), timestamp]
+				price = int(s.get_price().split(".")[self.PRICE])
+				#print("type for price:{}".format(type(price)))
+				dict[symbol] = [price, timestamp]
+				del s 
 			except:
-				print ("Could not find {} in yahoo finance".format(symbol))
+				pass
+				#print ("Could not find {} in yahoo finance".format(symbol))
 
 		for item in dict:
-			r_list.append((item, datetime.strptime(dict[item][self.TIME], "%Y-%m-%dT%H:%M:%S.%f"), dict[item][self.PRICE]))
+			r_list.append((item, datetime.strptime(dict[item][self.TIME], "%Y-%m-%dT%H:%M:%S.%f"), dict[item][self.PRICE] ) )
 #			r_list.append((item, datetime.now(), dict[item]))
 
-
-		return r_list
+		for i in r_list:
+			yield i
 			
 		return ["GOOG", datetime(2104, 2, 13), 37]

@@ -25,15 +25,34 @@ class FileReader:
 					int(price)))
 
 
-
+from yahoo_finance import Share
 
 class HTTPReader:
 	"""Specify a list of stocks like GOOG, RHL etc to be read"""
-	def __init__(self):
-		pass
+	PRICE = 0
+	TIME = 1
+
+	def __init__(self, list):
+		self.list = list
 	"""Get list of current stock prices"""
 	def get_updates(self):
+		dict = {}
+		r_list = []
 
-		# Use 'requests' to fetch from relevant site
+		for symbol in self.list:
+			try:
+				s = Share(symbol)
+				tmp = s.get_trade_datetime().split()
+				timestamp = tmp[0]+'T'+tmp[1]+'.00'
+				dict[symbol] = [s.get_price(), timestamp]
+			except:
+				print ("Could not find {} in yahoo finance".format(symbol))
 
+		for item in dict:
+			r_list.append((item, datetime.strptime(dict[item][self.TIME], "%Y-%m-%dT%H:%M:%S.%f"), dict[item][self.PRICE]))
+#			r_list.append((item, datetime.now(), dict[item]))
+
+
+		return r_list
+			
 		return ["GOOG", datetime(2104, 2, 13), 37]

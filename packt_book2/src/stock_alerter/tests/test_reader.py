@@ -23,37 +23,28 @@ import re
 
 class HTTPReaderSyntaxTest(unittest.TestCase):
 
-	def validate_time(self, date_text):
-
-		if type(date_text) is not datetime.date:
-			raise self.failureException("Incorrect data format, should be YYYY-MM-DD")
-
-		return
-
-		try:
-			datetime.strptime(date_text, '%Y-%m-%d')
-		except ValueError:
-			raise failureException("Incorrect data format, should be YYYY-MM-DD")
-
 	def assert_has_correct_syntax(self, entry):
-		pass
 
 		if re.match("[\w]*", entry[0]) is None:
 			raise self.failureException("Wrong symbol: {}".format(entry[0]))
 
-
-# strftime('%m/%d/%Y')
-		self.validate_time(entry[1])
+		if not isinstance(entry[1], datetime):
+			raise self.failureException("Wrong symbol: {}".format(entry[0]))
 
 		if re.match("[\d]*", str(entry[2])) is None:
 			raise self.failureException("Wrong symbol: {}".format(entry[2]))		
 
+
 class HTTPReaderTest(HTTPReaderSyntaxTest):
-	def testHTTPReader_returns_valid_format(self):
+	def testHTTPReader_returns_valid_format1(self):
 		reader = HTTPReader(["GOOG"])
 		updater = reader.get_updates()
 		update = next(updater)
-		self.assertEqual(("GOOG", datetime(2015, 5,28,20,0), 539), update)
-		# TODO: Check for format/syntax...
+		self.assertEqual(("GOOG", datetime(2015, 5,29,20,0), 532), update)
 
+
+	def testHTTPReader_returns_valid_format2(self):
+		reader = HTTPReader(["GOOG"])
+		updater = reader.get_updates()
+		update = next(updater)
 		self.assert_has_correct_syntax(update)

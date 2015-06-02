@@ -36,11 +36,12 @@ class HTTPReaderSyntaxTest(unittest.TestCase):
 
 
 class HTTPReaderTest(HTTPReaderSyntaxTest):
-	def testHTTPReader_returns_valid_format1(self):
-		reader = HTTPReader(["GOOG"])
-		updater = reader.get_updates()
-		update = next(updater)
-		self.assertEqual(("GOOG", datetime(2015, 5,29,20,0), 532), update)
+
+	# def testHTTPReader_returns_valid_format1(self):
+	# 	reader = HTTPReader(["GOOG"])
+	# 	updater = reader.get_updates()
+	# 	update = next(updater)
+	# 	self.assertEqual(("GOOG", datetime(2015, 5,29,20,0), 532), update)
 
 
 	def testHTTPReader_returns_valid_format2(self):

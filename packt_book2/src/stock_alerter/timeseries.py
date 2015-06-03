@@ -1,6 +1,6 @@
 import bisect
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timedelta
 
 Update = namedtuple("Update", "timestamp value")
 

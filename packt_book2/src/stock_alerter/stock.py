@@ -40,6 +40,7 @@ class Stock:
 
     def _is_crossover_below_to_above(self, on_date, ma, reference_ma):
         prev_date = on_date - timedelta(1)
+        print(prev_date)
         return (ma.value_on(prev_date) < reference_ma.value_on(prev_date)
                 and ma.value_on(on_date) > reference_ma.value_on(on_date))
 
@@ -54,7 +55,9 @@ class Stock:
 
             if self._is_crossover_below_to_above(on_date, long_term_ma, short_term_ma):
                 return StockSignal.sell
+
         except NotEnoughDataException:
+            print("Got an exception!!!!")
             return StockSignal.neutral
 
         return StockSignal.neutral

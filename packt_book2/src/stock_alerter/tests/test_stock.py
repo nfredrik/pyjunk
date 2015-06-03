@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime  # remark to writer sidan 18
 from datetime import timedelta
-from ..stock import Stock
+from ..stock import Stock, StockSignal
 import collections
 import sys
 
@@ -73,6 +73,7 @@ class StockTrendTest(unittest.TestCase):
 class StockCrossOverSignalTest(unittest.TestCase):
     def setUp(self):
         self.goog = Stock("GOOG")
+        self.date_to_check = datetime(2014, 2, 13)
 
     def _flatten(self, timestamps):
         """Yield timestamp, if not recursivly call until we are"""
@@ -131,16 +132,49 @@ class StockCrossOverSignalTest(unittest.TestCase):
 
 
     def test_generate_timestamp_skips_empty_dates(self):
-        pass
+        price_list = [1, 2, 3, None, 5, 6, 7, 8, 9, 10, 11]
 
-    def test_generate_timestamp_handles_multiple_updates_per_date(self):
-        pass
+        expected = [
+                    datetime(2014,2,3), datetime(2014,2,4), datetime(2014,2,5), 
+                    datetime(2014,2,7), datetime(2014,2,8),  
+                    datetime(2014,2,9), datetime(2014,2,10), datetime(2014,2,11),
+                    datetime(2014,2,12), datetime(2014,2,13)                      
+                    ]
+
+        self.assertEqual(expected, self._generate_timestamps(price_list))
+
+# TODO implement when we have list of lists
+    # def test_generate_timestamp_handles_multiple_updates_per_date(self):
+    #     price_list = [1, 2, 3, [4, 3], 5, 6, 7, 8, 9, 10, 11]
+
+    #     expected = [
+    #                 datetime(2014,2,3), datetime(2014,2,4), datetime(2014,2,5), 
+    #                 datetime(2014,2,6), datetime(2014,2,6, 12),  
+    #                 datetime(2014,2,7), datetime(2014,2,8),    
+    #                 datetime(2014,2,9), datetime(2014,2,10), datetime(2014,2,11),
+    #                 datetime(2014,2,12), datetime(2014,2,13)                      
+    #                 ]
+
+    #     self.assertEqual(expected, self._generate_timestamps(price_list))
+        
+    def test_stock_with_no_data_returns_neutral(self):
+        date_to_check = datetime(2014, 2, 13)
+        self.given_a_series_of_prices([])
+        self.assertEqual(StockSignal.neutral, self.goog.get_crossover_signal(self.date_to_check))
 
     def test_stock_with_less_data_returns_neutral(self):
-        pass
+        """Even though the series has a downward crossover, we return neutral
+        because there are not enough data points """
+        self.given_a_series_of_prices([20, 21, 22, 23, 24, 25, 26, 27, 28, 1])
+        self.assertEqual(StockSignal.neutral, self.goog.get_crossover_signal(self.date_to_check))
+
+    def test_stock_with_no_crossover_returns_neutral(self):
+        self.given_a_series_of_prices([1,2,3,4,5,6,7,8,9,10,11])
+        self.assertEqual(StockSignal.neutral, self.goog.get_crossover_signal(self.date_to_check))
 
     def test_with_downward_crossover_returns_sell(self):
-        pass
+        self.given_a_series_of_prices([21,22,23,24,25,26,27,28,29,30,4])
+        self.assertEqual(StockSignal.sell, self.goog.get_crossover_signal(self.date_to_check))
 
     def test_with_upward_crossover_returns_buy(self):
         pass

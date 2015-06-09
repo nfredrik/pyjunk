@@ -1,12 +1,13 @@
-from behave import given, when, then
+from behave import *
+use_step_matcher("re")
 
 @given('I can access Wikipedia')
 def step_impl(context):
     context.browser.get('http://en.wikipedia.org/wiki/Main_Page')
 
 # "(.*)"
-@when(u'I search for "{text}"')
-#@when(u'I search for "(?P<text>".*")"')
+#@when(u'I search for "{text}"')
+@when(u'I search for "(?P<text>.*)"')
 def step_impl(context, text):
     context.browser.get('http://en.wikipedia.org/wiki/Main_Page') 
     assert "Wikipedia" in context.browser.title
@@ -16,22 +17,19 @@ def step_impl(context, text):
     elem.send_keys(context.Keys.RETURN)
     assert True
 
-@then(u'I get a result for "{text}"')
+@then(u'I get a result for "(?P<text>.*)"')
 def step_impl(context, text):
     assert text in context.browser.page_source
 
 # http://jenisys.github.io/behave.example/tutorials/tutorial04.html
+@when(u'I search for (?P<text>.*)')
+def step_impl(context, text):
+    context.execute_steps(u'''When I search for "{}"'''.format(text))
 
-@when(u'When I search for {subject}')
-def step_impl(context):
-    for row in context.table:
-        print(row['subject'])
-    # raise NotImplementedError(u'STEP: When I search for Capybara')
-
-# @then(u'I get a result for Capybara')
-# def step_impl(context):
-#     pass
-    #raise NotImplementedError(u'STEP: Then I get a result for Capybara')
+ 
+@then(u'I get a result for (?P<text>.*)')
+def step_impl(context, text):
+    context.execute_steps(u'''Then I get a result for "{}"'''.format(text))
 
 # @then(u'I find relevant information on Capybara')
 # def step_impl(context):

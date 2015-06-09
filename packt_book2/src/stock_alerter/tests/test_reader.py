@@ -24,6 +24,7 @@ import re
 class HTTPReaderSyntaxTest(unittest.TestCase):
 
 	def assert_has_correct_syntax(self, entry):
+		""" Verify that we have a string, datetime-type object and  valid digits """
 
 		if re.match("[\w]*", entry[0]) is None:
 			raise self.failureException("Wrong symbol: {}".format(entry[0]))

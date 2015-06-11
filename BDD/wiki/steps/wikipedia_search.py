@@ -4,13 +4,17 @@ use_step_matcher("re")
 # Nice page about behave!
 # http://jenisys.github.io/behave.example/tutorials/tutorial04.html
 #
-# TODO: - How to get rid of dequoting thing ....
-#       - Check more on methods to browser ...
-#
+# TODO:
+#       - better than this? : context.browser.page_source  -No, move perhaps?
+#       - Possible to leave out context as paramenter? 
+
 
 
 @given('I can access Wikipedia')
 def step_impl(context):
+
+    #assert context.failed is False   # santity check  How is it used????
+    
     context.browser.get('http://en.wikipedia.org/wiki/Main_Page')
     assert "Wikipedia" in context.browser.title
 
@@ -22,22 +26,24 @@ def step_impl(context, text):
 
 @then(u'I get a result for "(?P<text>.*)"')
 def step_impl(context, text):
-    assert text in context.browser.page_source
+    assertIn(text,context)
 
 
 @when(u'I search for (?P<text>[\w]+)')
 def step_impl(context, text):
-    context.execute_steps(u'''When I search for "{}"'''.format(text))
+    search_for(context, text)
 
 
 @then(u'I get a result for (?P<text>.*)')
 def step_impl(context, text):
+    # Check if calling internal works ...
     context.execute_steps(u'''Then I get a result for "{}"'''.format(text))
 
 
-@when(u'I search for the subject (?P<text>.*)')
+@when(u'I search for the subject "(?P<text>.*)"')
 def step_impl(context, text):
-    context.execute_steps(u'''When I search for "{}"'''.format(text))
+    search_for(context, text)
+    # Save for later use
     context.subject = text
 
 
@@ -48,15 +54,18 @@ def step_impl(context, text):
 
 @then(u'I get a matching result')
 def step_impl(context):
-    validate_in_h1(context, context.subject)
+    validate_subject_in_h1(context, context.subject)
 
 
 @then(u'I find relevant information')
 def step_impl(context):
     validate_relevance_for(context, context.subject)
 
-
+#
 # Helper functions
+#
+def assertIn(input, context):                  # Better name!
+    assert input in context.browser.page_source
 
 def search_for(context, subject):
     elem = context.browser.find_element_by_id("searchInput")
@@ -66,33 +75,18 @@ def search_for(context, subject):
 
 def validate_relevance_for(context, subject):
 
-    subject = dequote(subject)
-
     check = {"Capybara": "is the largest rodent in the world",
              "Selenium": "reduce the effects of mercury toxicity"}
-    result = check.get(subject, "Fredrik Svard")
+    result = check.get(subject, "This is an error!")
 
-    assert result in context.browser.page_source
+    assertIn(result, context)
 
 
-def validate_in_h1(context, subject):
+def validate_subject_in_h1(context, subject):
 
     lst = context.browser.find_elements_by_tag_name('h1')
-    subject = dequote(subject)
 
-    for l in lst:
-        if subject == l.text:
-            return             # We have a match!
+    if any([subject == l.text  for l in lst]):
+        return
 
     assert False
-
-
-def dequote(s):
-    """
-    If a string has single or double quotes around it, remove them.
-    Make sure the pair of quotes match.
-    If a matching pair of quotes is not found, return the string unchanged.
-    """
-    if (s[0] == s[-1]) and s.startswith(("'", '"')):
-        return s[1:-1]
-    return s

@@ -8,3 +8,4 @@ The tests will be started with:
 
 $ behave [-v]
 
+$ behave --no-capture     # To have stdout in console

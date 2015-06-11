@@ -4,15 +4,8 @@ import re
 import pprint
 use_step_matcher("re")
 
+# Nice page about behave!
 # http://jenisys.github.io/behave.example/tutorials/tutorial04.html
-#
-#  TODO
-#  - How to remember values btw features?, implemented!!
-#  - How to find a subject inside a html tag like <h1> ... </h1>
-#  - How to match a subject in a dictonary and get a value to match against a .text?
-#
-#
-#
 
 @given('I can access Wikipedia')
 def step_impl(context):
@@ -46,21 +39,6 @@ def step_impl(context, text):
 
 @then(u'I get a matching result')
 def step_impl(context):
-#   expect(find('h1').text).to eq(@subject)
-    # assert context.subject in context.browser.page_source
-    # assert context.subject
-    # assert context.browser.page_source
-    # assert isinstance(context.browser.find_elements_by_tag_name('h1'), list)
-    # #assert context.subject in context.browser.find_elements_by_tag_name('h1')
-
-    # pp = pprint.PrettyPrinter(indent=4)
-    # jj = context.browser.find_elements_by_tag_name('h1') 
-    # for j in jj:
-    #     #print(dir(j))
-    #     print(j.text)
-    #     print(j.id)
-        #assert context.subject in j, "{} {}".format(context.subject, j)
-
     validate_in_h1(context, context.subject)
 
 @then(u'I find relevant information')
@@ -73,13 +51,8 @@ def search_for(context, subject):
     elem.send_keys(context.Keys.RETURN)
     #elem.clear()
 
-def old_validate_relevance_for(context,subject):
-    assert subject in context.browser.page_source,"{}".format(subject)
-    #assert 'is the largest rodent in the world' in context.browser.page_source
-
 def validate_relevance_for(context,subject):
     assert isinstance(subject, str), "{}".format(type(subject))
-    #subject.replace('"','')
     subject = dequote(subject)
 
     check = {"Capybara": "is the largest rodent in the world", 
@@ -96,9 +69,7 @@ def validate_in_h1(context, subject):
     lst = context.browser.find_elements_by_tag_name('h1') 
     subject = dequote(subject)
     for l in lst:       
-#        print('Compare:{} with {}'.format(subject, l.text))
         if subject == l.text:
-#            print("return from validate_in_h1")
             return             # We have a match!
 
     assert False

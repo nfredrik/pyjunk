@@ -6,6 +6,10 @@ use_step_matcher("re")
 
 # Nice page about behave!
 # http://jenisys.github.io/behave.example/tutorials/tutorial04.html
+#
+# TODO: - How to get rid of dequoting thing ....
+#       - Check more on methods to browser ... 
+#
 
 @given('I can access Wikipedia')
 def step_impl(context):
@@ -49,18 +53,15 @@ def search_for(context, subject):
     elem = context.browser.find_element_by_id("searchInput")
     elem.send_keys(subject)
     elem.send_keys(context.Keys.RETURN)
-    #elem.clear()
 
 def validate_relevance_for(context,subject):
-    assert isinstance(subject, str), "{}".format(type(subject))
+
     subject = dequote(subject)
 
     check = {"Capybara": "is the largest rodent in the world", 
               "Selenium": "reduce the effects of mercury toxicity"}
-
     result = check.get(subject,"Fredrik Svard")
 
-    assert subject in context.browser.page_source,"{}".format(subject)
     assert result in context.browser.page_source, "{} {}".format(result, subject)
 
 
@@ -68,12 +69,12 @@ def validate_in_h1(context, subject):
 
     lst = context.browser.find_elements_by_tag_name('h1') 
     subject = dequote(subject)
+    
     for l in lst:       
         if subject == l.text:
             return             # We have a match!
 
     assert False
-
 
 def dequote(s):
     """

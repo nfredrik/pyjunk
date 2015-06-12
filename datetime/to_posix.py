@@ -2,6 +2,12 @@
 # - 150502161930  
 #   1284101485
 import datetime
+
+def dump(obj):
+  for attr in dir(obj):
+    print ("obj.{} = {}".format(attr, getattr(obj, attr)))
+
+
 first = datetime.datetime.fromtimestamp(int("1284101485"))
 second = first.strftime('%Y-%m-%dT%H:%M:%SZ')
 print(second)
@@ -18,3 +24,6 @@ if not hwlog_ts.startswith("20"):
 nisse = parse(hwlog_ts)
 today = nisse.strftime('%Y-%m-%dT%H:%M:%SZ')
 print(today)
+
+print(dump(today))
+

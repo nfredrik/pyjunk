@@ -1,11 +1,10 @@
 
 # http://stackoverflow.com/questions/4165135/how-to-use-while-read-bash-to-read-the-last-line-in-a-file-if-there-s-no-new
 
+set -x
 
 function to_posix 
 { 
-
-	#echo $@
 
 	if [[ $@ =~ ^([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})(.*)$ ]] ; then
 		year=${BASH_REMATCH[1]} 
@@ -15,8 +14,6 @@ function to_posix
 		min=${BASH_REMATCH[5]} 
 		secs=${BASH_REMATCH[6]} 
 		msg=${BASH_REMATCH[7]}
-
-
         echo "20$year-$mon-$dayT$hours:$min:$secs$msg"
     fi
 
@@ -25,7 +22,6 @@ function to_posix
 
 
 while IFS= read -r LINE || [[ -n "$LINE" ]]; do
-    #echo "my $LINE"
     to_posix $LINE
 done
 

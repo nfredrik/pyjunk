@@ -1,0 +1,32 @@
+digraph "classes_No_Name" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{Alert|action\ldescription\lexchange\lrule\l|check_rule()\lconnect()\l}", shape="record"];
+"1" [label="{AndRule|rules : tuple\l|matches()\l}", shape="record"];
+"2" [label="{AndRule|rules : tuple\l|depends_on()\lmatches()\l}", shape="record"];
+"3" [label="{AndRuleTest|\l|setUpClass()\ltest_and_AndRule_matches_if_all_component_rules_are_true()\l}", shape="record"];
+"4" [label="{Event|listeners : list\l|connect()\lfire()\l}", shape="record"];
+"5" [label="{FileReader|filename\l|get_updates()\l}", shape="record"];
+"6" [label="{FileReaderTest|\l|test_FileReader_returns_the_file_content()\l}", shape="record"];
+"7" [label="{HTTPReader|PRICE : int\lTIME : int\llist\l|get_updates()\l}", shape="record"];
+"8" [label="{HTTPReaderSyntaxTest|\l|assert_has_correct_syntax()\l}", shape="record"];
+"9" [label="{HTTPReaderTest|\l|testHTTPReader_returns_valid_format1()\ltestHTTPReader_returns_valid_format2()\l}", shape="record"];
+"10" [label="{ListReader|updates\l|get_updates()\l}", shape="record"];
+"11" [label="{MovingAverage|series\ltimespan\l|value_on()\l}", shape="record"];
+"12" [fontcolor="red", label="{NotEnoughDataException|\l|}", shape="record"];
+"13" [label="{PriceRule|condition\lsymbol\l|depends_on()\lmatches()\l}", shape="record"];
+"14" [label="{PriceRule|condition\lsymbol\l|depends_on()\lmatches()\l}", shape="record"];
+"15" [label="{PriceRuleTest|\l|setUpClass()\ltest_a_PriceRule_is_False_if_th_stock_hasnt_an_update_yet()\ltest_a_PriceRule_is_False_if_th_stock_not_in_exchange()\ltest_a_PriceRule_matches_when_it_mets_the_condition()\ltest_a_PriceRule_only_depends_on_its_stock()\l}", shape="record"];
+"16" [label="{PrintAction|\l|execute()\l}", shape="record"];
+"17" [label="{Processor|exchange\lreader\l|process()\l}", shape="record"];
+"18" [label="{Stock|LATEST : int\lLONG_TERM_TIMESPAN : int\lSHORT_TERM_TIMESPAN : int\lhistory\lsymbol\lupdated\l|get_crossover_signal()\lis_increasing_trend()\lprice()\lupdate()\l}", shape="record"];
+"19" [label="{Stock|LATEST : int\lLONG_TERM_TIMESPAN : int\lSHORT_TERM_TIMESPAN : int\lhistory\lsymbol\lupdated\l|get_crossover_signal()\lis_increasing_trend()\lprice()\lupdate()\l}", shape="record"];
+"20" [label="{StockSignal|\l|}", shape="record"];
+"21" [label="{StockSignal|\l|}", shape="record"];
+"22" [label="{TestStock|goog\l|given_a_series_of_prices()\lsetUp()\ltest_increasing_trend_is_false_if_price_decreases()\ltest_increasing_trend_is_false_if_price_equal()\ltest_increasing_trend_is_true()\ltest_negative_price_should_throw_ValueError()\ltest_stock_of_new_stock_object_should_be_None()\ltest_stock_price_should_give_the_latest_price()\ltest_stock_update()\l}", shape="record"];
+"23" [label="{TimeSeries|series : list\l|get_closing_price_list()\lupdate()\l}", shape="record"];
+"9" -> "8" [arrowhead="empty", arrowtail="none"];
+"4" -> "19" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="updated", style="solid"];
+"19" -> "22" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="goog", style="solid"];
+"23" -> "19" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="history", style="solid"];
+}

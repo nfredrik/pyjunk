@@ -1,0 +1,26 @@
+digraph "packages_No_Name" {
+charset="utf-8"
+rankdir=BT
+"0" [label="stock_alerter", shape="box"];
+"1" [label="stock_alerter.action", shape="box"];
+"2" [label="stock_alerter.alert", shape="box"];
+"3" [label="stock_alerter.event", shape="box"];
+"4" [label="stock_alerter.processor", shape="box"];
+"5" [label="stock_alerter.reader", shape="box"];
+"6" [label="stock_alerter.rule", shape="box"];
+"7" [label="stock_alerter.stock", shape="box"];
+"8" [label="stock_alerter.tests", shape="box"];
+"9" [label="stock_alerter.tests.rule", shape="box"];
+"10" [label="stock_alerter.tests.stock", shape="box"];
+"11" [label="stock_alerter.tests.test_reader", shape="box"];
+"12" [label="stock_alerter.tests.test_rule", shape="box"];
+"13" [label="stock_alerter.tests.test_stock", shape="box"];
+"14" [label="stock_alerter.tests.timeseries", shape="box"];
+"15" [label="stock_alerter.timeseries", shape="box"];
+"7" -> "3" [arrowhead="open", arrowtail="none"];
+"7" -> "15" [arrowhead="open", arrowtail="none"];
+"10" -> "14" [arrowhead="open", arrowtail="none"];
+"12" -> "9" [arrowhead="open", arrowtail="none"];
+"12" -> "10" [arrowhead="open", arrowtail="none"];
+"13" -> "10" [arrowhead="open", arrowtail="none"];
+}

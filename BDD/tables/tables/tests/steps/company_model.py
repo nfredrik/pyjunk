@@ -19,6 +19,7 @@ class Department(metaclass=EnforceCheckRep):
         return self.count
 
     def checkRep(self):
+        print('Heep')
         assert True
 
 class CompanyModel(metaclass=EnforceCheckRep):

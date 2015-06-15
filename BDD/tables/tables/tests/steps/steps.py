@@ -11,7 +11,7 @@ def step_impl(context):
 
     for row in context.table:
         context.model.add_user(name=row["name"], department=row["department"])
-    assert False
+    assert True
 
 @when(u'we count the number of people in the department')
 def step_impl(context):
@@ -22,6 +22,7 @@ def step_impl(context, count, department):
     count_ = NamedNumber.from_string(count)
     assert_that(count_, equal_to(context.model.get_headcount_for(department)))
 
-@then(u'we find one person in "{department}"')
-def step_impl(context, department):
-    assert_that(NamedNumber.from_string('one'), equal_to(context.model.get_headcount_for(department)))
+@then(u'we find "{count}" person in "{department}"')
+def step_impl(context, count, department):
+    assert_that(NamedNumber.from_string(count), equal_to(context.model.get_headcount_for(department)))
+    #assert context.model.get_headcount_for(department) == NamedNumber.from_string('one')

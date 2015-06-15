@@ -1,7 +1,5 @@
 
-
-Feature: As a writer for Acme
-	I This is very serious stuff.
+Feature: Step Setup Table
 
 	Given a set of specific users:
 

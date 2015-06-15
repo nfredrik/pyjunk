@@ -37,6 +37,10 @@ class CompanyModel(metaclass=EnforceCheckRep):
         assert True
 
     def get_headcount_for(self, department):
+
+        if department not in self.departments:
+            return 0
+            
         return self.departments[department].count
 
     def checkRep(self):

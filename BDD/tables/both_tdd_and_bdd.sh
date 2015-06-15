@@ -1,5 +1,11 @@
+#!/usr/bin/env bash
 
+echo 5
 
-`python -m unittest` 
+set -x
+cd tables/tests/steps
+python test_tables.py
+
+cd -
 
 behave tables/tests  --no-capture

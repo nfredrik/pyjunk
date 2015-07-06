@@ -38,6 +38,15 @@ class Morningstar(object):
         self.nav = re.search('Senaste NAV.*\ ([\d]*\,[\d]*)\ SEK[.]*',  self.result)
         return self.nav.group(1).replace(",",".")
 
+
+    def getIar(self):
+        print ' i ar:',
+        self.x = self.geturl(self.url)
+
+#        self.iar = re.search('\>I\ .r\*\<\/td\>\<td\ title\=\"([\d]*\,[\d]*)\"',  self.x)
+        self.iar = re.search('title\=\"([\d]*\,[\d]*)\"',  self.x)
+        return self.iar.group(1).replace(",",".")
+
     def getLatest(self):
         source = self.getDataSource()
         self.senasteNAV(source)

@@ -101,21 +101,24 @@ def regression_test(l):
     q.checkRep()
     
     for oper,value in l:
+
         if type(oper) is int:
+            print('+')
             res = q.enqueue(value)
             q.checkRep()
             
-            if not res : print 'queue was full!'
+            if not res : print('queue was full!')
             
         elif oper == 'dq':
+            print('-')
             res = q.dequeue()
-            q.checkRep
+            q.checkRep()
             
-            if res is None: print 'queue was empty, value was:', value
+            if res is None: print('queue was empty, value was:', value)
         else:
-            print 'invalid operation'    
+            print ('invalid operation')
             
 
 
 regression_test(inpts)
-print 'Finished'
+print ('Finished')

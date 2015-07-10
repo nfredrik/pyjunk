@@ -1,22 +1,35 @@
-Feature: As a writer for Acme
-  I wish to demonstrate
-  How easy writing Acceptance Tests
-  In Python really is.
+Feature: As a newbie of BDD and ReST
+  I wish to understand how Behaviour Driven Development, BDD,  and
+  Representational State Transfer, REST, works
+
+  I will write an couple of scenarios and use jsonplaceholder as server
+  to handle to the interaction with this client and the server
 
   Background:
-    Given I am using the calculator
+    Given I am using the client trying to setup a conversation with a 
+          REST service using some resources
 
-  Scenario: Calculate 2 plus 2 on our calculator
-     Given I input "2" add "2"
-     Then I should see "4"
+  Scenario: Show a specific resource
+     Given I want to retrieve the information about resource "1"
+     Then I should see json information about resource "1"
 
-  Scenario Outline: Calculate addent1 plus addent2 on our calculator
+ Scenario Outline: Show and arbitrary resource 
+     Given I want to retrieve the information about resource <id>
+     Then I should see json information about resource <1>
      Given I input "<addent1>" add "<addent2>"
      Then I should see "<result>"
    
    Examples:
-    | addent1   | addent2  | result |
-    | 2         |  2       |   4    |
-    | 3         |  2       |   5    | 
-    | 3         |  3       |   6    |
-    | 3         |  97      |  100   |     
+    | id        | 
+    | 1         |  
+    | 45        |
+    | 100       | 
+    | 501       | 
+
+
+   Scenario: List all possible resources
+     Given I want to retrieve the information about all resources
+     Then I should see a list of json information
+
+
+     

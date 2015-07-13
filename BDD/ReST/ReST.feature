@@ -6,9 +6,12 @@ Feature: As a newbie of BDD and ReST
   to handle to the interaction with this client and the server
 
   Background:
-    Given I am using the client trying to setup a conversation with a 
-          REST service using some resources
+    Given I am using the client trying to setup a conversation with a rest service using some resources
 
+  Scenario: Show that service supports specific primitives
+     Given I ask for supported primitives 
+     Then I will reply on supported primitives
+     
   Scenario: Show a specific resource
      Given I want to retrieve the information about resource "1"
      Then I should see json information about resource "1"

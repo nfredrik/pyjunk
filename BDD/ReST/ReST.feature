@@ -8,9 +8,9 @@ Feature: As a newbie of BDD and ReST
   Background:
     Given I am using the client trying to setup a conversation with a rest service using some resources
 
-  Scenario: Show that service supports specific primitives
-     Given I ask for supported primitives 
-     Then I will reply on supported primitives
+  Scenario: List the allowed operations on a resource
+     Given I ask for supported operations on a resource 
+     Then I will get a reply on supported operations
      
   Scenario: Show a specific resource
      Given I want to retrieve the information about resource "1"

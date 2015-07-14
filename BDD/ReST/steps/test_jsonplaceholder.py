@@ -53,14 +53,43 @@ def validate_json(text):
     }
     pp = pprint.PrettyPrinter(indent=4)
     #pp.pprint(text)
-    data = json.dumps(text)
+    nisse = json.dumps(text)
     #pp.pprint(data)
-    print(data)
+    #print(data)
     #schema = {"type":"object"}
+
+    schema = {
+
+
+
+    "userId": {
+      "type": "string"
+    },
+
+    "id": {
+      "type": "integer"
+    }
+     ,
+    "body": {
+      "type": "string"
+    }
+   , 
+   "titl": {
+      "type": "string"
+    },
+       "required": [
+    "body",
+    "id",
+    "userId",
+    "titl"
+    ]
+    
+    }
+
 
     #schema = {"type":"object","properties":
     #{"id":{"type":"integer"}, "title":{"type":"string"}, "body":{"type":"string"}, "userid":{"type":"integer"}}}
-    validictory.validate(data, schema)
+    validictory.validate(nisse, schema)
 
 class restingTests(unittest.TestCase):
     def setUp(self):
@@ -74,7 +103,7 @@ class restingTests(unittest.TestCase):
             if dict[key] is None:
                 raise self.failureException("no value for %s"%key)
 
-        #validate_json(str(dict))
+        validate_json(str(dict))
 
     def assert_valid_list(self, list):
         for dict in list:
@@ -94,6 +123,8 @@ class restingTests(unittest.TestCase):
         j = self.rest.show_resource(number='1').json
         pp = pprint.PrettyPrinter(indent=4)
         #pp.pprint(j)
+        k = json.dumps(j)
+        #pp.pprint(k)
         # Verify valid json
         self.assertTrue(isinstance(j,dict))
         self.assert_valid_dict(j)

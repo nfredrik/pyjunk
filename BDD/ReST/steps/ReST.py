@@ -1,4 +1,31 @@
+import json
+import validictory
+from hamcrest import assert_that, contains_string, equal_to, is_not
 from jsonplaceholder import REST
+
+schema={
+    "id": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "integer"
+    }
+  }
+
+
+def is_valid_json(text):
+    try:
+        json.dumps(text)
+        return True
+    except:
+        return False
+
 
 @given(u'I am using the client trying to setup a conversation with a rest service using some resources')
 def step_impl(context):
@@ -17,13 +44,21 @@ def step_impl(context):
     assert at_least.issubset(ll)
     #raise NotImplementedError(u'STEP: Then I will get a reply on supported operations')
 
-@given(u'I want to retrieve the information about resource "1"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given I want to retrieve the information about resource "1"')
+@given(u'I want to retrieve the information about resource "{resource_no}"')
+def step_impl(context, resource_no):
+    context.tmp = context.rest.show_resource(number=resource_no).json
+    assert context.rest is not None
 
-@then(u'I should see json information about resource "1"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I should see json information about resource "1"')
+@then(u'I should see json information about resource "{resource_no}"')
+def step_impl(context, resource_no):
+    # Check if json
+    assert isinstance(context.tmp,dict)
+    assert is_valid_json(context.tmp)
+    data = json.dumps(context.tmp)
+    validictory.validate(data, schema)
+    print('Mer:',context.tmp['id'])
+    assert_that(str(context.tmp['id']), equal_to(resource_no))
+    #assert False
 
 @given(u'I want to retrieve the information about resource 1')
 def step_impl(context):
@@ -32,14 +67,6 @@ def step_impl(context):
 @then(u'I should see json information about resource <1>')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then I should see json information about resource <1>')
-
-@given(u'I input "<addent1>" add "<addent2>"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given I input "<addent1>" add "<addent2>"')
-
-@then(u'I should see "<result>"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I should see "<result>"')
 
 @given(u'I want to retrieve the information about resource 45')
 def step_impl(context):

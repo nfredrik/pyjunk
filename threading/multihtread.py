@@ -31,7 +31,7 @@ class MyThread(Thread):
     def work(self, item):
         """"Do the real work"""
         self.log("Working on item %s"% item)
-        sleep(self.delay * 0.77)
+        #sleep(self.delay * 0.77)
         return item > 0
 
     def run(self):
@@ -43,7 +43,7 @@ class MyThread(Thread):
                 alive = self.work(item)
             except Empty:
                 self.log("No job for me.")
-                sleep(self.delay * 3.13)
+                #sleep(self.delay * 3.13)
         self.log("I am Done")
 
 if __name__ == "__main__":
@@ -62,19 +62,19 @@ if __name__ == "__main__":
     for i in range(3):
         t = MyThread(logger, q, names[i], delays[i])
         threads.append(t)
-    sleep(1.7)
+    #sleep(1.7)
 
     mylog("Start the threads")
     for thread in threads:
         thread.start()
 
-    sleep(4.7)
+    #sleep(4.7)
 
     mylog("Add some jobs, the allow some jobs to finish")
 
     for n in range(100, 170, 9):
         q.put(n)
-    sleep(2.2)
+    #sleep(2.2)
 
     mylog("Kill threads (once all jobs are done")
 

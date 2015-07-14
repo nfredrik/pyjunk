@@ -17,22 +17,24 @@ Feature: As a newbie of BDD and ReST
      Then I should see json information about resource "1"
 
  Scenario Outline: Show and arbitrary resource 
-     Given I want to retrieve the information about resource <id>
-     Then I should see json information about resource <1>
-     Given I input "<addent1>" add "<addent2>"
-     Then I should see "<result>"
+     Given I want to retrieve the information about resource "<id>"
+     Then I should see json information about resource "<id>"
    
    Examples:
     | id        | 
     | 1         |  
     | 45        |
     | 100       | 
-    | 501       | 
-
-
+   
    Scenario: List all possible resources
      Given I want to retrieve the information about all resources
      Then I should see a list of json information
+
+
+   Scenario: Handle a non-existing resource
+       Given I try to retrieve a non existing resource
+       Then  It throws a KeyError exception
+
 
 
      

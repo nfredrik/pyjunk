@@ -1,19 +1,28 @@
+import platform
+
 
 # Implementor
 class ListAPI:
     def list(self, includeHiddenFiles):
-        raise Exception
-
+        raise NotImplemented
 
 # ConcreteImplementor 1/2
 class ListAPILinux(ListAPI):
     def list(self, includeHiddenFiles):
-        pass  # use popen to list files, take of hidden files too..
 
-# ConcreteImplementor 1/2
+        if includeHiddenFiles:
+            print('Linux list files included hidden ones')
+        else:
+            print('Linux list files')
+        # use popen to list files, take of hidden files too..
+
+    def __str__(self):
+        return 'Linux'
+
+# ConcreteImplementor 2/2
 class ListAPIWindows(ListAPI):
     def list(self, includeHiddenFiles):
-        pass  # use popen to list files, take of hidden files too..
+        raise NotImplemented  # use popen to list files, take of hidden files too..
 
 
 # Abstraction
@@ -26,16 +35,40 @@ class List:
     def includeHiddenFiles(self):
         raise Exception
 
+
+class Platform(object):
+    operativ = {'Linux':ListAPILinux(), 'Darwin':ListAPILinux(), 'Windows':ListAPIWindows()}
+
+    def __init__(self):
+        self._os = self.operativ.get(platform.system(), None)
+    def __call__(self):
+        return self._os
+
+
 # Refined Abstraction
 class ListFiles(List):
-    def __init__(self, listAPI):
-        self.__listAPI = listAPI
+    def __init__(self):
+        self._listAPI = Platform()()
         self._includeHiddenFiles = False
 
     # low-level i.e. Implementation specific
     def list(self):
-        self.__listAPI.list(self)
+        self._listAPI.list(self._includeHiddenFiles)
 
     # high-level i.e. Abstraction specific
-    def includeHiddenFiles(self, pct):
+    def includeHiddenFiles(self):
         self._includeHiddenFiles = True
+
+
+
+
+
+
+#nisse = Platform()
+
+#print(str(nisse))
+
+listFiles = ListFiles()
+listFiles.includeHiddenFiles()
+listFiles.list()
+

@@ -4,7 +4,10 @@ import platform
 # Implementor
 class ListAPI:
     def list(self, includeHiddenFiles):
-        raise NotImplemented
+        raise NotImplementedError
+
+    def ip_config(self):
+        raise NotImplementedError
 
 # ConcreteImplementor 1/2
 class ListAPILinux(ListAPI):
@@ -16,14 +19,27 @@ class ListAPILinux(ListAPI):
             print('Linux list files')
         # use popen to list files, take of hidden files too..
 
+    def ip_config(self):
+        print('Linux showing some ip config stuff...')
     def __str__(self):
         return 'Linux'
 
 # ConcreteImplementor 2/2
 class ListAPIWindows(ListAPI):
     def list(self, includeHiddenFiles):
-        raise NotImplemented  # use popen to list files, take of hidden files too..
+        raise NotImplementedError  # use popen to list files, take of hidden files too..
 
+
+
+class Platform(object):
+    '''# Make it possible to decide what operating system we are using'''
+
+    operativ = {'Linux':ListAPILinux(), 'Darwin':ListAPILinux(), 'Windows':ListAPIWindows()}
+
+    def __init__(self):
+        self._os = self.operativ.get(platform.system(), None)
+    def __call__(self):
+        return self._os
 
 # Abstraction
 class List:
@@ -36,26 +52,24 @@ class List:
         raise Exception
 
 
-class Platform(object):
-    operativ = {'Linux':ListAPILinux(), 'Darwin':ListAPILinux(), 'Windows':ListAPIWindows()}
-
-    def __init__(self):
-        self._os = self.operativ.get(platform.system(), None)
-    def __call__(self):
-        return self._os
-
 
 # Refined Abstraction
 class ListFiles(List):
     def __init__(self):
-        self._listAPI = Platform()()
+        self._listAPI = Platform()
         self._includeHiddenFiles = False
 
     # low-level i.e. Implementation specific
+    @property
     def list(self):
-        self._listAPI.list(self._includeHiddenFiles)
+        self._listAPI().list(self._includeHiddenFiles)
+
+    @property 
+    def ip_config(self):
+        self._listAPI().ip_config()
 
     # high-level i.e. Abstraction specific
+    @property
     def includeHiddenFiles(self):
         self._includeHiddenFiles = True
 
@@ -69,6 +83,7 @@ class ListFiles(List):
 #print(str(nisse))
 
 listFiles = ListFiles()
-listFiles.includeHiddenFiles()
-listFiles.list()
+listFiles.includeHiddenFiles
+listFiles.list
+listFiles.ip_config
 

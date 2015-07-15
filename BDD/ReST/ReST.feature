@@ -8,9 +8,9 @@ Feature: As a newbie of BDD and ReST
   Background:
     Given I am using the client trying to setup a conversation with a rest service using some resources
 
-  Scenario: List the allowed operations on a resource
-     Given I ask for supported operations on a resource 
-     Then I will get a reply on supported operations
+  Scenario: List the allowed methods on a resource
+     Given I ask for supported methods on a resource 
+     Then I will get a reply on supported methods
      
   Scenario: Show a specific resource
      Given I want to retrieve the information about resource "1"
@@ -36,5 +36,6 @@ Feature: As a newbie of BDD and ReST
        Then  It throws a KeyError exception
 
 
-
+   
      
+

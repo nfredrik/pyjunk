@@ -1,6 +1,6 @@
 import json
 #import validictory
-import jsonvalidate
+#import jsonvalidate
 from hamcrest import assert_that, contains_string, equal_to, is_not
 from jsonplaceholder import REST
 
@@ -48,17 +48,18 @@ def step_impl(context):
     context.rest = REST()
     assert context.rest is not None 
 
-@given(u'I ask for supported operations on a resource')
+@given(u'I ask for supported methods on a resource')
 def step_impl(context):
     context.tmp = context.rest.show_primitives().options()
  
 
-@then(u'I will get a reply on supported operations')
+@then(u'I will get a reply on supported methods')
 def step_impl(context):
     ll = set(context.tmp.split(','))
+    print('Supported HTTP methods', ll)
     at_least = set(['PUT', 'GET'])
     assert at_least.issubset(ll)
-    #raise NotImplementedError(u'STEP: Then I will get a reply on supported operations')
+    #raise NotImplementedError(u'STEP: Then I will get a reply on supported methods')
 
 @given(u'I want to retrieve the information about resource "{resource_no}"')
 def step_impl(context, resource_no):
@@ -73,7 +74,7 @@ def step_impl(context, resource_no):
     jonne = json.dumps(context.tmp)
     #print('Mer:',jonne)
     #validictory.validate(jonne, schema)
-    jsonvalidate.validate(jonne, schema, [], None)
+    #jsonvalidate.validate(jonne, schema, [], None)
 
     assert_that(str(context.tmp['id']), equal_to(resource_no))
 

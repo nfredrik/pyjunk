@@ -48,6 +48,12 @@ class RESTingResponse(object):
             'Accept-Language': self.language or 'en-us'
         })
 
+    def _patch_request(self, accept):
+        return requests.patch(self.url, data=self.payload, headers={
+            'Content-Type': 'application/json',
+            'Accept-Language': self.language or 'en-us'
+        })
+
     def _delete_request(self, accept):
         return requests.delete(self.url,  headers={
             'Content-Type': 'application/json',
@@ -56,6 +62,12 @@ class RESTingResponse(object):
 
     def _options_request(self, accept):
         return requests.options(self.url,  headers={
+            'Content-Type': 'application/json',
+            'Accept-Language': self.language or 'en-us'
+        })
+
+    def _head_request(self, accept):
+        return requests.head(self.url,  headers={
             'Content-Type': 'application/json',
             'Accept-Language': self.language or 'en-us'
         })
@@ -91,10 +103,21 @@ class RESTingResponse(object):
             self.r = self._put_request('application/json')
         return self.r, self.r.text
 
+    def patch(self, payload):
+        if self._json is None:
+            self.payload = payload
+            self.r = self._patch_request('application/json')
+        return self.r, self.r.text
+
     def options(self):
         self.r = self._options_request('application/json')
         hdr = self.r.headers['access-control-allow-methods']
         return hdr
+
+    def head(self):
+        self.r = self._head_request('application/json')
+        time = self.r.headers['Date']
+        return self.r, time
 
     def delete(self):
         if self._json is None:
@@ -111,7 +134,9 @@ class REST(object):
         'create_resource': 'posts',
         'update_resource': 'posts/{number}',
         'delete_resource': 'posts/{number}',
-        'show_primitives':''
+        'show_primitives':'',
+        'patch_resource' :'posts/{number}',
+        'head_resource'  :'posts/{number}'        
     }
 
     def __init__(self, secure=False, language=None):

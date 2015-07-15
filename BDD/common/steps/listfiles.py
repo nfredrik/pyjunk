@@ -1,12 +1,23 @@
 import platform
 
 
+''' TODO: - Implement some stuff with popen
+          - Return result as list? or?...
+          - set and get current working directory
+'''
+
 # Implementor
 class ListAPI:
     def list(self, includeHiddenFiles):
         raise NotImplementedError
 
     def ip_config(self):
+        raise NotImplementedError
+
+    def set_cwd(self):
+        raise NotImplementedError
+
+    def get_cwd(self):
         raise NotImplementedError
 
 # ConcreteImplementor 1/2
@@ -32,7 +43,7 @@ class ListAPIWindows(ListAPI):
 
 
 class Platform(object):
-    '''# Make it possible to decide what operating system we are using'''
+    '''Make it possible to decide what operating system we are using'''
 
     operativ = {'Linux':ListAPILinux(), 'Darwin':ListAPILinux(), 'Windows':ListAPIWindows()}
 

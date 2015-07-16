@@ -1,5 +1,6 @@
 
 # http://httpstatus.es/
+# http://www.restapitutorial.com/httpstatuscodes.html
 
 class NamedHTTPstatus(object):
     """Map named HTTPstatuses into numbers."""

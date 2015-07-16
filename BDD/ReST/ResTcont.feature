@@ -9,7 +9,7 @@ Background:
 
 Scenario: Add a new resource
     Given I order to create a new resource "1"
-    Then  get an "OK" in the reply
+    Then  get an "CREATED" in the reply
     And   I will get a confirmation that resource "1" has been created
 
    Scenario: Update an existing resource

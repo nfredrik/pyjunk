@@ -18,12 +18,9 @@ def step_impl(context, status_code):
 
 @then(u'I will get a confirmation that resource "{resource:d}" has been created')
 def step_impl(context, resource):
-    expect = {"id":101, "title":"foo", "body":"bar" }
-    expect["userId"] = resource  # TODO Check if this could be done earlier!
-    #assert context.text is not None
+    expect = {"id":101, "title":"foo", "body":"bar", "userId": resource} # TODO Check if this could be done earlier!
     text = json.loads(context.payload)
     assert_that(text, equal_to(expect))
-
 
 @given(u'I order to delete resource "{resource}"')
 def step_impl(context, resource):

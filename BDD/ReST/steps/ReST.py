@@ -59,7 +59,6 @@ def step_impl(context):
     print('Supported HTTP methods', ll)
     at_least = set(['PUT', 'GET'])
     assert at_least.issubset(ll)
-    #raise NotImplementedError(u'STEP: Then I will get a reply on supported methods')
 
 @given(u'I want to retrieve the information about resource "{resource_no}"')
 def step_impl(context, resource_no):

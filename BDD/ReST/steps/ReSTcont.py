@@ -10,19 +10,16 @@ from dateutil import parser
 def step_impl(context, resource):    
     data = json.dumps({"title":"foo", "body":"bar", "userId":"1"})
     context.j, context.payload = context.rest.create_resource().create(data)
-    #context.text = json.loads(payload)
-    #print(payload)
     #assert context.text is not None
 
 @then(u'get an "{status_code}" in the reply')
 def step_impl(context, status_code):
-    #assert_that(context.j.status_code, equal_to(requests.codes.ok))
     assert_that(context.j.status_code, equal_to(NamedHTTPstatus.from_string(status_code)))
 
-@then(u'I will get a confirmation that resource "{resource}" has been created')
+@then(u'I will get a confirmation that resource "{resource:d}" has been created')
 def step_impl(context, resource):
     expect = {"id":101, "title":"foo", "body":"bar" }
-    expect["userId"] = int(resource)  # TODO Check if this could be done earlier!
+    expect["userId"] = resource  # TODO Check if this could be done earlier!
     #assert context.text is not None
     text = json.loads(context.payload)
     assert_that(text, equal_to(expect))
@@ -51,7 +48,6 @@ def step_impl(context, resource):
 @then(u'I will get metadata as reply')
 def step_impl(context):
     actual_time = parser.parse(context.time)
-    #print(actual_time, datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0))
     assert_that(actual_time, less_than_or_equal_to(datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)))
 
 @given(u'I order to update resource "{resource}"')
@@ -59,21 +55,21 @@ def step_impl(context, resource):
     data = json.dumps({'title':'foo', 'body':'bar', 'userId':'1'})     
     context.j, context.tmp = context.rest.update_resource(number=resource).update(data)
 
-    #raise NotImplementedError(u'STEP: Given I order to update resource "1"')
+# https://pythonhosted.org/behave/parse_builtin_types.html
 
-@then(u'I will get a confirmation that resource "{resource}" has been updated')
+@then(u'I will get a confirmation that resource "{resource:d}" has been updated')
 def step_impl(context, resource):
     assert_that(context.tmp, not_none())
 
     expect = {"id":1, "title":"foo", "body":"bar" }
-    expect["userId"] = int(resource)  # TODO Check if this could be done earlier!
+    expect["userId"] = resource  # TODO Check if this could be done earlier!
     #assert context.text is not None
     text = json.loads(context.tmp)
     assert_that(text, equal_to(expect))
 
 
 
-    #raise NotImplementedError(u'STEP: Then I will get a confirmation that resource "1" has been updated')
+
 
 
 

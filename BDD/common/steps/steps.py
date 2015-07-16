@@ -8,9 +8,9 @@
 def step_impl(context):
     raise NotImplementedError(u'STEP: Given That current directory is "."')
 
-@then(u'Verify that one file is listed')
+@then(u'Verify that at least one file is listed')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then Verify that one file is listed')
+    raise NotImplementedError(u'STEP: Then Verify that at least one file is listed')
 
 @then(u'We have a parent directory')
 def step_impl(context):

@@ -3,7 +3,7 @@ Feature: Try to implement functions that are common for both windows and Linux
 
 Scenario: List all files in a directory
     Given That current directory is "."
-    Then Verify that one file is listed
+    Then Verify that at least one file is listed
     And We have a parent directory
 
 Scenario: Get the MAC of the default network interface

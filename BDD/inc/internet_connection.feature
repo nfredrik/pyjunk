@@ -24,4 +24,6 @@ Feature: Have a way to pinpoint what could be wrong when trying to connect
   Scenario: We can mail echo berling and get a reply
   
   Scenario: Measure capacity
+
+  Scenario: Verify that the vendorID for the MAC is equal to Hewlett Packard (D0:BF:9C)
   

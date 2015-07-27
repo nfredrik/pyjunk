@@ -126,6 +126,21 @@ class RESTingResponse(object):
         return self.r
 
 
+class REST_light(object):
+
+    def __init__(self, url):
+        self.url = url
+
+    def __call__(self):
+        def outer(path):
+            def inner(secure=False, **kwargs):
+                url = self.build_url(path, **kwargs)
+                return RESTingResponse(url, language=self.language)
+            return inner
+
+        return outer(self.url) 
+
+
 class REST(object):
 
     actions = {

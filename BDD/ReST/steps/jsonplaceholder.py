@@ -125,6 +125,10 @@ class RESTingResponse(object):
             print("NOTE!!!: from delete", self.r.ok, self.r.status_code, "should be 204!")
         return self.r
 
+    @property
+    def status_code(self):
+        return 200
+
 
 class REST_light(object):
 

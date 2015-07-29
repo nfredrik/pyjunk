@@ -82,6 +82,7 @@ class RESTingResponse(object):
     def json(self):
         if self._json is None:
             self._json = self._make_request('application/json')
+            self.repsonse = self._json
         return self._json.json()
 
     @property
@@ -127,19 +128,21 @@ class RESTingResponse(object):
 
     @property
     def status_code(self):
-        return 200
+        return self.response.status_code
 
 
 class REST_light(object):
 
-    def __init__(self, url):
+    def __init__(self, url, secure=False, language=None):
         self.url = url
+        self.secure = secure
+        self.language = language
 
-    def __call__(self):
+    def fredde(self):
         def outer(path):
             def inner(secure=False, **kwargs):
-                url = self.build_url(path, **kwargs)
-                return RESTingResponse(url, language=self.language)
+                #url = self.build_url(path, **kwargs)
+                return RESTingResponse(self.url, language=self.language)
             return inner
 
         return outer(self.url) 

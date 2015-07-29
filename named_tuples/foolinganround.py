@@ -16,3 +16,11 @@ for i in l:
 for olle, pelle in l:
 	print(olle, pelle)
 
+
+
+for i in l:
+    for name in i._fields:
+        print(name, getattr(i, name))
+
+
+

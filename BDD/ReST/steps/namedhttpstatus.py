@@ -11,10 +11,12 @@ class NamedHTTPstatus(object):
        "NOT_MODIFIED": 304,
        "BAD_REQUEST": 400,
        "UNAUTHORIZED": 401,
-       "FORBIDDEB": 403,
+       "FORBIDDEN": 403,
+       "NOT_FOUND": 404,
        "METHOD_NOT_ALLOWED": 405,
        "CONFLICT" : 409,
-       "INTERNAL_SERVER_ERROR": 500,        
+       "INTERNAL_SERVER_ERROR": 500, 
+       "SERVICE_UNAVAILABLE" : 503       
     }
 
     @classmethod

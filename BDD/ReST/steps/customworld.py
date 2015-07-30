@@ -8,6 +8,7 @@ from steps.jsonplaceholder import REST_light, RESTingResponse
 from hamcrest import assert_that, contains_string, equal_to, is_not
 
 resource_type = collections.namedtuple('resource_type', 'path')
+mime_type = collections.namedtuple('mime_type', 'value')
 payload = collections.namedtuple('payload', 'title body userId')
 
 submap  = collections.namedtuple('submap', 'res number')
@@ -54,6 +55,12 @@ class CustomWorld(object):
         self.response = requests.get(self.host + self.resources[self.resource])
         return self.response
 
+    def request_resource_ng(self):
+        name = self.the_link
+        print(name)
+        self.response = requests.get(name)
+        return self.response
+
     def create_resource(self, format = 'json'):
 
         if format == 'json':
@@ -83,4 +90,22 @@ class CustomWorld(object):
 
     def assert_have_content(self):
         assert_that(self.response.content, is_not(equal_to(None)))
+
+    def assert_mime_type(self, mime):
+        assert_that(self.response.headers['Content-Type'], equal_to(self.resources[mime]))
+
+    def assert_attribute(self, name):
+        hit = False
+        items = self.response.json()
+        for key in items.keys():
+           if name == key:
+            hit = True
+            self.the_link = items[name]
+        
+        assert_that(hit, equal_to(True))
+
+    def assert_attribute_in_text(self, attr):
+        print(self.response.content)
+        assert_that(self.response.headers, contains_string(attr))
+
 

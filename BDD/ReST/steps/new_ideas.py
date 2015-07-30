@@ -59,5 +59,35 @@ def step_impl(context, res, xid, no, payloadid):
 def step_impl(context):
     context.CustomWorld.assert_have_content()
 
+@then(u'the request succeeds')
+def step_impl(context):
+    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("OK"))
+
+@then(u'the response type is {Cj}')
+def step_impl(context, Cj):
+    context.CustomWorld.assert_mime_type(Cj)    
+
+
+@then(u'the Cj response has a {name} link')
+def step_impl(context, name):
+    context.CustomWorld.assert_attribute(name)
+
+@then(u'I can find the id from the link response')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Then I can find the id from the link response')
+
+
+@then(u'I can request a the {name} link')
+def step_impl(context, name):
+    context.CustomWorld.request_resource_ng()
+
+@then(u'I can find the {attr} from the link response')
+def step_impl(context, attr):
+    context.CustomWorld.assert_mime_type('png')
+    #context.CustomWorld.assert_attribute_in_text("viewport")
+
+
+
+
 
 

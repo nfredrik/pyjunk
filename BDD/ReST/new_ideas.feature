@@ -4,14 +4,16 @@ Feature: Basic REST Interactions
 
 Background:
   Given the server knows about the following resources
-      |type   |path                    |
-      |posts  |/posts                  |
-      |post  |/posts/{id}              |
-      |nonexistent|/hue/does/not/exist |
+      |type       | path                |
+      |posts      | /posts              |
+      |post       | /posts/{id}         |
+      |nonexistent| /hue/does/not/exist |
+      |photo      | /photos/{id}         |
  
 And the server knows about the following mime types
-      |HTML   |text/html                       |
-      |Cj     |application/vnd.collections+json|
+      |HTML   |text/html                        |
+      | Cj    |application/json; charset=utf-8  |
+      | png   | image/png                       |
 
 And the server knows the structure of the payload
       | payload | title  | body | userId |
@@ -33,6 +35,24 @@ Scenario: Create an individual resource
     Given I want to create a posts resource with an id of 9 and payload 1
     And the create succeeds
     Then I can verify the reply
+
+
+Scenario: Basic resource request with validation
+    Given I want to request a photo resource with an id of 1
+    Then I can request it
+    And the request succeeds
+    And the response type is Cj
+    And the Cj response has a url link
+
+
+Scenario: Following links
+    Given I want to request a photo resource with an id of 1
+    Then I can request it
+    Then I can request a the url link
+    And I can find the png from the link response
+
+
+  
 
 
 

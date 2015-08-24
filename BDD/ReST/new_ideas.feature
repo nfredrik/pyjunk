@@ -11,8 +11,9 @@ Background:
       |photo      | /photos/{id}         |
  
 And the server knows about the following mime types
+      | type  | path                            | 
       |HTML   |text/html                        |
-      | Cj    |application/json; charset=utf-8  |
+      | json  |application/json; charset=utf-8  |
       | png   | image/png                       |
 
 And the server knows the structure of the payload
@@ -41,7 +42,7 @@ Scenario: Basic resource request with validation
     Given I want to request a photo resource with an id of 1
     Then I can request it
     And the request succeeds
-    And the response type is Cj
+    And the response type is json
     And the Cj response has a url link
 
 
@@ -51,6 +52,24 @@ Scenario: Following links
     Then I can request a the url link
     And I can find the png from the link response
 
+Scenario: Resource doesn't exist
+    Given I want to interact with an nonexistent resource
+    Then I can request it
+    And the request will not be found
+
+@html
+Scenario: Content Negotiation to known type
+    Given I want to interact with an posts resource
+    Then I can request it as HTML
+    And the request succeeds
+    And the response type is HTML
+
+@json
+Scenario: Content Negotiation to other known type
+    Given I want to interact with an posts resource
+    Then I can request it as json
+    And the request succeeds
+    And the response type is json
 
   
 

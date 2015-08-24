@@ -17,17 +17,33 @@ def get_text(file='demo2.docx'):
         fulltext.append(para.text.encode('ascii', 'replace'))
     return fulltext
 
+def get_text(file='demo2.docx'):
+    doc = docx.Document(file)
+    tables = doc.tables
+    fulltext = list()
+    for table in tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for para in cell.paragraphs:
+                    fulltext.append(para.text.encode('ascii', 'replace'))
+    return fulltext
 
 all_logIds = list()
 
 try:
-    ll = get_text()
+    #ll = get_text()
+    ll = get_text('gunnar.docx')    
+    # for row in ll: 
+    #     print(row)
+
     for number in g_serie:
-        for row in ll:
-            if number in str(row):
+        for cntr, row in enumerate(ll):
+            #print('compare:',number, row) 
+            if number.strip(';') in str(row):
                 #print(row)
                 tmp = str(row).split(';')
-                all_logIds.append(lollo(logId=number.strip(';'), text=tmp[-1]))
+                all_logIds.append(lollo(logId=number.strip(';'), text=ll[cntr+1]))
+                #all_logIds.append(lollo(logId=number.strip(';'), text=tmp[-1]))
                 #all_logIds.append(lollo(logId=number, text=tmp))
 except UnicodeEncodeError as e:
     pass

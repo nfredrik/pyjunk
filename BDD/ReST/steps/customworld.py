@@ -8,7 +8,7 @@ from steps.jsonplaceholder import REST_light, RESTingResponse
 from hamcrest import assert_that, contains_string, equal_to, is_not
 
 resource_type = collections.namedtuple('resource_type', 'path')
-mime_type = collections.namedtuple('mime_type', 'value')
+mime_type = collections.namedtuple('mime_type', 'typ value')
 payload = collections.namedtuple('payload', 'title body userId')
 
 submap  = collections.namedtuple('submap', 'res number')
@@ -22,6 +22,7 @@ class CustomWorld(object):
         self.sub_map = None
         self.host = host
         self.port = port
+        self.mimes = dict()
 
     def set_resources(self, table):
         for row in table:
@@ -29,7 +30,14 @@ class CustomWorld(object):
 
     def set_mime_types(self, table):
         for row in table:
-            self.resources[row["HTML"]] = row["text/html"]
+           #print('first', row["type"], row['path'])
+           self.mimes[row["type"]] = mime_type(typ= row['type'], value = row['path'])            
+        #for row in table:
+        #    self.resources[row["HTML"]] = row["text/html"]
+
+        #print("MIME TYPES")
+        #print(self.mimes)
+
 
     def set_payloads(self, table):
         for row in table:
@@ -44,21 +52,25 @@ class CustomWorld(object):
         self.sub_map = map
         self.sub_map = submap(res = res, number = number)
 
-    def request_resource(self):
+    def request_resource(self, mime=None):
         url = self.host
 
         if self.sub_map:
             if self.sub_map.res in self.resources[self.resource]:
                 self.resources[self.resource] = self.resources[self.resource].replace(self.sub_map.res, self.sub_map.number)
 
-        print(self.host + self.resources[self.resource])
-        self.response = requests.get(self.host + self.resources[self.resource])
+        if not mime:
+            self.response = requests.get(self.host + self.resources[self.resource])
+        else:
+            tmp = {'Content-Type':mime}
+            self.response = requests.get(self.host + self.resources[self.resource], headers= tmp)
+
         return self.response
 
-    def request_resource_ng(self):
+    def request_resource_ng(self, mime=None):
         name = self.the_link
-        print(name)
         self.response = requests.get(name)
+
         return self.response
 
     def create_resource(self, format = 'json'):
@@ -79,7 +91,7 @@ class CustomWorld(object):
             if self.sub_map[0] in self.resources[self.resource]:
                 self.resources[self.resource] = self.resources[self.resource].replace(self.sub_map[0], self.sub_map[1])
 
-        print(self.host + self.resources[self.resource])
+        #print(self.host + self.resources[self.resource])
         self.response = requests.post(self.host + self.resources[self.resource], payload)
         return self.response
 
@@ -92,7 +104,10 @@ class CustomWorld(object):
         assert_that(self.response.content, is_not(equal_to(None)))
 
     def assert_mime_type(self, mime):
-        assert_that(self.response.headers['Content-Type'], equal_to(self.resources[mime]))
+        #assert_that(self.response.headers['Content-Type'], equal_to(self.resources[mime]))
+        assert_that(self.response.headers['Content-Type'], equal_to(self.mimes[mime].value)) 
+        print('THe result', self.response.headers['Content-Type'], self.mimes[mime].value)
+        #   = mime_type(typ= row['type'], value = row['path'])  
 
     def assert_attribute(self, name):
         hit = False
@@ -105,7 +120,7 @@ class CustomWorld(object):
         assert_that(hit, equal_to(True))
 
     def assert_attribute_in_text(self, attr):
-        print(self.response.content)
+        #print(self.response.content)
         assert_that(self.response.headers, contains_string(attr))
 
 

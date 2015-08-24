@@ -83,8 +83,20 @@ def step_impl(context, name):
 
 @then(u'I can find the {attr} from the link response')
 def step_impl(context, attr):
-    context.CustomWorld.assert_mime_type('png')
+    context.CustomWorld.assert_mime_type(attr)
     #context.CustomWorld.assert_attribute_in_text("viewport")
+
+
+@then(u'the request will not be found')
+def step_impl(context):
+    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("NOT_FOUND"))
+
+
+@then(u'I can request it as {typ}')
+def step_impl(context, typ):
+    context.CustomWorld.request_resource(mime=typ)
+
+
 
 
 

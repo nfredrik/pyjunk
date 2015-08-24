@@ -23,7 +23,6 @@ def step_impl(context):
 @given(u'I want to request a {res} resource with an {xid} of {no}')
 def step_impl(context, res, xid, no):
     context.CustomWorld.set_resource_type(res)
-    print('xid', xid, 'no', no)
     context.CustomWorld.set_substitution('{'+xid+'}',no)
     nisse = context.CustomWorld.request_resource()
     assert nisse is not None
@@ -108,7 +107,16 @@ def step_impl(context):
 
 @then(u'I can verify the deletion')
 def step_impl(context):
-    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("NO_CONTENT"))
+    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("OK"))
+
+
+@given(u'the update succeeds')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Given the update succeeds')
+
+@given(u'I will get a confirmation that resource has been updated')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Given I will get a confirmation that resource has been updated')
 
 
 

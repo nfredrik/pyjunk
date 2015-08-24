@@ -3,13 +3,11 @@ import json
 import requests
 import collections
 from collections import namedtuple
-#from steps.jsonplaceholder import REST_light, RESTingResponse
 from hamcrest import assert_that, contains_string, equal_to, is_not
 
 resource_type = collections.namedtuple('resource_type', 'path')
 mime_type = collections.namedtuple('mime_type', 'typ value')
 payload = collections.namedtuple('payload', 'title body userId')
-
 submap  = collections.namedtuple('submap', 'res number')
 
 class CustomWorld(object):
@@ -31,11 +29,10 @@ class CustomWorld(object):
         for row in table:
            self.mimes[row["type"]] = mime_type(typ= row['type'], value = row['path'])            
 
-
-
     def set_payloads(self, table):
         for row in table:
             self.payloads[row["payload"]] = payload(title= row['title'], body = row['body'], userId= row['userId'])
+
     def set_payload(self, id):
         self.payload = id
 

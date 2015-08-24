@@ -38,11 +38,19 @@ Scenario: Create an individual resource
     And the create succeeds
     Then I can verify the reply
 
+@update
+Scenario: Update an existing resource
+    Given I want to update a post resource with an id of 9
+    And the update succeeds
+    And I will get a confirmation that resource has been updated
+
 @delete
-Scenario: Delete an indiidual resource
+Scenario: Delete an individual resource
     Given I want to delete a post resource with an id of 1
     And the delete succeeds
     Then I can verify the deletion
+
+
 
 
 

@@ -40,8 +40,6 @@ def step_impl(context):
 def step_impl(context):
     context.CustomWorld.assert_have_content()
 
-
-
 @given(u'the server knows the structure of the payload')
 def step_impl(context):
     context.CustomWorld.set_payloads(context.table)
@@ -95,6 +93,22 @@ def step_impl(context):
 @then(u'I can request it as {typ}')
 def step_impl(context, typ):
     context.CustomWorld.request_resource(mime=typ)
+
+
+
+
+@given(u'I want to {oper} a {res} resource with an {xid} of {no}')
+def step_impl(context, oper, res, xid, no):
+    context.CustomWorld.set_resource_type(res)
+    context.CustomWorld.set_substitution('{'+xid+'}',no)
+
+@given(u'the delete succeeds')
+def step_impl(context):
+    context.CustomWorld.delete_resource()
+
+@then(u'I can verify the deletion')
+def step_impl(context):
+    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("NO_CONTENT"))
 
 
 

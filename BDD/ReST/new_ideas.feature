@@ -32,10 +32,18 @@ Scenario: Work with an individual resource
     And the request succeeds
     Then I can read it's content
 
+@create
 Scenario: Create an individual resource
     Given I want to create a posts resource with an id of 9 and payload 1
     And the create succeeds
     Then I can verify the reply
+
+@delete
+Scenario: Delete an indiidual resource
+    Given I want to delete a post resource with an id of 1
+    And the delete succeeds
+    Then I can verify the deletion
+
 
 
 Scenario: Basic resource request with validation

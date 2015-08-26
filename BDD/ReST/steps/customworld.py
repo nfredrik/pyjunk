@@ -18,7 +18,7 @@ class CustomWorld(object):
         self.resources = dict()
         self.payload = None
         self.payloads = dict()
-        self.sub_map = list()
+        #self.sub_map = list()
         self.sub_map = None
         self.host = host
         self.port = port
@@ -43,18 +43,15 @@ class CustomWorld(object):
         self.resource = res
 
     def set_substitution(self, res, number):
-        #self.sub_map = map
         self.sub_map = submap(res = res, number = number)
 
     def substitute(self):
-        print(self.sub_map)
         if self.sub_map:
             if self.sub_map.res in self.resources[self.resource]:
                 self.resources[self.resource] = self.resources[self.resource].replace(self.sub_map.res, self.sub_map.number)
 
 
     def request_resource(self, mime=None):
-        url = self.host
 
         # Subsitute all e.g. /posts/{id}  with /posts/1
         self.substitute()
@@ -83,8 +80,6 @@ class CustomWorld(object):
         else:
             pass # Handle html e.g.
 
-        url = self.host
-
         self.response = requests.post(self.host + self.resources[self.resource], payload)
         return self.response
 
@@ -93,15 +88,11 @@ class CustomWorld(object):
 
     def check_for_existence(self):
         self.substitute()
-        url = self.host + self.resources[self.resource]
-        print(url)
-        self.response = requests.head(url)
+        self.response = requests.head(self.host + self.resources[self.resource])
 
     def delete_resource(self):
         self.substitute()
-        print(self.host + self.resources[self.resource])
         self.response = requests.delete(self.host + self.resources[self.resource])
-
 
     def assert_response(self, code):
         assert_that(self.response.status_code, equal_to(code))
@@ -130,7 +121,6 @@ class CustomWorld(object):
         actual_time = parser.parse(self.response.headers['Date'])
         assert_that(actual_time, less_than_or_equal_to(datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)))
         
-
     def assert_mime_type(self, mime):
         assert_that(self.response.headers['Content-Type'], equal_to(self.mimes[mime].value)) 
 
@@ -141,6 +131,8 @@ class CustomWorld(object):
            if name == key:
             hit = True
             self.the_link = items[name]
+
+        hitta = any([bool(key) for key in items.keys() if name == key])
         
         assert_that(hit, equal_to(True))
 

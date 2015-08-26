@@ -38,9 +38,14 @@ Scenario: Verify a resource existence
     When  Check for it's existance
     Then I will get it
     And check that the metadata is valid
-            
+
 Scenario: Basic resource request
     Given Me want to interact with a post resource with an id of 1
     When I request it
     Then I will get it
     And can verify the content
+
+Scenario: Delete a resource
+    Given Me want to interact with a post resource with an id of 1
+    When I delete it
+    Then I will get it

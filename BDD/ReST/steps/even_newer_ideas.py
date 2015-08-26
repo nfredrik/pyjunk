@@ -32,6 +32,16 @@ def step_impl(context):
     # Verify the content according to a json schema. Is this possible?
     context.CustomWorld.assert_have_content()
     context.CustomWorld.assert_valid_payload()
+
+@when(u'I delete it')
+def step_impl(context):
+    context.CustomWorld.delete_resource()
+
+@then(u'I get a delete confirmation')
+def step_impl(context):
+    context.CustomWorld.assert_response(NamedHTTPstatus.from_string("NO_CONTENT"))
+
+
     
 
 

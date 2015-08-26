@@ -27,8 +27,20 @@ And the server knows the structure of the payload
       |   1     | foo    | bar  |   1    |
       |   2     | nisse  | pelle|   2    |
 
+Scenario: Supported methods by server
+    Given I want to know supported methods
+    When I ask for it
+    Then I will get it as metadata
+    And It will be set or subset of the RestAPI
 
+Scenario: Verify a resource existence
+    Given Me want to interact with a post resource with an id of 1
+    When  Check for it's existance
+    Then I will get it
+    And check that the metadata is valid
+            
 Scenario: Basic resource request
     Given Me want to interact with a post resource with an id of 1
     When I request it
     Then I will get it
+    And can verify the content

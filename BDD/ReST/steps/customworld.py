@@ -1,9 +1,12 @@
 
+import datetime
+from dateutil import parser
+
 import json
 import requests
 import collections
 from collections import namedtuple
-from hamcrest import assert_that, contains_string, equal_to, is_not
+from hamcrest import assert_that, contains_string, equal_to, is_not, not_none, less_than, less_than_or_equal_to 
 
 resource_type = collections.namedtuple('resource_type', 'path')
 mime_type = collections.namedtuple('mime_type', 'typ value')
@@ -40,7 +43,7 @@ class CustomWorld(object):
         self.resource = res
 
     def set_substitution(self, res, number):
-        self.sub_map = map
+        #self.sub_map = map
         self.sub_map = submap(res = res, number = number)
 
     def substitute(self):
@@ -53,9 +56,8 @@ class CustomWorld(object):
     def request_resource(self, mime=None):
         url = self.host
 
-        if self.sub_map:
-            if self.sub_map.res in self.resources[self.resource]:
-                self.resources[self.resource] = self.resources[self.resource].replace(self.sub_map.res, self.sub_map.number)
+        # Subsitute all e.g. /posts/{id}  with /posts/1
+        self.substitute()
 
         if not mime:
             self.response = requests.get(self.host + self.resources[self.resource])
@@ -86,6 +88,15 @@ class CustomWorld(object):
         self.response = requests.post(self.host + self.resources[self.resource], payload)
         return self.response
 
+    def supported_methods(self):
+        self.response = requests.options(self.host)
+
+    def check_for_existence(self):
+        self.substitute()
+        url = self.host + self.resources[self.resource]
+        print(url)
+        self.response = requests.head(url)
+
     def delete_resource(self):
         self.substitute()
         print(self.host + self.resources[self.resource])
@@ -97,6 +108,28 @@ class CustomWorld(object):
 
     def assert_have_content(self):
         assert_that(self.response.content, is_not(equal_to(None)))
+
+    def valid_json(self, dict):
+        try:
+            json.loads(text)
+            return True
+        except:
+            return False
+
+    def assert_valid_payload(self):
+        #assert_that(isinstance(self.response.json, dict), equal_to(True))
+        print(self.response.json)
+        #assert self.valid_json(self.response.json)
+
+    def assert_supported_methods(self, a_set):
+        self.methods = set(self.response.headers['access-control-allow-methods'].split(','))
+        print(self.methods)
+        assert_that(a_set.issubset(self.methods))
+
+    def assert_valid_metadata(self):
+        actual_time = parser.parse(self.response.headers['Date'])
+        assert_that(actual_time, less_than_or_equal_to(datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)))
+        
 
     def assert_mime_type(self, mime):
         assert_that(self.response.headers['Content-Type'], equal_to(self.mimes[mime].value)) 
@@ -112,7 +145,6 @@ class CustomWorld(object):
         assert_that(hit, equal_to(True))
 
     def assert_attribute_in_text(self, attr):
-        #print(self.response.content)
         assert_that(self.response.headers, contains_string(attr))
 
 

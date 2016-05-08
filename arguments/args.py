@@ -1,16 +1,16 @@
 import sys
 
 # default
-def f(a, b=2, c=3): print a, b, c
+def f(a, b=2, c=3): print(a, b, c)
 
 # arbitrary args
-def func(*args): print args
+def func(*args): print(args)
 
 # arbitrary args, keywords
-def funck(**args): print args
+def funck(**args): print(args)
 
 # all
-def funcka(a, *pargs, **kargs): print a, pargs, kargs
+def funcka(a, *pargs, **kargs): print (a, pargs, kargs)
 
 def  main(args):
     

@@ -1,5 +1,6 @@
 import sys
-
+import requests
+import pprint
 class Control:
 
   def __init__(self,model, view):
@@ -11,12 +12,16 @@ class Control:
     self.view.expose_it(nn)
 
 
+
 class Model:
   def __init__(self, config):
     self.config = config
 
   def get_status(self):
-    return 42
+    response = requests.get('https://example.com')
+    return response.status_code
+
+
 
 class View:
 
@@ -24,7 +29,8 @@ class View:
     pass
 
   def expose_it(self, nn):
-    print(nn)
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(nn)
 
 
 

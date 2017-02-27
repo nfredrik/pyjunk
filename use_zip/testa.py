@@ -1,9 +1,28 @@
+import random
+import string
 import logging
 import zipfile
 import os
 import sys
 from os import walk
 from os.path import join
+
+
+def random_char(y):
+  return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
+
+def random_number():
+  return str(random.randint(-999,999))
+
+
+def get_random():
+  print "--- based on number of generators, pick one randomly"
+  mylist = [] 
+  mylist.append(random_char(5))
+  mylist.append(random_number())
+  return random.choice (mylist)
+
 
 class ExtractZipError(Exception): pass
 
@@ -45,6 +64,9 @@ class FileExtract:
 
 def main():
 
+  print '--- random chars:' + random_char(5)
+  print '--- random chars:' + get_random()
+  
   print "--- Start log everything in wrapping log file ..."
 
   print "--- Find relevant zipfile ..."

@@ -23,14 +23,15 @@ import json
 import argparse
 import collections
 from invariants import EnforceCheckRep
-from hamcrest import assert_that, contains_string, equal_to, is_not
+#from hamcrest import assert_that, contains_string, equal_to, is_not
 
 class DataException(Exception): pass
 
 Q_SIZE = 10
 
 # Fix this Queue class
-class Queue(metaclass = EnforceCheckRep):
+#class Queue(metaclass = EnforceCheckRep):
+class Queue(): #metaclass = EnforceCheckRep):    
     
     def __init__(self,size_max):
         self.checkRepcalled = 0
@@ -105,7 +106,7 @@ inpts = [(574, 0), ('dq', 0), (991, 0), ('dq', 0), ('dq', 1),
          (966, 0), ('dq', 0), (865, 0), ('dq', 0), (348, 0)]
 
 
-class Recipe(object):
+class oldRecipe(object):
     def __init__(self, file='output.json'):
         self.mylist = list()
 
@@ -125,13 +126,41 @@ class Recipe(object):
             data = json.loads(fh.read())
 
         inpprs = list()
-        for i, _ in enumerate(data["recipe"]):
-            (oper,value) = eval(data["recipe"][i])
+        for n in eval(data):
+            (oper,value) = oper['oper'], oper['val']
 
             inpprs.append((oper, int(value)))
 
         return inpprs
 
+class Recipe(object):
+    def __init__(self, file='output.json'):
+        self.file = file
+        self.mylist = list()
+
+    def record(self, oper, value):
+        t = { 'op': str(oper), 'val': str(value) }
+        self.mylist.append(t)
+
+    def stop_record(self):
+        print self.mylist 
+        with open(self.file , 'w') as self.fh:
+            nisse = json.dumps(self.mylist, indent=4)
+            self.fh.write(nisse)
+
+    def playback(self, input='output.json'):
+        with open(input, 'r') as fh:
+            data = json.loads(fh.read())
+       
+        inpprs = list()
+        for i in data:
+            oper = i['op']
+            value = i['val']
+
+            inpprs.append((oper, int(value)))
+
+        return inpprs
+    
 def generate_oper_and_value():
     l = list()
     for _ in range(100):
@@ -178,7 +207,7 @@ def regression_test(l, r = None):
                 cntr["empty"] +=1
                 print('queue was empty, value was:', value)
         else:
-            assert_that(oper, equal_to('dq'))
+            #assert_that(oper, equal_to('dq'))
             print ('invalid operation', oper)
 
         if r:
@@ -202,7 +231,7 @@ def regression_test(l, r = None):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='This is my first program using argparse')
-    parser.add_argument('-r', "--record", action="store_true", 
+    parser.add_argument('-r', "--record", action="store_true", default=False,
            help='Record a random queue and dequeue operations on a Queue')
     parser.add_argument('-p', "--playback", action="store_true",default=True,
            help='Playback queue and dequeue operations on a Queue from a default recording or selected')

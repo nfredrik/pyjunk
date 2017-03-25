@@ -139,7 +139,7 @@ class Recipe(object):
         self.mylist = list()
 
     def record(self, oper, value):
-        t = { 'op': str(oper), 'val': str(value) }
+        t = { 'op': oper, 'val': value }
         self.mylist.append(t)
 
     def stop_record(self):
@@ -155,7 +155,7 @@ class Recipe(object):
         inpprs = list()
         for i in data:
             oper = i['op']
-            value = i['val']
+            value = int(i['val'])
 
             inpprs.append((oper, int(value)))
 

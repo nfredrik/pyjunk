@@ -16,7 +16,7 @@ with open('data.json', 'w') as f:
 with open('data.json', 'r') as f:
      data1 = json.load(f)
 
-data1['natti'] = 134     
+data1['natti'] = {'mera': 4555}     
 
 print(data1)   
 

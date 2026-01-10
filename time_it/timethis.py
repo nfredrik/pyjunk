@@ -53,8 +53,7 @@ def _printstats():
         # Compute average and standard deviation
         mean = sum(times)/float(len(times))
         stddev = math.sqrt(sum((x-mean)**2 for x in times)/len(times))
-        print("{0:<{maxwidth}s} : {1:0.5f}s : N={2:5d} : stddev={3:0.5f}".format(
-                key,mean,len(times),stddev,maxwidth=maxwidth))
+        print(f"{key:<{maxwidth}} : {mean:0.5f}s : N={len(times):5d} : stddev={stddev:0.5f}")
 
 atexit.register(_printstats)
 

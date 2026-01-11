@@ -1,6 +1,7 @@
 import re
+import argparse
 from urllib.parse import urlparse, unquote
-from typing import Tuple, Optional
+from typing import Tuple, Optional, List
 
 
 def parse_jenkins_url(url: str) -> Tuple[str, str]:
@@ -50,19 +51,71 @@ def parse_jenkins_url(url: str) -> Tuple[str, str]:
     return job_name, job_id
 
 
-if __name__ == "__main__":
-    # Example usage
+def validate_testcycle(testcycle: str) -> None:
+    """
+    Validate the testcycle parameter format.
+    Expected format: SAVTSTCLY- followed by exactly 3 digits.
+    """
+    if not re.match(r'^SAVTSTCLY-\d{3}$', testcycle):
+        raise ValueError(
+            "Invalid testcycle format. Expected format: SAVTSTCLY-XXX where X is a digit"
+        )
+
+def run_test_cases() -> None:
+    """Run test cases to demonstrate the function."""
     test_urls = [
         "http://localhost:8080/job/fredde%20med%20mera/1/console",
         "http://jenkins.example.com/job/Test-Job/42/",
         "http://jenkins.example.com/job/Project%20X/123/build"
     ]
     
+    print("Running test cases:")
     for url in test_urls:
         try:
             job_name, job_id = parse_jenkins_url(url)
-            print(f"URL: {url}")
+            print(f"\nURL: {url}")
             print(f"  Job Name: {job_name}")
             print(f"  Build ID: {job_id}")
         except ValueError as e:
-            print(f"Error parsing URL '{url}': {e}")
+            print(f"\nError parsing URL '{url}': {e}")
+
+
+def parse_args(args: List[str] = None) -> argparse.Namespace:
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(
+        description='Parse Jenkins job URLs to extract job name and build number.'
+    )
+    parser.add_argument(
+        '--url',
+        type=str,
+        help='Jenkins job URL to parse (e.g., http://jenkins/job/My%%20Job/42/)',
+    )
+    return parser.parse_args(args)
+
+
+def main(args: argparse.Namespace) -> None:
+    job_name, job_id = parse_jenkins_url(url=args.url)
+    print(job_name, job_id)
+    validate_testcycle(args.testcycle)
+
+
+
+if __name__ == "__main__":
+    """Main function to handle command line execution."""
+    parser = argparse.ArgumentParser(
+        description='Parse Jenkins job URLs to extract job name and build number.'
+    )
+
+    parser.add_argument(
+        '--testcycle',
+        type=str,
+        default='SAVTSTCLY-456',
+        help = "test cycle run"
+    )
+    parser.add_argument(
+        '--url',
+        type=str,
+        default='http://jenkins/job/My%%20Job/42/',
+        help='Jenkins job URL to parse (e.g., http://jenkins/job/My%%20Job/42/)')
+
+    main(args = parser.parse_args())

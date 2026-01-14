@@ -47,7 +47,7 @@ class Null:
 
     The code might benefit from implementing some further special 
     Python methods depending on the context in which its instances 
-    are used. Especially when comparing and coercing Null objects
+    are used. Especially when comparing.py and coercing Null objects
     the respective methods' implementation will depend very much
     on the environment and, hence, these special methods are not
     provided here.

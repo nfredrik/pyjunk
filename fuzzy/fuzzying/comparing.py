@@ -42,3 +42,15 @@ def compare_strings(
     )
 
     return exact_matches, best_matches, others
+
+
+
+if __name__ == '__main__':
+    s1 = {'test_kanne', 'test_nisse', 'test_olle', 'orvar'}
+    s2 = {'test_kanle', 'test_nisse', 'test_olli', 'missan'}
+
+    exact, best, others = compare_strings(s1, s2)
+
+    print(f"{exact=}")
+    print(f"{best=}")
+    print(f"{others=}")
